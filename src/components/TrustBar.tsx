@@ -1,0 +1,33 @@
+"use client";
+
+import { BadgeCheck, Headphones, IdCard, LockKeyhole } from "lucide-react";
+import Container from "./Container";
+import { StaggerGroup, StaggerItem } from "./motion/Stagger";
+
+const items = [
+  { icon: IdCard, label: "Government ID verified" },
+  { icon: BadgeCheck, label: "Rated community" },
+  { icon: Headphones, label: "24/7 ride support" },
+  { icon: LockKeyhole, label: "Secure cost sharing" },
+];
+
+export default function TrustBar() {
+  return (
+    <section className="border-y border-black/5 bg-white">
+      <Container>
+        <StaggerGroup className="grid grid-cols-2 gap-4 py-7 lg:grid-cols-4 lg:gap-6 lg:py-8">
+          {items.map(({ icon: Icon, label }) => (
+            <StaggerItem key={label}>
+              <div className="flex items-center gap-3 rounded-2xl border border-brand/8 bg-surface px-3 py-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand text-white">
+                  <Icon className="h-5 w-5" strokeWidth={2} />
+                </span>
+                <p className="text-sm font-semibold text-navy">{label}</p>
+              </div>
+            </StaggerItem>
+          ))}
+        </StaggerGroup>
+      </Container>
+    </section>
+  );
+}

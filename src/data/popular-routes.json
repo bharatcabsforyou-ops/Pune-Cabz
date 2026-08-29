@@ -1,0 +1,68 @@
+[
+  {
+    "id": "seed-pr-1",
+    "fromCity": "Pune",
+    "toCity": "Mumbai",
+    "duration": "3h 30m",
+    "fromPrice": "499",
+    "tag": "Most booked",
+    "imageUrl": "/image2.jpg",
+    "sortOrder": 1,
+    "published": true
+  },
+  {
+    "id": "seed-pr-2",
+    "fromCity": "Pune",
+    "toCity": "Nashik",
+    "duration": "4h 15m",
+    "fromPrice": "449",
+    "tag": "Weekend",
+    "imageUrl": "/image3.jpg",
+    "sortOrder": 2,
+    "published": true
+  },
+  {
+    "id": "seed-pr-3",
+    "fromCity": "Mumbai",
+    "toCity": "Pune",
+    "duration": "3h 30m",
+    "fromPrice": "499",
+    "tag": "Daily",
+    "imageUrl": "/image2.jpg",
+    "sortOrder": 3,
+    "published": true
+  },
+  {
+    "id": "seed-pr-4",
+    "fromCity": "Pune",
+    "toCity": "Lonavala",
+    "duration": "1h 15m",
+    "fromPrice": "299",
+    "tag": "Hills",
+    "imageUrl": "/image4.jpg",
+    "sortOrder": 4,
+    "published": true
+  },
+  {
+    "id": "seed-pr-5",
+    "fromCity": "Pune",
+    "toCity": "Goa",
+    "duration": "9h",
+    "fromPrice": "1299",
+    "tag": "Coastal",
+    "imageUrl": "/image4.jpg",
+    "sortOrder": 5,
+    "published": true
+  },
+  {
+    "id": "seed-pr-6",
+    "fromCity": "Pune",
+    "toCity": "Mahabaleshwar",
+    "duration": "2h 45m",
+    "fromPrice": "399",
+    "tag": "Scenic",
+    "imageUrl": "/image5.jpg",
+    "sortOrder": 6,
+    "published": true
+  }
+]

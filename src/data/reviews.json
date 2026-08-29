@@ -1,0 +1,29 @@
+[
+  {
+    "id": "seed-1",
+    "name": "Riya Sharma",
+    "city": "Pune",
+    "rating": 5,
+    "route": "Pune to Mumbai",
+    "text": "Booked a 6am Innova to Mumbai. Driver was on time, AC was proper, and the fare matched the search - no extra at the gate.",
+    "date": "2026-08-24"
+  },
+  {
+    "id": "seed-2",
+    "name": "Arjun Deshmukh",
+    "city": "Nashik",
+    "rating": 5,
+    "route": "Nashik to Pune",
+    "text": "Shared a sedan with two others. Smooth highway, verified profile, and we split fuel and tolls fairly. Booking again for Diwali.",
+    "date": "2026-08-19"
+  },
+  {
+    "id": "seed-3",
+    "name": "Ananya Patil",
+    "city": "Mumbai",
+    "rating": 4,
+    "route": "Mumbai to Pune",
+    "text": "Sunday evening hop back to Pune. Shared live location with my parents and reached before the time on the ticket.",
+    "date": "2026-08-11"
+  }
+]

@@ -2,25 +2,365 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1a0a0c;
+
+  --color-navy: #1a0a0c;
+  --color-navy-light: #2a1215;
+  --color-brand: #dc1f26;
+  --color-brand-dark: #b4161c;
+  --color-brand-light: #f15b61;
+  --color-soft: #fffafa;
+  --color-soft-dark: #fff0f0;
+  --color-bright: #ffffff;
+  --color-surface: #fff5f7;
+  --color-whatsapp: #25d366;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-navy: var(--color-navy);
+  --color-navy-light: var(--color-navy-light);
+  --color-brand: var(--color-brand);
+  --color-brand-dark: var(--color-brand-dark);
+  --color-brand-light: var(--color-brand-light);
+  --color-soft: var(--color-soft);
+  --color-soft-dark: var(--color-soft-dark);
+  --color-bright: var(--color-bright);
+  --color-surface: var(--color-surface);
+  --color-whatsapp: var(--color-whatsapp);
+  --font-sans: var(--font-poppins);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+@media (pointer: fine) {
+  html.has-car-cursor,
+  html.has-car-cursor * {
+    cursor: none !important;
+  }
+
+  html.has-car-cursor input,
+  html.has-car-cursor textarea,
+  html.has-car-cursor [contenteditable="true"] {
+    cursor: text !important;
+  }
+}
+
+::selection {
+  background: var(--color-brand);
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+}
+
+.search-bar input,
+.search-bar input:focus,
+.search-bar input:focus-visible,
+.search-bar button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.search-bar input {
+  font-size: 16px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-soft);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e8c9c9;
+  border-radius: 999px;
+  border: 2px solid var(--color-soft);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-light);
+}
+
+.bg-dot-grid {
+  background-image: radial-gradient(currentColor 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.text-gradient-brand,
+.text-gradient-brand {
+  background: linear-gradient(95deg, var(--color-brand) 10%, #f15b61 60%, #ff8a8e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 0.65rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--color-navy) 58%, transparent);
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--color-navy);
+  background: transparent;
+}
+
+.nav-link-active,
+.nav-link-active:hover {
+  color: var(--color-brand);
+  background: transparent;
+}
+
+.nav-link-active::after {
+  content: "";
+  position: absolute;
+  left: 0.85rem;
+  right: 0.85rem;
+  bottom: 0.2rem;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--color-brand);
+}
+
+.btn-shine,
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.35) 50%, transparent 75%);
+  transform: translateX(-120%);
+}
+
+.btn-shine:hover::after,
+.btn-shine:hover::after {
+  animation: shine-sweep 0.7s ease;
+}
+
+@keyframes shine-sweep {
+  to { transform: translateX(120%); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(220, 31, 38, 0.35); }
+  100% { box-shadow: 0 0 0 10px rgba(220, 31, 38, 0); }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.icon-tile,
+.icon-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  box-shadow: 0 10px 22px -12px rgba(220, 31, 38, 0.35);
+  transition: transform 0.3s ease;
+}
+
+.group:hover .icon-tile,
+.group:hover .icon-tile {
+  transform: scale(1.1) rotate(3deg);
+}
+
+.whatsapp-float {
+  position: fixed;
+  right: max(0.75rem, env(safe-area-inset-right));
+  bottom: max(0.85rem, env(safe-area-inset-bottom));
+  z-index: 60;
+  display: flex;
+  height: 3.15rem;
+  width: 3.15rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #2ee26a 0%, #1ebe57 100%);
+  box-shadow: 0 10px 28px -6px rgba(18, 140, 126, 0.7);
+}
+
+@media (min-width: 640px) {
+  .whatsapp-float {
+    right: 1.15rem;
+    bottom: 1.25rem;
+    height: 3.6rem;
+    width: 3.6rem;
+  }
+}
+
+.whatsapp-pulse,
+.whatsapp-pulse.delay {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 2px solid #25d366;
+  animation: wa-ping 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.whatsapp-pulse.delay {
+  animation-delay: 0.7s;
+}
+
+@keyframes wa-ping {
+  0% { transform: scale(1); opacity: 0.7; }
+  80%, 100% { transform: scale(1.7); opacity: 0; }
+}
+
+.whatsapp-tip {
+  pointer-events: none;
+  position: absolute;
+  right: calc(100% + 0.75rem);
+  white-space: nowrap;
+  border-radius: 999px;
+  background: var(--color-navy);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.4rem 0.75rem;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 8px 20px -8px rgba(26, 10, 12, 0.5);
+}
+
+.whatsapp-float:hover .whatsapp-tip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.card-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 40px -18px rgba(26, 10, 12, 0.22);
+}
+
+.step-line {
+  background: linear-gradient(90deg, transparent, var(--color-brand-light), transparent);
+}
+
+.rides-marquee {
+  overflow: hidden;
+}
+
+.rides-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1rem;
+  padding-inline: 1rem;
+  animation: rides-scroll 32s linear infinite;
+}
+
+.rides-marquee:hover .rides-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes rides-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.hero-vignette {
+  background:
+    radial-gradient(ellipse 80% 70% at 72% 48%, transparent 30%, rgba(8, 5, 6, 0.22) 100%),
+    linear-gradient(180deg, rgba(8, 5, 6, 0.15) 0%, transparent 30%, transparent 65%, rgba(8, 5, 6, 0.45) 100%);
+}
+
+.hero-route-card > div:first-child {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 245, 247, 0.9) 45%,
+    rgba(220, 31, 38, 0.18) 100%
+  );
+}
+
+.hero-route-skeleton {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(220, 31, 38, 0.08) 100%
+  );
+}
+
+.hero-route-progress {
+  box-shadow: 0 0 12px rgba(220, 31, 38, 0.35);
+}
+
+.hero-route-card-inner {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(220, 31, 38, 0.06), transparent 42%),
+    radial-gradient(circle at 0% 100%, rgba(255, 250, 250, 0.9), transparent 50%),
+    #ffffff;
+}
+
+.hero-ken {
+  animation: hero-ken 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes hero-ken {
+  from { transform: scale(1) translate3d(0, 0, 0); }
+  to { transform: scale(1.07) translate3d(-1.6%, 1.2%, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-float-slow,
+  .animate-pulse-ring,
+  .whatsapp-pulse,
+  .rides-marquee-track,
+  .hero-ken {
+    animation: none;
+  }
+  .btn-shine::after {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .whatsapp-tip {
+    display: none;
+  }
 }
