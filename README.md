@@ -87,5 +87,5 @@ Click **Deploy**. After build succeeds, your site is live at `https://your-proje
 
 ## Notes
 
-- `public/hero-bg.mp4` is gitignored (large file). Hero uses a poster image on Vercel; optional video is local-only.
+- Hero background video ships as `public/hero-bg.mp4` (~6MB, compressed). Optional override: `NEXT_PUBLIC_HERO_VIDEO_URL`.
 - Default route/tourism data falls back to JSON if Supabase is not configured, but admin and live updates need Supabase.
