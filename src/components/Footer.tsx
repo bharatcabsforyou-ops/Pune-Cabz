@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import clsx from "clsx";
 import Container from "./Container";
 import Logo from "./Logo";
 import SocialIcon, { type SocialName } from "./SocialIcon";
@@ -53,21 +54,30 @@ export default function Footer() {
         alt=""
         fill
         sizes="100vw"
-        className="object-cover object-[70%_center]"
+        className="object-cover object-center sm:object-[70%_center]"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/82 to-navy/45" />
-      <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-transparent to-navy/30" />
+      <div className="absolute inset-0 bg-navy/92 sm:bg-gradient-to-r sm:from-navy sm:via-navy/82 sm:to-navy/45" />
+      <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/35 to-navy/55 sm:from-navy/90 sm:via-transparent sm:to-navy/30" />
 
       <Container className="relative py-8 pb-28 sm:py-9 sm:pb-10">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <Link href="/" className="shrink-0 justify-self-start">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-7 sm:gap-8 lg:grid-cols-4">
+          <Link href="/" className="col-span-2 shrink-0 lg:col-span-1">
             <Logo dark />
           </Link>
 
-          {columns.map((col) => (
-            <div key={col.title}>
-              <h3 className="text-base font-bold tracking-tight text-brand sm:text-lg">{col.title}</h3>
-              <ul className="mt-3 space-y-2">
+          {columns.map((col, index) => (
+            <div
+              key={col.title}
+              className={clsx(index === columns.length - 1 && "col-span-2 sm:col-span-1 lg:col-span-1")}
+            >
+              <h3 className="text-sm font-bold tracking-tight text-brand sm:text-lg">{col.title}</h3>
+              <ul
+                className={clsx(
+                  "mt-3 space-y-2",
+                  index === columns.length - 1 &&
+                    "grid grid-cols-2 gap-x-4 gap-y-2 space-y-0 sm:block sm:space-y-2"
+                )}
+              >
                 {col.links.map((link) => (
                   <li key={link.label}>
                     <Link
@@ -83,7 +93,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-white/15 pt-5">
+        <div className="mt-7 flex flex-col items-center gap-4 border-t border-white/15 pt-5 text-center sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:text-left">
           <p className="text-sm text-white/55">
             <a href="#" className="hover:text-white">
               Terms and Conditions
