@@ -14,7 +14,7 @@ export default function PopularRoutes() {
   if (loaded && routes.length === 0) return null;
 
   return (
-    <section className="border-t border-black/[0.04] bg-gradient-to-b from-white to-[#f8f9fb] py-14 sm:py-16">
+    <section className="border-t border-black/[0.04] bg-white page-section">
       <Container>
         <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">

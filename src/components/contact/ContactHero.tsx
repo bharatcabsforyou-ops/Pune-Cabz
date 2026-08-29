@@ -16,12 +16,9 @@ const highlights = [
 
 export default function ContactHero() {
   return (
-    <section className="relative overflow-hidden bg-soft pb-0 pt-10 sm:pt-16">
-      <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-brand/10 blur-3xl" />
-      <div className="pointer-events-none absolute -right-16 top-32 h-80 w-80 rounded-full bg-brand-light/20 blur-3xl" />
-
+    <section className="relative overflow-hidden bg-white pb-0 pt-6 sm:pt-8">
       <Container className="relative">
-        <div className="grid grid-cols-1 items-center gap-10 pb-12 lg:grid-cols-2 lg:gap-14 lg:pb-16">
+        <div className="page-grid page-grid-2 items-center pb-8 lg:pb-10">
           <div className="max-w-xl">
             <motion.span
               initial={{ opacity: 0, y: 16 }}
@@ -82,14 +79,19 @@ export default function ContactHero() {
 
       <div className="border-t border-black/5 bg-white">
         <Container>
-          <div className="grid grid-cols-1 gap-4 py-8 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 py-6 sm:grid-cols-3">
             {highlights.map(({ icon: Icon, label, text }) => (
-              <div key={label} className="rounded-2xl bg-soft px-5 py-4 text-left">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand text-white">
+              <div
+                key={label}
+                className="flex items-start gap-3 rounded-xl border border-black/[0.06] bg-surface/60 px-4 py-3.5"
+              >
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand text-white">
                   <Icon className="h-4 w-4" strokeWidth={2} />
                 </span>
-                <p className="mt-3 text-sm font-bold text-navy">{label}</p>
-                <p className="mt-1 text-[13px] text-navy/55">{text}</p>
+                <div>
+                  <p className="text-sm font-bold text-navy">{label}</p>
+                  <p className="mt-0.5 text-xs text-navy/55">{text}</p>
+                </div>
               </div>
             ))}
           </div>

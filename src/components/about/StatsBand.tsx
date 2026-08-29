@@ -11,7 +11,7 @@ const stats: { value: number; suffix: string; label: string; decimals?: number }
 
 export default function StatsBand() {
   return (
-    <section className="bg-navy py-12 sm:py-14">
+    <section className="bg-brand page-section">
       <Container>
         <Reveal className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-5">
           {stats.map((s) => (

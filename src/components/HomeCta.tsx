@@ -7,10 +7,10 @@ import Reveal from "./motion/Reveal";
 
 export default function HomeCta() {
   return (
-    <section className="bg-white py-12 sm:py-16">
+    <section className="bg-white page-section">
       <Container>
         <Reveal>
-          <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-brand via-brand to-brand-light px-6 py-10 text-center shadow-xl shadow-brand/20 sm:px-12 sm:py-14">
+          <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-brand via-brand to-brand-light px-6 py-8 text-center sm:px-10 sm:py-10">
             <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-white text-brand shadow-md">
               <CarFront className="h-6 w-6" />
             </span>

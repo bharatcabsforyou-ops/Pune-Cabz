@@ -18,7 +18,7 @@ const loop = [...rides, ...rides];
 
 export default function TopRides() {
   return (
-    <section className="overflow-hidden border-b border-brand/10 bg-gradient-to-b from-white to-surface py-7 sm:py-8">
+    <section className="overflow-hidden border-b border-black/5 bg-white py-5 sm:py-6">
       <Container>
         <h2 className="text-lg font-extrabold text-navy sm:text-xl">
           Top carpool rides
@@ -31,7 +31,7 @@ export default function TopRides() {
             <a
               key={`${from}-${to}-${i}`}
               href="/#search"
-              className="flex min-w-[220px] shrink-0 items-center justify-between gap-3 rounded-xl border border-brand/10 bg-white px-4 py-2.5 text-sm font-bold text-navy shadow-sm shadow-brand/5"
+              className="flex min-w-[220px] shrink-0 items-center justify-between gap-3 rounded-xl border border-black/8 bg-white px-4 py-2.5 text-sm font-bold text-navy shadow-sm"
             >
               <span className="flex items-center gap-2">
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand/10 text-brand">

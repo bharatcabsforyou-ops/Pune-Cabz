@@ -9,10 +9,10 @@
   --color-brand: #dc1f26;
   --color-brand-dark: #b4161c;
   --color-brand-light: #f15b61;
-  --color-soft: #fffafa;
-  --color-soft-dark: #fff0f0;
+  --color-soft: #ffffff;
+  --color-soft-dark: #f8f8f8;
   --color-bright: #ffffff;
-  --color-surface: #fff5f7;
+  --color-surface: #fafafa;
   --color-whatsapp: #25d366;
 }
 
@@ -32,10 +32,39 @@
   --font-sans: var(--font-poppins);
 }
 
-html {
-  scroll-behavior: smooth;
-  overflow-x: clip;
+/* Consistent page rhythm — tighter sections site-wide */
+.page-section {
+  padding-block: 2rem;
 }
+
+@media (min-width: 640px) {
+  .page-section {
+    padding-block: 2.5rem;
+  }
+}
+
+.page-section-head {
+  margin-top: 1.5rem;
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .page-grid {
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 
 body {
   background: var(--background);
@@ -180,8 +209,8 @@ body {
 }
 
 @keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 rgba(220, 31, 38, 0.35); }
-  100% { box-shadow: 0 0 0 10px rgba(220, 31, 38, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(26, 10, 12, 0.12); }
+  100% { box-shadow: 0 0 0 10px rgba(26, 10, 12, 0); }
 }
 
 .animate-pulse-ring {
@@ -194,7 +223,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 1rem;
-  box-shadow: 0 10px 22px -12px rgba(220, 31, 38, 0.35);
+  box-shadow: 0 8px 18px -12px rgba(26, 10, 12, 0.15);
   transition: transform 0.3s ease;
 }
 
@@ -303,16 +332,15 @@ body {
 
 .hero-vignette {
   background:
-    radial-gradient(ellipse 80% 70% at 72% 48%, transparent 30%, rgba(8, 5, 6, 0.22) 100%),
-    linear-gradient(180deg, rgba(8, 5, 6, 0.15) 0%, transparent 30%, transparent 65%, rgba(8, 5, 6, 0.45) 100%);
+    radial-gradient(ellipse 80% 70% at 72% 48%, transparent 40%, rgba(8, 5, 6, 0.08) 100%),
+    linear-gradient(180deg, rgba(8, 5, 6, 0.06) 0%, transparent 35%, transparent 70%, rgba(8, 5, 6, 0.18) 100%);
 }
 
 .hero-route-card > div:first-child {
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(255, 245, 247, 0.9) 45%,
-    rgba(220, 31, 38, 0.18) 100%
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(248, 248, 248, 0.95) 100%
   );
 }
 
@@ -320,18 +348,18 @@ body {
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.12) 0%,
-    rgba(220, 31, 38, 0.08) 100%
+    rgba(255, 255, 255, 0.06) 100%
   );
 }
 
 .hero-route-progress {
-  box-shadow: 0 0 12px rgba(220, 31, 38, 0.35);
+  box-shadow: none;
 }
 
 .hero-route-card-inner {
   background:
-    radial-gradient(circle at 100% 0%, rgba(220, 31, 38, 0.06), transparent 42%),
-    radial-gradient(circle at 0% 100%, rgba(255, 250, 250, 0.9), transparent 50%),
+    radial-gradient(circle at 100% 0%, rgba(0, 0, 0, 0.03), transparent 42%),
+    radial-gradient(circle at 0% 100%, rgba(255, 255, 255, 0.95), transparent 50%),
     #ffffff;
 }
 

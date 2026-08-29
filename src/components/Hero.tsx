@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import Container from "./Container";
 import SearchBar from "./SearchBar";
 import HomeRoutesCarousel from "./HomeRoutesCarousel";
@@ -14,43 +14,22 @@ const stats = [
 ];
 
 export default function Hero() {
-  const reduceMotion = useReducedMotion();
-
   return (
-    <section className="relative isolate overflow-hidden bg-[#1a1214]">
+    <section className="relative isolate overflow-hidden bg-[#2a2022]">
       <div className="absolute inset-0">
-        {reduceMotion ? (
-          <Image
-            src={images.heroBg}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[68%_center] brightness-[1.08] contrast-[1.04] saturate-[1.06]"
-          />
-        ) : (
-          <video
-            className="absolute inset-0 h-full w-full object-cover brightness-[1.12] contrast-[1.05] saturate-[1.08]"
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster={images.heroBg}
-          >
-            <source
-              src="https://pixabay.com/videos/download/video-22544_medium.mp4"
-              type="video/mp4"
-            />
-            <source src={images.heroVideo} type="video/mp4" />
-          </video>
-        )}
+        <Image
+          src={images.heroBg}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[68%_center] brightness-[1.18] contrast-[1.02] saturate-[1.04]"
+        />
       </div>
 
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#1a1214]/88 via-[#1a1214]/55 to-[#1a1214]/20" />
-      <div className="hero-vignette pointer-events-none absolute inset-0" />
-
-      <Container className="relative z-10 py-8 sm:py-12 lg:py-14">
-        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_minmax(0,520px)] lg:gap-10 xl:grid-cols-[1fr_minmax(0,580px)] xl:gap-14">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#1a1214]/55 via-[#1a1214]/25 to-transparent" />
+      <Container className="relative z-10 py-6 sm:py-8 lg:py-10">
+        <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[1fr_minmax(0,520px)] lg:gap-8 xl:grid-cols-[1fr_minmax(0,580px)] xl:gap-10">
           <div className="max-w-xl pt-1 lg:pt-2">
             <motion.p
               initial={{ opacity: 0, y: 12 }}
@@ -120,7 +99,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.5 }}
-          className="mt-10 w-full min-w-0 sm:mt-12 lg:mt-14"
+          className="mt-6 w-full min-w-0 sm:mt-8 lg:mt-10"
         >
           <SearchBar variant="hero" />
         </motion.div>

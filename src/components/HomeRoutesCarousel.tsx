@@ -106,7 +106,7 @@ export default function HomeRoutesCarousel({
       );
     }
     return (
-      <section className="bg-white py-20">
+      <section className="bg-white py-10">
         <Container>
           <div className="h-64 animate-pulse rounded-3xl bg-surface" />
         </Container>
@@ -206,7 +206,7 @@ export default function HomeRoutesCarousel({
   );
 
   return (
-    <section className="bg-white py-16 sm:py-20">
+    <section className="bg-white page-section">
       <Container>{carousel}</Container>
     </section>
   );
@@ -241,8 +241,8 @@ function HeroRoutesPanel({
     >
       <div className="relative overflow-hidden rounded-[1.75rem] p-[1px] shadow-[0_28px_70px_-24px_rgba(0,0,0,0.55)]">
         <div className="hero-route-card-inner relative overflow-hidden rounded-[calc(1.75rem-1px)] bg-white">
-          <div className="pointer-events-none absolute -right-20 -top-20 h-44 w-44 rounded-full bg-brand/10 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-16 -left-16 h-36 w-36 rounded-full bg-brand/5 blur-3xl" />
+          <div className="pointer-events-none absolute -right-20 -top-20 h-44 w-44 rounded-full bg-black/[0.03] blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-16 -left-16 h-36 w-36 rounded-full bg-black/[0.02] blur-3xl" />
 
           <div className="relative flex items-center justify-between gap-3 border-b border-black/[0.04] px-4 py-3.5 sm:px-5">
             <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand/12 to-brand/6 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-brand ring-1 ring-brand/10">
@@ -290,8 +290,7 @@ function HeroRoutesPanel({
                     className="object-cover"
                     priority={index === 0}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/50 via-navy/5 to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand/10 via-transparent to-transparent opacity-60" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/35 via-transparent to-transparent" />
 
                   <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-brand shadow-md backdrop-blur-sm ring-1 ring-white/80">
                     {active.tag}

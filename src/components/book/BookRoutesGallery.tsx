@@ -23,7 +23,7 @@ export default function BookRoutesGallery({
 }) {
   if (!loaded) {
     return (
-      <section className="bg-gradient-to-b from-[#fff5f7] to-white py-16 sm:py-20">
+      <section className="bg-white page-section">
         <Container>
           <RoutesGridSkeleton />
         </Container>
@@ -33,9 +33,9 @@ export default function BookRoutesGallery({
 
   if (routes.length === 0) {
     return (
-      <section className="bg-gradient-to-b from-[#fff5f7] to-white py-16 sm:py-20">
+      <section className="bg-white page-section">
         <Container>
-          <div className="rounded-[1.5rem] border border-dashed border-brand/20 bg-white px-6 py-16 text-center shadow-sm">
+          <div className="rounded-[1.5rem] border border-dashed border-black/10 bg-surface px-6 py-10 text-center">
             <MapPinned className="mx-auto h-9 w-9 text-brand/35" />
             <p className="mt-4 text-lg font-bold text-navy">No routes match your search</p>
             <p className="mx-auto mt-2 max-w-md text-sm text-navy/55">
@@ -53,10 +53,7 @@ export default function BookRoutesGallery({
   }
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#fff5f7] via-white to-white py-16 sm:py-20">
-      <div className="pointer-events-none absolute -left-24 top-10 h-64 w-64 rounded-full bg-brand/[0.06] blur-3xl" />
-      <div className="pointer-events-none absolute -right-20 bottom-10 h-56 w-56 rounded-full bg-brand/[0.05] blur-3xl" />
-
+    <section className="bg-white page-section">
       <Container className="relative">
         <Reveal className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
@@ -84,7 +81,7 @@ export default function BookRoutesGallery({
           </div>
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="page-section-head grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {routes.map((route, index) => (
             <RouteCardBook
               key={route.id}

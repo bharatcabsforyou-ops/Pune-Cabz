@@ -30,7 +30,7 @@ const values = [
 
 export default function Values() {
   return (
-    <section className="bg-white py-14 sm:py-16">
+    <section className="bg-white page-section">
       <Container>
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-bold uppercase tracking-widest text-brand">What we stand for</p>
@@ -42,7 +42,7 @@ export default function Values() {
           </p>
         </Reveal>
 
-        <StaggerGroup className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <StaggerGroup className="page-section-head grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {values.map(({ icon: Icon, title, text }, i) => (
             <StaggerItem key={title}>
               <article className="flex h-full flex-col rounded-2xl border border-black/5 bg-soft p-6 text-left">

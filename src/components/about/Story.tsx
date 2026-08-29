@@ -25,9 +25,9 @@ const milestones = [
 
 export default function Story() {
   return (
-    <section className="bg-white py-14 sm:py-16">
+    <section className="bg-white page-section">
       <Container>
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+        <div className="grid grid-cols-1 items-center page-grid page-grid-2">
           <Reveal direction="left">
             <PhotoCard src={images.teamCabin} alt="The Pune Cabz team at work" />
           </Reveal>

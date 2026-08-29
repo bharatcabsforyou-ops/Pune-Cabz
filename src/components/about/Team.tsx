@@ -15,7 +15,7 @@ const team = [
 
 export default function Team() {
   return (
-    <section className="bg-soft py-14 sm:py-16">
+    <section className="bg-soft page-section">
       <Container>
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-bold uppercase tracking-widest text-brand">The people</p>
@@ -27,7 +27,7 @@ export default function Team() {
           </p>
         </Reveal>
 
-        <StaggerGroup className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-5">
+        <StaggerGroup className="page-section-head grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-5">
           {team.map((member) => (
             <StaggerItem key={member.name}>
               <article className="overflow-hidden rounded-2xl border border-black/5 bg-white text-left shadow-sm">

@@ -12,7 +12,7 @@ export default function ShareRide() {
     <section className="bg-white py-4">
       <Container>
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl px-6 py-14 text-center sm:px-16 sm:py-20">
+          <div className="relative overflow-hidden rounded-3xl px-6 py-10 text-center sm:px-12 sm:py-12">
             <Image
               src={images.film4}
               alt=""

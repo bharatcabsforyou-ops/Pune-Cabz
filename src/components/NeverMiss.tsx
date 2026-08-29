@@ -9,9 +9,9 @@ import { images } from "@/lib/images";
 
 export default function NeverMiss() {
   return (
-    <section className="bg-white py-20">
+    <section className="bg-white page-section">
       <Container>
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
+        <div className="page-grid page-grid-2 items-center">
           <Reveal direction="left" className="relative">
             <PhotoCard src={images.film2} alt="Pune to Mumbai with Pune Cabz" variant="banner" />
 

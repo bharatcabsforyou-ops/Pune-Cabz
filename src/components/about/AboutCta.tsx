@@ -7,7 +7,7 @@ import Reveal from "../motion/Reveal";
 
 export default function AboutCta() {
   return (
-    <section className="bg-white py-12 sm:py-16">
+    <section className="bg-white page-section">
       <Container>
         <Reveal>
           <div className="rounded-3xl bg-navy px-6 py-12 text-center sm:px-12 sm:py-14">

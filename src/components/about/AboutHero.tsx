@@ -9,12 +9,9 @@ import { images } from "@/lib/images";
 
 export default function AboutHero() {
   return (
-    <section className="relative overflow-hidden bg-soft pb-10 pt-8 sm:pb-16 sm:pt-16">
-      <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-brand/10 blur-3xl" />
-      <div className="pointer-events-none absolute -right-16 top-32 h-80 w-80 rounded-full bg-brand-light/20 blur-3xl" />
-
+    <section className="relative overflow-hidden bg-white pb-8 pt-6 sm:pb-10 sm:pt-8">
       <Container className="relative">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-14">
+        <div className="grid grid-cols-1 page-grid page-grid-2 items-center">
           <div className="min-w-0 max-w-xl">
             <motion.span
               initial={{ opacity: 0, y: 16 }}

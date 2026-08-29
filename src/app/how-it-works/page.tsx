@@ -95,12 +95,9 @@ export default function HowItWorksPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-soft pb-12 pt-10 sm:pb-16 sm:pt-16">
-        <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-brand/10 blur-3xl" />
-        <div className="pointer-events-none absolute -right-16 top-32 h-80 w-80 rounded-full bg-brand-light/20 blur-3xl" />
-
+      <section className="relative overflow-hidden bg-white pb-8 pt-6 sm:pb-10 sm:pt-8">
         <Container className="relative">
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          <div className="grid grid-cols-1 items-center page-grid page-grid-2">
             <div className="max-w-xl">
               <motion.span
                 initial={{ opacity: 0, y: 16 }}
@@ -164,7 +161,7 @@ export default function HowItWorksPage() {
 
       <HowItWorks className="bg-white" />
 
-      <section id="offer" className="scroll-mt-24 bg-soft py-14 sm:py-16">
+      <section id="offer" className="scroll-mt-24 bg-soft page-section">
         <Container>
           <Reveal className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-bold uppercase tracking-widest text-brand">Two sides, one app</p>
@@ -176,7 +173,7 @@ export default function HowItWorksPage() {
             </p>
           </Reveal>
 
-          <StaggerGroup className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-2">
+          <StaggerGroup className="page-section-head grid grid-cols-1 gap-5 lg:grid-cols-2">
             {roles.map(({ icon: Icon, title, intro, points }) => (
               <StaggerItem key={title}>
                 <article className="flex h-full flex-col rounded-2xl border border-black/5 bg-white p-7 text-left shadow-sm">
@@ -200,9 +197,9 @@ export default function HowItWorksPage() {
         </Container>
       </section>
 
-      <section className="bg-white py-14 sm:py-16">
+      <section className="bg-white page-section">
         <Container>
-          <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-14">
+          <div className="grid grid-cols-1 page-grid items-start lg:grid-cols-12">
             <Reveal className="lg:col-span-4">
               <p className="text-xs font-bold uppercase tracking-widest text-brand">Trip day</p>
               <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
@@ -243,9 +240,9 @@ export default function HowItWorksPage() {
         </Container>
       </section>
 
-      <section className="bg-soft py-14 sm:py-16">
+      <section className="bg-soft page-section">
         <Container>
-          <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-14">
+          <div className="grid grid-cols-1 items-start page-grid page-grid-2">
             <Reveal direction="left" className="lg:sticky lg:top-24">
               <PhotoCard
                 src={images.film3}
@@ -312,7 +309,7 @@ export default function HowItWorksPage() {
         </Container>
       </section>
 
-      <section className="bg-white py-12 sm:py-16">
+      <section className="bg-white page-section">
         <Container>
           <Reveal>
             <div className="rounded-3xl bg-navy px-6 py-12 text-center sm:px-12 sm:py-14">

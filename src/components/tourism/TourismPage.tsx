@@ -107,7 +107,7 @@ function RouteTripCard({
   return (
     <Link
       href="/book"
-      className="group grid overflow-hidden rounded-[1.75rem] border border-black/5 bg-white shadow-md shadow-navy/5 ring-1 ring-black/5 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-brand/10 sm:grid-cols-2"
+      className="group grid overflow-hidden rounded-[1.75rem] border border-black/5 bg-white ring-1 ring-black/5 transition-all hover:-translate-y-0.5 hover:border-black/10 sm:grid-cols-2"
     >
       <div className="relative min-h-[200px] overflow-hidden bg-[#1a1214] sm:min-h-[240px] lg:min-h-[272px]">
         <TripImage
@@ -181,7 +181,7 @@ function DestinationsSection({ trips }: { trips: TourismTrip[] }) {
   }
 
   return (
-    <section id="destinations" className="scroll-mt-24 bg-surface py-14 sm:py-20">
+    <section id="destinations" className="scroll-mt-24 bg-surface page-section">
       <Container>
         <Reveal className="mx-auto max-w-2xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-brand shadow-sm ring-1 ring-black/5">
@@ -223,7 +223,7 @@ function DestinationsSection({ trips }: { trips: TourismTrip[] }) {
         </Reveal>
 
         {filtered.length === 0 ? (
-          <div className="mt-10 rounded-3xl border border-dashed border-brand/20 bg-white px-6 py-16 text-center">
+          <div className="page-section-head rounded-3xl border border-dashed border-brand/20 bg-white px-6 py-10 text-center">
             <Sparkles className="mx-auto h-8 w-8 text-brand/40" />
             <p className="mt-4 text-lg font-bold text-navy">No routes in this category</p>
             <p className="mt-2 text-sm text-navy/55">Try another filter or book a custom route.</p>
@@ -236,7 +236,7 @@ function DestinationsSection({ trips }: { trips: TourismTrip[] }) {
             </button>
           </div>
         ) : (
-          <StaggerGroup className="mt-10 flex flex-col gap-5">
+          <StaggerGroup className="page-section-head flex flex-col gap-5">
             {filtered.map((trip, i) => (
               <StaggerItem key={trip.id}>
                 <RouteTripCard
@@ -270,12 +270,9 @@ export default function TourismPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-soft pb-12 pt-8 sm:pb-16 sm:pt-14">
-        <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-brand/10 blur-3xl" />
-        <div className="pointer-events-none absolute -right-16 top-24 h-80 w-80 rounded-full bg-sky-400/10 blur-3xl" />
-
+      <section className="relative overflow-hidden bg-white pb-8 pt-6 sm:pb-10 sm:pt-8">
         <Container className="relative">
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          <div className="grid grid-cols-1 items-center page-grid page-grid-2">
             <div className="min-w-0 max-w-xl">
               <motion.span
                 initial={{ opacity: 0, y: 12 }}
@@ -454,10 +451,10 @@ export default function TourismPage() {
       {tripsLoaded ? <DestinationsSection trips={trips} /> : null}
 
       {/* CTA */}
-      <section className="bg-white py-12 sm:py-16">
+      <section className="bg-white page-section">
         <Container>
           <Reveal>
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand via-brand to-brand-light px-6 py-10 text-center shadow-xl shadow-brand/20 sm:px-12 sm:py-14">
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand via-brand to-brand-light px-6 py-8 text-center sm:px-10 sm:py-10">
               <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
               <div className="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
               <span className="relative mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-white text-brand shadow-md">

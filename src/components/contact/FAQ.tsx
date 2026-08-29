@@ -29,19 +29,15 @@ const faqs = [
     q: "How fast will support reply?",
     a: "WhatsApp and phone are staffed 9am-9pm IST. Email is answered within one business day. During an active ride, SOS and in-app help are monitored around the clock.",
   },
-  {
-    q: "Can I visit the office without an appointment?",
-    a: "Yes for general queries during office hours. For partnerships or press, email us first so the right person is available when you arrive at Koregaon Park.",
-  },
 ];
 
 export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="bg-white py-14 sm:py-16">
+    <section className="bg-white page-section">
       <Container>
-        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-14">
+        <div className="grid grid-cols-1 items-start page-grid page-grid-2">
           <Reveal direction="left" className="lg:sticky lg:top-24">
             <PhotoCard
               src={images.friendsTable}

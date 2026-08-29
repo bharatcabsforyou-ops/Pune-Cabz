@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Container from "./Container";
+import Logo from "./Logo";
 import SocialIcon, { type SocialName } from "./SocialIcon";
 import { images } from "@/lib/images";
 import { site } from "@/lib/site";
@@ -57,12 +58,16 @@ export default function Footer() {
       <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/82 to-navy/45" />
       <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-transparent to-navy/30" />
 
-      <Container className="relative py-10 pb-24 sm:py-11 sm:pb-10">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <Container className="relative py-8 pb-20 sm:py-9 sm:pb-9">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <Link href="/" className="shrink-0 justify-self-start">
+            <Logo dark />
+          </Link>
+
           {columns.map((col) => (
             <div key={col.title}>
               <h3 className="text-base font-bold tracking-tight text-brand sm:text-lg">{col.title}</h3>
-              <ul className="mt-3.5 space-y-2">
+              <ul className="mt-3 space-y-2">
                 {col.links.map((link) => (
                   <li key={link.label}>
                     <Link
@@ -78,7 +83,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-white/15 pt-5">
+        <div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-white/15 pt-5">
           <p className="text-sm text-white/55">
             <a href="#" className="hover:text-white">
               Terms and Conditions

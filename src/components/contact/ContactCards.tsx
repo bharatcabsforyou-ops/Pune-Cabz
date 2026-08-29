@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, Phone } from "lucide-react";
 import Container from "../Container";
 import Reveal from "../motion/Reveal";
 import { StaggerGroup, StaggerItem } from "../motion/Stagger";
@@ -33,31 +33,23 @@ const cards = [
     brand: false,
     external: true,
   },
-  {
-    icon: MapPin,
-    title: "Visit us",
-    detail: site.address,
-    hint: "HQ · Koregaon Park",
-    href: "#office-map",
-    brand: true,
-  },
 ];
 
 export default function ContactCards() {
   return (
-    <section className="bg-white py-14 sm:py-16">
+    <section className="bg-white page-section">
       <Container>
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-bold uppercase tracking-widest text-brand">Reach us</p>
           <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
-            Four ways in
+            Three ways in
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-[15px] leading-relaxed text-navy/60">
             Same Pune team. Pick whatever is easiest - every card is a tap away.
           </p>
         </Reveal>
 
-        <StaggerGroup className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <StaggerGroup className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
           {cards.map(({ icon: Icon, title, detail, hint, href, brand, external }, i) => (
             <StaggerItem key={title} className="h-full">
               <a
@@ -68,8 +60,8 @@ export default function ContactCards() {
               >
                 <div className="flex items-center justify-between gap-3">
                   <span
-                    className={`flex h-11 w-11 items-center justify-center rounded-xl text-white shadow-md ${
-                      brand ? "bg-brand shadow-brand/25" : "bg-[#25D366] shadow-[#25D366]/25"
+                    className={`flex h-11 w-11 items-center justify-center rounded-xl text-white ${
+                      brand ? "bg-brand" : "bg-[#25D366]"
                     }`}
                   >
                     <Icon className="h-5 w-5" strokeWidth={1.75} />

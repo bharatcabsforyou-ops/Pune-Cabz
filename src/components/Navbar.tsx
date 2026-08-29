@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { CarFront, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import BrandIcon from "./BrandIcon";
 import clsx from "clsx";
 import Container from "./Container";
 import Logo from "./Logo";
@@ -14,8 +15,8 @@ const navLinks = [
   { href: "/how-it-works", label: "How it works" },
   { href: "/safety", label: "Safety" },
   { href: "/tourism", label: "Tourism" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/about", label: "About us" },
+  { href: "/contact", label: "Contact us" },
 ];
 
 export default function Navbar() {
@@ -57,7 +58,7 @@ export default function Navbar() {
           : "border-transparent"
       )}
     >
-      <Container className="grid h-[4.25rem] min-w-0 grid-cols-[auto_1fr_auto] items-center gap-3 sm:h-[4.75rem] sm:gap-6">
+      <Container className="grid h-16 min-w-0 grid-cols-[auto_1fr_auto] items-center gap-3 sm:gap-5">
         <Link
           href="/"
           className="relative z-10 min-w-0 shrink-0 justify-self-start"
@@ -86,9 +87,9 @@ export default function Navbar() {
           <Link
             href="/book"
             aria-label="Book your cars"
-            className="btn-shine inline-flex h-10 items-center justify-center gap-2 rounded-full bg-brand px-3.5 text-[13px] font-semibold text-white shadow-[0_8px_20px_-8px_rgba(220,31,38,0.55)] transition-all hover:bg-brand-dark hover:shadow-[0_10px_24px_-8px_rgba(220,31,38,0.65)] sm:h-11 sm:px-5"
+            className="btn-shine inline-flex h-10 items-center justify-center gap-2 rounded-full bg-brand px-3.5 text-[13px] font-semibold text-white transition-all hover:bg-brand-dark sm:h-11 sm:px-5"
           >
-            <CarFront className="h-4 w-4" />
+            <BrandIcon size={16} className="h-4 w-4" />
             <span className="hidden sm:inline">Book your cars</span>
           </Link>
           <button
@@ -132,9 +133,9 @@ export default function Navbar() {
               })}
               <Link
                 href="/book"
-                className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-brand px-4 py-3.5 text-sm font-semibold text-white shadow-md shadow-brand/20"
+                className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-brand px-4 py-3.5 text-sm font-semibold text-white"
               >
-                <CarFront className="h-4 w-4" />
+                <BrandIcon size={16} className="h-4 w-4" />
                 Book your cars
               </Link>
             </nav>

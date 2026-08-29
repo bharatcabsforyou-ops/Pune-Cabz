@@ -14,7 +14,7 @@ export default function Home() {
       <Hero />
       <TopRides />
       <TrustBar />
-      <HowItWorks className="bg-surface" />
+      <HowItWorks className="bg-white" />
       <WhyChoose />
       <HomeExplore />
       <WhyTravelWithUs />

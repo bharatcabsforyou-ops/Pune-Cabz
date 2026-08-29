@@ -32,7 +32,7 @@ const cards = [
 
 export default function HomeExplore() {
   return (
-    <section className="bg-white py-12 sm:py-16">
+    <section className="bg-white page-section">
       <Container>
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-bold uppercase tracking-widest text-brand">Explore</p>
@@ -44,14 +44,14 @@ export default function HomeExplore() {
           </p>
         </Reveal>
 
-        <StaggerGroup className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+        <StaggerGroup className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
           {cards.map(({ icon: Icon, title, text, href, cta }) => (
             <StaggerItem key={title}>
               <Link
                 href={href}
-                className="group flex h-full flex-col rounded-2xl border border-brand/8 bg-surface p-6 transition-colors hover:border-brand/15 hover:bg-white hover:shadow-sm"
+                className="group flex h-full flex-col rounded-2xl border border-black/6 bg-surface p-5 transition-colors hover:border-black/10 hover:bg-white"
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand text-white shadow-md shadow-brand/20">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand text-white">
                   <Icon className="h-5 w-5" strokeWidth={2} />
                 </span>
                 <h3 className="mt-5 text-lg font-bold text-navy">{title}</h3>

@@ -156,7 +156,7 @@ export default function BookPage() {
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.38 }}
-            className="mt-10 w-full min-w-0"
+            className="mt-6 w-full min-w-0"
           >
             <SearchBar
               variant="hero"

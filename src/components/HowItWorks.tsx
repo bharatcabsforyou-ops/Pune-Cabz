@@ -35,7 +35,7 @@ export default function HowItWorks({
   className?: string;
 }) {
   return (
-    <section className={clsx("relative overflow-hidden py-14 sm:py-16", className ?? "bg-soft")}>
+    <section className={clsx("relative overflow-hidden page-section", className ?? "bg-white")}>
       <Container className="relative">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-bold uppercase tracking-widest text-brand">Simple by design</p>
@@ -47,12 +47,12 @@ export default function HowItWorks({
           </p>
         </Reveal>
 
-        <StaggerGroup className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+        <StaggerGroup className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
           {steps.map(({ icon: Icon, title, text }, i) => (
             <StaggerItem key={title}>
               <article className="flex h-full flex-col rounded-2xl border border-black/5 bg-white p-6 text-left shadow-sm">
                 <div className="flex items-center justify-between gap-3">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand text-white shadow-md shadow-brand/25">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand text-white">
                     <Icon className="h-5 w-5" strokeWidth={2} />
                   </span>
                   <span className="text-2xl font-extrabold tabular-nums text-brand/20">

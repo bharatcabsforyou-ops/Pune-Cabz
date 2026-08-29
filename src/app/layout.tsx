@@ -23,12 +23,11 @@ export const metadata: Metadata = {
   description:
     "Find a carpool ride or share your own. Pune Cabz connects drivers and passengers travelling the same way for less.",
   icons: {
-    icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
-    apple: "/apple-icon",
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    shortcut: "/favicon.svg",
+    apple: [{ url: "/apple-icon", sizes: "180x180" }],
   },
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

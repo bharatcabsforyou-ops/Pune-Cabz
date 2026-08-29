@@ -88,18 +88,16 @@ export default function ReviewsSection() {
   }
 
   return (
-    <section className="bg-surface py-10 sm:py-16">
+    <section className="bg-white page-section">
       <Container>
-        <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-brand">Reviews</p>
-            <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
-              What riders say
-            </h2>
-            <p className="mt-2 max-w-lg text-[15px] leading-relaxed text-navy/60">
-              Recent trips on Pune Cabz. Add yours - it goes live after our team checks it.
-            </p>
-          </div>
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-xs font-bold uppercase tracking-widest text-brand">Reviews</p>
+          <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
+            What riders say
+          </h2>
+          <p className="mx-auto mt-2 max-w-lg text-[15px] leading-relaxed text-navy/60">
+            Recent trips on Pune Cabz. Add yours - it goes live after our team checks it.
+          </p>
           <button
             type="button"
             onClick={() => {
@@ -107,7 +105,7 @@ export default function ReviewsSection() {
               setError("");
               setOpen(true);
             }}
-            className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-brand/25 hover:bg-brand-dark"
+            className="mt-5 inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
           >
             <MessageSquarePlus className="h-4 w-4" />
             Add review

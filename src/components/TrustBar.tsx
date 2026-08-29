@@ -15,10 +15,10 @@ export default function TrustBar() {
   return (
     <section className="border-y border-black/5 bg-white">
       <Container>
-        <StaggerGroup className="grid grid-cols-2 gap-4 py-7 lg:grid-cols-4 lg:gap-6 lg:py-8">
+        <StaggerGroup className="grid grid-cols-2 gap-3 py-5 lg:grid-cols-4 lg:gap-4 lg:py-6">
           {items.map(({ icon: Icon, label }) => (
             <StaggerItem key={label}>
-              <div className="flex items-center gap-3 rounded-2xl border border-brand/8 bg-surface px-3 py-3">
+              <div className="flex items-center gap-3 rounded-2xl border border-black/6 bg-surface px-3 py-2.5">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand text-white">
                   <Icon className="h-5 w-5" strokeWidth={2} />
                 </span>

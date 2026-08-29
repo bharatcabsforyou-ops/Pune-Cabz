@@ -15,10 +15,10 @@ export default function JourneyShowcase() {
         return (
           <section
             key={film.src}
-            className={clsx("py-14 sm:py-20", i % 2 === 0 ? "bg-white" : "bg-surface")}
+            className={clsx("page-section", i % 2 === 0 ? "bg-white" : "bg-surface")}
           >
             <Container>
-              <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-14">
+              <div className="grid grid-cols-1 page-grid page-grid-2 items-center">
                 <Reveal
                   direction={reverse ? "right" : "left"}
                   className={clsx(reverse && "lg:order-2")}

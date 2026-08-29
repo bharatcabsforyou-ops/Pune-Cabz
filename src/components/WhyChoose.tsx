@@ -25,7 +25,7 @@ const reasons = [
 
 export default function WhyChoose() {
   return (
-    <section className="bg-white py-12 sm:py-14">
+    <section className="bg-white page-section">
       <Container>
         <Reveal className="mx-auto max-w-xl text-center">
           <p className="text-xs font-bold uppercase tracking-widest text-brand">Why Pune Cabz</p>
@@ -34,10 +34,10 @@ export default function WhyChoose() {
           </h2>
         </Reveal>
 
-        <StaggerGroup className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <StaggerGroup className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
           {reasons.map(({ icon: Icon, title, text }) => (
             <StaggerItem key={title}>
-              <div className="h-full rounded-2xl border border-brand/8 bg-surface p-5 shadow-sm">
+              <div className="h-full rounded-2xl border border-black/6 bg-surface p-5">
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand text-white">
                   <Icon className="h-5 w-5" strokeWidth={2} />
                 </span>
