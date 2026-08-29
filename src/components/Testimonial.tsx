@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { BadgeCheck, Quote, Star } from "lucide-react";
 import Container from "./Container";
+import FeatureIcon from "./FeatureIcon";
 import Reveal from "./motion/Reveal";
 import { images } from "@/lib/images";
 
@@ -18,9 +19,7 @@ export default function Testimonial() {
             <div className="relative grid grid-cols-1 lg:grid-cols-[1fr_auto]">
               <div className="border-b border-black/[0.06] p-6 sm:p-8 lg:border-b-0 lg:border-r">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand text-white">
-                    <Quote className="h-5 w-5" fill="currentColor" strokeWidth={0} />
-                  </span>
+                  <FeatureIcon icon={Quote} iconClassName="fill-current" strokeWidth={0} />
                   <div>
                     <p className="text-xs font-bold uppercase tracking-widest text-brand">
                       Rider story

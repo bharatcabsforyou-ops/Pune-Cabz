@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Clock3, MessageCircle, ShieldCheck } from "lucide-react";
 import Container from "../Container";
+import FeatureIcon from "../FeatureIcon";
 import PhotoCard from "../PhotoCard";
 import WhatsAppIcon from "../WhatsAppIcon";
 import { images } from "@/lib/images";
@@ -85,9 +86,7 @@ export default function ContactHero() {
                 key={label}
                 className="flex items-start gap-3 rounded-xl border border-black/[0.06] bg-surface/60 px-4 py-3.5"
               >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand text-white">
-                  <Icon className="h-4 w-4" strokeWidth={2} />
-                </span>
+                <FeatureIcon icon={Icon} size="sm" />
                 <div>
                   <p className="text-sm font-bold text-navy">{label}</p>
                   <p className="mt-0.5 text-xs text-navy/55">{text}</p>

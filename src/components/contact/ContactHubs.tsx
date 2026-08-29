@@ -2,6 +2,7 @@
 
 import { MapPinned } from "lucide-react";
 import Container from "../Container";
+import FeatureIcon from "../FeatureIcon";
 import Reveal from "../motion/Reveal";
 import { StaggerGroup, StaggerItem } from "../motion/Stagger";
 
@@ -35,9 +36,7 @@ export default function ContactHubs() {
           {hubs.map(({ city, tag }) => (
             <StaggerItem key={city} className="h-full">
               <div className="flex h-full items-center gap-3 rounded-2xl border border-black/5 bg-white px-4 py-4 text-left shadow-sm">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand text-white">
-                  <MapPinned className="h-4 w-4" />
-                </span>
+                <FeatureIcon icon={MapPinned} size="sm" />
                 <div>
                   <p className="text-sm font-bold text-navy">{city}</p>
                   <p className="text-xs font-medium text-navy/45">{tag}</p>

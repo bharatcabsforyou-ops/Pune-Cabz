@@ -2,6 +2,7 @@
 
 import { IndianRupee, Snowflake, Timer } from "lucide-react";
 import Container from "./Container";
+import FeatureIcon from "./FeatureIcon";
 import Reveal from "./motion/Reveal";
 import { StaggerGroup, StaggerItem } from "./motion/Stagger";
 
@@ -38,9 +39,7 @@ export default function WhyChoose() {
           {reasons.map(({ icon: Icon, title, text }) => (
             <StaggerItem key={title}>
               <div className="h-full rounded-2xl border border-black/6 bg-surface p-5">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand text-white">
-                  <Icon className="h-5 w-5" strokeWidth={2} />
-                </span>
+                <FeatureIcon icon={Icon} size="lg" />
                 <h3 className="mt-4 text-base font-bold text-navy">{title}</h3>
                 <p className="mt-1.5 text-[13px] leading-relaxed text-navy/60">{text}</p>
               </div>

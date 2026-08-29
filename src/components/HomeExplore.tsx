@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, CarFront, MapPinned, ShieldCheck } from "lucide-react";
 import Container from "./Container";
+import FeatureIcon from "./FeatureIcon";
 import Reveal from "./motion/Reveal";
 import { StaggerGroup, StaggerItem } from "./motion/Stagger";
 
@@ -51,9 +52,7 @@ export default function HomeExplore() {
                 href={href}
                 className="group flex h-full flex-col rounded-2xl border border-black/6 bg-surface p-5 transition-colors hover:border-black/10 hover:bg-white"
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand text-white">
-                  <Icon className="h-5 w-5" strokeWidth={2} />
-                </span>
+                <FeatureIcon icon={Icon} size="lg" />
                 <h3 className="mt-5 text-lg font-bold text-navy">{title}</h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-navy/60">{text}</p>
                 <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand">

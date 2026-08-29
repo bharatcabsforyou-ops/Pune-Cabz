@@ -205,8 +205,8 @@ function DestinationsSection({ trips }: { trips: TourismTrip[] }) {
                 onClick={() => setFilter(type)}
                 className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
                   filter === type
-                    ? "bg-brand text-white shadow-md shadow-brand/20"
-                    : "bg-white text-navy ring-1 ring-black/5 hover:bg-white/80"
+                    ? "bg-brand/10 text-brand ring-1 ring-brand/25"
+                    : "bg-white text-navy ring-1 ring-black/5 hover:bg-surface"
                 }`}
               >
                 {type}

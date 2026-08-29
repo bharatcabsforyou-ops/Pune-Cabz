@@ -17,6 +17,7 @@ import {
   Wallet,
 } from "lucide-react";
 import Container from "@/components/Container";
+import FeatureIcon from "@/components/FeatureIcon";
 import HowItWorks from "@/components/HowItWorks";
 import PhotoCard from "@/components/PhotoCard";
 import Reveal from "@/components/motion/Reveal";
@@ -177,9 +178,7 @@ export default function HowItWorksPage() {
             {roles.map(({ icon: Icon, title, intro, points }) => (
               <StaggerItem key={title}>
                 <article className="flex h-full flex-col rounded-2xl border border-black/5 bg-white p-7 text-left shadow-sm">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white">
-                    <Icon className="h-6 w-6" strokeWidth={2} />
-                  </span>
+                  <FeatureIcon icon={Icon} size="lg" className="h-12 w-12" iconClassName="h-6 w-6" />
                   <h3 className="mt-5 text-xl font-bold tracking-tight text-navy">{title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-navy/60">{intro}</p>
                   <ul className="mt-5 space-y-3">

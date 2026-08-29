@@ -15,6 +15,7 @@ import {
   Users,
 } from "lucide-react";
 import Container from "@/components/Container";
+import FeatureIcon from "@/components/FeatureIcon";
 import PhotoCard from "@/components/PhotoCard";
 import Reveal from "@/components/motion/Reveal";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
@@ -186,9 +187,7 @@ export default function SafetyPage() {
               <StaggerItem key={title}>
                 <article className="flex h-full flex-col rounded-2xl border border-black/5 bg-soft p-6 text-left">
                   <div className="flex items-center justify-between gap-3">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand text-white shadow-md shadow-brand/25">
-                      <Icon className="h-5 w-5" strokeWidth={2} />
-                    </span>
+                    <FeatureIcon icon={Icon} size="lg" />
                     <span className="text-2xl font-extrabold tabular-nums text-brand/20">
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -233,9 +232,7 @@ export default function SafetyPage() {
         <Container>
           <div className="grid grid-cols-1 items-center page-grid page-grid-2">
             <Reveal>
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white shadow-md shadow-brand/25">
-                <ShieldAlert className="h-6 w-6" />
-              </span>
+              <FeatureIcon icon={ShieldAlert} size="lg" className="h-12 w-12" iconClassName="h-6 w-6" />
               <h2 className="mt-5 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
                 If something feels off
               </h2>
@@ -284,9 +281,7 @@ export default function SafetyPage() {
           <Reveal>
             <div className="grid grid-cols-1 items-center gap-8 rounded-3xl border border-black/5 bg-white p-7 sm:p-10 lg:grid-cols-12">
               <div className="lg:col-span-8">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand text-white">
-                  <ShieldCheck className="h-5 w-5" />
-                </span>
+                <FeatureIcon icon={ShieldCheck} size="lg" />
                 <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-navy">
                   Ready to ride with checks in place?
                 </h2>

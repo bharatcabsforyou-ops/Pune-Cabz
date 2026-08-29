@@ -1,3 +1,6 @@
+const DEFAULT_HERO_VIDEO_CDN =
+  "https://assets.mixkit.co/videos/preview/mixkit-view-from-the-windshield-of-a-car-driving-4249-large.mp4";
+
 export const site = {
   name: "Pune Cabz",
   phone: "+91 62058 78945",
@@ -13,4 +16,8 @@ export const site = {
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=Koregaon+Park+Pune",
   mapEmbed:
     "https://www.openstreetmap.org/export/embed.html?bbox=73.880%2C18.528%2C73.910%2C18.548&layer=mapnik&marker=18.5362%2C73.8939",
+  /** Hero video: env override, or local mp4 in dev, or CDN on Vercel production */
+  heroVideoUrl:
+    process.env.NEXT_PUBLIC_HERO_VIDEO_URL ??
+    (process.env.NODE_ENV === "production" ? DEFAULT_HERO_VIDEO_CDN : "/hero-bg.mp4"),
 };

@@ -58,7 +58,7 @@ export default function Footer() {
       <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/82 to-navy/45" />
       <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-transparent to-navy/30" />
 
-      <Container className="relative py-8 pb-20 sm:py-9 sm:pb-9">
+      <Container className="relative py-8 pb-28 sm:py-9 sm:pb-10">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <Link href="/" className="shrink-0 justify-self-start">
             <Logo dark />

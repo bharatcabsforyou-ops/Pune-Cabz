@@ -8,6 +8,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import Container from "./Container";
+import FeatureIcon from "./FeatureIcon";
 import Reveal from "./motion/Reveal";
 
 const features = [
@@ -33,9 +34,7 @@ export default function WhyTravelWithUs() {
           <div className="mt-6 grid grid-cols-1 divide-y divide-black/[0.06] rounded-2xl border border-black/[0.06] bg-surface/60 sm:grid-cols-2 lg:grid-cols-5 lg:divide-x lg:divide-y-0">
             {features.map(({ title, text, icon: Icon }) => (
               <div key={title} className="flex flex-col items-center px-4 py-4 text-center sm:px-5">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand/10 text-brand">
-                  <Icon className="h-5 w-5" />
-                </span>
+                <FeatureIcon icon={Icon} />
                 <h3 className="mt-3 text-sm font-bold text-navy">{title}</h3>
                 <p className="mt-1 text-xs leading-relaxed text-navy/50">{text}</p>
               </div>

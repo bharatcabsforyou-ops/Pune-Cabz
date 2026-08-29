@@ -2,6 +2,7 @@
 
 import { Handshake, IndianRupee, Leaf, ShieldCheck } from "lucide-react";
 import Container from "../Container";
+import FeatureIcon from "../FeatureIcon";
 import Reveal from "../motion/Reveal";
 import { StaggerGroup, StaggerItem } from "../motion/Stagger";
 
@@ -47,9 +48,7 @@ export default function Values() {
             <StaggerItem key={title}>
               <article className="flex h-full flex-col rounded-2xl border border-black/5 bg-soft p-6 text-left">
                 <div className="flex items-center justify-between gap-3">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand text-white shadow-md shadow-brand/25">
-                    <Icon className="h-5 w-5" strokeWidth={2} />
-                  </span>
+                  <FeatureIcon icon={Icon} size="lg" />
                   <span className="text-2xl font-extrabold tabular-nums text-brand/20">
                     {String(i + 1).padStart(2, "0")}
                   </span>

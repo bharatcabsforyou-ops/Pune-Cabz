@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import Container from "./Container";
 import SearchBar from "./SearchBar";
 import HomeRoutesCarousel from "./HomeRoutesCarousel";
 import { images } from "@/lib/images";
+import { site } from "@/lib/site";
 
 const stats = [
   { value: "5000+", label: "members" },
@@ -14,6 +16,18 @@ const stats = [
 ];
 
 export default function Hero() {
+  const reduceMotion = useReducedMotion();
+  const [videoOk, setVideoOk] = useState(true);
+  const [videoSrc, setVideoSrc] = useState(site.heroVideoUrl);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+    setVideoSrc(site.heroVideoUrl);
+    setVideoOk(true);
+  }, [reduceMotion]);
+
+  const showVideo = !reduceMotion && videoOk;
+
   return (
     <section className="relative isolate overflow-hidden bg-[#2a2022]">
       <div className="absolute inset-0">
@@ -25,6 +39,26 @@ export default function Hero() {
           sizes="100vw"
           className="object-cover object-[68%_center] brightness-[1.18] contrast-[1.02] saturate-[1.04]"
         />
+        {showVideo ? (
+          <video
+            key={videoSrc}
+            className="absolute inset-0 h-full w-full object-cover brightness-[1.2] contrast-[1.02] saturate-[1.05]"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={images.heroBg}
+            onError={() => {
+              if (videoSrc !== images.heroVideo) {
+                setVideoSrc(images.heroVideo);
+                return;
+              }
+              setVideoOk(false);
+            }}
+          >
+            <source src={videoSrc} type="video/mp4" />
+          </video>
+        ) : null}
       </div>
 
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#1a1214]/55 via-[#1a1214]/25 to-transparent" />

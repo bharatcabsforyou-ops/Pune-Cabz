@@ -2,6 +2,7 @@
 
 import { BadgeCheck, Headphones, IdCard, LockKeyhole } from "lucide-react";
 import Container from "./Container";
+import FeatureIcon from "./FeatureIcon";
 import { StaggerGroup, StaggerItem } from "./motion/Stagger";
 
 const items = [
@@ -19,9 +20,7 @@ export default function TrustBar() {
           {items.map(({ icon: Icon, label }) => (
             <StaggerItem key={label}>
               <div className="flex items-center gap-3 rounded-2xl border border-black/6 bg-surface px-3 py-2.5">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand text-white">
-                  <Icon className="h-5 w-5" strokeWidth={2} />
-                </span>
+                <FeatureIcon icon={Icon} />
                 <p className="text-sm font-semibold text-navy">{label}</p>
               </div>
             </StaggerItem>
