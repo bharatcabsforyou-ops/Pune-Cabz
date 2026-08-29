@@ -74,28 +74,28 @@ export default function ContactForm() {
   return (
     <section id="write" className="scroll-mt-20 border-y border-black/[0.06] bg-white py-6 sm:py-8">
       <Container>
-        <div className="page-grid page-grid-2 items-start gap-5 lg:items-center lg:gap-6">
-          <Reveal direction="left" className="order-2 w-full lg:order-1 lg:max-w-sm">
-            <div className="relative h-[160px] overflow-hidden rounded-xl sm:h-[180px] lg:h-[220px]">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-stretch lg:gap-5">
+          <Reveal direction="left" className="order-2 min-h-0 lg:order-1 lg:relative lg:w-[38%] lg:shrink-0">
+            <div className="relative h-40 overflow-hidden rounded-xl bg-[#1a1214] sm:h-44 lg:absolute lg:inset-0 lg:h-auto">
               <Image
                 src={images.film2}
                 alt="Pune Cabz support"
                 fill
-                sizes="(min-width: 1024px) 320px, 100vw"
-                className="object-cover"
+                sizes="(min-width: 1024px) 360px, 100vw"
+                className="object-contain object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/75 via-navy/15 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4">
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/75 via-navy/10 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 p-3">
                 <p className="text-[9px] font-bold uppercase tracking-widest text-brand-light">
                   Pune Cabz
                 </p>
-                <p className="mt-0.5 text-sm font-extrabold text-white sm:text-base">Need help fast?</p>
-                <p className="mt-0.5 text-[11px] text-white/70">Call or WhatsApp us.</p>
+                <p className="mt-0.5 text-sm font-extrabold text-white">Need help fast?</p>
+                <p className="text-[11px] text-white/70">Call or WhatsApp us.</p>
               </div>
             </div>
           </Reveal>
 
-          <Reveal direction="right" className="order-1 w-full lg:order-2">
+          <Reveal direction="right" className="order-1 min-h-0 flex-1 lg:order-2">
             <div className="overflow-hidden rounded-xl border border-black/[0.08] bg-white">
               <div className="border-b border-black/[0.06] px-4 py-3 sm:px-5">
                 <h2 className="text-lg font-extrabold text-navy">Send a message</h2>
