@@ -5,56 +5,43 @@ import PhotoCard from "../PhotoCard";
 import Reveal from "../motion/Reveal";
 import { images } from "@/lib/images";
 
-const milestones = [
-  {
-    year: "2019",
-    title: "A college WhatsApp group",
-    text: "Classmates in Pune needed a ride home for the holidays. Empty seats met rising fuel prices.",
-  },
-  {
-    year: "Then",
-    title: "The platform we wished existed",
-    text: "Identity checks, in-app ratings, and search that understands Maharashtra routes.",
-  },
-  {
-    year: "Now",
-    title: "Pune and 20+ cities",
-    text: "The same idea - verified people sharing a car and splitting the cost - every day.",
-  },
-];
-
 export default function Story() {
   return (
     <section className="bg-white page-section">
       <Container>
         <div className="grid grid-cols-1 items-center page-grid page-grid-2">
           <Reveal direction="left">
-            <PhotoCard src={images.teamCabin} alt="The Pune Cabz team at work" />
+            <PhotoCard src={images.travelScenicRoad} alt="Pune Cabz journey across Maharashtra" />
           </Reveal>
 
           <Reveal direction="right">
-            <p className="text-xs font-bold uppercase tracking-widest text-brand">Our story</p>
-            <h2 className="mt-2 text-2xl font-extrabold leading-tight tracking-tight text-navy sm:text-3xl">
-              From a Pune carpool group to a city-wide platform
+            <p className="section-eyebrow">About Us</p>
+            <h2 className="section-title mt-2 text-left">
+              Your trusted cab service in Pune
             </h2>
-            <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-navy/60">
-              We built Pune Cabz so sharing a seat feels as easy as booking a
-              ticket - with checks in place, and without surge games.
-            </p>
-
-            <ol className="mt-8 space-y-5">
-              {milestones.map((item) => (
-                <li key={item.year} className="flex gap-4 text-left">
-                  <span className="mt-0.5 w-12 shrink-0 text-sm font-extrabold tabular-nums text-brand">
-                    {item.year}
-                  </span>
-                  <div>
-                    <h3 className="text-base font-bold text-navy">{item.title}</h3>
-                    <p className="mt-1 text-sm leading-relaxed text-navy/60">{item.text}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
+            <div className="mt-4 max-w-xl space-y-4 text-[15px] leading-relaxed text-navy/60">
+              <p>
+                Welcome to PuneCabz, your trusted cab service in Pune. We are committed
+                to making every journey safe, comfortable, reliable, and convenient.
+              </p>
+              <p>
+                Whether you need a cab for daily travel, airport transfers, business
+                trips, local sightseeing, outstation journeys, or special occasions, we
+                are here to serve you with dependable transportation solutions.
+              </p>
+              <p>
+                Our team focuses on providing well-maintained vehicles, professional
+                drivers, timely pickups, transparent service, and a comfortable travel
+                experience. We understand that every customer has different travel
+                needs, which is why we aim to provide flexible and customer-friendly cab
+                services across Pune and beyond.
+              </p>
+              <p>
+                With a strong focus on safety, punctuality, and customer satisfaction,
+                we strive to become a cab service that people can confidently rely on
+                for every journey.
+              </p>
+            </div>
           </Reveal>
         </div>
       </Container>

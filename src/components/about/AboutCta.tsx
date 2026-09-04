@@ -10,25 +10,25 @@ export default function AboutCta() {
     <section className="bg-white page-section">
       <Container>
         <Reveal>
-          <div className="rounded-3xl bg-navy px-6 py-12 text-center sm:px-12 sm:py-14">
-            <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+          <div className="cta-panel px-6 py-9 text-center sm:px-10 sm:py-11">
+            <h2 className="relative text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
               Ride with Pune Cabz
             </h2>
-            <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-white/70">
+            <p className="relative mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-white/90">
               Search a verified seat, or talk to the team in Koregaon Park if you
               want to partner with us.
             </p>
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+            <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/book"
-                className="inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-black/20 transition-colors hover:bg-brand-dark"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-brand shadow-lg transition-transform hover:scale-[1.02] hover:bg-white/95"
               >
                 Book your cars
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-navy"
+                className="inline-flex items-center gap-2 rounded-full bg-white/15 px-7 py-3.5 text-sm font-semibold text-white ring-1 ring-white/35 backdrop-blur-sm transition-colors hover:bg-white/25"
               >
                 Contact us
               </Link>

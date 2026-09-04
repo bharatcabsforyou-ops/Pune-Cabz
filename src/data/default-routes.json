@@ -5,7 +5,7 @@
     "duration": "45m",
     "fromPrice": "199",
     "tag": "Popular",
-    "imageUrl": "/image1.jpg",
+    "imageUrl": "/image1.jpeg",
     "sortOrder": 1,
     "published": true
   },
@@ -15,7 +15,7 @@
     "duration": "3h 30m",
     "fromPrice": "499",
     "tag": "Most booked",
-    "imageUrl": "/image2.jpg",
+    "imageUrl": "/image2.jpeg",
     "sortOrder": 2,
     "published": true
   },
@@ -25,7 +25,7 @@
     "duration": "4h 15m",
     "fromPrice": "449",
     "tag": "Weekend",
-    "imageUrl": "/image3.jpg",
+    "imageUrl": "/image3.png",
     "sortOrder": 3,
     "published": true
   },
@@ -35,7 +35,7 @@
     "duration": "5h",
     "fromPrice": "599",
     "tag": "Coastal",
-    "imageUrl": "/image4.jpg",
+    "imageUrl": "/image4.jpeg",
     "sortOrder": 4,
     "published": true
   },
@@ -45,8 +45,68 @@
     "duration": "2h 45m",
     "fromPrice": "399",
     "tag": "Scenic",
-    "imageUrl": "/image5.jpg",
+    "imageUrl": "/iamge5.png",
     "sortOrder": 5,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Lonavala",
+    "duration": "1h 15m",
+    "fromPrice": "299",
+    "tag": "Hills",
+    "imageUrl": "/image6.png",
+    "sortOrder": 6,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Shirdi",
+    "duration": "5h 30m",
+    "fromPrice": "699",
+    "tag": "Pilgrimage",
+    "imageUrl": "/image7.png",
+    "sortOrder": 7,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Kolhapur",
+    "duration": "4h",
+    "fromPrice": "549",
+    "tag": "Daily",
+    "imageUrl": "/image8.png",
+    "sortOrder": 8,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Aurangabad",
+    "duration": "5h",
+    "fromPrice": "649",
+    "tag": "Heritage",
+    "imageUrl": "/image9.png",
+    "sortOrder": 9,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Goa",
+    "duration": "9h",
+    "fromPrice": "1299",
+    "tag": "Coastal",
+    "imageUrl": "/image10.png",
+    "sortOrder": 10,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Satara",
+    "duration": "2h",
+    "fromPrice": "349",
+    "tag": "Scenic",
+    "imageUrl": "/image11.png",
+    "sortOrder": 11,
     "published": true
   }
 ]

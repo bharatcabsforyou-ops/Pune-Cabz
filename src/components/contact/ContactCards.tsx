@@ -40,24 +40,22 @@ export default function ContactCards() {
   return (
     <section className="bg-white page-section">
       <Container>
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-bold uppercase tracking-widest text-brand">Reach us</p>
-          <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
-            Three ways in
-          </h2>
-          <p className="mx-auto mt-3 max-w-lg text-[15px] leading-relaxed text-navy/60">
+        <Reveal className="section-head">
+          <p className="section-eyebrow">Reach us</p>
+          <h2 className="section-title">Three ways in</h2>
+          <p className="section-desc">
             Same Pune team. Pick whatever is easiest - every card is a tap away.
           </p>
         </Reveal>
 
-        <StaggerGroup className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <StaggerGroup className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
           {cards.map(({ icon: Icon, title, detail, hint, href, brand, external }, i) => (
             <StaggerItem key={title} className="h-full">
               <a
                 href={href}
                 target={external ? "_blank" : undefined}
                 rel={external ? "noopener noreferrer" : undefined}
-                className="group flex h-full flex-col rounded-2xl border border-black/5 bg-soft p-6 text-left transition-colors hover:bg-white hover:shadow-sm"
+                className="pro-card-interactive group flex h-full flex-col p-5 sm:p-6"
               >
                 <div className="flex items-center justify-between gap-3">
                   <FeatureIcon

@@ -21,21 +21,19 @@ export default function ContactHubs() {
   return (
     <section className="bg-soft page-section">
       <Container>
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-bold uppercase tracking-widest text-brand">Coverage</p>
-          <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
-            Cities we serve
-          </h2>
-          <p className="mx-auto mt-3 max-w-lg text-[15px] leading-relaxed text-navy/60">
+        <Reveal className="section-head">
+          <p className="section-eyebrow">Coverage</p>
+          <h2 className="section-title">Cities we serve</h2>
+          <p className="section-desc">
             Support is based in Pune. Rides run across these hubs and the routes
             between them.
           </p>
         </Reveal>
 
-        <StaggerGroup className="page-section-head grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+        <StaggerGroup className="page-section-head grid grid-cols-2 gap-3 sm:grid-cols-4">
           {hubs.map(({ city, tag }) => (
             <StaggerItem key={city} className="h-full">
-              <div className="flex h-full items-center gap-3 rounded-2xl border border-black/5 bg-white px-4 py-4 text-left shadow-sm">
+              <div className="feature-row h-full">
                 <FeatureIcon icon={MapPinned} size="sm" />
                 <div>
                   <p className="text-sm font-bold text-navy">{city}</p>

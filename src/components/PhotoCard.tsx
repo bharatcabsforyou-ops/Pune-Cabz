@@ -1,9 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Star, ShieldCheck } from "lucide-react";
 import clsx from "clsx";
+import { images, isBrandedRouteBanner } from "@/lib/images";
+
+const FALLBACK = images.film1;
 
 export default function PhotoCard({
   src,
@@ -20,7 +24,13 @@ export default function PhotoCard({
   badge?: "rating" | "verified" | false;
   priority?: boolean;
 }) {
-  const isBanner = variant === "banner";
+  const [imgSrc, setImgSrc] = useState(src || FALLBACK);
+
+  useEffect(() => {
+    setImgSrc(src || FALLBACK);
+  }, [src]);
+
+  const isBanner = variant === "banner" || isBrandedRouteBanner(imgSrc);
   const aspect = {
     wide: "aspect-4/3",
     portrait: "aspect-3/4",
@@ -35,32 +45,36 @@ export default function PhotoCard({
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
       className={clsx(
-        "relative w-full overflow-hidden rounded-3xl bg-navy shadow-2xl shadow-navy/20 ring-1 ring-black/5",
+        "relative w-full overflow-hidden rounded-3xl bg-white shadow-lg shadow-navy/8 ring-1 ring-black/[0.05]",
         aspect,
         className
       )}
     >
       {isBanner ? (
-        <Image
-          src={src}
-          alt={alt}
-          width={1536}
-          height={1024}
-          priority={priority}
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          className="h-auto w-full"
-        />
+        <div className={isBrandedRouteBanner(imgSrc) ? "bg-[#1a1214]" : "bg-white"}>
+          <Image
+            src={imgSrc}
+            alt={alt}
+            width={1536}
+            height={1024}
+            priority={priority}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="h-auto w-full object-contain object-center"
+            onError={() => setImgSrc(FALLBACK)}
+          />
+        </div>
       ) : (
         <>
           <Image
-            src={src}
+            src={imgSrc}
             alt={alt}
             fill
             priority={priority}
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover"
+            onError={() => setImgSrc(FALLBACK)}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy/25 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy/12 via-transparent to-transparent" />
         </>
       )}
 

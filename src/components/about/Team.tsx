@@ -17,20 +17,18 @@ export default function Team() {
   return (
     <section className="bg-soft page-section">
       <Container>
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-bold uppercase tracking-widest text-brand">The people</p>
-          <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
-            Meet the team
-          </h2>
-          <p className="mx-auto mt-3 max-w-lg text-[15px] leading-relaxed text-navy/60">
+        <Reveal className="section-head">
+          <p className="section-eyebrow">The people</p>
+          <h2 className="section-title">Meet the team</h2>
+          <p className="section-desc">
             A small Pune team obsessed with making shared travel simple and safe.
           </p>
         </Reveal>
 
-        <StaggerGroup className="page-section-head grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-5">
+        <StaggerGroup className="page-section-head grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
           {team.map((member) => (
             <StaggerItem key={member.name}>
-              <article className="overflow-hidden rounded-2xl border border-black/5 bg-white text-left shadow-sm">
+              <article className="pro-card-interactive overflow-hidden p-0">
                 <div className="relative aspect-square w-full">
                   <Image
                     src={member.photo}
@@ -40,7 +38,7 @@ export default function Team() {
                     className="object-cover"
                   />
                 </div>
-                <div className="p-4">
+                <div className="card-body p-4">
                   <p className="font-bold tracking-tight text-navy">{member.name}</p>
                   <p className="mt-0.5 text-xs font-medium text-navy/50">{member.role}</p>
                 </div>

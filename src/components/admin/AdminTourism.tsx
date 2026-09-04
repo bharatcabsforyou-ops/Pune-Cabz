@@ -17,7 +17,7 @@ const emptyForm: TourismTripInput = {
   caption: "",
   tripType: "Day trip",
   fromCity: "Pune",
-  imageUrl: "/image1.jpg",
+  imageUrl: "/image1.jpeg",
   sortOrder: 0,
   published: true,
 };

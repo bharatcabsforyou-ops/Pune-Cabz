@@ -90,12 +90,10 @@ export default function ReviewsSection() {
   return (
     <section className="bg-white page-section">
       <Container>
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-bold uppercase tracking-widest text-brand">Reviews</p>
-          <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
-            What riders say
-          </h2>
-          <p className="mx-auto mt-2 max-w-lg text-[15px] leading-relaxed text-navy/60">
+        <div className="section-head">
+          <p className="section-eyebrow">Reviews</p>
+          <h2 className="section-title">What riders say</h2>
+          <p className="section-desc">
             Recent trips on Pune Cabz. Add yours - it goes live after our team checks it.
           </p>
           <button
@@ -105,22 +103,22 @@ export default function ReviewsSection() {
               setError("");
               setOpen(true);
             }}
-            className="mt-5 inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+            className="btn-primary btn-shine mt-6 inline-flex gap-2 px-6 py-2.5 text-sm"
           >
             <MessageSquarePlus className="h-4 w-4" />
             Add review
           </button>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-3">
           {reviews.map((review) => (
             <article
               key={review.id}
-              className="flex h-full flex-col rounded-2xl border border-black/5 bg-white p-5 text-left shadow-sm"
+              className="pro-card flex h-full flex-col p-4 text-left sm:p-5"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="flex min-w-0 items-center gap-3">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand text-[11px] font-bold text-white shadow-sm ring-2 ring-brand/15">
                     {initials(review.name)}
                   </span>
                   <div className="min-w-0">

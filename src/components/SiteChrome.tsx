@@ -5,21 +5,20 @@ import type { ReactNode } from "react";
 import Footer from "@/components/Footer";
 import ReviewsSection from "@/components/ReviewsSection";
 import ContactFloats from "@/components/ContactFloats";
-import CarCursor from "@/components/CarCursor";
 
 export default function SiteChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
+  const hideReviews = pathname.startsWith("/about/testimonials");
 
   return (
     <>
       {children}
       {!isAdmin ? (
         <>
-          <ReviewsSection />
+          {!hideReviews ? <ReviewsSection /> : null}
           <Footer />
           <ContactFloats />
-          <CarCursor />
         </>
       ) : null}
     </>

@@ -15,11 +15,17 @@ function resolveRouteImage(row: RowWithImage) {
 
   if (row.image_url) return row.image_url;
 
-  if (row.sort_order >= 1 && row.sort_order <= 5) {
-    return `/image${row.sort_order}.jpg`;
+  const extMap: Record<number, string> = {
+    1: "/image1.jpeg", 2: "/image2.jpeg", 3: "/image3.png",
+    4: "/image4.jpeg", 5: "/iamge5.png",  6: "/image6.png",
+    7: "/image7.png",  8: "/image8.png",  9: "/image9.png",
+    10: "/image10.png", 11: "/image11.png",
+  };
+  if (row.sort_order >= 1 && row.sort_order <= 11) {
+    return extMap[row.sort_order];
   }
 
-  return "/image2.jpg";
+  return "/image2.jpeg";
 }
 
 export const ROUTE_SELECT_WITH_IMAGE =

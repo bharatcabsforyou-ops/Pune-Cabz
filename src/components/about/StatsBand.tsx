@@ -2,11 +2,16 @@ import Container from "../Container";
 import Counter from "../motion/Counter";
 import Reveal from "../motion/Reveal";
 
-const stats: { value: number; suffix: string; label: string; decimals?: number }[] = [
-  { value: 5000, suffix: "+", label: "Registered members" },
-  { value: 20, suffix: "+", label: "Cities connected" },
-  { value: 100, suffix: "%", label: "ID-checked members" },
-  { value: 4.8, suffix: "★", label: "Average rating", decimals: 1 },
+const stats: {
+  value?: number;
+  suffix?: string;
+  label: string;
+  display?: string;
+}[] = [
+  { value: 80, suffix: "+", label: "Cities Covered" },
+  { value: 5, suffix: "+", label: "Years of Experience" },
+  { value: 12, suffix: "", label: "Vehicle Fleet" },
+  { display: "24×7", label: "Booking Support" },
 ];
 
 export default function StatsBand() {
@@ -20,7 +25,11 @@ export default function StatsBand() {
               className="rounded-2xl bg-white/8 px-5 py-6 text-center ring-1 ring-white/10"
             >
               <p className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                <Counter value={s.value} suffix={s.suffix} decimals={s.decimals ?? 0} />
+                {s.display ? (
+                  s.display
+                ) : (
+                  <Counter value={s.value ?? 0} suffix={s.suffix ?? ""} />
+                )}
               </p>
               <p className="mt-2 text-xs font-medium text-white/60 sm:text-sm">{s.label}</p>
             </div>

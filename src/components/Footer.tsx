@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import clsx from "clsx";
 import Container from "./Container";
 import Logo from "./Logo";
 import SocialIcon, { type SocialName } from "./SocialIcon";
 import { images } from "@/lib/images";
 import { site } from "@/lib/site";
+import { aboutNavLinks } from "@/lib/site-nav";
 
 const columns = [
   {
@@ -31,11 +31,15 @@ const columns = [
   {
     title: "Company",
     links: [
-      { label: "How it works", href: "/how-it-works" },
-      { label: "Safety", href: "/safety" },
-      { label: "About us", href: "/about" },
+      { label: "Packages", href: "/packages" },
+      { label: "Our Services", href: "/how-it-works" },
+      { label: "Tour Places", href: "/tourism" },
       { label: "Contact us", href: "/contact" },
     ],
+  },
+  {
+    title: "About",
+    links: aboutNavLinks.map((l) => ({ label: l.label, href: l.href })),
   },
 ];
 
@@ -56,28 +60,28 @@ export default function Footer() {
         sizes="100vw"
         className="object-cover object-center sm:object-[70%_center]"
       />
-      <div className="absolute inset-0 bg-navy/92 sm:bg-gradient-to-r sm:from-navy sm:via-navy/82 sm:to-navy/45" />
-      <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/35 to-navy/55 sm:from-navy/90 sm:via-transparent sm:to-navy/30" />
+      <div className="absolute inset-0 bg-navy/78 sm:bg-gradient-to-r sm:from-navy/80 sm:via-navy/68 sm:to-navy/50" />
+      <div className="absolute inset-0 bg-gradient-to-t from-navy/82 via-navy/20 to-navy/40 sm:from-navy/75 sm:via-transparent sm:to-navy/20" />
 
       <Container className="relative py-8 pb-28 sm:py-9 sm:pb-10">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-7 sm:gap-8 lg:grid-cols-4">
-          <Link href="/" className="col-span-2 shrink-0 lg:col-span-1">
-            <Logo dark />
-          </Link>
+        <div className="grid grid-cols-2 gap-x-6 gap-y-7 sm:grid-cols-2 sm:gap-8 lg:grid-cols-5">
+          <div className="col-span-2 lg:col-span-1">
+            <Link href="/" className="inline-block">
+              <Logo dark />
+            </Link>
+            <p className="mt-3 max-w-[16rem] text-sm leading-relaxed text-white/70">
+              Safe, comfortable cabs across Maharashtra &amp; beyond — book in
+              minutes on WhatsApp.
+            </p>
+            <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-brand">
+              Travellers Choice
+            </p>
+          </div>
 
-          {columns.map((col, index) => (
-            <div
-              key={col.title}
-              className={clsx(index === columns.length - 1 && "col-span-2 sm:col-span-1 lg:col-span-1")}
-            >
-              <h3 className="text-sm font-bold tracking-tight text-brand sm:text-lg">{col.title}</h3>
-              <ul
-                className={clsx(
-                  "mt-3 space-y-2",
-                  index === columns.length - 1 &&
-                    "grid grid-cols-2 gap-x-4 gap-y-2 space-y-0 sm:block sm:space-y-2"
-                )}
-              >
+          {columns.map((col) => (
+            <div key={col.title}>
+              <h3 className="text-sm font-bold tracking-tight text-brand">{col.title}</h3>
+              <ul className="mt-3 space-y-2">
                 {col.links.map((link) => (
                   <li key={link.label}>
                     <Link
@@ -95,7 +99,7 @@ export default function Footer() {
 
         <div className="mt-7 flex flex-col items-center gap-4 border-t border-white/15 pt-5 text-center sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:text-left">
           <p className="text-sm text-white/55">
-            <a href="#" className="hover:text-white">
+            <a href="/about/terms" className="hover:text-white">
               Terms and Conditions
             </a>
             <span className="mx-2 text-white/25">·</span>

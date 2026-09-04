@@ -107,10 +107,8 @@ export default function SearchBar({
     <form id="search" onSubmit={handleSearch} className="search-bar w-full min-w-0 scroll-mt-28">
       <div
         className={clsx(
-          "flex w-full min-w-0 flex-col overflow-hidden rounded-2xl bg-white lg:flex-row lg:items-stretch",
-          isHero
-            ? "shadow-2xl shadow-black/30 ring-1 ring-white/15 sm:rounded-[1.25rem]"
-            : "shadow-2xl shadow-black/20"
+          "flex w-full min-w-0 flex-col lg:flex-row lg:items-stretch",
+          isHero ? "search-panel sm:rounded-[1.35rem]" : "search-panel search-panel-default rounded-2xl"
         )}
       >
         <Field
@@ -202,7 +200,7 @@ export default function SearchBar({
           <button
             type="submit"
             className={clsx(
-              "btn-shine flex w-full items-center justify-center gap-2 bg-[#25D366] font-semibold text-white transition-colors hover:bg-[#1ebe57]",
+              "btn-shine flex w-full items-center justify-center gap-2 bg-brand font-semibold text-white transition-colors hover:bg-brand-dark",
               isHero
                 ? "px-6 py-4 text-sm lg:min-w-[168px] lg:px-8 lg:py-0"
                 : "px-6 py-4 text-sm lg:min-w-[168px] lg:px-6 lg:py-0"
@@ -243,7 +241,7 @@ function Field({
   return (
     <div
       className={clsx(
-        "flex min-w-0 items-center gap-3 px-4 py-3.5 transition-colors focus-within:bg-soft/60 sm:px-5 sm:py-4",
+        "flex min-w-0 items-center gap-3 px-4 py-3.5 transition-colors focus-within:bg-brand/[0.02] sm:px-5 sm:py-4",
         isHero ? "flex-1 lg:min-w-[140px]" : "flex-1",
         type === "date" && isHero && "lg:min-w-[170px] lg:max-w-[200px]"
       )}

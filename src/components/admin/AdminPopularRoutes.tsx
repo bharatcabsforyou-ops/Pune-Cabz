@@ -16,7 +16,7 @@ const emptyForm: PopularRouteInput = {
   duration: "3h 30m",
   fromPrice: "499",
   tag: "Popular",
-  imageUrl: "/image2.jpg",
+  imageUrl: "/image2.jpeg",
   sortOrder: 0,
   published: true,
 };
@@ -163,7 +163,7 @@ function RoutesGrid({
           className="overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-sm"
         >
           <div className="relative aspect-[16/10] bg-surface">
-            <RouteImage src={route.imageUrl ?? "/image2.jpg"} alt={`${route.fromCity} to ${route.toCity}`} />
+            <RouteImage src={route.imageUrl ?? "/image2.jpeg"} alt={`${route.fromCity} to ${route.toCity}`} />
             <span
               className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase ${
                 route.published ? "bg-emerald-500 text-white" : "bg-navy/70 text-white"

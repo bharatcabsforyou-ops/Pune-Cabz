@@ -57,20 +57,18 @@ export default function BookRoutesGallery({
       <Container className="relative">
         <Reveal className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
-            <span className="inline-flex items-center gap-2 rounded-full bg-brand/10 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-brand ring-1 ring-brand/10">
+            <span className="section-eyebrow inline-flex items-center gap-2">
               <Sparkles className="h-3.5 w-3.5" />
               Popular routes
             </span>
-            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
-              Popular routes from Pune
-            </h2>
-            <p className="mt-3 max-w-lg text-[15px] leading-relaxed text-navy/55">
+            <h2 className="section-title mt-4 text-left">Popular routes from Pune</h2>
+            <p className="section-desc mt-3 text-left">
               {filterActive
                 ? `Showing ${routes.length} matching route${routes.length === 1 ? "" : "s"}. Tap WhatsApp to book instantly.`
                 : "Verified intercity rides — tap a card and book instantly on WhatsApp."}
             </p>
           </div>
-          <div className="shrink-0 rounded-2xl border border-black/[0.06] bg-white px-4 py-3 shadow-sm">
+          <div className="pro-card-static shrink-0 px-4 py-3">
             <p className="text-[11px] font-bold uppercase tracking-wide text-navy/35">Available</p>
             <p className="text-xl font-extrabold tabular-nums text-navy">
               {routes.length}

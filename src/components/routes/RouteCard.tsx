@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { ArrowRight, Clock3, IndianRupee, MapPin } from "lucide-react";
+import RouteBannerImage from "@/components/RouteBannerImage";
 import RouteImage from "@/components/routes/RouteImage";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { isBrandedRouteBanner } from "@/lib/images";
 import { logRouteInquiry, routeWhatsAppHref } from "@/lib/open-route-whatsapp";
 import type { PopularRoute } from "@/lib/popular-routes";
 
@@ -15,15 +17,31 @@ export function RouteCardGrid({ route }: { route: PopularRoute }) {
   return (
     <Link
       href={routeBookHref(route)}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/15 hover:shadow-lg hover:shadow-brand/5"
+      className="pro-card-interactive group flex h-full flex-col overflow-hidden"
     >
-      <div className="relative aspect-[16/10] overflow-hidden bg-surface">
-        <RouteImage src={route.imageUrl} alt={`${route.fromCity} to ${route.toCity}`} />
-        <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-brand shadow-sm">
-          {route.tag}
-        </span>
+      <div
+        className={
+          isBrandedRouteBanner(route.imageUrl)
+            ? "overflow-hidden bg-[#1a1214]"
+            : "relative aspect-[16/10] overflow-hidden bg-surface"
+        }
+      >
+        {isBrandedRouteBanner(route.imageUrl) ? (
+          <RouteBannerImage
+            src={route.imageUrl}
+            alt={`${route.fromCity} to ${route.toCity}`}
+            rounded="none"
+          />
+        ) : (
+          <RouteImage src={route.imageUrl} alt={`${route.fromCity} to ${route.toCity}`} />
+        )}
+        {!isBrandedRouteBanner(route.imageUrl) ? (
+          <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-brand shadow-sm">
+            {route.tag}
+          </span>
+        ) : null}
       </div>
-      <div className="flex flex-1 flex-col p-5">
+      <div className="card-body flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex min-w-0 items-center gap-2">
             <MapPin className="h-4 w-4 shrink-0 text-brand" />
@@ -43,7 +61,7 @@ export function RouteCardGrid({ route }: { route: PopularRoute }) {
             from {route.fromPrice}
           </span>
         </div>
-        <p className="mt-4 text-xs font-semibold text-brand opacity-0 transition-opacity group-hover:opacity-100">
+        <p className="card-cta mt-4 opacity-0 transition-opacity group-hover:opacity-100">
           Book this route →
         </p>
       </div>
@@ -69,35 +87,45 @@ export function RouteCardBook({
 
   return (
     <article
-      className={`group flex h-full flex-col overflow-hidden rounded-[1.35rem] border bg-white shadow-[0_12px_40px_-24px_rgba(26,10,12,0.35)] transition-all hover:-translate-y-1 hover:shadow-[0_22px_50px_-22px_rgba(26,10,12,0.4)] ${
-        active
-          ? "border-brand/40 ring-2 ring-brand/15"
-          : "border-black/[0.06] hover:border-brand/20"
+      className={`pro-card-interactive group flex h-full flex-col overflow-hidden ${
+        active ? "border-brand/40 ring-2 ring-brand/15" : ""
       }`}
     >
       <button
         type="button"
         onClick={() => onSelect(route)}
-        className="relative aspect-[16/10] w-full overflow-hidden bg-surface text-left"
+        className={`relative w-full overflow-hidden text-left ${
+          isBrandedRouteBanner(route.imageUrl) ? "bg-[#1a1214]" : "aspect-[16/10] bg-surface"
+        }`}
       >
-        <RouteImage
-          src={route.imageUrl}
-          alt={`${route.fromCity} to ${route.toCity}`}
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/55 via-navy/10 to-transparent" />
-        <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-brand shadow-sm backdrop-blur-sm">
-          {route.tag}
-        </span>
+        {isBrandedRouteBanner(route.imageUrl) ? (
+          <RouteBannerImage
+            src={route.imageUrl}
+            alt={`${route.fromCity} to ${route.toCity}`}
+            rounded="none"
+          />
+        ) : (
+          <>
+            <RouteImage
+              src={route.imageUrl}
+              alt={`${route.fromCity} to ${route.toCity}`}
+              className="transition-transform duration-500 group-hover:scale-[1.04]"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/55 via-navy/10 to-transparent" />
+            <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-brand shadow-sm backdrop-blur-sm">
+              {route.tag}
+            </span>
+            <div className="absolute bottom-3 left-3 right-3">
+              <p className="text-lg font-extrabold leading-tight text-white drop-shadow-sm">
+                {route.fromCity}{" "}
+                <span className="text-brand-light">→</span> {route.toCity}
+              </p>
+            </div>
+          </>
+        )}
         <span className="absolute right-3 top-3 rounded-full bg-navy/75 px-2.5 py-1 text-[10px] font-bold text-white backdrop-blur-sm">
           {label} / {totalLabel}
         </span>
-        <div className="absolute bottom-3 left-3 right-3">
-          <p className="text-lg font-extrabold leading-tight text-white drop-shadow-sm">
-            {route.fromCity}{" "}
-            <span className="text-brand-light">→</span> {route.toCity}
-          </p>
-        </div>
       </button>
 
       <div className="flex flex-1 flex-col p-4 sm:p-5">
@@ -122,7 +150,7 @@ export function RouteCardBook({
           <a
             href={routeWhatsAppHref(route)}
             onClick={() => logRouteInquiry(route)}
-            className="btn-shine inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3 text-sm font-semibold text-white shadow-md shadow-[#25D366]/25 transition-colors hover:bg-[#1ebe57]"
+            className="btn-shine inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-4 py-3 text-sm font-semibold text-white shadow-md shadow-brand/25 transition-colors hover:bg-brand-dark"
           >
             <WhatsAppIcon className="h-4 w-4" />
             Book now on WhatsApp

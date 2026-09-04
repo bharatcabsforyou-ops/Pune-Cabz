@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowLeft,
@@ -15,6 +14,7 @@ import {
 } from "lucide-react";
 import Container from "./Container";
 import PhotoCard from "./PhotoCard";
+import RouteBannerImage from "./RouteBannerImage";
 import Reveal from "./motion/Reveal";
 import { usePopularRoutes } from "@/hooks/usePopularRoutes";
 import defaultRoutes from "@/data/default-routes.json";
@@ -22,6 +22,7 @@ import { films } from "@/lib/images";
 import { logRouteInquiry, routeWhatsAppHref } from "@/lib/open-route-whatsapp";
 import WhatsAppIcon from "./WhatsAppIcon";
 import type { PopularRoute } from "@/lib/popular-routes";
+import { isBrandedRouteBanner } from "@/lib/images";
 import clsx from "clsx";
 
 const AUTO_PLAY_MS = 5000;
@@ -280,21 +281,22 @@ function HeroRoutesPanel({
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 1.02 }}
                   transition={{ duration: 0.45, ease: [0.21, 0.47, 0.32, 0.98] }}
-                  className="relative aspect-[5/4] overflow-hidden rounded-2xl ring-1 ring-black/[0.06] sm:aspect-[4/3]"
+                  className="overflow-hidden rounded-2xl bg-[#1a1214] ring-1 ring-black/[0.06]"
                 >
-                  <Image
+                  <RouteBannerImage
                     src={active.imageUrl}
                     alt={`${active.fromCity} to ${active.toCity} - Pune Cabz`}
-                    fill
-                    sizes="(min-width: 1024px) 280px, 50vw"
-                    className="object-cover"
+                    rounded="none"
                     priority={index === 0}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/35 via-transparent to-transparent" />
-
-                  <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-brand shadow-md backdrop-blur-sm ring-1 ring-white/80">
-                    {active.tag}
-                  </span>
+                  {!isBrandedRouteBanner(active.imageUrl) ? (
+                    <>
+                      <div className="absolute inset-0 bg-gradient-to-t from-navy/35 via-transparent to-transparent" />
+                      <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-brand shadow-md backdrop-blur-sm ring-1 ring-white/80">
+                        {active.tag}
+                      </span>
+                    </>
+                  ) : null}
                 </motion.div>
               </AnimatePresence>
 
@@ -342,7 +344,7 @@ function HeroRoutesPanel({
                   <a
                     href={routeWhatsAppHref(active)}
                     onClick={() => logRouteInquiry(active)}
-                    className="btn-shine mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#25D366]/30 transition-all hover:bg-[#1ebe57] sm:mt-auto sm:w-auto sm:rounded-full sm:px-6"
+                    className="btn-shine mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-brand/30 transition-all hover:bg-brand-dark sm:mt-auto sm:w-auto sm:rounded-full sm:px-6"
                   >
                     <WhatsAppIcon className="h-4 w-4" />
                     Book on WhatsApp
@@ -402,7 +404,7 @@ function RouteDetails({
         <a
           href={routeWhatsAppHref(active)}
           onClick={() => logRouteInquiry(active)}
-          className="btn-shine mt-6 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-7 py-3.5 text-sm font-semibold text-white shadow-md shadow-[#25D366]/25 transition-colors hover:bg-[#1ebe57]"
+          className="btn-shine mt-6 inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-sm font-semibold text-white shadow-md shadow-brand/25 transition-colors hover:bg-brand-dark"
         >
           <WhatsAppIcon className="h-4 w-4" />
           Book on WhatsApp

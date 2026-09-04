@@ -14,7 +14,7 @@ export default function FeatureIcon({
   className,
   iconClassName,
   size = "md",
-  variant = "brand",
+  variant: _variant = "brand",
   strokeWidth = 2,
 }: {
   icon: IconComponent;
@@ -25,10 +25,7 @@ export default function FeatureIcon({
   strokeWidth?: number;
 }) {
   const s = sizes[size];
-  const tone =
-    variant === "whatsapp"
-      ? "bg-emerald-500/10 text-emerald-600"
-      : "bg-brand/10 text-brand";
+  const tone = "bg-brand/[0.09] text-brand ring-1 ring-brand/12";
 
   return (
     <span

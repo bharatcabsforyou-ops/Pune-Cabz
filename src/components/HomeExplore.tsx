@@ -1,33 +1,37 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, CarFront, MapPinned, ShieldCheck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Container from "./Container";
-import FeatureIcon from "./FeatureIcon";
+import RouteBannerImage from "./RouteBannerImage";
 import Reveal from "./motion/Reveal";
 import { StaggerGroup, StaggerItem } from "./motion/Stagger";
+import { images } from "@/lib/images";
 
 const cards = [
   {
-    icon: CarFront,
     title: "Book your cars",
-    text: "City rides and intercity cabs. Sedan, SUV, Innova - search and go.",
+    text: "City rides and intercity cabs. Sedan, SUV, Innova.",
     href: "/book",
     cta: "Search now",
+    image: images.travelCab,
+    imageAlt: "Book an intercity cab with Pune Cabz",
   },
   {
-    icon: MapPinned,
     title: "Tourism trips",
-    text: "Hills, coast, and weekend getaways from Pune with verified drivers.",
+    text: "Hills, coast, and weekend getaways with verified drivers.",
     href: "/tourism",
     cta: "Explore routes",
+    image: images.travelHills,
+    imageAlt: "Scenic hill station trip from Pune",
   },
   {
-    icon: ShieldCheck,
     title: "Ride safe",
-    text: "ID checks, live trip sharing, and 24/7 support on every booking.",
+    text: "ID checks, live trip sharing, and 24/7 support.",
     href: "/safety",
     cta: "See safety",
+    image: images.travelOpenRoad,
+    imageAlt: "Safe highway travel with verified drivers",
   },
 ];
 
@@ -35,30 +39,27 @@ export default function HomeExplore() {
   return (
     <section className="bg-white page-section">
       <Container>
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-bold uppercase tracking-widest text-brand">Explore</p>
-          <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
-            More than a search bar
-          </h2>
-          <p className="mx-auto mt-3 max-w-lg text-[15px] leading-relaxed text-navy/60">
+        <Reveal className="section-head">
+          <p className="section-eyebrow">Explore</p>
+          <h2 className="section-title">More than a search bar</h2>
+          <p className="section-desc">
             Book a seat, plan a trip, or read how we keep every ride safer.
           </p>
         </Reveal>
 
-        <StaggerGroup className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
-          {cards.map(({ icon: Icon, title, text, href, cta }) => (
+        <StaggerGroup className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
+          {cards.map(({ title, text, href, cta, image, imageAlt }) => (
             <StaggerItem key={title}>
-              <Link
-                href={href}
-                className="group flex h-full flex-col rounded-2xl border border-black/6 bg-surface p-5 transition-colors hover:border-black/10 hover:bg-white"
-              >
-                <FeatureIcon icon={Icon} size="lg" />
-                <h3 className="mt-5 text-lg font-bold text-navy">{title}</h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-navy/60">{text}</p>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand">
-                  {cta}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </span>
+              <Link href={href} className="pro-card-interactive group">
+                <RouteBannerImage src={image} alt={imageAlt} rounded="none" />
+                <div className="card-body p-4">
+                  <h3 className="text-[15px] font-bold text-navy">{title}</h3>
+                  <p className="mt-1 text-xs leading-relaxed text-navy/55">{text}</p>
+                  <span className="card-cta mt-3">
+                    {cta}
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
+                </div>
               </Link>
             </StaggerItem>
           ))}

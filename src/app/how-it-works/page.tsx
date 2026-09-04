@@ -96,36 +96,35 @@ export default function HowItWorksPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-white pb-8 pt-6 sm:pb-10 sm:pt-8">
+      <section className="page-hero">
         <Container className="relative">
           <div className="grid grid-cols-1 items-center page-grid page-grid-2">
             <div className="max-w-xl">
               <motion.span
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-brand"
+                className="section-eyebrow"
               >
-                How it works
+                Our Services
               </motion.span>
               <motion.h1
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.08 }}
-                className="mt-4 text-[1.85rem] font-extrabold leading-[1.12] tracking-tight text-navy sm:text-5xl"
+                className="section-title mt-4 text-[1.85rem] sm:text-5xl"
               >
-                Search. Book.
+                On time.
                 <br />
-                <span className="text-gradient-brand">Share the road.</span>
+                <span className="text-gradient-brand">Transparent fare.</span>
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.18 }}
-                className="mt-5 text-[15px] leading-relaxed text-navy/60"
+                className="section-desc mt-5 text-left"
               >
-                Pune Cabz is built for Pune and Maharashtra routes. Find a verified
-                seat, split fuel and tolls, and travel with people who have been
-                checked - not with a surprise fare at the gate.
+                Professional drivers, neat latest-model vehicles, easy booking and
+                refunds, plus 24×7 assistance across 80+ cities.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
@@ -133,17 +132,11 @@ export default function HowItWorksPage() {
                 transition={{ duration: 0.5, delay: 0.28 }}
                 className="mt-7 flex flex-wrap gap-3"
               >
-                <Link
-                  href="/book"
-                  className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-md shadow-brand/25 transition-colors hover:bg-brand-dark"
-                >
+                <Link href="/book" className="btn-primary px-6 py-3">
                   Book your cars
                   <ArrowRight className="h-4 w-4" />
                 </Link>
-                <Link
-                  href="/safety"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-navy shadow-sm ring-1 ring-black/5 hover:bg-soft"
-                >
+                <Link href="/safety" className="btn-secondary px-6 py-3">
                   <ShieldCheck className="h-4 w-4 text-brand" />
                   Safety first
                 </Link>
@@ -162,22 +155,20 @@ export default function HowItWorksPage() {
 
       <HowItWorks className="bg-white" />
 
-      <section id="offer" className="scroll-mt-24 bg-soft page-section">
+      <section id="offer" className="scroll-mt-24 border-t border-black/[0.04] bg-white page-section">
         <Container>
-          <Reveal className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-bold uppercase tracking-widest text-brand">Two sides, one app</p>
-            <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
-              Ride as you like
-            </h2>
-            <p className="mx-auto mt-3 max-w-lg text-[15px] leading-relaxed text-navy/60">
+          <Reveal className="section-head">
+            <p className="section-eyebrow">Two sides, one app</p>
+            <h2 className="section-title">Ride as you like</h2>
+            <p className="section-desc">
               Passengers and drivers use the same flow - just different seats.
             </p>
           </Reveal>
 
-          <StaggerGroup className="page-section-head grid grid-cols-1 gap-5 lg:grid-cols-2">
+          <StaggerGroup className="page-section-head grid grid-cols-1 gap-4 lg:grid-cols-2">
             {roles.map(({ icon: Icon, title, intro, points }) => (
               <StaggerItem key={title}>
-                <article className="flex h-full flex-col rounded-2xl border border-black/5 bg-white p-7 text-left shadow-sm">
+                <article className="pro-card flex h-full flex-col p-5 sm:p-6">
                   <FeatureIcon icon={Icon} size="lg" className="h-12 w-12" iconClassName="h-6 w-6" />
                   <h3 className="mt-5 text-xl font-bold tracking-tight text-navy">{title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-navy/60">{intro}</p>
@@ -196,19 +187,17 @@ export default function HowItWorksPage() {
         </Container>
       </section>
 
-      <section className="bg-white page-section">
+      <section className="border-t border-black/[0.04] bg-soft page-section">
         <Container>
           <div className="grid grid-cols-1 page-grid items-start lg:grid-cols-12">
             <Reveal className="lg:col-span-4">
-              <p className="text-xs font-bold uppercase tracking-widest text-brand">Trip day</p>
-              <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
-                What happens once you book
-              </h2>
-              <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-navy/60">
+              <p className="section-eyebrow">Trip day</p>
+              <h2 className="section-title mt-2 text-left">What happens once you book</h2>
+              <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-navy/55">
                 No guesswork at the curb. You always know where to stand, who is
                 picking you up, and how to reach support.
               </p>
-              <div className="mt-6 flex items-start gap-3 rounded-2xl bg-soft p-4">
+              <div className="feature-row mt-6">
                 <Wallet className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
                 <p className="text-sm leading-relaxed text-navy/65">
                   Fair shared pricing covers fuel and tolls only. You see the fare
@@ -217,11 +206,11 @@ export default function HowItWorksPage() {
               </div>
             </Reveal>
 
-            <StaggerGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-8">
+            <StaggerGroup className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:col-span-8">
               {day.map(({ icon: Icon, title, text }, i) => (
                 <StaggerItem key={title}>
-                  <article className="flex h-full gap-4 rounded-2xl border border-black/5 bg-soft p-5 text-left">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-brand shadow-sm">
+                  <article className="feature-row h-full">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand/[0.08] text-brand ring-1 ring-brand/10">
                       <Icon className="h-5 w-5" strokeWidth={2} />
                     </span>
                     <div>
@@ -229,7 +218,7 @@ export default function HowItWorksPage() {
                         Step {i + 1}
                       </p>
                       <h3 className="mt-1 text-base font-bold text-navy">{title}</h3>
-                      <p className="mt-1.5 text-sm leading-relaxed text-navy/60">{text}</p>
+                      <p className="mt-1.5 text-sm leading-relaxed text-navy/55">{text}</p>
                     </div>
                   </article>
                 </StaggerItem>
@@ -239,37 +228,32 @@ export default function HowItWorksPage() {
         </Container>
       </section>
 
-      <section className="bg-soft page-section">
+      <section className="border-t border-black/[0.04] bg-white page-section">
         <Container>
           <div className="grid grid-cols-1 items-start page-grid page-grid-2">
             <Reveal direction="left" className="lg:sticky lg:top-24">
               <PhotoCard
-                src={images.film3}
-                alt="Pune to Nashik with Pune Cabz"
+                src={images.travelHills}
+                alt="Pune to Nashik hill route with Pune Cabz"
                 variant="banner"
               />
             </Reveal>
 
             <Reveal direction="right">
-              <p className="text-xs font-bold uppercase tracking-widest text-brand">Questions</p>
-              <span className="mt-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-brand shadow-sm">
+              <p className="section-eyebrow">Questions</p>
+              <span className="mt-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand/[0.08] text-brand ring-1 ring-brand/10">
                 <CircleHelp className="h-6 w-6" />
               </span>
-              <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
-                Before you book
-              </h2>
-              <p className="mt-3 max-w-md text-[15px] leading-relaxed text-navy/60">
+              <h2 className="section-title mt-4 text-left">Before you book</h2>
+              <p className="mt-3 max-w-md text-[15px] leading-relaxed text-navy/55">
                 Short answers. If you still need help, WhatsApp us from any page.
               </p>
 
-              <div className="mt-8 space-y-3">
+              <div className="mt-6 space-y-3">
                 {faqs.map((item, i) => {
                   const isOpen = open === i;
                   return (
-                    <div
-                      key={item.q}
-                      className="overflow-hidden rounded-2xl border border-black/5 bg-white text-left"
-                    >
+                    <div key={item.q} className="faq-item">
                       <button
                         type="button"
                         onClick={() => setOpen(isOpen ? null : i)}
@@ -311,17 +295,17 @@ export default function HowItWorksPage() {
       <section className="bg-white page-section">
         <Container>
           <Reveal>
-            <div className="rounded-3xl bg-navy px-6 py-12 text-center sm:px-12 sm:py-14">
-              <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+            <div className="cta-panel px-6 py-9 text-center sm:px-10 sm:py-11">
+              <h2 className="relative text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
                 Ready for the road?
               </h2>
-              <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-white/70">
+              <p className="relative mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-white/90">
                 Search a route, pick a verified ride, and travel together - Pune
                 to Mumbai, Nashik, Goa, and beyond.
               </p>
               <Link
                 href="/book"
-                className="mt-7 inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-black/20 transition-colors hover:bg-brand-dark"
+                className="relative mt-7 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-brand shadow-lg transition-transform hover:scale-[1.02] hover:bg-white/95"
               >
                 Book your cars
                 <ArrowRight className="h-4 w-4" />

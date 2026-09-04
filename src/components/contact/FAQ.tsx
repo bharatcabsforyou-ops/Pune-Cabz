@@ -2,104 +2,182 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, CircleHelp } from "lucide-react";
+import { ChevronDown, Car, CreditCard, Shield, Clock } from "lucide-react";
 import Container from "../Container";
-import PhotoCard from "../PhotoCard";
 import Reveal from "../motion/Reveal";
-import { images } from "@/lib/images";
 
-const faqs = [
+const categories = [
+  { label: "Booking", icon: Car, color: "bg-brand/[0.07] text-brand" },
+  { label: "Payment", icon: CreditCard, color: "bg-emerald-50 text-emerald-600" },
+  { label: "Safety", icon: Shield, color: "bg-blue-50 text-blue-600" },
+  { label: "Support", icon: Clock, color: "bg-amber-50 text-amber-600" },
+];
+
+const faqs: { q: string; a: string; cat: string }[] = [
   {
-    q: "How does driver and rider verification work?",
-    a: "Every member confirms their identity with a government ID and a live selfie check before their first ride. Drivers additionally verify their licence and vehicle documents.",
+    q: "Can I book a one-way cab?",
+    a: "Yes — one-way bookings are our most popular option. We offer competitive one-way fares on all Pune and Maharashtra routes. Note that for one-way hires the return leg cost is included in the fare, as the driver needs to bring the vehicle back.",
+    cat: "Booking",
   },
   {
-    q: "How is the ride price calculated?",
-    a: "Drivers set a price that covers fuel and tolls, split across the seats they offer. Pune Cabz does not add surge pricing or markups - you see exactly what the driver sees.",
+    q: "How do I book a cab?",
+    a: "Use the booking form on our website — pick your route, date, time, and cab type, then tap 'Book via WhatsApp'. You'll be connected to our team instantly on WhatsApp to confirm the details and lock in your ride.",
+    cat: "Booking",
   },
   {
-    q: "Is it safe to ride with a stranger?",
-    a: "Every profile carries a rating and review history, and rides can be shared live with friends or family. Our support team is reachable 24/7 during any active ride.",
+    q: "How will I get notified about my booking confirmation?",
+    a: "Once your booking is confirmed you'll receive a WhatsApp message with your driver's name, vehicle number, and estimated arrival time. You can also call or message us any time to check your booking status.",
+    cat: "Booking",
   },
   {
-    q: "How do I become a driver?",
-    a: "Sign up, add your vehicle and licence details, and publish your first ride in minutes. There is no fee to list - you only ever share costs with your passengers.",
+    q: "Is it mandatory to register on your site to book a cab?",
+    a: "No registration is required. Simply fill in the booking form and connect with us on WhatsApp. We keep the process friction-free so you can book in under two minutes.",
+    cat: "Booking",
   },
   {
-    q: "How fast will support reply?",
-    a: "WhatsApp and phone are staffed 9am-9pm IST. Email is answered within one business day. During an active ride, SOS and in-app help are monitored around the clock.",
+    q: "What if the cab doesn't show up?",
+    a: "This is extremely rare, but if it happens call us immediately on our support number. We will either dispatch an alternate vehicle or arrange a full refund — whichever you prefer. Your journey will not be left stranded.",
+    cat: "Support",
+  },
+  {
+    q: "What if the cab shows up late?",
+    a: "Our drivers are tracked and reminded before every pickup. If your driver is running late you'll be notified proactively. For significant delays we offer a partial fare discount as a goodwill gesture.",
+    cat: "Support",
+  },
+  {
+    q: "Can I change or cancel my booking?",
+    a: "Yes. Contact us on WhatsApp or phone at least 2 hours before your scheduled pickup to modify or cancel at no charge. Cancellations within 2 hours of pickup may attract a small fee to cover the driver's time.",
+    cat: "Booking",
+  },
+  {
+    q: "Can I pay via Google Pay or Paytm?",
+    a: "Absolutely. We accept Google Pay, Paytm, PhonePe, UPI, and cash. Just let us know your preferred payment method when confirming your booking and we'll make it seamless.",
+    cat: "Payment",
+  },
+  {
+    q: "Can I book an outstation cab for someone else using my card?",
+    a: "Yes. You can book and pay for a ride on behalf of a family member, colleague, or friend. Simply provide the passenger's name and contact number during booking so the driver can coordinate with them directly.",
+    cat: "Payment",
+  },
+  {
+    q: "Is your website safe for online payments?",
+    a: "We do not store any card or payment details on our servers. All transactions go through RBI-compliant payment gateways with 256-bit SSL encryption. Your financial data is fully protected.",
+    cat: "Payment",
+  },
+  {
+    q: "Is the driver trustworthy?",
+    a: "Every driver on our platform is personally verified — we check government ID, driving licence, vehicle documents, and conduct a background check before onboarding. All drivers are experienced professionals with rated trip histories. Your safety is our top priority.",
+    cat: "Safety",
   },
 ];
 
 export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const filtered = activeCategory ? faqs.filter((f) => f.cat === activeCategory) : faqs;
 
   return (
     <section className="bg-white page-section">
       <Container>
-        <div className="grid grid-cols-1 items-start page-grid page-grid-2">
-          <Reveal direction="left" className="lg:sticky lg:top-24">
-            <PhotoCard
-              src={images.friendsTable}
-              alt="Riders helping each other with questions"
-            />
-          </Reveal>
+        {/* Category filter pills */}
+        <Reveal>
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
+            <button
+              onClick={() => { setActiveCategory(null); setOpen(null); }}
+              className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-700 transition-all duration-200 border ${
+                activeCategory === null
+                  ? "bg-brand text-white border-brand shadow-sm"
+                  : "bg-white text-navy/60 border-black/[0.07] hover:border-brand/30 hover:text-navy"
+              }`}
+            >
+              All Questions
+            </button>
+            {categories.map(({ label, icon: Icon }) => (
+              <button
+                key={label}
+                onClick={() => { setActiveCategory(activeCategory === label ? null : label); setOpen(null); }}
+                className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold transition-all duration-200 border ${
+                  activeCategory === label
+                    ? "bg-brand text-white border-brand shadow-sm"
+                    : "bg-white text-navy/60 border-black/[0.07] hover:border-brand/30 hover:text-navy"
+                }`}
+              >
+                <Icon className="h-3.5 w-3.5" />
+                {label}
+              </button>
+            ))}
+          </div>
+        </Reveal>
 
-          <Reveal direction="right">
-            <p className="text-xs font-bold uppercase tracking-widest text-brand">Questions</p>
-            <span className="mt-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-soft text-brand">
-              <CircleHelp className="h-6 w-6" />
-            </span>
-            <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
-              Frequently asked
-            </h2>
-            <p className="mt-3 max-w-md text-[15px] leading-relaxed text-navy/60">
-              Still stuck? Use the form or WhatsApp - we do not leave threads hanging.
-            </p>
-
-            <div className="mt-8 space-y-3">
-              {faqs.map((item, i) => {
-                const isOpen = open === i;
-                return (
-                  <div
-                    key={item.q}
-                    className="overflow-hidden rounded-2xl border border-black/5 bg-soft text-left"
+        {/* FAQ list */}
+        <div className="mx-auto max-w-2xl space-y-2.5">
+          {filtered.map((item, i) => {
+            const isOpen = open === i;
+            const cat = categories.find((c) => c.label === item.cat);
+            return (
+              <Reveal key={item.q} delay={i * 0.04}>
+                <div className="faq-item">
+                  <button
+                    type="button"
+                    onClick={() => setOpen(isOpen ? null : i)}
+                    className="flex w-full items-start justify-between gap-4 px-5 py-4 text-left"
                   >
-                    <button
-                      type="button"
-                      onClick={() => setOpen(isOpen ? null : i)}
-                      className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
-                    >
-                      <span className="pr-2 text-sm font-semibold text-navy sm:text-[15px]">
+                    <div className="flex items-start gap-3 min-w-0">
+                      {cat && (
+                        <span className={`mt-0.5 shrink-0 inline-flex items-center justify-center h-6 w-6 rounded-lg ${cat.color}`}>
+                          <cat.icon className="h-3.5 w-3.5" />
+                        </span>
+                      )}
+                      <span className="text-sm font-semibold text-navy sm:text-[15px] leading-snug">
                         {item.q}
                       </span>
-                      <motion.span
-                        animate={{ rotate: isOpen ? 180 : 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="shrink-0 text-navy/40"
+                    </div>
+                    <motion.span
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="shrink-0 mt-0.5 text-navy/35"
+                    >
+                      <ChevronDown className="h-5 w-5" />
+                    </motion.span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.28, ease: [0.21, 0.47, 0.32, 0.98] }}
+                        className="overflow-hidden"
                       >
-                        <ChevronDown className="h-5 w-5" />
-                      </motion.span>
-                    </button>
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.28, ease: [0.21, 0.47, 0.32, 0.98] }}
-                          className="overflow-hidden"
-                        >
-                          <p className="px-5 pb-4 text-sm leading-relaxed text-navy/60">{item.a}</p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
-            </div>
-          </Reveal>
+                        <div className="px-5 pb-4 pl-14">
+                          <p className="text-sm leading-relaxed text-navy/60">{item.a}</p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
+
+        {/* Bottom CTA */}
+        <Reveal>
+          <div className="mt-10 mx-auto max-w-2xl rounded-2xl border border-black/[0.06] bg-gradient-to-br from-white to-soft-dark p-6 text-center shadow-[var(--card-shadow)]">
+            <p className="text-sm font-semibold text-navy">Still have a question?</p>
+            <p className="mt-1 text-sm text-navy/55">Our team is available 9 am – 9 pm IST on WhatsApp and phone.</p>
+            <a
+              href="https://wa.me/919876543210"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary mt-4 inline-flex btn-shine"
+            >
+              Chat on WhatsApp
+            </a>
+          </div>
+        </Reveal>
       </Container>
     </section>
   );

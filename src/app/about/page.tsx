@@ -6,9 +6,9 @@ import Values from "@/components/about/Values";
 import AboutCta from "@/components/about/AboutCta";
 
 export const metadata: Metadata = {
-  title: "About us - Pune Cabz",
+  title: "About Pune Cabz",
   description:
-    "Pune Cabz connects verified drivers and passengers across Pune and Maharashtra. Learn about our story and what we stand for.",
+    "Welcome to PuneCabz — trusted cab service in Pune for daily travel, airport transfers, outstation journeys, and more.",
 };
 
 export default function AboutPage() {

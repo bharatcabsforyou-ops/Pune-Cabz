@@ -78,8 +78,8 @@ export default function ContactForm() {
           <Reveal direction="left" className="order-2 min-h-0 lg:order-1 lg:relative lg:w-[38%] lg:shrink-0">
             <div className="relative h-40 overflow-hidden rounded-xl bg-[#1a1214] sm:h-44 lg:absolute lg:inset-0 lg:h-auto">
               <Image
-                src={images.film2}
-                alt="Pune Cabz support"
+                src={images.travelDriveView}
+                alt="Pune Cabz support on your route"
                 fill
                 sizes="(min-width: 1024px) 360px, 100vw"
                 className="object-contain object-center"

@@ -1,31 +1,31 @@
 "use client";
 
-import { Handshake, IndianRupee, Leaf, ShieldCheck } from "lucide-react";
+import { Clock3, HeartHandshake, ShieldCheck, Target } from "lucide-react";
 import Container from "../Container";
 import FeatureIcon from "../FeatureIcon";
 import Reveal from "../motion/Reveal";
 import { StaggerGroup, StaggerItem } from "../motion/Stagger";
 
-const values = [
+const goals = [
   {
     icon: ShieldCheck,
-    title: "Trust and safety",
-    text: "ID checks, in-app ratings, and 24/7 support so every ride feels safe.",
+    title: "Safe travel",
+    text: "High safety standards on every ride, so customers travel with confidence.",
   },
   {
-    icon: Handshake,
-    title: "Community first",
-    text: "Built by riders and drivers, for riders and drivers across Maharashtra.",
+    icon: Clock3,
+    title: "On-time rides",
+    text: "Timely pickups and reliable schedules for daily, airport, and outstation trips.",
   },
   {
-    icon: IndianRupee,
-    title: "Fair pricing",
-    text: "Costs are shared, not marked up - no surge, no hidden fees.",
+    icon: HeartHandshake,
+    title: "Customer first",
+    text: "Flexible, transparent service shaped around real travel needs in Pune.",
   },
   {
-    icon: Leaf,
-    title: "Fewer empty seats",
-    text: "Every shared seat is one fewer car on the Pune-Mumbai stretch.",
+    icon: Target,
+    title: "Trusted brand",
+    text: "Professional service with modern booking — a cab partner people choose again.",
   },
 ];
 
@@ -33,20 +33,35 @@ export default function Values() {
   return (
     <section className="bg-white page-section">
       <Container>
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-bold uppercase tracking-widest text-brand">What we stand for</p>
-          <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
-            Four principles on every ride
+        <Reveal className="section-head max-w-3xl">
+          <p className="section-eyebrow">Our Goal</p>
+          <h2 className="section-title">
+            Safe, reliable, affordable, and hassle-free transportation
           </h2>
-          <p className="mx-auto mt-3 max-w-lg text-[15px] leading-relaxed text-navy/60">
-            These guide the product we ship and the way we treat people in the car.
+          <p className="section-desc max-w-2xl">
+            Our goal is to provide safe, reliable, affordable, and hassle-free
+            transportation for every customer.
           </p>
         </Reveal>
 
-        <StaggerGroup className="page-section-head grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {values.map(({ icon: Icon, title, text }, i) => (
+        <Reveal className="mx-auto mt-6 max-w-3xl text-center text-[15px] leading-relaxed text-navy/60 sm:mt-8">
+          <p>
+            We aim to build a trusted cab service brand in Pune by combining professional
+            service with modern technology and a customer-first approach. We continuously
+            work to improve our services, maintain high safety standards, provide timely
+            rides, and make every journey comfortable.
+          </p>
+          <p className="mt-4">
+            Our vision is simple: to make travelling easier, safer, and more convenient
+            for everyone. We want every customer to reach their destination comfortably
+            and on time — and to choose us again for their next journey.
+          </p>
+        </Reveal>
+
+        <StaggerGroup className="page-section-head grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {goals.map(({ icon: Icon, title, text }, i) => (
             <StaggerItem key={title}>
-              <article className="flex h-full flex-col rounded-2xl border border-black/5 bg-soft p-6 text-left">
+              <article className="pro-card flex h-full flex-col p-5 sm:p-6">
                 <div className="flex items-center justify-between gap-3">
                   <FeatureIcon icon={Icon} size="lg" />
                   <span className="text-2xl font-extrabold tabular-nums text-brand/20">

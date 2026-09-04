@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import ContactHero from "@/components/contact/ContactHero";
 import ContactCards from "@/components/contact/ContactCards";
-import ContactForm from "@/components/contact/ContactForm";
 import ContactHubs from "@/components/contact/ContactHubs";
 import FAQ from "@/components/contact/FAQ";
+import ContactHero from "@/components/contact/ContactHero";
 
 export const metadata: Metadata = {
   title: "Contact us - Pune Cabz",
@@ -15,7 +14,7 @@ export default function ContactPage() {
   return (
     <>
       <ContactHero />
-      <ContactForm />
+
       <ContactCards />
       <ContactHubs />
       <FAQ />

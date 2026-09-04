@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import {
@@ -12,11 +11,11 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import Container from "../Container";
-import SearchBar from "../SearchBar";
+import HeroMediaBackground from "../HeroMediaBackground";
+import BookCabForm from "../BookCabForm";
 import BookRoutesGallery from "@/components/book/BookRoutesGallery";
 import { usePopularRoutes } from "@/hooks/usePopularRoutes";
 import defaultRoutes from "@/data/default-routes.json";
-import { images } from "@/lib/images";
 import type { PopularRoute } from "@/lib/popular-routes";
 
 const points = [
@@ -78,111 +77,101 @@ export default function BookPage() {
 
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-[#1a1214]">
-        <div className="absolute inset-0">
-          <Image
-            src={images.bridge}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center brightness-[1.05] contrast-[1.04] saturate-[1.05]"
-          />
-        </div>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#1a1214]/92 via-[#1a1214]/72 to-[#1a1214]/45" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#1a1214]/85 via-transparent to-[#1a1214]/35" />
-        <div className="hero-vignette pointer-events-none absolute inset-0" />
+      <section className="relative isolate overflow-hidden bg-[#141012]">
+        <HeroMediaBackground />
 
-        <Container className="relative z-10 pb-12 pt-12 sm:pb-16 sm:pt-16 lg:pb-20 lg:pt-20">
-          <div className="max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45 }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-white/90 backdrop-blur-sm"
-            >
-              <MapPinned className="h-3.5 w-3.5 text-brand-light" />
-              Book your cars
-            </motion.div>
+        <Container className="relative z-10 pb-4 pt-4 sm:pb-6 sm:pt-6">
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 
-            <h1 className="mt-5 text-[2.15rem] font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.4rem]">
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
+            {/* LEFT — text */}
+            <div className="flex flex-1 flex-col justify-center">
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.06 }}
-                className="block"
+                transition={{ duration: 0.45 }}
+                className="inline-flex items-center gap-2 badge-pill"
               >
-                Choose a route.
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.14 }}
-                className="mt-1 block text-brand-light"
-              >
-                Book on WhatsApp.
-              </motion.span>
-            </h1>
+                <MapPinned className="h-3.5 w-3.5" />
+                Book your cars
+              </motion.div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.22 }}
-              className="mt-4 max-w-xl text-[15px] leading-relaxed text-white/80 sm:text-base"
-            >
-              Set from, to, and date — or pick a popular route below. Instant chat with Pune Cabz
-              for fare and confirmation.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-7 flex flex-wrap gap-2.5"
-            >
-              {points.map(({ icon: Icon, label }) => (
-                <span
-                  key={label}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-3.5 py-2 text-[13px] font-semibold text-white/90 backdrop-blur-sm"
+              <h1 className="mt-3 text-[1.75rem] font-extrabold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-[2.8rem] drop-shadow-[0_2px_12px_rgba(0,0,0,0.25)]">
+                <motion.span
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.06 }}
+                  className="block"
                 >
-                  <Icon className="h-3.5 w-3.5 text-brand-light" />
-                  {label}
+                  Choose a route.
+                </motion.span>
+                <motion.span
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.14 }}
+                  className="mt-1 block text-brand-light"
+                >
+                  Book on WhatsApp.
+                </motion.span>
+              </h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.22 }}
+                className="mt-3 max-w-xl text-[14px] leading-relaxed text-white/80 sm:text-[15px]"
+              >
+                Set from, to, and date — or pick a popular route below. Instant chat with Pune Cabz
+                for fare and confirmation.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="mt-4 flex flex-wrap gap-2"
+              >
+                {points.map(({ icon: Icon, label }) => (
+                  <span key={label} className="stat-chip">
+                    <Icon className="h-3.5 w-3.5" />
+                    {label}
+                  </span>
+                ))}
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-white/55"
+              >
+                <span>
+                  <strong className="font-bold text-white">{routes.length || "—"}</strong> live routes
                 </span>
-              ))}
+                <span className="hidden h-1 w-1 rounded-full bg-white/30 sm:inline-block" />
+                <span>
+                  From <strong className="font-bold text-white">₹199</strong>
+                </span>
+                <span className="hidden h-1 w-1 rounded-full bg-white/30 sm:inline-block" />
+                <span>Pune · Mumbai · Nashik · Konkan & more</span>
+              </motion.div>
+            </div>
+
+            {/* RIGHT — form */}
+            <motion.div
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.38 }}
+              className="w-full lg:w-[440px] lg:shrink-0"
+            >
+              <BookCabForm
+                from={from}
+                to={to}
+                onFromChange={setFrom}
+                onToChange={setTo}
+              />
             </motion.div>
+
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.38 }}
-            className="mt-6 w-full min-w-0"
-          >
-            <SearchBar
-              variant="hero"
-              from={from}
-              to={to}
-              onFromChange={setFrom}
-              onToChange={setTo}
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/55"
-          >
-            <span>
-              <strong className="font-bold text-white">{routes.length || "—"}</strong> live routes
-            </span>
-            <span className="hidden h-1 w-1 rounded-full bg-white/30 sm:inline-block" />
-            <span>
-              From <strong className="font-bold text-white">₹199</strong>
-            </span>
-            <span className="hidden h-1 w-1 rounded-full bg-white/30 sm:inline-block" />
-            <span>Pune · Mumbai · Nashik · Konkan & more</span>
-          </motion.div>
         </Container>
       </section>
 

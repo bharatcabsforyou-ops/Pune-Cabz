@@ -1,32 +1,49 @@
 "use client";
 
 import clsx from "clsx";
-import { CalendarCheck, CarFront, Search, Star } from "lucide-react";
+import {
+  BadgeCheck,
+  CarFront,
+  Clock3,
+  Headphones,
+  IndianRupee,
+  Sparkles,
+} from "lucide-react";
 import Container from "./Container";
 import FeatureIcon from "./FeatureIcon";
 import Reveal from "./motion/Reveal";
 import { StaggerGroup, StaggerItem } from "./motion/Stagger";
 
-const steps = [
+const services = [
   {
-    icon: Search,
-    title: "Search your route",
-    text: "Enter from, to, and date. We show verified rides going your way - city hops and intercity.",
+    icon: Clock3,
+    title: "On time",
+    text: "Punctual pickups so you reach on schedule — every trip.",
+  },
+  {
+    icon: IndianRupee,
+    title: "Transparent fare",
+    text: "Clear per-km rates with no hidden markups or surprise charges.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Professional drivers",
+    text: "Highly experienced, professional drivers for a smooth ride.",
   },
   {
     icon: CarFront,
-    title: "Pick a ride",
-    text: "Compare time, fare, car type, and driver ratings. Book a seat in a few taps.",
+    title: "Neat & clean vehicles",
+    text: "Well-maintained cabs with the latest models in our fleet.",
   },
   {
-    icon: CalendarCheck,
-    title: "Meet and travel",
-    text: "Chat in-app, meet at the pickup pin, and share the journey with a verified driver.",
+    icon: Sparkles,
+    title: "Easy booking & refunds",
+    text: "Simple booking with clear refund policies when plans change.",
   },
   {
-    icon: Star,
-    title: "Rate each other",
-    text: "Leave a rating after drop-off so the next rider knows who they can trust.",
+    icon: Headphones,
+    title: "24×7 assistance",
+    text: "Round-the-clock support whenever you need help on the road.",
   },
 ];
 
@@ -36,30 +53,29 @@ export default function HowItWorks({
   className?: string;
 }) {
   return (
-    <section className={clsx("relative overflow-hidden page-section", className ?? "bg-white")}>
+    <section className={clsx("relative overflow-hidden bg-white page-section", className)}>
       <Container className="relative">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-bold uppercase tracking-widest text-brand">Simple by design</p>
-          <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
-            How Pune Cabz works
-          </h2>
-          <p className="mx-auto mt-3 max-w-lg text-[15px] leading-relaxed text-navy/60">
-            Four clear steps from search to seat. No surge. No hidden fees.
+        <Reveal className="section-head">
+          <p className="section-eyebrow">Our Services</p>
+          <h2 className="section-title">Why travel with Pune Cabz</h2>
+          <p className="section-desc">
+            Reliable cabs across Pune and beyond — on time, transparent, and always
+            supported.
           </p>
         </Reveal>
 
-        <StaggerGroup className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
-          {steps.map(({ icon: Icon, title, text }, i) => (
+        <StaggerGroup className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map(({ icon: Icon, title, text }, i) => (
             <StaggerItem key={title}>
-              <article className="flex h-full flex-col rounded-2xl border border-black/5 bg-white p-6 text-left shadow-sm">
+              <article className="pro-card group flex h-full flex-col p-4 text-left sm:p-5">
                 <div className="flex items-center justify-between gap-3">
                   <FeatureIcon icon={Icon} size="lg" />
-                  <span className="text-2xl font-extrabold tabular-nums text-brand/20">
+                  <span className="text-xl font-extrabold tabular-nums text-brand/15 transition-colors group-hover:text-brand/25">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
-                <h3 className="mt-5 text-base font-bold tracking-tight text-navy">{title}</h3>
-                <p className="mt-2 text-[13px] leading-relaxed text-navy/60">{text}</p>
+                <h3 className="mt-3 text-[15px] font-bold tracking-tight text-navy">{title}</h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-navy/55 sm:text-[13px]">{text}</p>
               </article>
             </StaggerItem>
           ))}

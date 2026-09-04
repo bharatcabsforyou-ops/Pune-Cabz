@@ -32,7 +32,7 @@ export default function AdminSampleCards({
         {samples.map((item, index) => {
           const key = item.id ?? `${item.title ?? item.fromCity}-${index}`;
           const label = item.title ?? `${item.fromCity} → ${item.toCity}`;
-          const image = item.imageUrl ?? "/image2.jpg";
+          const image = item.imageUrl ?? "/image2.jpeg";
 
           return (
             <article

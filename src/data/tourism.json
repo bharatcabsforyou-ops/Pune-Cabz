@@ -1,11 +1,11 @@
 [
   {
     "id": "seed-1",
-    "title": "Pune city",
+    "title": "Pune City Tour",
     "caption": "Shaniwar Wada to your doorstep",
     "tripType": "Day trip",
     "fromCity": "Pune",
-    "imageUrl": "/image1.jpg",
+    "imageUrl": "/image1.jpeg",
     "sortOrder": 1,
     "published": true
   },
@@ -15,27 +15,27 @@
     "caption": "Comfortable rides. Every time.",
     "tripType": "City to city",
     "fromCity": "Pune",
-    "imageUrl": "/image2.jpg",
+    "imageUrl": "/image2.jpeg",
     "sortOrder": 2,
     "published": true
   },
   {
     "id": "seed-3",
     "title": "Pune to Nashik",
-    "caption": "Every ride. Every time.",
+    "caption": "Vineyards, temples and open roads.",
     "tripType": "Weekend",
     "fromCity": "Pune",
-    "imageUrl": "/image3.jpg",
+    "imageUrl": "/image3.png",
     "sortOrder": 3,
     "published": true
   },
   {
     "id": "seed-4",
     "title": "Pune to Konkan",
-    "caption": "Scenic routes. Smooth rides.",
+    "caption": "Scenic coastal routes. Smooth rides.",
     "tripType": "Coastal",
     "fromCity": "Pune",
-    "imageUrl": "/image4.jpg",
+    "imageUrl": "/image4.jpeg",
     "sortOrder": 4,
     "published": true
   },
@@ -45,8 +45,68 @@
     "caption": "Scenic journeys. Unforgettable memories.",
     "tripType": "Hill station",
     "fromCity": "Pune",
-    "imageUrl": "/image5.jpg",
+    "imageUrl": "/iamge5.png",
     "sortOrder": 5,
+    "published": true
+  },
+  {
+    "id": "seed-6",
+    "title": "Pune to Lonavala",
+    "caption": "Hill escapes made easy.",
+    "tripType": "Hill station",
+    "fromCity": "Pune",
+    "imageUrl": "/image6.png",
+    "sortOrder": 6,
+    "published": true
+  },
+  {
+    "id": "seed-7",
+    "title": "Pune to Shirdi",
+    "caption": "Peaceful journeys to sacred places.",
+    "tripType": "Pilgrimage",
+    "fromCity": "Pune",
+    "imageUrl": "/image7.png",
+    "sortOrder": 7,
+    "published": true
+  },
+  {
+    "id": "seed-8",
+    "title": "Pune to Kolhapur",
+    "caption": "Smooth rides across Maharashtra.",
+    "tripType": "City to city",
+    "fromCity": "Pune",
+    "imageUrl": "/image8.png",
+    "sortOrder": 8,
+    "published": true
+  },
+  {
+    "id": "seed-9",
+    "title": "Pune to Aurangabad",
+    "caption": "Heritage routes, reliable cabs.",
+    "tripType": "Heritage",
+    "fromCity": "Pune",
+    "imageUrl": "/image9.png",
+    "sortOrder": 9,
+    "published": true
+  },
+  {
+    "id": "seed-10",
+    "title": "Pune to Goa",
+    "caption": "Coastal drives done right.",
+    "tripType": "Coastal",
+    "fromCity": "Pune",
+    "imageUrl": "/image10.png",
+    "sortOrder": 10,
+    "published": true
+  },
+  {
+    "id": "seed-11",
+    "title": "Pune to Satara",
+    "caption": "Your comfort, our priority.",
+    "tripType": "Day trip",
+    "fromCity": "Pune",
+    "imageUrl": "/image11.png",
+    "sortOrder": 11,
     "published": true
   }
 ]

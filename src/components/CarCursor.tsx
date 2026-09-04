@@ -2,6 +2,10 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { carAssets } from "@/lib/car-icons";
+
+const CURSOR_W = 32;
+const CURSOR_H = 11;
 
 export default function CarCursor() {
   const [pos, setPos] = useState({ x: -40, y: -40 });
@@ -40,25 +44,29 @@ export default function CarCursor() {
 
   if (!on || typing) return null;
 
+  const scale = hover ? 1.05 : 1;
+  const flip = faceRight ? "" : " scaleX(-1)";
+
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed z-[9999]"
+      className="pointer-events-none fixed z-[9999] will-change-transform"
       style={{
         left: pos.x,
         top: pos.y,
-        transform: `translate(-50%, -50%) scale(${hover ? 1.12 : 1}) ${faceRight ? "" : "scaleX(-1)"}`,
-        transition: "transform 70ms linear",
+        transform: `translate3d(-50%, -58%, 0) scale(${scale})${flip}`,
+        transition: "transform 80ms ease-out",
       }}
     >
       <Image
-        src="/cursor-car.svg"
+        src={carAssets.cursorSedan}
         alt=""
-        width={36}
-        height={16}
+        width={CURSOR_W}
+        height={CURSOR_H}
+        unoptimized
         priority
         draggable={false}
-        className="drop-shadow-[0_2px_6px_rgba(26,10,12,0.22)]"
+        className="block select-none drop-shadow-[0_1px_3px_rgba(26,10,12,0.2)]"
       />
     </div>
   );
