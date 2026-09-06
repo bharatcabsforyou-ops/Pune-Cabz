@@ -6,7 +6,7 @@ import Container from "./Container";
 const rides = [
   { from: "Mumbai", to: "Pune" },
   { from: "Nashik", to: "Pune" },
-  { from: "Pune", to: "Aurangabad" },
+  { from: "Pune", to: "Chatrapati Sambhajinagar" },
   { from: "Pune", to: "Kolhapur" },
   { from: "Pune", to: "Lonavala" },
   { from: "Pune", to: "Goa" },
@@ -21,7 +21,7 @@ export default function TopRides() {
     <section className="overflow-hidden border-b border-black/[0.04] bg-white py-5 sm:py-6">
       <Container>
         <h2 className="text-lg font-extrabold text-navy sm:text-xl">
-          Top carpool rides
+          Top cab routes
         </h2>
       </Container>
 

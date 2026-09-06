@@ -10,17 +10,17 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Packages - Pune Cabz",
   description:
-    "Pune Cabz cab packages — hatchback, sedan, SUV, Innova and bus rates per km. Book now on WhatsApp.",
+    "Pune Cabz cab packages — hatchback, sedan, SUV, Innova and bus fares per km. Book now on WhatsApp.",
 };
 
 const packages = [
   {
     name: "Hatchback",
-    vehicles: "Etios, Swift, WagonR",
+    vehicles: "Swift, WagonR",
     type: "Hatchback (4 + 1)",
     seats: "4 + 1",
     rate: "₹11/KM",
-    image: "/image1.jpeg",
+    image: "/image2.jpeg",
     bookable: true,
     highlight: false,
   },
@@ -30,7 +30,7 @@ const packages = [
     type: "Sedan (4 + 1)",
     seats: "4 + 1",
     rate: "₹12/KM",
-    image: "/image2.jpeg",
+    image: "/image1.jpeg",
     bookable: true,
     highlight: true,
   },
@@ -40,7 +40,7 @@ const packages = [
     type: "SUV (6 + 1)",
     seats: "6 + 1",
     rate: "₹15/KM",
-    image: "/image3.png",
+    image: "/image8.png",
     bookable: true,
     highlight: false,
   },
@@ -50,7 +50,7 @@ const packages = [
     type: "Premium SUV (6 + 1)",
     seats: "6 + 1",
     rate: "₹17/KM",
-    image: "/image4.jpeg",
+    image: "/image11.png",
     bookable: true,
     highlight: false,
   },
@@ -60,7 +60,7 @@ const packages = [
     type: "Premium SUV (7 + 1)",
     seats: "7 + 1",
     rate: "₹18/KM",
-    image: "/iamge5.png",
+    image: "/image3.png",
     bookable: true,
     highlight: false,
   },
@@ -70,7 +70,7 @@ const packages = [
     type: "Premium SUV (6 + 1)",
     seats: "6 + 1",
     rate: "₹20/KM",
-    image: "/image6.png",
+    image: "/image3.png",
     bookable: true,
     highlight: false,
   },
@@ -80,7 +80,7 @@ const packages = [
     type: "Premium SUV (7 + 1)",
     seats: "7 + 1",
     rate: "₹22/KM",
-    image: "/image8.png",
+    image: "/image3.png",
     bookable: true,
     highlight: true,
   },
@@ -90,7 +90,7 @@ const packages = [
     type: "Premium SUV (8 + 1)",
     seats: "8 + 1",
     rate: "₹18/KM",
-    image: "/image10.png",
+    image: "/image4.jpeg",
     bookable: true,
     highlight: false,
   },
@@ -118,7 +118,7 @@ export default function PackagesPage() {
         <Container>
           <Reveal className="section-head">
             <p className="section-eyebrow">Packages</p>
-            <h1 className="section-title">Tour packages & cab rates</h1>
+            <h1 className="section-title">Tour packages & cab fares</h1>
             <p className="section-desc">
               Clear per-km fares for every vehicle — book on WhatsApp in minutes.
             </p>
@@ -200,7 +200,7 @@ export default function PackagesPage() {
           </StaggerGroup>
 
           <Reveal className="mt-8 text-center text-sm text-navy/50">
-            Rates are indicative per km. Tolls, parking, driver allowance and taxes as per{" "}
+            Fares are indicative per km. Tolls, parking, driver allowance and taxes as per{" "}
             <Link href="/about/terms" className="font-semibold text-brand hover:underline">
               Terms & Conditions
             </Link>

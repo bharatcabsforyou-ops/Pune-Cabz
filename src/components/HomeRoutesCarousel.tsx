@@ -7,8 +7,8 @@ import {
   ArrowRight,
   ArrowUpRight,
   Bell,
+  CarFront,
   Clock3,
-  IndianRupee,
   MapPin,
   Sparkles,
 } from "lucide-react";
@@ -33,6 +33,12 @@ const captionsByTo: Record<string, string> = {
   Nashik: films[2].caption,
   Konkan: films[3].caption,
   Mahabaleshwar: films[4].caption,
+  Lonavala: films[5].caption,
+  Shirdi: films[6].caption,
+  Kolhapur: films[7].caption,
+  "Chatrapati Sambhajinagar": films[8].caption,
+  Goa: films[9].caption,
+  Satara: films[10].caption,
 };
 
 function routeTitle(route: PopularRoute) {
@@ -117,16 +123,11 @@ export default function HomeRoutesCarousel({
 
   if (!active) return null;
 
-  const label = String(index + 1).padStart(2, "0");
-  const totalLabel = String(total).padStart(2, "0");
-
   if (isHero) {
     return (
       <HeroRoutesPanel
         active={active}
         index={index}
-        label={label}
-        totalLabel={totalLabel}
         shouldAutoPlay={shouldAutoPlay}
         onPause={setPaused}
       />
@@ -144,19 +145,12 @@ export default function HomeRoutesCarousel({
         }
       }}
     >
-      <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-4">
+      <Reveal className="mb-8 flex flex-col items-center text-center">
         <div>
           <p className="text-xs font-bold uppercase tracking-widest text-brand">Popular routes</p>
           <h2 className="mt-2 text-2xl font-extrabold text-navy sm:text-3xl">
-            Book your cars from Pune
+            Book a ride Now from Pune
           </h2>
-        </div>
-        <div className="flex items-center gap-2">
-          <NavButton dir="prev" onClick={() => go(-1)} />
-          <span className="min-w-[4.5rem] text-center text-sm font-semibold text-navy/50">
-            {label} / {totalLabel}
-          </span>
-          <NavButton dir="next" onClick={() => go(1)} />
         </div>
       </Reveal>
 
@@ -199,9 +193,14 @@ export default function HomeRoutesCarousel({
         </div>
 
         <Reveal direction="right">
-          <RouteDetails active={active} label={label} totalLabel={totalLabel} />
+          <RouteDetails active={active} />
           <RouteDots routes={routes} index={index} onSelect={setIndex} />
         </Reveal>
+      </div>
+
+      <div className="mt-8 flex items-center justify-center gap-2">
+        <NavButton dir="prev" onClick={() => go(-1)} />
+        <NavButton dir="next" onClick={() => go(1)} />
       </div>
     </div>
   );
@@ -216,15 +215,11 @@ export default function HomeRoutesCarousel({
 function HeroRoutesPanel({
   active,
   index,
-  label,
-  totalLabel,
   shouldAutoPlay,
   onPause,
 }: {
   active: PopularRoute;
   index: number;
-  label: string;
-  totalLabel: string;
   shouldAutoPlay: boolean;
   onPause: (v: boolean) => void;
 }) {
@@ -250,11 +245,6 @@ function HeroRoutesPanel({
               <Sparkles className="h-3 w-3" />
               Popular routes
             </span>
-            <div className="flex items-center gap-1.5 rounded-full bg-surface px-3 py-1 ring-1 ring-black/[0.04]">
-              <span className="text-xs font-extrabold tabular-nums text-navy">{label}</span>
-              <span className="text-[10px] font-medium text-navy/25">/</span>
-              <span className="text-xs font-semibold tabular-nums text-navy/40">{totalLabel}</span>
-            </div>
           </div>
 
           {shouldAutoPlay && (
@@ -321,10 +311,6 @@ function HeroRoutesPanel({
                   transition={{ duration: 0.35 }}
                   className="flex min-h-0 flex-1 flex-col"
                 >
-                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-brand/80">
-                    Route {label}
-                  </p>
-
                   <h3 className="mt-2 text-xl font-extrabold leading-[1.15] tracking-tight text-navy sm:text-2xl">
                     <span className="text-navy/55">{active.fromCity}</span>
                     <ArrowRight className="mx-1.5 inline h-4 w-4 -translate-y-px text-brand sm:h-5 sm:w-5" />
@@ -332,13 +318,13 @@ function HeroRoutesPanel({
                   </h3>
 
                   <p className="mt-3 text-[13px] leading-relaxed text-navy/55 sm:text-sm">
-                    {routeCaption(active)} Shared highway seats, verified drivers.
+                    {routeCaption(active)} Professional drivers. Hatchback to Innova.
                   </p>
 
-                  <div className="mt-4 grid grid-cols-3 gap-2">
+                  <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
                     <MetaChip icon={MapPin} label="Route" value={active.toCity} compact />
                     <MetaChip icon={Clock3} label="Time" value={active.duration} compact />
-                    <MetaChip icon={IndianRupee} label="From" value={`₹${active.fromPrice}`} compact highlight />
+                    <MetaChip icon={CarFront} label="Fleet" value="Hatchback to Innova" compact highlight />
                   </div>
 
                   <a
@@ -347,7 +333,7 @@ function HeroRoutesPanel({
                     className="btn-shine mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-brand/30 transition-all hover:bg-brand-dark sm:mt-auto sm:w-auto sm:rounded-full sm:px-6"
                   >
                     <WhatsAppIcon className="h-4 w-4" />
-                    Book on WhatsApp
+                    Book on <span className="text-white">WhatsApp</span>
                     <ArrowUpRight className="h-4 w-4 opacity-80" />
                   </a>
                 </motion.div>
@@ -362,12 +348,8 @@ function HeroRoutesPanel({
 
 function RouteDetails({
   active,
-  label,
-  totalLabel,
 }: {
   active: PopularRoute;
-  label: string;
-  totalLabel: string;
 }) {
   return (
     <AnimatePresence mode="wait">
@@ -378,14 +360,11 @@ function RouteDetails({
         exit={{ opacity: 0, y: -12 }}
         transition={{ duration: 0.3 }}
       >
-        <p className="text-xs font-bold uppercase tracking-[0.22em] text-brand">
-          Route {label} / {totalLabel}
-        </p>
-        <h3 className="mt-3 text-2xl font-extrabold leading-tight text-navy sm:text-3xl lg:text-4xl">
+        <h3 className="text-2xl font-extrabold leading-tight text-navy sm:text-3xl lg:text-4xl">
           {routeTitle(active)}
         </h3>
         <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-navy/60">
-          {routeCaption(active)} Book a verified seat — same highway, shared cost.
+          {routeCaption(active)} Book a verified cab — hatchback to Innova.
         </p>
         <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-navy/55">
           <span className="inline-flex items-center gap-1.5 font-medium text-navy">
@@ -397,8 +376,8 @@ function RouteDetails({
             {active.duration}
           </span>
           <span className="inline-flex items-center gap-1.5 font-semibold text-navy">
-            <IndianRupee className="h-4 w-4 text-brand" />
-            from {active.fromPrice}
+            <CarFront className="h-4 w-4 text-brand" />
+            Hatchback to Innova
           </span>
         </div>
         <a

@@ -3,7 +3,10 @@
 import Container from "../Container";
 import PhotoCard from "../PhotoCard";
 import Reveal from "../motion/Reveal";
-import { images } from "@/lib/images";
+import { unsplash } from "@/lib/images";
+
+/** Comfortable sedan on an open highway — fits Pune Cabz about story */
+const aboutStoryImage = unsplash("1485291571150-772bcfc10da5");
 
 export default function Story() {
   return (
@@ -11,10 +14,6 @@ export default function Story() {
       <Container>
         <div className="grid grid-cols-1 items-center page-grid page-grid-2">
           <Reveal direction="left">
-            <PhotoCard src={images.travelScenicRoad} alt="Pune Cabz journey across Maharashtra" />
-          </Reveal>
-
-          <Reveal direction="right">
             <p className="section-eyebrow">About Us</p>
             <h2 className="section-title mt-2 text-left">
               Your trusted cab service in Pune
@@ -42,6 +41,13 @@ export default function Story() {
                 for every journey.
               </p>
             </div>
+          </Reveal>
+
+          <Reveal direction="right">
+            <PhotoCard
+              src={aboutStoryImage}
+              alt="Comfortable cab ride with Pune Cabz"
+            />
           </Reveal>
         </div>
       </Container>

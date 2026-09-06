@@ -5,7 +5,7 @@
     "caption": "Shaniwar Wada to your doorstep",
     "tripType": "Day trip",
     "fromCity": "Pune",
-    "imageUrl": "/image1.jpeg",
+    "imageUrl": "https://images.unsplash.com/photo-1532375810709-75b1da00537c?auto=format&fit=crop&q=85&w=1600",
     "sortOrder": 1,
     "published": true
   },
@@ -15,7 +15,7 @@
     "caption": "Comfortable rides. Every time.",
     "tripType": "City to city",
     "fromCity": "Pune",
-    "imageUrl": "/image2.jpeg",
+    "imageUrl": "https://images.unsplash.com/photo-1751608734207-1c68d53554b4?auto=format&fit=crop&q=85&w=1600",
     "sortOrder": 2,
     "published": true
   },
@@ -25,7 +25,7 @@
     "caption": "Vineyards, temples and open roads.",
     "tripType": "Weekend",
     "fromCity": "Pune",
-    "imageUrl": "/image3.png",
+    "imageUrl": "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&q=85&w=1600",
     "sortOrder": 3,
     "published": true
   },
@@ -35,7 +35,7 @@
     "caption": "Scenic coastal routes. Smooth rides.",
     "tripType": "Coastal",
     "fromCity": "Pune",
-    "imageUrl": "/image4.jpeg",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=85&w=1600",
     "sortOrder": 4,
     "published": true
   },
@@ -45,7 +45,7 @@
     "caption": "Scenic journeys. Unforgettable memories.",
     "tripType": "Hill station",
     "fromCity": "Pune",
-    "imageUrl": "/iamge5.png",
+    "imageUrl": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=85&w=1600",
     "sortOrder": 5,
     "published": true
   },
@@ -55,7 +55,7 @@
     "caption": "Hill escapes made easy.",
     "tripType": "Hill station",
     "fromCity": "Pune",
-    "imageUrl": "/image6.png",
+    "imageUrl": "https://images.unsplash.com/photo-1712186869971-24b3e49b1375?auto=format&fit=crop&q=85&w=1600",
     "sortOrder": 6,
     "published": true
   },
@@ -65,7 +65,7 @@
     "caption": "Peaceful journeys to sacred places.",
     "tripType": "Pilgrimage",
     "fromCity": "Pune",
-    "imageUrl": "/image7.png",
+    "imageUrl": "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&fit=crop&q=85&w=1600",
     "sortOrder": 7,
     "published": true
   },
@@ -75,17 +75,17 @@
     "caption": "Smooth rides across Maharashtra.",
     "tripType": "City to city",
     "fromCity": "Pune",
-    "imageUrl": "/image8.png",
+    "imageUrl": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&q=85&w=1600",
     "sortOrder": 8,
     "published": true
   },
   {
     "id": "seed-9",
-    "title": "Pune to Aurangabad",
+    "title": "Pune to Chatrapati Sambhajinagar",
     "caption": "Heritage routes, reliable cabs.",
     "tripType": "Heritage",
     "fromCity": "Pune",
-    "imageUrl": "/image9.png",
+    "imageUrl": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=85&w=1600",
     "sortOrder": 9,
     "published": true
   },
@@ -95,7 +95,7 @@
     "caption": "Coastal drives done right.",
     "tripType": "Coastal",
     "fromCity": "Pune",
-    "imageUrl": "/image10.png",
+    "imageUrl": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&q=85&w=1600",
     "sortOrder": 10,
     "published": true
   },
@@ -105,7 +105,7 @@
     "caption": "Your comfort, our priority.",
     "tripType": "Day trip",
     "fromCity": "Pune",
-    "imageUrl": "/image11.png",
+    "imageUrl": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&q=85&w=1600",
     "sortOrder": 11,
     "published": true
   }

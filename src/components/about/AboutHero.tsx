@@ -50,7 +50,7 @@ export default function AboutHero() {
               className="mt-7 flex flex-wrap gap-3"
             >
               <Link href="/book" className="btn-primary px-5 py-2.5 sm:px-6 sm:py-3">
-                Book your cars
+                Book a ride Now
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link href="/contact" className="btn-secondary px-5 py-2.5 sm:px-6 sm:py-3">

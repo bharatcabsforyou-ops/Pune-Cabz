@@ -12,7 +12,6 @@ import {
   cabBookingNotes,
   cabBookingWhatsAppHref,
 } from "@/lib/whatsapp-booking";
-import { site } from "@/lib/site";
 
 const TRIP_TABS = [
   { id: "outstation", label: "Outstation" },
@@ -24,7 +23,7 @@ const TRIP_TABS = [
 type TripTabId = (typeof TRIP_TABS)[number]["id"];
 
 const VEHICLE_OPTIONS = [
-  "Any / Suggest me",
+  "Choose your vehicles",
   "Sedan",
   "SUV",
   "Innova",
@@ -190,11 +189,6 @@ export default function BookCabForm({
       className={clsx("book-cab-form scroll-mt-28", compact && "book-cab-form--compact")}
     >
       <div className="book-cab-card">
-        <div className="book-cab-header">
-          <h2 className="book-cab-title">Book Your Cab</h2>
-          <span className="book-cab-badge">24×7</span>
-        </div>
-
         <div className="book-cab-tabs" role="tablist" aria-label="Trip type">
           {TRIP_TABS.map((tab) => (
             <button
@@ -209,6 +203,8 @@ export default function BookCabForm({
             </button>
           ))}
         </div>
+
+        <span className="book-cab-badge book-cab-badge-float">24×7</span>
 
         <div className="book-cab-grid">
           <FormField label="Full name">
@@ -275,7 +271,16 @@ export default function BookCabForm({
             <input
               type="date"
               value={date}
+              min={new Date().toISOString().slice(0, 10)}
               onChange={(e) => setDate(e.target.value)}
+              onClick={(e) => {
+                const el = e.currentTarget;
+                try {
+                  el.showPicker?.();
+                } catch {
+                  /* unsupported browsers still open on focus */
+                }
+              }}
               className="book-cab-input book-cab-input-date"
             />
           </FormField>
@@ -285,6 +290,14 @@ export default function BookCabForm({
               type="time"
               value={time}
               onChange={(e) => setTime(e.target.value)}
+              onClick={(e) => {
+                const el = e.currentTarget;
+                try {
+                  el.showPicker?.();
+                } catch {
+                  /* unsupported browsers still open on focus */
+                }
+              }}
               className="book-cab-input book-cab-input-time"
             />
           </FormField>
@@ -335,31 +348,19 @@ export default function BookCabForm({
         <div className="book-cab-actions">
           <button type="submit" className="book-cab-btn-whatsapp">
             <WhatsAppIcon className="h-5 w-5" />
-            {compact ? "WhatsApp" : "Send on WhatsApp"}
+            {compact ? (
+              <span className="text-white">WhatsApp</span>
+            ) : (
+              <>
+                Send on <span className="text-white">WhatsApp</span>
+              </>
+            )}
           </button>
           <button type="button" onClick={handleEmail} className="book-cab-btn-email">
             <Mail className="h-5 w-5" />
             {compact ? "Email" : "Send by Email"}
           </button>
         </div>
-
-        <p className="book-cab-footer">
-          {compact ? (
-            <>
-              Call{" "}
-              <a href={site.phoneHref} className="font-bold text-navy hover:text-brand">
-                {site.phone}
-              </a>
-            </>
-          ) : (
-            <>
-              No registration needed. Or simply call{" "}
-              <a href={site.phoneHref} className="font-bold text-navy hover:text-brand">
-                {site.phone}
-              </a>
-            </>
-          )}
-        </p>
       </div>
     </form>
   );

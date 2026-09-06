@@ -19,7 +19,7 @@ const hotelOfferings = [
   "Access to 3-star and 5-star establishments",
   "Online booking with time and cost savings",
   "Budget-friendly options across Indian cities",
-  "Specialised group rates and packages",
+  "Specialised group fares and packages",
 ];
 
 const stats = [

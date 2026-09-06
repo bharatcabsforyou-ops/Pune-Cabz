@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import BrandIcon from "./BrandIcon";
 import clsx from "clsx";
 import Container from "./Container";
@@ -15,6 +15,7 @@ import {
   isNavActive,
   mainNavLinks,
 } from "@/lib/site-nav";
+import { site } from "@/lib/site";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -158,13 +159,22 @@ export default function Navbar() {
         </nav>
 
         <div className="relative z-10 flex shrink-0 items-center justify-self-end gap-2">
+          <a
+            href={site.phoneHref}
+            className="hidden items-center gap-1.5 rounded-full border border-black/[0.08] bg-white px-3 py-2 text-sm font-semibold text-navy transition-colors hover:border-brand/30 hover:text-brand md:inline-flex"
+            aria-label={`Call ${site.phone}`}
+          >
+            <Phone className="h-3.5 w-3.5 text-brand" strokeWidth={2.25} />
+            <span className="hidden xl:inline">{site.phone}</span>
+            <span className="xl:hidden">Call</span>
+          </a>
           <Link
             href="/book"
-            aria-label="Book your cars"
+            aria-label="Book a ride Now"
             className="btn-primary btn-shine inline-flex h-9 items-center gap-2 px-3 sm:h-10 sm:px-4"
           >
             <BrandIcon size={16} className="h-4 w-4" />
-            <span className="hidden sm:inline">Book your cars</span>
+            <span className="hidden sm:inline">Book a ride Now</span>
           </Link>
           <button
             type="button"
@@ -251,12 +261,20 @@ export default function Navbar() {
                 );
               })}
 
+              <a
+                href={site.phoneHref}
+                className="mt-2 flex items-center justify-center gap-2 rounded-xl border border-black/[0.08] bg-white px-4 py-3.5 text-sm font-semibold text-navy"
+              >
+                <Phone className="h-4 w-4 text-brand" strokeWidth={2.25} />
+                {site.phone}
+              </a>
+
               <Link
                 href="/book"
                 className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-brand px-4 py-3.5 text-sm font-semibold text-white"
               >
                 <BrandIcon size={16} className="h-4 w-4" />
-                Book your cars
+                Book a ride Now
               </Link>
             </nav>
           </motion.div>

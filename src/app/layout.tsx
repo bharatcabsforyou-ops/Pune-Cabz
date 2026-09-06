@@ -20,15 +20,32 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Pune Cabz - Travel anywhere together. Spend smarter.",
+  metadataBase: new URL(
+    (process.env.NEXT_PUBLIC_SITE_URL ?? "https://punecabz.in").replace(/\/$/, "")
+  ),
+  title: {
+    default: "Pune Cabz - Book cabs across Maharashtra",
+    template: "%s | Pune Cabz",
+  },
   description:
-    "Find a carpool ride or share your own. Pune Cabz connects drivers and passengers travelling the same way for less.",
+    "Book hatchback to Innova and bus cabs with Pune Cabz. Local, outstation, airport and group travel across Maharashtra and India.",
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
     shortcut: "/favicon.svg",
     apple: [{ url: "/apple-icon", sizes: "180x180" }],
   },
   manifest: "/manifest.webmanifest",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

@@ -23,7 +23,7 @@ export default function AboutCta() {
                 href="/book"
                 className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-brand shadow-lg transition-transform hover:scale-[1.02] hover:bg-white/95"
               >
-                Book your cars
+                Book a ride Now
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link

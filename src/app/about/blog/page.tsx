@@ -38,7 +38,7 @@ const posts = [
     date: "Jun 2025",
     readTime: "4 min read",
     category: "Tips",
-    excerpt: "Per-km rates, tolls, driver allowance — a plain-English breakdown of your bill.",
+    excerpt: "Per-km fares, tolls, driver allowance — a plain-English breakdown of your bill.",
     href: "/about/blog",
     image: "/image3.png",
   },

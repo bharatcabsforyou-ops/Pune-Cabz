@@ -6,9 +6,9 @@ import HeroMediaBackground from "./HeroMediaBackground";
 import BookCabForm from "./BookCabForm";
 
 const stats = [
-  { value: "80+", label: "cities" },
-  { value: "5+", label: "years" },
-  { value: "12", label: "vehicles" },
+  { value: "30+", label: "cities" },
+  { value: "6+", label: "years" },
+  { value: "10", label: "vehicles" },
   { value: "24×7", label: "support" },
 ];
 
@@ -18,7 +18,7 @@ export default function Hero() {
       <HeroMediaBackground />
 
       <Container className="relative z-10 pt-3 pb-5 sm:pt-4 sm:pb-6 lg:pt-5 lg:pb-7">
-        <div className="grid items-start gap-5 sm:gap-6 lg:grid-cols-[minmax(0,1fr)_430px] lg:gap-7 xl:grid-cols-[minmax(0,1fr)_450px]">
+        <div className="grid items-start gap-5 sm:gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,560px)] lg:gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(360px,600px)]">
           <div className="min-w-0 max-w-2xl pt-0.5">
             <motion.p
               initial={{ opacity: 0, y: 12 }}
@@ -36,7 +36,7 @@ export default function Hero() {
                 transition={{ duration: 0.55, delay: 0.08, ease: [0.21, 0.47, 0.32, 0.98] }}
                 className="block text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.25)]"
               >
-                Travel together.
+                Pune Cabz
               </motion.span>
               <motion.span
                 initial={{ opacity: 0, y: 22 }}
@@ -44,7 +44,7 @@ export default function Hero() {
                 transition={{ duration: 0.55, delay: 0.18, ease: [0.21, 0.47, 0.32, 0.98] }}
                 className="mt-1 block text-brand drop-shadow-[0_2px_12px_rgba(0,0,0,0.25)]"
               >
-                Spend smarter.
+                Travellers Choice
               </motion.span>
             </h1>
 
@@ -54,7 +54,8 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.26 }}
               className="mt-3 text-[15px] font-semibold text-white/90 sm:text-base drop-shadow-[0_1px_8px_rgba(0,0,0,0.2)]"
             >
-              Local, outstation & airport cabs — book in minutes on WhatsApp.
+              Local, outstation & airport cabs — book in minutes on{" "}
+              <span className="text-whatsapp">WhatsApp</span>.
             </motion.p>
 
             <motion.p

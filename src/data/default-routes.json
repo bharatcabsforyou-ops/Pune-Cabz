@@ -35,7 +35,7 @@
     "duration": "5h",
     "fromPrice": "599",
     "tag": "Coastal",
-    "imageUrl": "/image4.jpeg",
+    "imageUrl": "/image7.png",
     "sortOrder": 4,
     "published": true
   },
@@ -81,7 +81,7 @@
   },
   {
     "fromCity": "Pune",
-    "toCity": "Aurangabad",
+    "toCity": "Chatrapati Sambhajinagar",
     "duration": "5h",
     "fromPrice": "649",
     "tag": "Heritage",

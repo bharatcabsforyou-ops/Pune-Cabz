@@ -8,9 +8,9 @@ const stats: {
   label: string;
   display?: string;
 }[] = [
-  { value: 80, suffix: "+", label: "Cities Covered" },
-  { value: 5, suffix: "+", label: "Years of Experience" },
-  { value: 12, suffix: "", label: "Vehicle Fleet" },
+  { value: 30, suffix: "+", label: "Cities Covered" },
+  { value: 6, suffix: "+", label: "Years of Experience" },
+  { value: 10, suffix: "", label: "Vehicle Fleet" },
   { display: "24×7", label: "Booking Support" },
 ];
 

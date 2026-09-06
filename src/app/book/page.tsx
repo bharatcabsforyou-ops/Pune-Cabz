@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import BookPage from "@/components/book/BookPage";
 
 export const metadata: Metadata = {
-  title: "Book your cars - Pune Cabz",
+  title: "Book a ride Now - Pune Cabz",
   description:
     "Book a verified Pune Cabz car for city hops and intercity rides across Maharashtra.",
 };

@@ -5,60 +5,41 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
-  CarFront,
   ChevronDown,
   CircleHelp,
   Clock3,
   Luggage,
   MapPinned,
   MessageCircle,
+  Plane,
   ShieldCheck,
-  UserRound,
+  Users,
   Wallet,
 } from "lucide-react";
 import Container from "@/components/Container";
-import FeatureIcon from "@/components/FeatureIcon";
 import HowItWorks from "@/components/HowItWorks";
 import PhotoCard from "@/components/PhotoCard";
 import Reveal from "@/components/motion/Reveal";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { images } from "@/lib/images";
 
-const roles = [
-  {
-    icon: UserRound,
-    title: "For passengers",
-    intro: "You need a seat. We match you with a verified car going your way.",
-    points: [
-      "Search any Pune or Maharashtra route by time and price",
-      "See driver ratings, car type, and pickup notes before you book",
-      "Pay only your share of fuel and tolls - no surge",
-      "Share a live trip link with family until you arrive",
-    ],
-  },
-  {
-    icon: CarFront,
-    title: "For drivers",
-    intro: "You have empty seats. Fill them and split the cost of the same trip.",
-    points: [
-      "Publish a ride in under two minutes",
-      "Choose who rides with you from verified profiles",
-      "Keep the shared fare - there is no listing fee",
-      "Build a rating that fills seats faster next time",
-    ],
-  },
+const glance = [
+  { feature: "Ride Options", offer: "7+ vehicle categories" },
+  { feature: "Services", offer: "Local, Outstation, Airport, and Group Travel" },
+  { feature: "Our Reach", offer: "Across Maharashtra and Pan-India" },
+  { feature: "The Promise", offer: "Safe, comfortable, and dependable travel" },
 ];
 
 const day = [
   {
     icon: MessageCircle,
     title: "Before pickup",
-    text: "You get driver name, car, and a map pin. Chat in-app if you need to shift the time by a few minutes.",
+    text: "Confirm your cab on WhatsApp. You get driver name, vehicle, and pickup pin before the trip starts.",
   },
   {
     icon: MapPinned,
     title: "At the pin",
-    text: "Arrive five minutes early. Confirm the number plate, say hello, and stow bags before you leave.",
+    text: "Arrive a few minutes early. Confirm the number plate, greet your driver, and stow bags before you leave.",
   },
   {
     icon: Clock3,
@@ -68,26 +49,26 @@ const day = [
   {
     icon: Luggage,
     title: "After drop",
-    text: "Rate each other. Fair ratings keep the next Pune Cabz ride safer for everyone.",
+    text: "Pay the confirmed fare and rate your ride. Clear support if anything needs attention.",
   },
 ];
 
 const faqs = [
   {
-    q: "How do I book a seat?",
-    a: "Open Book your cars, enter from, to, and date, pick a verified ride, and confirm. You will get driver and pickup details right away.",
+    q: "How do I book a cab?",
+    a: "Open Book a ride Now, enter from, to, and date, pick a vehicle, and confirm on WhatsApp. You will get driver and pickup details right away.",
   },
   {
     q: "How is the price set?",
-    a: "Drivers set a fare that covers fuel and tolls, split across seats. Pune Cabz does not add surge or hidden markups.",
+    a: "Fares follow clear per-km packages by vehicle type. Tolls and extras are confirmed upfront — no hidden surge.",
   },
   {
     q: "Can I cancel?",
-    a: "Yes. Cancel as early as you can so the seat can go to someone else. Last-minute no-shows can affect your rating.",
+    a: "Yes. Cancel as early as you can so we can free the cab for another booking. Details are shared when you confirm.",
   },
   {
     q: "What luggage can I bring?",
-    a: "One cabin bag plus a small backpack is standard. Mention extra bags in chat before you book so the driver can confirm space.",
+    a: "One cabin bag plus a small backpack is standard in hatchback/sedan. Mention extra bags on WhatsApp so we assign the right vehicle.",
   },
 ];
 
@@ -124,7 +105,7 @@ export default function HowItWorksPage() {
                 className="section-desc mt-5 text-left"
               >
                 Professional drivers, neat latest-model vehicles, easy booking and
-                refunds, plus 24×7 assistance across 80+ cities.
+                refunds, plus 24×7 assistance across 30+ cities.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
@@ -133,7 +114,7 @@ export default function HowItWorksPage() {
                 className="mt-7 flex flex-wrap gap-3"
               >
                 <Link href="/book" className="btn-primary px-6 py-3">
-                  Book your cars
+                  Book a ride Now
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link href="/safety" className="btn-secondary px-6 py-3">
@@ -158,28 +139,46 @@ export default function HowItWorksPage() {
       <section id="offer" className="scroll-mt-24 border-t border-black/[0.04] bg-white page-section">
         <Container>
           <Reveal className="section-head">
-            <p className="section-eyebrow">Two sides, one app</p>
-            <h2 className="section-title">Ride as you like</h2>
+            <p className="section-eyebrow">At a glance</p>
+            <h2 className="section-title">PuneCabz at a Glance</h2>
             <p className="section-desc">
-              Passengers and drivers use the same flow - just different seats.
+              Clear services, wider reach, and dependable travel across every route.
             </p>
           </Reveal>
 
-          <StaggerGroup className="page-section-head grid grid-cols-1 gap-4 lg:grid-cols-2">
-            {roles.map(({ icon: Icon, title, intro, points }) => (
+          <Reveal className="page-section-head mx-auto max-w-3xl overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-sm">
+            <div className="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-3 border-b border-brand/15 bg-brand/[0.04] px-5 py-3.5 text-[11px] font-bold uppercase tracking-wider text-brand sm:px-6">
+              <span>Feature</span>
+              <span>What We Offer</span>
+            </div>
+            <ul className="divide-y divide-black/[0.05]">
+              {glance.map((row) => (
+                <li
+                  key={row.feature}
+                  className="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-3 px-5 py-4 sm:px-6"
+                >
+                  <span className="text-sm font-semibold text-navy">{row.feature}</span>
+                  <span className="text-sm leading-snug text-navy/60">{row.offer}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+
+          <StaggerGroup className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {[
+              { icon: MapPinned, title: "Local & outstation", text: "City hops to long highway runs." },
+              { icon: Plane, title: "Airport transfers", text: "On-time pickups for every flight." },
+              { icon: Users, title: "Group travel", text: "SUV to bus for tours and events." },
+            ].map(({ icon: Icon, title, text }) => (
               <StaggerItem key={title}>
-                <article className="pro-card flex h-full flex-col p-5 sm:p-6">
-                  <FeatureIcon icon={Icon} size="lg" className="h-12 w-12" iconClassName="h-6 w-6" />
-                  <h3 className="mt-5 text-xl font-bold tracking-tight text-navy">{title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-navy/60">{intro}</p>
-                  <ul className="mt-5 space-y-3">
-                    {points.map((point) => (
-                      <li key={point} className="flex gap-3 text-sm leading-relaxed text-navy/70">
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
+                <article className="feature-row h-full">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand/[0.08] text-brand ring-1 ring-brand/10">
+                    <Icon className="h-5 w-5" strokeWidth={2} />
+                  </span>
+                  <div>
+                    <h3 className="text-sm font-bold text-navy">{title}</h3>
+                    <p className="mt-0.5 text-xs leading-relaxed text-navy/55">{text}</p>
+                  </div>
                 </article>
               </StaggerItem>
             ))}
@@ -200,8 +199,8 @@ export default function HowItWorksPage() {
               <div className="feature-row mt-6">
                 <Wallet className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
                 <p className="text-sm leading-relaxed text-navy/65">
-                  Fair shared pricing covers fuel and tolls only. You see the fare
-                  before you confirm.
+                  Transparent per-km packages. You see the fare before you confirm on
+                  WhatsApp.
                 </p>
               </div>
             </Reveal>
@@ -234,7 +233,7 @@ export default function HowItWorksPage() {
             <Reveal direction="left" className="lg:sticky lg:top-24">
               <PhotoCard
                 src={images.travelHills}
-                alt="Pune to Nashik hill route with Pune Cabz"
+                alt="Pune to Lonavala hill route with Pune Cabz"
                 variant="banner"
               />
             </Reveal>
@@ -300,14 +299,14 @@ export default function HowItWorksPage() {
                 Ready for the road?
               </h2>
               <p className="relative mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-white/90">
-                Search a route, pick a verified ride, and travel together - Pune
-                to Mumbai, Nashik, Goa, and beyond.
+                Search a route, pick your cab, and travel with Pune Cabz — Pune to
+                Mumbai, Nashik, Goa, and beyond.
               </p>
               <Link
                 href="/book"
                 className="relative mt-7 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-brand shadow-lg transition-transform hover:scale-[1.02] hover:bg-white/95"
               >
-                Book your cars
+                Book a ride Now
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

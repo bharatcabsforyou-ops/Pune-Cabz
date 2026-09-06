@@ -8,21 +8,50 @@ const defaultImageByRoute = Object.fromEntries(
   ])
 );
 
+/** Old city name → current label */
+const cityAliases: Record<string, string> = {
+  aurangabad: "chatrapati sambhajinagar",
+};
+
+const fleetBySort: Record<number, string> = {
+  1: "/image1.jpeg",
+  2: "/image2.jpeg",
+  3: "/image3.png",
+  4: "/image7.png",
+  5: "/iamge5.png",
+  6: "/image6.png",
+  7: "/image7.png",
+  8: "/image8.png",
+  9: "/image9.png",
+  10: "/image10.png",
+  11: "/image11.png",
+};
+
+function isFleetCarImage(url: string) {
+  return /\/image\d+\.(jpeg|png)$/i.test(url) || /\/iamge5\.png$/i.test(url);
+}
+
+function normalizeCity(city: string) {
+  const key = city.toLowerCase().trim();
+  return cityAliases[key] ?? key;
+}
+
 function resolveRouteImage(row: RowWithImage) {
-  const key = `${row.from_city.toLowerCase()}|${row.to_city.toLowerCase()}`;
+  const from = normalizeCity(row.from_city);
+  const to = normalizeCity(row.to_city);
+  const key = `${from}|${to}`;
   const mapped = defaultImageByRoute[key];
   if (mapped) return mapped;
 
-  if (row.image_url) return row.image_url;
+  if (to === "chatrapati sambhajinagar") {
+    return "/image9.png";
+  }
 
-  const extMap: Record<number, string> = {
-    1: "/image1.jpeg", 2: "/image2.jpeg", 3: "/image3.png",
-    4: "/image4.jpeg", 5: "/iamge5.png",  6: "/image6.png",
-    7: "/image7.png",  8: "/image8.png",  9: "/image9.png",
-    10: "/image10.png", 11: "/image11.png",
-  };
+  // Prefer local fleet car photos for popular routes
+  if (row.image_url && isFleetCarImage(row.image_url)) return row.image_url;
+
   if (row.sort_order >= 1 && row.sort_order <= 11) {
-    return extMap[row.sort_order];
+    return fleetBySort[row.sort_order];
   }
 
   return "/image2.jpeg";
@@ -53,10 +82,15 @@ export function isMissingImageColumn(message: string) {
 }
 
 export function mapPopularRouteRow(row: RowWithImage): PopularRoute {
+  const toCity =
+    normalizeCity(row.to_city) === "chatrapati sambhajinagar"
+      ? "Chatrapati Sambhajinagar"
+      : row.to_city;
+
   return {
     id: row.id,
     fromCity: row.from_city,
-    toCity: row.to_city,
+    toCity,
     duration: row.duration,
     fromPrice: row.from_price,
     tag: row.tag,

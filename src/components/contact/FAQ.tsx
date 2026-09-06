@@ -78,7 +78,7 @@ export default function FAQ() {
   const filtered = activeCategory ? faqs.filter((f) => f.cat === activeCategory) : faqs;
 
   return (
-    <section className="bg-white page-section">
+    <section className="bg-white py-8 sm:py-9">
       <Container>
         {/* Category filter pills */}
         <Reveal>

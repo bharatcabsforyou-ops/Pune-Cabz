@@ -39,7 +39,7 @@
     "duration": "1h 15m",
     "fromPrice": "299",
     "tag": "Hills",
-    "imageUrl": "/image6.png",
+    "imageUrl": "/image7.png",
     "sortOrder": 4,
     "published": true
   },
@@ -101,7 +101,7 @@
   {
     "id": "seed-pr-10",
     "fromCity": "Pune",
-    "toCity": "Aurangabad",
+    "toCity": "Chatrapati Sambhajinagar",
     "duration": "5h",
     "fromPrice": "649",
     "tag": "Heritage",

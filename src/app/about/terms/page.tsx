@@ -41,7 +41,7 @@ const sections: {
     title: "Pricing",
     icon: ShieldCheck,
     body: [
-      "Our pricing is designed to provide clear, competitive and transparent travel options without unnecessary surprises. Base fares quoted exclude taxes, parking charges, toll charges, permits, entrance fees, local guide charges and waiting charges. Additional charges such as toll, parking, permits, entry fees, interstate taxes and other applicable charges may be payable separately unless specifically included in the quoted fare. Rates are calculated on current fuel prices; in the event of a hike in fuel price, rates may vary.",
+      "Our pricing is designed to provide clear, competitive and transparent travel options without unnecessary surprises. Base fares quoted exclude taxes, parking charges, toll charges, permits, entrance fees, local guide charges and waiting charges. Additional charges such as toll, parking, permits, entry fees, interstate taxes and other applicable charges may be payable separately unless specifically included in the quoted fare. Fares are calculated on current fuel prices; in the event of a hike in fuel price, fares may vary.",
     ],
   },
   {

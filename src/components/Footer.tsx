@@ -11,7 +11,7 @@ import { aboutNavLinks } from "@/lib/site-nav";
 
 const columns = [
   {
-    title: "Travel with carpool",
+    title: "Travel with Pune Cabz",
     links: [
       { label: "Mumbai → Pune", href: "/#search" },
       { label: "Nashik → Pune", href: "/#search" },
@@ -32,8 +32,8 @@ const columns = [
     title: "Company",
     links: [
       { label: "Packages", href: "/packages" },
-      { label: "Our Services", href: "/how-it-works" },
-      { label: "Tour Places", href: "/tourism" },
+      { label: "Our Services", href: "/our-services" },
+      { label: "Tourist places", href: "/tourism" },
       { label: "Contact us", href: "/contact" },
     ],
   },
@@ -45,7 +45,7 @@ const columns = [
 
 const socials: { name: SocialName; href: string; label: string }[] = [
   { name: "whatsapp", href: site.whatsappHref, label: "WhatsApp" },
-  { name: "instagram", href: "#", label: "Instagram" },
+  { name: "instagram", href: site.instagram, label: "Instagram" },
   { name: "facebook", href: "#", label: "Facebook" },
   { name: "youtube", href: "#", label: "YouTube" },
 ];
@@ -71,11 +71,25 @@ export default function Footer() {
             </Link>
             <p className="mt-3 max-w-[16rem] text-sm leading-relaxed text-white/70">
               Safe, comfortable cabs across Maharashtra &amp; beyond — book in
-              minutes on WhatsApp.
+              minutes on <span className="text-whatsapp">WhatsApp</span>.
             </p>
             <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-brand">
               Travellers Choice
             </p>
+            <div className="mt-4 space-y-2 text-sm">
+              <a
+                href={site.phoneHref}
+                className="flex items-center gap-2 font-semibold text-white transition-colors hover:text-brand"
+              >
+                {site.phone}
+              </a>
+              <a
+                href={site.emailHref}
+                className="flex items-center gap-2 text-white/75 transition-colors hover:text-white"
+              >
+                {site.email}
+              </a>
+            </div>
           </div>
 
           {columns.map((col) => (
@@ -110,8 +124,8 @@ export default function Footer() {
               <a
                 key={item.name}
                 href={item.href}
-                target={item.name === "whatsapp" ? "_blank" : undefined}
-                rel={item.name === "whatsapp" ? "noopener noreferrer" : undefined}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 aria-label={item.label}
                 className="flex h-9 w-9 items-center justify-center rounded-full bg-white/12 text-white hover:bg-brand"
               >

@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import {
   CarFront,
   Clock3,
-  MapPinned,
   MessageCircle,
   ShieldCheck,
 } from "lucide-react";
@@ -19,10 +18,10 @@ import defaultRoutes from "@/data/default-routes.json";
 import type { PopularRoute } from "@/lib/popular-routes";
 
 const points = [
-  { icon: CarFront, label: "Sedan, SUV & Innova" },
+  { icon: CarFront, label: "Sedan to Innova" },
   { icon: ShieldCheck, label: "Verified drivers" },
-  { icon: Clock3, label: "Same-day booking" },
-  { icon: MessageCircle, label: "Book on WhatsApp" },
+  { icon: Clock3, label: "Same-day" },
+  { icon: MessageCircle, label: "WhatsApp" },
 ];
 
 export default function BookPage() {
@@ -80,97 +79,67 @@ export default function BookPage() {
       <section className="relative isolate overflow-hidden bg-[#141012]">
         <HeroMediaBackground />
 
-        <Container className="relative z-10 pb-4 pt-4 sm:pb-6 sm:pt-6">
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
-
-            {/* LEFT — text */}
-            <div className="flex flex-1 flex-col justify-center">
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45 }}
-                className="inline-flex items-center gap-2 badge-pill"
-              >
-                <MapPinned className="h-3.5 w-3.5" />
-                Book your cars
-              </motion.div>
-
-              <h1 className="mt-3 text-[1.75rem] font-extrabold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-[2.8rem] drop-shadow-[0_2px_12px_rgba(0,0,0,0.25)]">
+        <Container className="relative z-10 py-3 sm:py-4">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-8">
+            <div className="flex min-w-0 flex-1 flex-col justify-start">
+              <h1 className="text-[1.55rem] font-extrabold leading-[1.08] tracking-tight text-white sm:text-3xl lg:text-[2.35rem] drop-shadow-[0_2px_12px_rgba(0,0,0,0.25)]">
                 <motion.span
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.06 }}
+                  transition={{ duration: 0.4, delay: 0.04 }}
                   className="block"
                 >
                   Choose a route.
                 </motion.span>
                 <motion.span
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.14 }}
-                  className="mt-1 block text-brand-light"
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                  className="mt-0.5 block text-brand-light"
                 >
                   Book on WhatsApp.
                 </motion.span>
               </h1>
 
               <motion.p
-                initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.22 }}
-                className="mt-3 max-w-xl text-[14px] leading-relaxed text-white/80 sm:text-[15px]"
+                transition={{ duration: 0.4, delay: 0.16 }}
+                className="mt-2 max-w-xl text-sm leading-relaxed text-white/75"
               >
-                Set from, to, and date — or pick a popular route below. Instant chat with Pune Cabz
-                for fare and confirmation.
+                Set from, to, and date — or pick a popular route below. Instant chat
+                with Pune Cabz for fare and confirmation.
               </motion.p>
 
               <motion.div
-                initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="mt-4 flex flex-wrap gap-2"
+                transition={{ duration: 0.4, delay: 0.22 }}
+                className="mt-3 flex flex-wrap gap-1.5"
               >
                 {points.map(({ icon: Icon, label }) => (
-                  <span key={label} className="stat-chip">
-                    <Icon className="h-3.5 w-3.5" />
+                  <span key={label} className="stat-chip px-2.5 py-1 text-xs">
+                    <Icon className="h-3 w-3" />
                     {label}
                   </span>
                 ))}
               </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-white/55"
-              >
-                <span>
-                  <strong className="font-bold text-white">{routes.length || "—"}</strong> live routes
-                </span>
-                <span className="hidden h-1 w-1 rounded-full bg-white/30 sm:inline-block" />
-                <span>
-                  From <strong className="font-bold text-white">₹199</strong>
-                </span>
-                <span className="hidden h-1 w-1 rounded-full bg-white/30 sm:inline-block" />
-                <span>Pune · Mumbai · Nashik · Konkan & more</span>
-              </motion.div>
             </div>
 
-            {/* RIGHT — form */}
             <motion.div
-              initial={{ opacity: 0, y: 22 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.38 }}
-              className="w-full lg:w-[440px] lg:shrink-0"
+              transition={{ duration: 0.45, delay: 0.2 }}
+              className="w-full min-w-0 lg:w-[520px] xl:w-[560px] lg:shrink-0"
             >
               <BookCabForm
+                variant="compact"
                 from={from}
                 to={to}
                 onFromChange={setFrom}
                 onToChange={setTo}
               />
             </motion.div>
-
           </div>
         </Container>
       </section>

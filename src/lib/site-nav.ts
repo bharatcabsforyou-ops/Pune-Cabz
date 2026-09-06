@@ -12,8 +12,8 @@ export const aboutNavLinks = [
 
 export const mainNavLinks = [
   { href: "/", label: "Home" },
-  { href: "/how-it-works", label: "Our Services" },
-  { href: "/tourism", label: "Tour Places" },
+  { href: "/our-services", label: "Our Services" },
+  { href: "/tourism", label: "Tourist places" },
   { href: "/packages", label: "Packages" },
   { href: "/contact", label: "Contact us" },
 ] as const;

@@ -25,7 +25,10 @@ export default function FeatureIcon({
   strokeWidth?: number;
 }) {
   const s = sizes[size];
-  const tone = "bg-brand/[0.09] text-brand ring-1 ring-brand/12";
+  const tone =
+    _variant === "whatsapp"
+      ? "bg-[#25D366]/12 text-whatsapp ring-1 ring-[#25D366]/25"
+      : "bg-brand/[0.09] text-brand ring-1 ring-brand/12";
 
   return (
     <span

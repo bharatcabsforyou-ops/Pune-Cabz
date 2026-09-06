@@ -6,6 +6,7 @@ import AboutSubHero from "@/components/about/AboutSubHero";
 import Container from "@/components/Container";
 import Reveal from "@/components/motion/Reveal";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Fleet - Pune Cabz",
@@ -18,47 +19,52 @@ const fleet = [
     name: "Hatchback",
     seats: "4 + 1",
     rate: "₹11/KM",
-    note: "Etios, Swift, WagonR — ideal for city hops and light travel.",
-    image: "/image1.jpeg",
+    note: "Swift, WagonR — ideal for city hops and light travel.",
+    image: "/image2.jpeg",
   },
   {
     name: "Sedan",
     seats: "4 + 1",
     rate: "₹12/KM",
     note: "Dzire, Accent, Aura, Amaze, Etios — comfortable highway rides.",
-    image: "/image2.jpeg",
+    image: "/image1.jpeg",
   },
   {
     name: "SUV",
     seats: "6 + 1",
     rate: "₹15/KM",
     note: "Ertiga, Rumion — extra space for family and luggage.",
-    image: "/image4.jpeg",
+    image: "/image8.png",
   },
   {
     name: "Premium SUV",
     seats: "6–8 + 1",
     rate: "From ₹17/KM",
     note: "Carens, Innova, Crysta, Scorpio, Tavera — premium outstation comfort.",
-    image: "/image9.png",
+    image: "/image3.png",
   },
   {
     name: "Bus",
     seats: "17–60",
     rate: "On Call",
     note: "AC / Non-AC group travel for tours, events, and large parties.",
-    image: "/image11.png",
+    image: "/image9.png",
   },
 ];
+
+function bookHref(name: string, rate: string) {
+  const text = `Hi Pune Cabz, I want to book a ${name} at ${rate}.`;
+  return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
+}
 
 export default function FleetPage() {
   return (
     <>
       <AboutSubHero
         eyebrow="Our Fleet"
-        title="Every cab you need. Clear rates."
+        title="Every cab you need. Clear fares."
         description="From hatchback to bus — neat, latest-model cabs with professional drivers across Pune and Maharashtra."
-        image="/image4.jpeg"
+        image="/image8.png"
         imageAlt="Pune Cabz fleet of vehicles"
       />
       <section className="bg-white page-section">
@@ -85,6 +91,15 @@ export default function FleetPage() {
                       <span className="rounded-full bg-soft px-2.5 py-1 text-navy/60">{rate}</span>
                     </div>
                     <p className="mt-3 flex-1 text-sm leading-relaxed text-navy/55">{note}</p>
+                    <a
+                      href={bookHref(name, rate)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary btn-shine mt-5 inline-flex w-full items-center justify-center px-4 py-2.5 text-sm"
+                    >
+                      Book Now
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
                   </div>
                 </article>
               </StaggerItem>
@@ -96,7 +111,7 @@ export default function FleetPage() {
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link href="/book" className="btn-secondary inline-flex px-6 py-3">
-              Book your cars
+              Book a ride Now
             </Link>
           </Reveal>
         </Container>

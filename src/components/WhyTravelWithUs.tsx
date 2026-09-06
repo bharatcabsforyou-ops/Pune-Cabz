@@ -6,6 +6,7 @@ import {
   ShieldCheck,
   Sofa,
   UsersRound,
+  Wrench,
 } from "lucide-react";
 import Container from "./Container";
 import Reveal from "./motion/Reveal";
@@ -36,6 +37,11 @@ const reasons = [
     icon: Sofa,
     title: "Stretch Out and Relax",
     text: "Spacious vehicles set up so even the longest journeys feel comfortable and easy.",
+  },
+  {
+    icon: Wrench,
+    title: "Maintained to SOP",
+    text: "Timely maintenance and mechanical checks as per standard operating procedures.",
   },
 ];
 

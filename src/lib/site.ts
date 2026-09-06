@@ -1,9 +1,12 @@
 export const site = {
   name: "Pune Cabz",
+  /** Canonical site origin — set NEXT_PUBLIC_SITE_URL in production */
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://punecabz.in").replace(/\/$/, ""),
   phone: "+91 95959 33899",
   phoneHref: "tel:+919595933899",
-  email: "support@punecabz.in",
-  emailHref: "mailto:support@punecabz.in",
+  email: "punecabz@gmail.com",
+  emailHref: "mailto:punecabz@gmail.com",
+  instagram: "https://www.instagram.com/punecabz",
   address: "Koregaon Park, Pune",
   addressLine: "Lane 7, North Main Road, Koregaon Park",
   city: "Pune, Maharashtra 411001",

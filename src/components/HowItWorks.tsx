@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import Container from "./Container";
 import FeatureIcon from "./FeatureIcon";
-import Reveal from "./motion/Reveal";
 import { StaggerGroup, StaggerItem } from "./motion/Stagger";
 
 const services = [
@@ -23,7 +22,7 @@ const services = [
   {
     icon: IndianRupee,
     title: "Transparent fare",
-    text: "Clear per-km rates with no hidden markups or surprise charges.",
+    text: "Clear per-km fares with no hidden markups or surprise charges.",
   },
   {
     icon: BadgeCheck,
@@ -33,7 +32,7 @@ const services = [
   {
     icon: CarFront,
     title: "Neat & clean vehicles",
-    text: "Well-maintained cabs with the latest models in our fleet.",
+    text: "Timely maintenance and mechanical checks as per standard operating procedures.",
   },
   {
     icon: Sparkles,
@@ -43,7 +42,7 @@ const services = [
   {
     icon: Headphones,
     title: "24×7 assistance",
-    text: "Round-the-clock support whenever you need help on the road.",
+    text: "Round-the-clock support on phone and WhatsApp whenever you need help.",
   },
 ];
 
@@ -55,16 +54,7 @@ export default function HowItWorks({
   return (
     <section className={clsx("relative overflow-hidden bg-white page-section", className)}>
       <Container className="relative">
-        <Reveal className="section-head">
-          <p className="section-eyebrow">Our Services</p>
-          <h2 className="section-title">Why travel with Pune Cabz</h2>
-          <p className="section-desc">
-            Reliable cabs across Pune and beyond — on time, transparent, and always
-            supported.
-          </p>
-        </Reveal>
-
-        <StaggerGroup className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <StaggerGroup className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {services.map(({ icon: Icon, title, text }, i) => (
             <StaggerItem key={title}>
               <article className="pro-card group flex h-full flex-col p-4 text-left sm:p-5">

@@ -26,7 +26,7 @@ export default function NeverMiss() {
                 <Bell className="h-4.5 w-4.5 text-brand" />
               </div>
               <p className="text-[13px] font-medium leading-snug text-navy">
-                New ride: A carpool to your destination is available!
+                New cab available for your route!
                 <span className="ml-1 text-navy/40">now</span>
               </p>
             </motion.div>
@@ -34,14 +34,11 @@ export default function NeverMiss() {
 
           <Reveal direction="right">
             <h2 className="text-3xl font-extrabold leading-tight text-navy sm:text-4xl">
-              Never miss a carpool!
+              Never miss a ride!
             </h2>
             <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-navy/60">
-              We know it&apos;s frustrating when you want to book in advance and
-              don&apos;t find any rides, as drivers often publish their ride just a
-              few days before they go. With our alert system, you can set up
-              notifications and get an email and app notification as soon as a new
-              ride is published. Stay informed and book the best seat!
+              Set an alert for your route and get notified when cabs are ready to book. Stay
+              informed and reserve hatchback to Innova seats before they fill up.
             </p>
             <motion.a
               whileHover={{ scale: 1.03 }}

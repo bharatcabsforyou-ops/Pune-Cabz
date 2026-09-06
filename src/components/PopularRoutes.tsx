@@ -23,7 +23,7 @@ export default function PopularRoutes() {
               Popular routes from Pune
             </h2>
             <p className="mt-3 max-w-lg text-[15px] leading-relaxed text-navy/60">
-              Book your cars — same routes on the home page and on the book page. Tap any route to
+              Book a ride Now — same routes on the home page and on the book page. Tap any route to
               start booking.
             </p>
           </div>
@@ -31,7 +31,7 @@ export default function PopularRoutes() {
             href="/book"
             className="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-brand/20 bg-white px-4 py-2.5 text-sm font-semibold text-brand shadow-sm transition-colors hover:bg-brand hover:text-white sm:self-auto"
           >
-            Book your cars
+            Book a ride Now
             <ArrowRight className="h-4 w-4" />
           </Link>
         </Reveal>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Clock3, IndianRupee, MapPin } from "lucide-react";
+import { ArrowRight, Clock3, MapPin } from "lucide-react";
 import RouteBannerImage from "@/components/RouteBannerImage";
 import RouteImage from "@/components/routes/RouteImage";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
@@ -57,8 +57,7 @@ export function RouteCardGrid({ route }: { route: PopularRoute }) {
             {route.duration}
           </span>
           <span className="inline-flex items-center gap-1.5 font-semibold text-navy">
-            <IndianRupee className="h-3.5 w-3.5 text-brand" />
-            from {route.fromPrice}
+            Hatchback to Innova
           </span>
         </div>
         <p className="card-cta mt-4 opacity-0 transition-opacity group-hover:opacity-100">
@@ -138,10 +137,9 @@ export function RouteCardBook({
             </p>
           </div>
           <div className="rounded-xl bg-brand/[0.06] px-3 py-2.5 ring-1 ring-brand/10">
-            <p className="text-[10px] font-bold uppercase tracking-wide text-navy/40">From</p>
-            <p className="mt-0.5 inline-flex items-center gap-1 text-sm font-extrabold text-brand">
-              <IndianRupee className="h-3.5 w-3.5" />
-              {route.fromPrice}
+            <p className="text-[10px] font-bold uppercase tracking-wide text-navy/40">Fleet</p>
+            <p className="mt-0.5 text-sm font-extrabold text-brand">
+              Hatchback to Innova
             </p>
           </div>
         </div>
@@ -153,7 +151,7 @@ export function RouteCardBook({
             className="btn-shine inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-4 py-3 text-sm font-semibold text-white shadow-md shadow-brand/25 transition-colors hover:bg-brand-dark"
           >
             <WhatsAppIcon className="h-4 w-4" />
-            Book now on WhatsApp
+            Book now on <span className="text-white">WhatsApp</span>
           </a>
           <button
             type="button"
@@ -214,8 +212,7 @@ export function RouteCardSidebar({
             {route.duration}
           </span>
           <span className="inline-flex items-center gap-1 font-semibold text-navy">
-            <IndianRupee className="h-3 w-3 text-brand" />
-            from {route.fromPrice}
+            Hatchback to Innova
           </span>
         </div>
       </div>

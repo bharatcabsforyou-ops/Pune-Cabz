@@ -10,7 +10,7 @@ const hubs = [
   { city: "Pune", tag: "HQ" },
   { city: "Mumbai", tag: "West" },
   { city: "Nashik", tag: "West" },
-  { city: "Aurangabad", tag: "Marathwada" },
+  { city: "Chatrapati Sambhajinagar", tag: "Marathwada" },
   { city: "Kolhapur", tag: "South MH" },
   { city: "Satara", tag: "West" },
   { city: "Goa", tag: "Coast" },
@@ -19,21 +19,20 @@ const hubs = [
 
 export default function ContactHubs() {
   return (
-    <section className="bg-soft page-section">
+    <section className="bg-soft py-8 sm:py-9">
       <Container>
         <Reveal className="section-head">
           <p className="section-eyebrow">Coverage</p>
-          <h2 className="section-title">Cities we serve</h2>
-          <p className="section-desc">
-            Support is based in Pune. Rides run across these hubs and the routes
-            between them.
+          <h2 className="section-title text-2xl sm:text-3xl">Cities we serve</h2>
+          <p className="section-desc mt-2">
+            Support is based in Pune. Rides run across these hubs.
           </p>
         </Reveal>
 
-        <StaggerGroup className="page-section-head grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <StaggerGroup className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
           {hubs.map(({ city, tag }) => (
             <StaggerItem key={city} className="h-full">
-              <div className="feature-row h-full">
+              <div className="feature-row h-full !p-3">
                 <FeatureIcon icon={MapPinned} size="sm" />
                 <div>
                   <p className="text-sm font-bold text-navy">{city}</p>

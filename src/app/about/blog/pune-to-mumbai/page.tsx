@@ -49,7 +49,7 @@ The expressway is a six-lane divided highway with well-maintained rest stops, fu
   {
     id: "fares",
     heading: "Cab Fares & What's Included",
-    body: `Pune Cabz charges transparent per-km rates with no hidden markups. Here is a typical fare breakdown for Pune to Mumbai:
+    body: `Pune Cabz charges transparent per-km fares with no hidden markups. Here is a typical fare breakdown for Pune to Mumbai:
 
 - **Sedan (Dzire / Etios):** ₹12/km × ~155 km = approx. ₹1,860 + toll (₹285) + driver allowance
 - **SUV (Ertiga / Rumion):** ₹15/km × ~155 km = approx. ₹2,325 + toll + driver allowance
@@ -104,7 +104,7 @@ const relatedPosts = [
   },
   {
     title: "How Cab Fares Are Calculated at Pune Cabz",
-    excerpt: "Per-km rates, tolls, driver allowance — a plain-English breakdown of your bill.",
+    excerpt: "Per-km fares, tolls, driver allowance — a plain-English breakdown of your bill.",
     date: "Jun 2025",
     category: "Tips",
     href: "/about/blog",

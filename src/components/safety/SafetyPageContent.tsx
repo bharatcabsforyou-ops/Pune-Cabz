@@ -122,7 +122,7 @@ export default function SafetyPageContent() {
                 className="mt-7 flex flex-wrap gap-3"
               >
                 <Link href="/book" className="btn-primary px-6 py-3">
-                  Book your cars
+                  Book a ride Now
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <a
@@ -286,10 +286,10 @@ export default function SafetyPageContent() {
               </div>
               <div className="flex flex-wrap gap-3 lg:col-span-4 lg:justify-end">
                 <Link href="/book" className="btn-primary px-6 py-3">
-                  Book your cars
+                  Book a ride Now
                   <ArrowRight className="h-4 w-4" />
                 </Link>
-                <Link href="/how-it-works" className="btn-secondary px-6 py-3">
+                <Link href="/our-services" className="btn-secondary px-6 py-3">
                   Our Services
                 </Link>
               </div>

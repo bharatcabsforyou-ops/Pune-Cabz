@@ -10,7 +10,7 @@ import { images } from "@/lib/images";
 
 const cards = [
   {
-    title: "Book your cars",
+    title: "Book a ride Now",
     text: "City rides and intercity cabs. Sedan, SUV, Innova.",
     href: "/book",
     cta: "Search now",
@@ -18,7 +18,7 @@ const cards = [
     imageAlt: "Book an intercity cab with Pune Cabz",
   },
   {
-    title: "Tourism trips",
+    title: "Tourist places",
     text: "Hills, coast, and weekend getaways with verified drivers.",
     href: "/tourism",
     cta: "Explore routes",

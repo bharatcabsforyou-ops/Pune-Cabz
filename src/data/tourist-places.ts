@@ -27,7 +27,7 @@ export const touristPlaces: TouristPlace[] = [
     fromMumbai: "~83–88 km (Approx. 2 hours)",
     stops: ["Tiger Point", "Bhushi Dam", "Lohagad Fort", "Pawna Lake"],
     category: "Hill station",
-    image: unsplash("1506905925346-21bda4d32df4"),
+    image: unsplash("1712186869971-24b3e49b1375"),
   },
   {
     id: "tamhini-ghat",
@@ -62,7 +62,7 @@ export const touristPlaces: TouristPlace[] = [
       "Mapro Garden",
     ],
     category: "Hill station",
-    image: unsplash("1464822759023-fed622ff2c3b"),
+    image: unsplash("1493246507139-91e8fad9978e"),
   },
   {
     id: "mahabaleshwar",
@@ -97,7 +97,7 @@ export const touristPlaces: TouristPlace[] = [
       "Nana Phadnavis Wada",
     ],
     category: "Heritage",
-    image: unsplash("1548013146-72479768bada"),
+    image: unsplash("1578662996442-48f60103fc96"),
   },
   {
     id: "alibag",
@@ -149,7 +149,7 @@ export const touristPlaces: TouristPlace[] = [
       "Water sports on Dasve Lake",
     ],
     category: "Hill station",
-    image: unsplash("1501785888041-af3ef285b470"),
+    image: unsplash("1439066615861-d1af74d74000"),
   },
   {
     id: "malshej-ghat",
@@ -166,7 +166,7 @@ export const touristPlaces: TouristPlace[] = [
       "Ajoba Hill Fort",
     ],
     category: "Monsoon",
-    image: unsplash("1439066615861-d1af74d74000"),
+    image: unsplash("1663089553368-9df5eb1778ba"),
   },
   {
     id: "jejuri",
@@ -183,7 +183,7 @@ export const touristPlaces: TouristPlace[] = [
       "Purandar Fort",
     ],
     category: "Pilgrimage",
-    image: unsplash("1469474968028-56623f02e42e"),
+    image: unsplash("1621506289937-a8e4df240d0b"),
   },
   {
     id: "balaji-ketkawale",
@@ -199,7 +199,7 @@ export const touristPlaces: TouristPlace[] = [
       "Baneshwar Shiva Temple",
     ],
     category: "Pilgrimage",
-    image: unsplash("1621506289937-a8e4df240d0b"),
+    image: unsplash("1609137144813-7d9921338f24"),
   },
   {
     id: "prati-shirdi",
@@ -216,6 +216,6 @@ export const touristPlaces: TouristPlace[] = [
       "Annachhatra Mahaprasad",
     ],
     category: "Pilgrimage",
-    image: unsplash("1609137144813-7d9921338f24"),
+    image: unsplash("1605649487212-47bdab064df7"),
   },
 ];
