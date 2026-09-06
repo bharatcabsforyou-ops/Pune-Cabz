@@ -94,7 +94,7 @@ export default function ReviewsSection() {
           <p className="section-eyebrow">Reviews</p>
           <h2 className="section-title">What riders say</h2>
           <p className="section-desc">
-            Recent trips on Pune Cabz. Add yours - it goes live after our team checks it.
+            Recent trips on Pune Cabz. Add yours.
           </p>
           <button
             type="button"

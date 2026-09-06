@@ -13,7 +13,7 @@ const cards = [
     icon: Phone,
     title: "Call Now",
     detail: site.phone,
-    hint: "Mon-Sat, 9am-9pm IST",
+    hint: "",
     href: site.phoneHref,
     brand: true,
     whatsapp: false,
@@ -22,7 +22,7 @@ const cards = [
     icon: Mail,
     title: "Get in touch",
     detail: site.email,
-    hint: "We reply within 1 day",
+    hint: "",
     href: site.emailHref,
     brand: true,
     whatsapp: false,
@@ -78,7 +78,9 @@ export default function ContactCards() {
                   {title}
                 </h3>
                 <p className="mt-1 flex-1 text-sm font-medium leading-relaxed text-navy/70">{detail}</p>
-                <p className="mt-2 text-xs font-medium text-navy/45">{hint}</p>
+                {hint ? (
+                  <p className="mt-2 text-xs font-medium text-navy/45">{hint}</p>
+                ) : null}
               </a>
             </StaggerItem>
           ))}

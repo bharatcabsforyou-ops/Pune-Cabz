@@ -99,7 +99,6 @@ export default function ContactForm() {
             <div className="overflow-hidden rounded-xl border border-black/[0.08] bg-white">
               <div className="border-b border-black/[0.06] px-4 py-3 sm:px-5">
                 <h2 className="text-lg font-extrabold text-navy">Send a message</h2>
-                <p className="mt-0.5 text-xs text-navy/50">We reply within one business day.</p>
               </div>
 
               <div className="px-4 py-4 sm:px-5">

@@ -38,8 +38,8 @@ const day = [
   },
   {
     icon: MapPinned,
-    title: "At the pin",
-    text: "Arrive a few minutes early. Confirm the number plate, greet your driver, and stow bags before you leave.",
+    title: "At your location",
+    text: "Driver arrives few minutes early. Confirm the number plate, greet your driver, and stow bags before you leave.",
   },
   {
     icon: Clock3,
