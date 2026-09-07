@@ -5,30 +5,10 @@ import Container from "./Container";
 import Reveal from "./motion/Reveal";
 import { StaggerGroup, StaggerItem } from "./motion/Stagger";
 import WhatsAppIcon from "./WhatsAppIcon";
+import { useT } from "@/lib/i18n";
+import type { MessageKey } from "@/lib/i18n/en";
 
-const steps = [
-  {
-    title: (
-      <>
-        Call or <span className="text-whatsapp">WhatsApp</span>
-      </>
-    ),
-    text: "Tell us where you are going, when, and how many of you are travelling. One message is enough — no forms, no registration.",
-    icons: "contact" as const,
-  },
-  {
-    title: "Get a confirmed fare",
-    text: "We pick the right vehicle and quote the exact fare on the spot. What we commit is what you pay — toll and parking as actual, nothing hidden.",
-    icons: "fare" as const,
-  },
-  {
-    title: "Cab at your door",
-    text: "The driver reaches your address before the pre-decided time and waits. You get the vehicle number and driver contact in advance.",
-    icons: "cab" as const,
-  },
-];
-
-function StepIcons({ kind }: { kind: (typeof steps)[number]["icons"] }) {
+function StepIcons({ kind }: { kind: "contact" | "fare" | "cab" }) {
   if (kind === "contact") {
     return (
       <span className="flex items-center gap-1.5">
@@ -44,19 +24,42 @@ function StepIcons({ kind }: { kind: (typeof steps)[number]["icons"] }) {
 }
 
 export default function BookingProcess() {
+  const t = useT();
+
+  const steps: {
+    titleKey: MessageKey;
+    textKey: MessageKey;
+    icons: "contact" | "fare" | "cab";
+    whatsappTitle?: boolean;
+  }[] = [
+    {
+      titleKey: "bookingProcess.step1.title",
+      textKey: "bookingProcess.step1.text",
+      icons: "contact",
+      whatsappTitle: true,
+    },
+    {
+      titleKey: "bookingProcess.step2.title",
+      textKey: "bookingProcess.step2.text",
+      icons: "fare",
+    },
+    {
+      titleKey: "bookingProcess.step3.title",
+      textKey: "bookingProcess.step3.text",
+      icons: "cab",
+    },
+  ];
+
   return (
     <section className="relative overflow-hidden border-t border-black/[0.04] bg-white page-section">
       <Container>
         <Reveal className="section-head">
-          <p className="section-eyebrow">How it works</p>
-          <h2 className="section-title">Book in three simple steps</h2>
-          <p className="section-desc">
-            Call or chat, lock the fare, and your cab arrives — that&apos;s it.
-          </p>
+          <p className="section-eyebrow">{t("bookingProcess.eyebrow")}</p>
+          <h2 className="section-title">{t("bookingProcess.title")}</h2>
+          <p className="section-desc">{t("bookingProcess.desc")}</p>
         </Reveal>
 
         <div className="relative mt-10">
-          {/* Connector — desktop */}
           <div
             className="pointer-events-none absolute left-[16%] right-[16%] top-9 hidden h-px border-t-2 border-dashed border-brand/25 lg:block"
             aria-hidden
@@ -64,8 +67,7 @@ export default function BookingProcess() {
 
           <StaggerGroup className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-6 lg:gap-8">
             {steps.map((step, i) => (
-              <StaggerItem key={i} className="relative text-center">
-                {/* Connector — mobile */}
+              <StaggerItem key={step.titleKey} className="relative text-center">
                 {i < steps.length - 1 && (
                   <div
                     className="pointer-events-none absolute left-1/2 top-[4.75rem] h-8 w-px -translate-x-1/2 border-l-2 border-dashed border-brand/25 sm:hidden"
@@ -88,10 +90,17 @@ export default function BookingProcess() {
                 </div>
 
                 <h3 className="mt-5 text-base font-extrabold tracking-tight text-navy sm:text-lg">
-                  {step.title}
+                  {step.whatsappTitle ? (
+                    <>
+                      {t("common.call")} {" / "}
+                      <span className="text-whatsapp">{t("common.whatsapp")}</span>
+                    </>
+                  ) : (
+                    t(step.titleKey)
+                  )}
                 </h3>
                 <p className="mx-auto mt-2.5 max-w-[17rem] text-sm leading-relaxed text-navy/55">
-                  {step.text}
+                  {t(step.textKey)}
                 </p>
               </StaggerItem>
             ))}

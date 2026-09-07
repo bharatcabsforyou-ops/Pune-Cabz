@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import AppProviders from "@/components/AppProviders";
 import Navbar from "@/components/Navbar";
 import SiteChrome from "@/components/SiteChrome";
 
@@ -52,10 +53,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${jakarta.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-white font-sans text-navy">
-        <Navbar />
-        <main className="flex-1">
-          <SiteChrome>{children}</SiteChrome>
-        </main>
+        <AppProviders>
+          <Navbar />
+          <main className="flex-1">
+            <SiteChrome>{children}</SiteChrome>
+          </main>
+        </AppProviders>
       </body>
     </html>
   );

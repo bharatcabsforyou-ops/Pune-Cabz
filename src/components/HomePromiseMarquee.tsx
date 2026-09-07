@@ -7,11 +7,11 @@ import { usePopularRoutes } from "@/hooks/usePopularRoutes";
 import defaultRoutes from "@/data/default-routes.json";
 import { touristPlaces } from "@/data/tourist-places";
 import type { PopularRoute } from "@/lib/popular-routes";
+import { useT } from "@/lib/i18n";
 
 type LocationChip = {
   from: string;
   to: string;
-  label: string;
 };
 
 function buildLocations(routes: PopularRoute[]): LocationChip[] {
@@ -22,11 +22,7 @@ function buildLocations(routes: PopularRoute[]): LocationChip[] {
     const key = `${from}|${to}`.toLowerCase();
     if (seen.has(key)) return;
     seen.add(key);
-    out.push({
-      from,
-      to,
-      label: `${from} to ${to} Cab`,
-    });
+    out.push({ from, to });
   };
 
   for (const route of routes) {
@@ -41,6 +37,7 @@ function buildLocations(routes: PopularRoute[]): LocationChip[] {
 }
 
 export default function HomePromiseMarquee() {
+  const t = useT();
   const { routes: fromApi } = usePopularRoutes();
   const routes =
     fromApi.length > 0
@@ -59,10 +56,10 @@ export default function HomePromiseMarquee() {
     <section className="overflow-hidden border-y border-black/[0.04] bg-white py-5 sm:py-6">
       <Container>
         <p className="text-center text-[11px] font-bold uppercase tracking-[0.16em] text-brand">
-          Popular destinations
+          {t("marquee.eyebrow")}
         </p>
         <h2 className="mt-1.5 text-center text-lg font-extrabold tracking-tight text-navy sm:text-xl">
-          Book a cab to these locations
+          {t("marquee.title")}
         </h2>
       </Container>
 
@@ -70,12 +67,12 @@ export default function HomePromiseMarquee() {
         <div className="rides-marquee-track locations-marquee-track gap-2.5 py-0.5">
           {loop.map((loc, i) => (
             <Link
-              key={`${loc.label}-${i}`}
+              key={`${loc.from}-${loc.to}-${i}`}
               href={`/book?from=${encodeURIComponent(loc.from)}&to=${encodeURIComponent(loc.to)}`}
               className="flex min-w-max shrink-0 items-center gap-2 rounded-xl border border-black/[0.08] bg-white px-3.5 py-2.5 text-sm font-semibold text-navy shadow-sm transition-colors hover:border-brand/35 hover:text-brand"
             >
               <ArrowRight className="h-3.5 w-3.5 shrink-0 text-brand" strokeWidth={2.5} />
-              {loc.label}
+              {t("marquee.chip", { from: loc.from, to: loc.to })}
             </Link>
           ))}
         </div>

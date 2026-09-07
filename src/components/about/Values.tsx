@@ -4,17 +4,18 @@ import { Eye, Target } from "lucide-react";
 import Container from "../Container";
 import Reveal from "../motion/Reveal";
 import { StaggerGroup, StaggerItem } from "../motion/Stagger";
+import { useT } from "@/lib/i18n";
 
 export default function Values() {
+  const t = useT();
+
   return (
     <section className="border-t border-black/[0.04] bg-soft page-section">
       <Container>
         <Reveal className="section-head">
-          <p className="section-eyebrow">What drives us</p>
-          <h2 className="section-title">Our Goal &amp; Vision</h2>
-          <p className="section-desc">
-            Clear purpose. Clear direction. Built around every customer&apos;s journey.
-          </p>
+          <p className="section-eyebrow">{t("values.eyebrow")}</p>
+          <h2 className="section-title">{t("values.title")}</h2>
+          <p className="section-desc">{t("values.desc")}</p>
         </Reveal>
 
         <StaggerGroup className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
@@ -26,26 +27,17 @@ export default function Values() {
                 </span>
                 <div>
                   <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand">
-                    Our Goal
+                    {t("values.goal.label")}
                   </p>
                   <h3 className="mt-0.5 text-lg font-extrabold tracking-tight text-navy sm:text-xl">
-                    Safe, reliable &amp; hassle-free rides
+                    {t("values.goal.title")}
                   </h3>
                 </div>
               </div>
 
               <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-navy/60">
-                <p>
-                  Our goal is to provide safe, reliable, affordable, and hassle-free
-                  transportation for every customer.
-                </p>
-                <p>
-                  We aim to build a trusted cab service brand in Pune by combining
-                  professional service with modern technology and a customer-first
-                  approach. We continuously work to improve our services, maintain high
-                  safety standards, provide timely rides, and make every journey
-                  comfortable.
-                </p>
+                <p>{t("values.goal.p1")}</p>
+                <p>{t("values.goal.p2")}</p>
               </div>
             </article>
           </StaggerItem>
@@ -58,23 +50,17 @@ export default function Values() {
                 </span>
                 <div>
                   <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand">
-                    Our Vision
+                    {t("values.vision.label")}
                   </p>
                   <h3 className="mt-0.5 text-lg font-extrabold tracking-tight text-navy sm:text-xl">
-                    Easier, safer &amp; more convenient travel
+                    {t("values.vision.title")}
                   </h3>
                 </div>
               </div>
 
               <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-navy/60">
-                <p>
-                  Our vision is simple — to make travelling easier, safer, and more
-                  convenient for everyone.
-                </p>
-                <p>
-                  We want every customer to reach their destination comfortably and on
-                  time — and to choose us again for their next journey.
-                </p>
+                <p>{t("values.vision.p1")}</p>
+                <p>{t("values.vision.p2")}</p>
               </div>
             </article>
           </StaggerItem>

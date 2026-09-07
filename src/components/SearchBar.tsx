@@ -17,6 +17,7 @@ import { usePopularRoutes } from "@/hooks/usePopularRoutes";
 import defaultRoutes from "@/data/default-routes.json";
 import { routeCityOptions, type PopularRoute } from "@/lib/popular-routes";
 import { routeSearchWhatsAppHref } from "@/lib/whatsapp-booking";
+import { useT } from "@/lib/i18n";
 
 export default function SearchBar({
   from: controlledFrom,
@@ -31,6 +32,7 @@ export default function SearchBar({
   onToChange?: (value: string) => void;
   variant?: "default" | "hero";
 } = {}) {
+  const t = useT();
   const { routes: fromApi, loaded } = usePopularRoutes();
   const routes = useMemo(() => {
     if (fromApi.length > 0) return fromApi;
@@ -113,7 +115,7 @@ export default function SearchBar({
       >
         <Field
           icon={<CircleDot className="h-5 w-5 text-brand" />}
-          label="From"
+          label={t("search.from")}
           placeholder={defaultFrom}
           value={from}
           onChange={handleFromChange}
@@ -130,7 +132,7 @@ export default function SearchBar({
             animate={{ rotate: swapped ? 180 : 0 }}
             whileTap={{ scale: 0.9 }}
             transition={{ duration: 0.3 }}
-            aria-label="Swap from and to"
+            aria-label={t("search.swap")}
             className="relative z-10 -my-3 flex h-8 w-8 items-center justify-center rounded-full border border-black/10 bg-white text-navy/60 shadow-sm hover:border-brand/30 hover:text-brand lg:my-auto lg:-mx-3 lg:h-9 lg:w-9"
           >
             <ArrowRightLeft className="h-4 w-4" />
@@ -139,7 +141,7 @@ export default function SearchBar({
 
         <Field
           icon={<MapPin className="h-5 w-5 text-brand" />}
-          label="To"
+          label={t("search.to")}
           placeholder={defaultTo}
           value={to}
           onChange={setTo}
@@ -151,8 +153,8 @@ export default function SearchBar({
         <Divider />
         <Field
           icon={<CalendarDays className="h-5 w-5 text-brand" />}
-          label="Departure"
-          placeholder="Today"
+          label={t("search.departure")}
+          placeholder={t("search.today")}
           value={date}
           onChange={setDate}
           type="date"
@@ -168,9 +170,10 @@ export default function SearchBar({
           <UsersRound className="h-5 w-5 shrink-0 text-brand" />
           <div className="flex min-w-0 flex-1 items-center justify-between gap-3">
             <div className="flex min-w-0 flex-col">
-              <span className="text-xs font-medium text-navy/50">Passengers</span>
+              <span className="text-xs font-medium text-navy/50">{t("search.passengers")}</span>
               <span className="whitespace-nowrap text-[15px] font-semibold text-navy">
-                {passengers} {passengers === 1 ? "passenger" : "passengers"}
+                {passengers}{" "}
+                {passengers === 1 ? t("search.passengerOne") : t("search.passengerMany")}
               </span>
             </div>
             <div className="flex shrink-0 items-center gap-2">
@@ -207,7 +210,7 @@ export default function SearchBar({
             )}
           >
             <WhatsAppIcon className="h-4 w-4" />
-            WhatsApp
+            {t("search.whatsapp")}
           </button>
         </div>
       </div>

@@ -12,6 +12,7 @@ import {
   mergeHeroReviews,
   type Review,
 } from "@/lib/reviews";
+import { useT } from "@/lib/i18n";
 
 const emptyForm = {
   name: "",
@@ -22,6 +23,7 @@ const emptyForm = {
 };
 
 export default function ReviewsSection() {
+  const t = useT();
   const pathname = usePathname();
   const [reviews, setReviews] = useState<Review[]>(seedReviews as Review[]);
   const [open, setOpen] = useState(false);
@@ -91,11 +93,9 @@ export default function ReviewsSection() {
     <section className="bg-white page-section">
       <Container>
         <div className="section-head">
-          <p className="section-eyebrow">Reviews</p>
-          <h2 className="section-title">What riders say</h2>
-          <p className="section-desc">
-            Recent trips on Pune Cabz. Add yours.
-          </p>
+          <p className="section-eyebrow">{t("reviews.eyebrow")}</p>
+          <h2 className="section-title">{t("reviews.title")}</h2>
+          <p className="section-desc">{t("reviews.desc")}</p>
           <button
             type="button"
             onClick={() => {
@@ -106,7 +106,7 @@ export default function ReviewsSection() {
             className="btn-primary btn-shine mt-6 inline-flex gap-2 px-6 py-2.5 text-sm"
           >
             <MessageSquarePlus className="h-4 w-4" />
-            Add review
+            {t("reviews.add")}
           </button>
         </div>
 
@@ -164,15 +164,17 @@ export default function ReviewsSection() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-widest text-brand">
-                    Add review
+                    {t("reviews.modal.eyebrow")}
                   </p>
-                  <h2 className="mt-1 text-xl font-extrabold text-navy">How was your ride?</h2>
+                  <h2 className="mt-1 text-xl font-extrabold text-navy">
+                    {t("reviews.modal.title")}
+                  </h2>
                 </div>
                 <button
                   type="button"
                   onClick={close}
                   className="rounded-full p-1 text-navy/40 hover:bg-soft hover:text-navy"
-                  aria-label="Close"
+                  aria-label={t("reviews.modal.close")}
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -180,34 +182,35 @@ export default function ReviewsSection() {
 
               {done ? (
                 <p className="mt-5 text-sm leading-relaxed text-navy/70">
-                  Thanks. Your review is with our team. It will show on the site after
-                  an admin approves it.
+                  {t("reviews.modal.thanks")}
                 </p>
               ) : (
                 <form onSubmit={submit} className="mt-5 space-y-3.5">
                   <div className="grid grid-cols-2 gap-3">
                     <Field
-                      label="Name"
+                      label={t("reviews.modal.name")}
                       value={form.name}
                       onChange={(name) => setForm((f) => ({ ...f, name }))}
                       placeholder="Riya Sharma"
                     />
                     <Field
-                      label="City"
+                      label={t("reviews.modal.city")}
                       value={form.city}
                       onChange={(city) => setForm((f) => ({ ...f, city }))}
                       placeholder="Pune"
                     />
                   </div>
                   <Field
-                    label="Route"
+                    label={t("reviews.modal.route")}
                     value={form.route}
                     onChange={(route) => setForm((f) => ({ ...f, route }))}
                     placeholder="Pune to Mumbai"
                     required={false}
                   />
                   <div>
-                    <p className="mb-1.5 text-xs font-medium text-navy/50">Rating</p>
+                    <p className="mb-1.5 text-xs font-medium text-navy/50">
+                      {t("reviews.modal.rating")}
+                    </p>
                     <div className="flex gap-1">
                       {Array.from({ length: 5 }).map((_, i) => {
                         const value = i + 1;
@@ -233,14 +236,14 @@ export default function ReviewsSection() {
                   </div>
                   <div>
                     <label className="mb-1.5 block text-xs font-medium text-navy/50">
-                      Your review
+                      {t("reviews.modal.yourReview")}
                     </label>
                     <textarea
                       required
                       rows={4}
                       value={form.text}
                       onChange={(e) => setForm((f) => ({ ...f, text: e.target.value }))}
-                      placeholder="Tell others how the ride went."
+                      placeholder={t("reviews.modal.placeholder")}
                       className="w-full resize-none rounded-xl border border-black/10 px-3.5 py-2.5 text-sm text-navy outline-none placeholder:text-navy/30 focus:border-brand"
                     />
                   </div>
@@ -250,10 +253,10 @@ export default function ReviewsSection() {
                     disabled={sending}
                     className="w-full rounded-xl bg-brand px-4 py-3 text-sm font-semibold text-white disabled:opacity-60"
                   >
-                    {sending ? "Sending..." : "Submit for approval"}
+                    {sending ? t("reviews.modal.sending") : t("reviews.modal.submit")}
                   </button>
                   <p className="text-center text-[12px] text-navy/45">
-                    Reviews go to the admin panel first. They appear here after approval.
+                    {t("reviews.modal.note")}
                   </p>
                 </form>
               )}

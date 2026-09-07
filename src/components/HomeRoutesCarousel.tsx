@@ -23,6 +23,7 @@ import { logRouteInquiry, routeWhatsAppHref } from "@/lib/open-route-whatsapp";
 import WhatsAppIcon from "./WhatsAppIcon";
 import type { PopularRoute } from "@/lib/popular-routes";
 import { isBrandedRouteBanner } from "@/lib/images";
+import { useT } from "@/lib/i18n";
 import clsx from "clsx";
 
 const AUTO_PLAY_MS = 5000;
@@ -60,6 +61,7 @@ export default function HomeRoutesCarousel({
   variant?: "default" | "hero";
   autoPlay?: boolean;
 }) {
+  const t = useT();
   const reduceMotion = useReducedMotion();
   const { routes: fromApi, loaded } = usePopularRoutes();
   const routes = useMemo(() => {
@@ -147,9 +149,9 @@ export default function HomeRoutesCarousel({
     >
       <Reveal className="mb-8 flex flex-col items-center text-center">
         <div>
-          <p className="text-xs font-bold uppercase tracking-widest text-brand">Popular routes</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-brand">{t("routes.eyebrow")}</p>
           <h2 className="mt-2 text-2xl font-extrabold text-navy sm:text-3xl">
-            Book a ride Now from Pune
+            {t("routes.title")}
           </h2>
         </div>
       </Reveal>
@@ -223,6 +225,7 @@ function HeroRoutesPanel({
   shouldAutoPlay: boolean;
   onPause: (v: boolean) => void;
 }) {
+  const t = useT();
   return (
     <div
       className="hero-route-card group/card w-full min-w-0"
@@ -243,7 +246,7 @@ function HeroRoutesPanel({
           <div className="relative flex items-center justify-between gap-3 border-b border-black/[0.04] px-4 py-3.5 sm:px-5">
             <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand/12 to-brand/6 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-brand ring-1 ring-brand/10">
               <Sparkles className="h-3 w-3" />
-              Popular routes
+              {t("routes.eyebrow")}
             </span>
           </div>
 
@@ -296,7 +299,7 @@ function HeroRoutesPanel({
                 </div>
                 <p className="min-w-0 text-[11px] font-semibold leading-snug text-navy sm:text-xs">
                   New ride to {active.toCity}
-                  <span className="font-medium text-navy/45"> · available now</span>
+                  <span className="font-medium text-navy/45"> · {t("routes.availableNow")}</span>
                 </p>
               </div>
             </div>
@@ -318,13 +321,13 @@ function HeroRoutesPanel({
                   </h3>
 
                   <p className="mt-3 text-[13px] leading-relaxed text-navy/55 sm:text-sm">
-                    {routeCaption(active)} Professional drivers. Hatchback to Innova.
+                    {routeCaption(active)} {t("routes.fleet")}
                   </p>
 
                   <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
-                    <MetaChip icon={MapPin} label="Route" value={active.toCity} compact />
-                    <MetaChip icon={Clock3} label="Time" value={active.duration} compact />
-                    <MetaChip icon={CarFront} label="Fleet" value="Hatchback to Innova" compact highlight />
+                    <MetaChip icon={MapPin} label={t("routes.meta.route")} value={active.toCity} compact />
+                    <MetaChip icon={Clock3} label={t("routes.meta.time")} value={active.duration} compact />
+                    <MetaChip icon={CarFront} label={t("routes.meta.fleet")} value={t("routes.fleet")} compact highlight />
                   </div>
 
                   <a
@@ -333,7 +336,7 @@ function HeroRoutesPanel({
                     className="btn-shine mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-brand/30 transition-all hover:bg-brand-dark sm:mt-auto sm:w-auto sm:rounded-full sm:px-6"
                   >
                     <WhatsAppIcon className="h-4 w-4" />
-                    Book on <span className="text-white">WhatsApp</span>
+                    {t("routes.bookWhatsApp")}
                     <ArrowUpRight className="h-4 w-4 opacity-80" />
                   </a>
                 </motion.div>
@@ -351,6 +354,7 @@ function RouteDetails({
 }: {
   active: PopularRoute;
 }) {
+  const t = useT();
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -364,7 +368,7 @@ function RouteDetails({
           {routeTitle(active)}
         </h3>
         <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-navy/60">
-          {routeCaption(active)} Book a verified cab — hatchback to Innova.
+          {routeCaption(active)} {t("routes.fleet")}
         </p>
         <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-navy/55">
           <span className="inline-flex items-center gap-1.5 font-medium text-navy">
@@ -377,7 +381,7 @@ function RouteDetails({
           </span>
           <span className="inline-flex items-center gap-1.5 font-semibold text-navy">
             <CarFront className="h-4 w-4 text-brand" />
-            Hatchback to Innova
+            {t("routes.fleet")}
           </span>
         </div>
         <a
@@ -386,7 +390,7 @@ function RouteDetails({
           className="btn-shine mt-6 inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-sm font-semibold text-white shadow-md shadow-brand/25 transition-colors hover:bg-brand-dark"
         >
           <WhatsAppIcon className="h-4 w-4" />
-          Book on WhatsApp
+          {t("routes.bookWhatsApp")}
         </a>
       </motion.div>
     </AnimatePresence>
@@ -467,12 +471,13 @@ function NavButton({
   onClick: () => void;
   compact?: boolean;
 }) {
+  const t = useT();
   const Icon = dir === "prev" ? ArrowLeft : ArrowRight;
   return (
     <button
       type="button"
       onClick={onClick}
-      aria-label={dir === "prev" ? "Previous route" : "Next route"}
+      aria-label={dir === "prev" ? t("routes.prev") : t("routes.next")}
       className={clsx(
         "flex items-center justify-center rounded-full border border-black/10 bg-white text-navy shadow-sm transition-colors hover:border-brand/30 hover:text-brand",
         compact ? "h-8 w-8" : "h-10 w-10"
@@ -484,12 +489,13 @@ function NavButton({
 }
 
 function OverlayNav({ dir, onClick }: { dir: "prev" | "next"; onClick: () => void }) {
+  const t = useT();
   const Icon = dir === "prev" ? ArrowLeft : ArrowRight;
   return (
     <button
       type="button"
       onClick={onClick}
-      aria-label={dir === "prev" ? "Previous route" : "Next route"}
+      aria-label={dir === "prev" ? t("routes.prev") : t("routes.next")}
       className={clsx(
         "absolute top-1/2 hidden -translate-y-1/2 rounded-full bg-white/95 p-2.5 text-navy shadow-lg ring-1 ring-black/5 transition hover:text-brand sm:flex",
         dir === "prev" ? "left-3" : "right-3"

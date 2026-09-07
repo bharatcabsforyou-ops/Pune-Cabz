@@ -8,8 +8,10 @@ import Container from "@/components/Container";
 import Reveal from "@/components/motion/Reveal";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { touristPlaces, type TouristPlace } from "@/data/tourist-places";
+import { useT } from "@/lib/i18n";
 
 function PlaceCard({ place }: { place: TouristPlace }) {
+  const t = useT();
   const bookHref = `/book?to=${encodeURIComponent(place.name)}&from=${encodeURIComponent("Pune")}`;
 
   return (
@@ -46,7 +48,8 @@ function PlaceCard({ place }: { place: TouristPlace }) {
           <div className="flex items-start gap-2 text-xs leading-snug text-navy/60">
             <Navigation className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand" />
             <span>
-              <span className="font-bold text-navy">From Pune</span> · {place.fromPune}
+              <span className="font-bold text-navy">{t("tourism.guide.fromPune")}</span> ·{" "}
+              {place.fromPune}
             </span>
           </div>
           <div className="flex items-start gap-2 text-xs leading-snug text-navy/55">
@@ -62,7 +65,7 @@ function PlaceCard({ place }: { place: TouristPlace }) {
           href={bookHref}
           className="btn-primary btn-shine mt-5 inline-flex h-10 w-full items-center justify-center gap-2 px-4 text-sm"
         >
-          Book cab
+          {t("tourism.guide.bookCab")}
           <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
         </Link>
       </div>
@@ -71,6 +74,9 @@ function PlaceCard({ place }: { place: TouristPlace }) {
 }
 
 export default function TouristPlacesGuide() {
+  const t = useT();
+  const allLabel = t("tourism.guide.all");
+
   const categories = useMemo(() => {
     return ["All", ...new Set(touristPlaces.map((p) => p.category))];
   }, []);
@@ -88,12 +94,10 @@ export default function TouristPlacesGuide() {
         <Reveal className="section-head">
           <p className="section-eyebrow inline-flex items-center gap-2">
             <MapPinned className="h-3.5 w-3.5" />
-            Tourist places
+            {t("tourism.guide.eyebrow")}
           </p>
-          <h2 className="section-title">Popular destinations</h2>
-          <p className="section-desc">
-            Real places, clear distances, and instant cab booking from Pune.
-          </p>
+          <h2 className="section-title">{t("tourism.guide.title")}</h2>
+          <p className="section-desc">{t("tourism.guide.desc")}</p>
         </Reveal>
 
         <Reveal className="mt-6 flex flex-wrap justify-center gap-2">
@@ -110,7 +114,7 @@ export default function TouristPlacesGuide() {
                     : "bg-soft text-navy/65 ring-1 ring-black/[0.05] hover:bg-white hover:text-navy hover:ring-brand/20"
                 }`}
               >
-                {type}
+                {type === "All" ? allLabel : type}
               </button>
             );
           })}

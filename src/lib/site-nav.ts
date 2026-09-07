@@ -1,22 +1,24 @@
-export const aboutNavLinks = [
-  { href: "/about", label: "About Pune Cabz" },
-  { href: "/about/fleet", label: "Fleet" },
-  { href: "/hotels", label: "Hotels & Flights" },
-  { href: "/about/testimonials", label: "Testimonials" },
-  { href: "/about/faq", label: "FAQ" },
-  { href: "/about/blog", label: "Blog" },
-  { href: "/about/career", label: "Career" },
-  { href: "/about/terms", label: "Terms & Conditions" },
-  { href: "/about/safety", label: "Safety" },
-] as const;
+import type { MessageKey } from "@/lib/i18n/en";
 
-export const mainNavLinks = [
-  { href: "/", label: "Home" },
-  { href: "/our-services", label: "Our Services" },
-  { href: "/tourism", label: "Tourist places" },
-  { href: "/packages", label: "Packages" },
-  { href: "/contact", label: "Contact us" },
-] as const;
+export const aboutNavLinks: { href: string; labelKey: MessageKey }[] = [
+  { href: "/about", labelKey: "nav.aboutPuneCabz" },
+  { href: "/about/fleet", labelKey: "nav.fleet" },
+  { href: "/hotels", labelKey: "nav.hotelsFlights" },
+  { href: "/about/testimonials", labelKey: "nav.testimonials" },
+  { href: "/about/faq", labelKey: "nav.faq" },
+  { href: "/about/blog", labelKey: "nav.blog" },
+  { href: "/about/career", labelKey: "nav.career" },
+  { href: "/about/terms", labelKey: "nav.terms" },
+  { href: "/about/safety", labelKey: "nav.safety" },
+];
+
+export const mainNavLinks: { href: string; labelKey: MessageKey }[] = [
+  { href: "/", labelKey: "nav.home" },
+  { href: "/our-services", labelKey: "nav.ourServices" },
+  { href: "/tourism", labelKey: "nav.touristPlaces" },
+  { href: "/packages", labelKey: "nav.packages" },
+  { href: "/contact", labelKey: "nav.contactUs" },
+];
 
 export function isAboutPath(pathname: string) {
   return (

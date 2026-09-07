@@ -17,6 +17,7 @@ import Container from "../Container";
 import Reveal from "../motion/Reveal";
 import { images } from "@/lib/images";
 import { site } from "@/lib/site";
+import { useT } from "@/lib/i18n";
 
 const subjects = [
   { value: "", label: "Select topic" },
@@ -28,6 +29,7 @@ const subjects = [
 ];
 
 export default function ContactForm() {
+  const t = useT();
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -89,8 +91,8 @@ export default function ContactForm() {
                 <p className="text-[9px] font-bold uppercase tracking-widest text-brand-light">
                   Pune Cabz
                 </p>
-                <p className="mt-0.5 text-sm font-extrabold text-white">Need help fast?</p>
-                <p className="text-[11px] text-white/70">Call or WhatsApp us.</p>
+                <p className="mt-0.5 text-sm font-extrabold text-white">{t("contactForm.needHelp")}</p>
+                <p className="text-[11px] text-white/70">{t("contactForm.callOrWa")}</p>
               </div>
             </div>
           </Reveal>
@@ -98,7 +100,7 @@ export default function ContactForm() {
           <Reveal direction="right" className="order-1 min-h-0 flex-1 lg:order-2">
             <div className="overflow-hidden rounded-xl border border-black/[0.08] bg-white">
               <div className="border-b border-black/[0.06] px-4 py-3 sm:px-5">
-                <h2 className="text-lg font-extrabold text-navy">Send a message</h2>
+                <h2 className="text-lg font-extrabold text-navy">{t("contactForm.title")}</h2>
               </div>
 
               <div className="px-4 py-4 sm:px-5">
@@ -111,8 +113,8 @@ export default function ContactForm() {
                       className="flex flex-col items-center gap-2 rounded-lg bg-emerald-50 px-4 py-8 text-center ring-1 ring-emerald-100"
                     >
                       <CheckCircle2 className="h-9 w-9 text-emerald-500" />
-                      <p className="text-base font-bold text-navy">Message received</p>
-                      <p className="text-xs text-navy/55">We&apos;ll reply soon on email or phone.</p>
+                      <p className="text-base font-bold text-navy">{t("contactForm.received")}</p>
+                      <p className="text-xs text-navy/55">{t("contactForm.replySoon")}</p>
                       <button
                         type="button"
                         onClick={() => {
@@ -121,7 +123,7 @@ export default function ContactForm() {
                         }}
                         className="mt-1 text-xs font-semibold text-brand hover:underline"
                       >
-                        Send another
+                        {t("contactForm.sendAnother")}
                       </button>
                     </motion.div>
                   ) : (
@@ -213,7 +215,7 @@ export default function ContactForm() {
                         className="btn-shine flex w-full items-center justify-center gap-2 rounded-lg bg-brand px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-dark disabled:opacity-60"
                       >
                         <Send className="h-3.5 w-3.5" />
-                        {busy ? "Sending..." : "Submit"}
+                        {busy ? t("contactForm.sending") : t("contactForm.submit")}
                       </motion.button>
                     </motion.form>
                   )}

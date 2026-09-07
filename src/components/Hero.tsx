@@ -4,15 +4,18 @@ import { motion } from "framer-motion";
 import Container from "./Container";
 import HeroMediaBackground from "./HeroMediaBackground";
 import BookCabForm from "./BookCabForm";
-
-const stats = [
-  { value: "30+", label: "cities" },
-  { value: "6+", label: "years" },
-  { value: "10", label: "vehicles" },
-  { value: "24×7", label: "support" },
-];
+import { useT } from "@/lib/i18n";
 
 export default function Hero() {
+  const t = useT();
+
+  const stats = [
+    { value: "30+", label: t("hero.stat.cities") },
+    { value: "6+", label: t("hero.stat.years") },
+    { value: "10", label: t("hero.stat.vehicles") },
+    { value: "24×7", label: t("hero.stat.support") },
+  ];
+
   return (
     <section className="relative isolate overflow-hidden bg-[#141012]">
       <HeroMediaBackground />
@@ -26,7 +29,7 @@ export default function Hero() {
               transition={{ duration: 0.5 }}
               className="badge-pill px-3 py-1.5 text-sm font-semibold sm:text-[15px]"
             >
-              Pune, Maharashtra
+              {t("hero.badge")}
             </motion.p>
 
             <h1 className="mt-3 text-[2.25rem] font-extrabold leading-[1.08] tracking-tight sm:mt-3.5 sm:text-5xl lg:text-[3.5rem]">
@@ -36,7 +39,7 @@ export default function Hero() {
                 transition={{ duration: 0.55, delay: 0.08, ease: [0.21, 0.47, 0.32, 0.98] }}
                 className="block text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.25)]"
               >
-                Pune Cabz
+                {t("hero.title1")}
               </motion.span>
               <motion.span
                 initial={{ opacity: 0, y: 22 }}
@@ -44,7 +47,7 @@ export default function Hero() {
                 transition={{ duration: 0.55, delay: 0.18, ease: [0.21, 0.47, 0.32, 0.98] }}
                 className="mt-1 block text-brand drop-shadow-[0_2px_12px_rgba(0,0,0,0.25)]"
               >
-                Travellers Choice
+                {t("hero.title2")}
               </motion.span>
             </h1>
 
@@ -54,8 +57,7 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.26 }}
               className="mt-3 text-[15px] font-semibold text-white/90 sm:text-base drop-shadow-[0_1px_8px_rgba(0,0,0,0.2)]"
             >
-              Local, outstation & airport cabs — book in minutes on{" "}
-              <span className="text-whatsapp">WhatsApp</span>.
+              {t("hero.subtitle")}
             </motion.p>
 
             <motion.p
@@ -64,9 +66,7 @@ export default function Hero() {
               transition={{ duration: 0.55, delay: 0.32 }}
               className="mt-2.5 max-w-lg text-[15px] leading-relaxed text-white/92 sm:mt-3 sm:text-base lg:text-[17px] drop-shadow-[0_1px_8px_rgba(0,0,0,0.25)]"
             >
-              Verified drivers, GPS-enabled cabs, and upfront fares on real routes —
-              Pune to Mumbai, Nashik, Lonavala, Konkan, Goa and beyond. No hidden
-              charges. Instant confirmation.
+              {t("hero.body")}
             </motion.p>
 
             <motion.div

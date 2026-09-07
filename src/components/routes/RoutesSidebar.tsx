@@ -1,6 +1,6 @@
 "use client";
 
-import { Clock3, IndianRupee, MapPin } from "lucide-react";
+import { Clock3, MapPin } from "lucide-react";
 import RouteImage from "@/components/routes/RouteImage";
 import { RouteCardSidebar, RoutesSidebarSkeleton } from "@/components/routes/RouteCard";
 import type { PopularRoute } from "@/lib/popular-routes";
@@ -45,8 +45,6 @@ export function RoutesMobileStrip({ routes, loaded, selectedId, onSelect }: Rout
                 <p className="mt-1.5 flex items-center gap-2 text-[11px] text-navy/55">
                   <Clock3 className="h-3 w-3" />
                   {route.duration}
-                  <IndianRupee className="ml-1 h-3 w-3 text-brand" />
-                  {route.fromPrice}
                 </p>
               </div>
             </button>

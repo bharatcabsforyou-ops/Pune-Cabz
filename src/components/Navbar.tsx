@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import BrandIcon from "./BrandIcon";
+import LanguageSwitcher from "./LanguageSwitcher";
 import clsx from "clsx";
 import Container from "./Container";
 import Logo from "./Logo";
@@ -16,8 +17,10 @@ import {
   mainNavLinks,
 } from "@/lib/site-nav";
 import { site } from "@/lib/site";
+import { useT } from "@/lib/i18n";
 
 export default function Navbar() {
+  const t = useT();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
@@ -72,7 +75,7 @@ export default function Navbar() {
           : "border-transparent"
       )}
     >
-      <Container className="grid h-[4.25rem] min-w-0 grid-cols-[auto_1fr_auto] items-center gap-2.5 sm:h-[4.75rem] sm:gap-3">
+      <Container className="grid h-[4.25rem] min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 sm:h-[4.75rem] sm:gap-2.5 xl:gap-3">
         <Link
           href="/"
           className="relative z-10 flex shrink-0 items-center justify-self-start"
@@ -81,13 +84,13 @@ export default function Navbar() {
           <Logo size="nav" />
         </Link>
 
-        <nav className="hidden items-center justify-center gap-0.5 justify-self-center lg:flex">
+        <nav className="hidden min-w-0 flex-nowrap items-center justify-center gap-0 justify-self-center xl:flex">
           <Link
             href="/"
             aria-current={pathname === "/" ? "page" : undefined}
             className={clsx("nav-link", pathname === "/" && "nav-link-active")}
           >
-            Home
+            {t("nav.home")}
           </Link>
 
           <div
@@ -106,7 +109,7 @@ export default function Navbar() {
                 aboutActive && "nav-link-active"
               )}
             >
-              About
+              {t("nav.about")}
               <ChevronDown
                 className={clsx(
                   "h-3.5 w-3.5 transition-transform",
@@ -135,7 +138,7 @@ export default function Navbar() {
                           : "text-navy/70 hover:bg-soft hover:text-navy"
                       )}
                     >
-                      {link.label}
+                      {t(link.labelKey)}
                     </Link>
                   ))}
                 </motion.div>
@@ -152,36 +155,37 @@ export default function Navbar() {
                 aria-current={active ? "page" : undefined}
                 className={clsx("nav-link", active && "nav-link-active")}
               >
-                {link.label}
+                {t(link.labelKey)}
               </Link>
             );
           })}
         </nav>
 
-        <div className="relative z-10 flex shrink-0 items-center justify-self-end gap-2">
+        <div className="relative z-10 flex shrink-0 items-center justify-self-end gap-1.5 sm:gap-2">
+          <LanguageSwitcher />
           <a
             href={site.phoneHref}
             className="hidden items-center gap-1.5 rounded-full border border-black/[0.08] bg-white px-3 py-2 text-sm font-semibold text-navy transition-colors hover:border-brand/30 hover:text-brand md:inline-flex"
-            aria-label={`Call ${site.phone}`}
+            aria-label={`${t("nav.call")} ${site.phone}`}
           >
             <Phone className="h-3.5 w-3.5 text-brand" strokeWidth={2.25} />
             <span className="hidden xl:inline">{site.phone}</span>
-            <span className="xl:hidden">Call</span>
+            <span className="xl:hidden">{t("nav.call")}</span>
           </a>
           <Link
             href="/book"
-            aria-label="Book a ride Now"
+            aria-label={t("nav.bookRide")}
             className="btn-primary btn-shine inline-flex h-9 items-center gap-2 px-3 sm:h-10 sm:px-4"
           >
             <BrandIcon size={16} className="h-4 w-4" />
-            <span className="hidden sm:inline">Book a ride Now</span>
+            <span className="hidden sm:inline">{t("nav.bookRide")}</span>
           </Link>
           <button
             type="button"
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={open ? t("nav.closeMenu") : t("nav.openMenu")}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-black/[0.08] bg-white text-navy transition-colors hover:border-brand/25 hover:text-brand lg:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-black/[0.08] bg-white text-navy transition-colors hover:border-brand/25 hover:text-brand xl:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -195,9 +199,16 @@ export default function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.26, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="overflow-hidden border-t border-black/[0.06] bg-white/95 backdrop-blur-xl lg:hidden"
+            className="overflow-hidden border-t border-black/[0.06] bg-white/95 backdrop-blur-xl xl:hidden"
           >
             <nav className="flex flex-col gap-0.5 px-4 py-3 sm:px-6">
+              <div className="mb-2 flex items-center justify-between rounded-xl border border-black/[0.06] bg-soft px-3 py-2.5">
+                <span className="text-xs font-bold uppercase tracking-wider text-navy/50">
+                  {t("nav.language")}
+                </span>
+                <LanguageSwitcher compact />
+              </div>
+
               <Link
                 href="/"
                 className={clsx(
@@ -207,7 +218,7 @@ export default function Navbar() {
                     : "text-navy/70 hover:bg-soft hover:text-navy"
                 )}
               >
-                Home
+                {t("nav.home")}
               </Link>
 
               <button
@@ -220,7 +231,7 @@ export default function Navbar() {
                     : "text-navy/70 hover:bg-soft hover:text-navy"
                 )}
               >
-                About
+                {t("nav.about")}
                 <ChevronDown className={clsx("h-4 w-4 transition-transform", aboutOpen && "rotate-180")} />
               </button>
 
@@ -237,7 +248,7 @@ export default function Navbar() {
                           : "text-navy/65 hover:bg-soft hover:text-navy"
                       )}
                     >
-                      {link.label}
+                      {t(link.labelKey)}
                     </Link>
                   ))}
                 </div>
@@ -256,7 +267,7 @@ export default function Navbar() {
                         : "text-navy/70 hover:bg-soft hover:text-navy"
                     )}
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                   </Link>
                 );
               })}
@@ -274,7 +285,7 @@ export default function Navbar() {
                 className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-brand px-4 py-3.5 text-sm font-semibold text-white"
               >
                 <BrandIcon size={16} className="h-4 w-4" />
-                Book a ride Now
+                {t("nav.bookRide")}
               </Link>
             </nav>
           </motion.div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AboutSubHero from "@/components/about/AboutSubHero";
+import FaqPageHero from "@/components/about/FaqPageHero";
 import FAQ from "@/components/contact/FAQ";
 
 export const metadata: Metadata = {
@@ -10,13 +10,7 @@ export const metadata: Metadata = {
 export default function AboutFaqPage() {
   return (
     <>
-      <AboutSubHero
-        eyebrow="FAQ"
-        title="Frequently Asked Questions"
-        description="Everything people ask us before their first booking — answered plainly."
-        image="/image2.jpeg"
-        imageAlt="Pune Cabz cab on the road"
-      />
+      <FaqPageHero />
       <FAQ />
     </>
   );

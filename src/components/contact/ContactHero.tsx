@@ -5,8 +5,11 @@ import Container from "../Container";
 import WhatsAppIcon from "../WhatsAppIcon";
 import { site } from "@/lib/site";
 import BookCabForm from "@/components/BookCabForm";
+import { useT } from "@/lib/i18n";
 
 export default function ContactHero() {
+  const t = useT();
+
   return (
     <section className="relative overflow-hidden border-b border-black/[0.04] bg-white">
       <Container className="relative py-6 sm:py-8">
@@ -17,7 +20,7 @@ export default function ContactHero() {
               animate={{ opacity: 1, y: 0 }}
               className="section-eyebrow"
             >
-              Contact us
+              {t("contact.eyebrow")}
             </motion.span>
 
             <motion.h1
@@ -26,8 +29,8 @@ export default function ContactHero() {
               transition={{ duration: 0.45, delay: 0.06 }}
               className="mt-2.5 text-[1.65rem] font-extrabold leading-[1.1] tracking-tight text-navy sm:text-3xl lg:text-[2.35rem]"
             >
-              Talk to us.{" "}
-              <span className="text-gradient-brand">We actually reply.</span>
+              {t("contact.title")}{" "}
+              <span className="text-gradient-brand">{t("contact.titleAccent")}</span>
             </motion.h1>
 
             <motion.p
@@ -36,8 +39,7 @@ export default function ContactHero() {
               transition={{ duration: 0.45, delay: 0.12 }}
               className="mt-2.5 text-sm leading-relaxed text-navy/60 sm:text-[15px]"
             >
-              Ride issues, account help, or a partnership idea — reach us on{" "}
-              <span className="text-whatsapp font-semibold">WhatsApp</span> anytime.
+              {t("contact.body")}
             </motion.p>
 
             <motion.div
@@ -53,10 +55,10 @@ export default function ContactHero() {
                 className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#25D366]/30 transition-colors hover:bg-[#1ebe57]"
               >
                 <WhatsAppIcon className="h-4 w-4" />
-                Chat on WhatsApp
+                {t("contact.chatWhatsApp")}
               </a>
               <a href={site.phoneHref} className="btn-secondary px-5 py-2.5">
-                24/7 support
+                {t("contact.support247")}
               </a>
             </motion.div>
           </div>

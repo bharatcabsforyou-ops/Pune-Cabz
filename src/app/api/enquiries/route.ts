@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { isSupabaseConfigured } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { validateEnquiryInput } from "@/lib/enquiries";
+import { sendEnquiryEmail } from "@/lib/send-enquiry-email";
 
 export async function POST(request: Request) {
   if (!isSupabaseConfigured()) {
@@ -34,7 +35,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json({ ok: true });
+    // Best-effort email to site inbox (does not block save success)
+    const mail = await sendEnquiryEmail(validated.data);
+    if (!mail.ok) {
+      console.error("[enquiries] email notify failed:", mail.error);
+    }
+
+    return NextResponse.json({ ok: true, emailed: mail.ok });
   } catch {
     return NextResponse.json({ error: "Could not save enquiry." }, { status: 500 });
   }

@@ -3,20 +3,23 @@
 import Container from "./Container";
 import Counter from "./motion/Counter";
 import Reveal from "./motion/Reveal";
-
-const stats: {
-  value?: number;
-  suffix?: string;
-  label: string;
-  display?: string;
-}[] = [
-  { value: 30, suffix: "+", label: "Cities Covered" },
-  { value: 6, suffix: "+", label: "Years of Experience" },
-  { value: 10, suffix: "", label: "Vehicle Fleet" },
-  { display: "24×7", label: "Booking Support" },
-];
+import { useT } from "@/lib/i18n";
 
 export default function TrustBar() {
+  const t = useT();
+
+  const stats: {
+    value?: number;
+    suffix?: string;
+    label: string;
+    display?: string;
+  }[] = [
+    { value: 30, suffix: "+", label: t("trustBar.citiesCovered") },
+    { value: 6, suffix: "+", label: t("trustBar.yearsExperience") },
+    { value: 10, suffix: "", label: t("trustBar.vehicleFleet") },
+    { display: "24×7", label: t("trustBar.bookingSupport") },
+  ];
+
   return (
     <section className="relative z-10 -mt-1 border-b border-black/[0.04] bg-soft py-4 sm:py-5">
       <Container>
@@ -43,17 +46,9 @@ export default function TrustBar() {
                       />
                     )}
                   </p>
-                  <p className="mt-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-navy/45 sm:text-[11px]">
+                  <p className="mt-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-navy/45 sm:text-xs">
                     {s.label}
                   </p>
-                  {i === 0 ? (
-                    <span
-                      className="mt-2.5 h-0.5 w-10 rounded-full bg-gradient-to-r from-brand to-amber-400"
-                      aria-hidden
-                    />
-                  ) : (
-                    <span className="mt-2.5 h-0.5 w-10 opacity-0" aria-hidden />
-                  )}
                 </div>
               ))}
             </div>

@@ -5,15 +5,18 @@ import { BadgeCheck, Star } from "lucide-react";
 import Container from "./Container";
 import Reveal from "./motion/Reveal";
 import { images } from "@/lib/images";
+import { useT, type MessageKey } from "@/lib/i18n";
 
-const glance = [
-  { feature: "Ride Options", offer: "7+ vehicle categories" },
-  { feature: "Services", offer: "Local, Outstation, Airport, and Group Travel" },
-  { feature: "Our Reach", offer: "Across Maharashtra and Pan-India" },
-  { feature: "The Promise", offer: "Safe, comfortable, and dependable travel" },
+const glance: { featureKey: MessageKey; offerKey: MessageKey }[] = [
+  { featureKey: "glance.rideOptions", offerKey: "glance.rideOptionsOffer" },
+  { featureKey: "glance.services", offerKey: "glance.servicesOffer" },
+  { featureKey: "glance.reach", offerKey: "glance.reachOffer" },
+  { featureKey: "glance.promise", offerKey: "glance.promiseOffer" },
 ];
 
 export default function Testimonial() {
+  const t = useT();
+
   return (
     <section className="border-t border-black/[0.04] bg-soft page-section">
       <Container>
@@ -22,47 +25,45 @@ export default function Testimonial() {
             <article className="overflow-hidden rounded-2xl border border-black/[0.06] bg-white">
               <div className="border-b border-brand/15 bg-brand/[0.04] px-6 py-5 sm:px-7">
                 <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand">
-                  At a glance
+                  {t("glance.eyebrow")}
                 </p>
                 <h2 className="mt-1.5 text-xl font-extrabold tracking-tight text-navy">
-                  PuneCabz at a Glance
+                  {t("glance.title")}
                 </h2>
               </div>
 
               <div className="px-6 py-2 sm:px-7">
                 <div className="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-3 border-b border-black/[0.06] py-3 text-[11px] font-bold uppercase tracking-wider text-navy/40">
-                  <span>Feature</span>
-                  <span>What We Offer</span>
+                  <span>{t("glance.feature")}</span>
+                  <span>{t("glance.offer")}</span>
                 </div>
                 <ul className="divide-y divide-black/[0.05]">
                   {glance.map((row) => (
                     <li
-                      key={row.feature}
+                      key={row.featureKey}
                       className="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-3 py-3.5"
                     >
-                      <span className="text-sm font-semibold text-navy">{row.feature}</span>
-                      <span className="text-sm leading-snug text-navy/60">{row.offer}</span>
+                      <span className="text-sm font-semibold text-navy">{t(row.featureKey)}</span>
+                      <span className="text-sm leading-snug text-navy/60">{t(row.offerKey)}</span>
                     </li>
                   ))}
                 </ul>
                 <p className="border-t border-black/[0.05] py-4 text-sm text-navy/50">
-                  You pick the destination; we&apos;ll take care of the drive.
+                  {t("glance.footer")}
                 </p>
               </div>
             </article>
 
             <article className="rounded-2xl border border-black/[0.06] bg-white p-6 sm:p-7">
               <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand">
-                Rider story
+                {t("glance.story.eyebrow")}
               </p>
               <h2 className="mt-1.5 text-xl font-extrabold tracking-tight text-navy">
-                Only on Pune Cabz
+                {t("glance.story.title")}
               </h2>
 
               <blockquote className="mt-5 text-[15px] leading-relaxed text-navy/65">
-                &ldquo;Booked an Innova for Pune to Mumbai early morning. Driver arrived on
-                time, the cab was clean and AC was perfect, and the fare matched what we
-                confirmed on <span className="text-whatsapp">WhatsApp</span> — no extras at drop.&rdquo;
+                &ldquo;{t("glance.story.quote")}&rdquo;
               </blockquote>
 
               <div className="mt-6 flex items-center gap-3 border-t border-black/[0.05] pt-5">
@@ -77,7 +78,7 @@ export default function Testimonial() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-bold text-navy">Kabir Malhotra</p>
-                  <p className="text-xs text-navy/45">Regular Pune Cabz rider</p>
+                  <p className="text-xs text-navy/45">{t("glance.story.role")}</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="inline-flex items-center gap-0.5 text-amber-500">
@@ -87,7 +88,7 @@ export default function Testimonial() {
                   </span>
                   <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-brand">
                     <BadgeCheck className="h-3.5 w-3.5" />
-                    Verified
+                    {t("glance.verified")}
                   </span>
                 </div>
               </div>

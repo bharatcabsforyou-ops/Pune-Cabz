@@ -6,8 +6,11 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Container from "../Container";
 import { images } from "@/lib/images";
+import { useT } from "@/lib/i18n";
 
 export default function AboutHero() {
+  const t = useT();
+
   return (
     <section className="page-hero">
       <Container className="relative">
@@ -19,7 +22,7 @@ export default function AboutHero() {
               transition={{ duration: 0.5 }}
               className="section-eyebrow"
             >
-              About us
+              {t("aboutHero.eyebrow")}
             </motion.span>
 
             <motion.h1
@@ -28,7 +31,7 @@ export default function AboutHero() {
               transition={{ duration: 0.6, delay: 0.08, ease: [0.21, 0.47, 0.32, 0.98] }}
               className="section-title mt-4 text-[1.85rem] sm:text-5xl"
             >
-              Welcome to
+              {t("aboutHero.titleBefore")}
               <br />
               <span className="text-gradient-brand">PuneCabz.</span>
             </motion.h1>
@@ -39,8 +42,7 @@ export default function AboutHero() {
               transition={{ duration: 0.6, delay: 0.18 }}
               className="section-desc mt-5 text-left"
             >
-              Your trusted cab service in Pune — committed to making every journey
-              safe, comfortable, reliable, and convenient across the city and beyond.
+              {t("aboutHero.desc")}
             </motion.p>
 
             <motion.div
@@ -50,14 +52,15 @@ export default function AboutHero() {
               className="mt-7 flex flex-wrap gap-3"
             >
               <Link href="/book" className="btn-primary px-5 py-2.5 sm:px-6 sm:py-3">
-                Book a ride Now
+                {t("common.bookRideNow")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link href="/contact" className="btn-secondary px-5 py-2.5 sm:px-6 sm:py-3">
-                Contact us
+                {t("nav.contactUs")}
               </Link>
             </motion.div>
           </div>
+
 
           <motion.div
             initial={{ opacity: 0, y: 18 }}

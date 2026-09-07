@@ -16,15 +16,17 @@ import BookRoutesGallery from "@/components/book/BookRoutesGallery";
 import { usePopularRoutes } from "@/hooks/usePopularRoutes";
 import defaultRoutes from "@/data/default-routes.json";
 import type { PopularRoute } from "@/lib/popular-routes";
+import { useT, type MessageKey } from "@/lib/i18n";
 
-const points = [
-  { icon: CarFront, label: "Sedan to Innova" },
-  { icon: ShieldCheck, label: "Verified drivers" },
-  { icon: Clock3, label: "Same-day" },
-  { icon: MessageCircle, label: "WhatsApp" },
+const points: { icon: typeof CarFront; labelKey: MessageKey }[] = [
+  { icon: CarFront, labelKey: "book.chip.fleet" },
+  { icon: ShieldCheck, labelKey: "book.chip.drivers" },
+  { icon: Clock3, labelKey: "book.chip.sameDay" },
+  { icon: MessageCircle, labelKey: "book.chip.whatsapp" },
 ];
 
 export default function BookPage() {
+  const t = useT();
   const searchParams = useSearchParams();
   const queryFrom = searchParams.get("from") ?? "";
   const queryTo = searchParams.get("to") ?? "";
@@ -89,7 +91,7 @@ export default function BookPage() {
                   transition={{ duration: 0.4, delay: 0.04 }}
                   className="block"
                 >
-                  Choose a route.
+                  {t("book.chooseRoute")}
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, y: 14 }}
@@ -97,7 +99,7 @@ export default function BookPage() {
                   transition={{ duration: 0.4, delay: 0.1 }}
                   className="mt-0.5 block text-brand-light"
                 >
-                  Book on WhatsApp.
+                  {t("book.onWhatsApp")}
                 </motion.span>
               </h1>
 
@@ -107,8 +109,7 @@ export default function BookPage() {
                 transition={{ duration: 0.4, delay: 0.16 }}
                 className="mt-2 max-w-xl text-sm leading-relaxed text-white/75"
               >
-                Set from, to, and date — or pick a popular route below. Instant chat
-                with Pune Cabz for fare and confirmation.
+                {t("book.desc")}
               </motion.p>
 
               <motion.div
@@ -117,10 +118,10 @@ export default function BookPage() {
                 transition={{ duration: 0.4, delay: 0.22 }}
                 className="mt-3 flex flex-wrap gap-1.5"
               >
-                {points.map(({ icon: Icon, label }) => (
-                  <span key={label} className="stat-chip px-2.5 py-1 text-xs">
+                {points.map(({ icon: Icon, labelKey }) => (
+                  <span key={labelKey} className="stat-chip px-2.5 py-1 text-xs">
                     <Icon className="h-3 w-3" />
-                    {label}
+                    {t(labelKey)}
                   </span>
                 ))}
               </motion.div>

@@ -7,49 +7,49 @@ import Reveal from "../motion/Reveal";
 import { StaggerGroup, StaggerItem } from "../motion/Stagger";
 import WhatsAppIcon from "../WhatsAppIcon";
 import { site } from "@/lib/site";
-
-const cards = [
-  {
-    icon: Phone,
-    title: "Call Now",
-    detail: site.phone,
-    hint: "",
-    href: site.phoneHref,
-    brand: true,
-    whatsapp: false,
-  },
-  {
-    icon: Mail,
-    title: "Get in touch",
-    detail: site.email,
-    hint: "",
-    href: site.emailHref,
-    brand: true,
-    whatsapp: false,
-  },
-  {
-    icon: WhatsAppIcon,
-    title: "WhatsApp",
-    detail: "Chat with support",
-    hint: "24/7 support",
-    href: site.whatsappHref,
-    brand: false,
-    external: true,
-    whatsapp: true,
-  },
-];
+import { useT } from "@/lib/i18n";
 
 export default function ContactCards() {
+  const t = useT();
+
+  const cards = [
+    {
+      icon: Phone,
+      title: t("contact.cards.call"),
+      detail: site.phone,
+      hint: "",
+      href: site.phoneHref,
+      whatsapp: false,
+    },
+    {
+      icon: Mail,
+      title: t("contact.cards.email"),
+      detail: site.email,
+      hint: "",
+      href: site.emailHref,
+      whatsapp: false,
+    },
+    {
+      icon: WhatsAppIcon,
+      title: t("contact.cards.whatsapp"),
+      detail: t("contact.cards.whatsappDetail"),
+      hint: t("contact.cards.whatsappHint"),
+      href: site.whatsappHref,
+      external: true,
+      whatsapp: true,
+    },
+  ];
+
   return (
     <section className="bg-white py-8 sm:py-9">
       <Container>
         <Reveal className="section-head">
-          <p className="section-eyebrow">Call Now</p>
-          <h2 className="section-title text-2xl sm:text-3xl">Get in touch</h2>
+          <p className="section-eyebrow">{t("contact.cards.eyebrow")}</p>
+          <h2 className="section-title text-2xl sm:text-3xl">{t("contact.cards.title")}</h2>
         </Reveal>
 
         <StaggerGroup className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
-          {cards.map(({ icon: Icon, title, detail, hint, href, brand, external, whatsapp }, i) => (
+          {cards.map(({ icon: Icon, title, detail, hint, href, external, whatsapp }, i) => (
             <StaggerItem key={title} className="h-full">
               <a
                 href={href}

@@ -5,6 +5,7 @@ import { ArrowRight, Clock3, MapPin } from "lucide-react";
 import RouteBannerImage from "@/components/RouteBannerImage";
 import RouteImage from "@/components/routes/RouteImage";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { useT } from "@/lib/i18n";
 import { isBrandedRouteBanner } from "@/lib/images";
 import { logRouteInquiry, routeWhatsAppHref } from "@/lib/open-route-whatsapp";
 import type { PopularRoute } from "@/lib/popular-routes";
@@ -14,6 +15,8 @@ export function routeBookHref(route: PopularRoute) {
 }
 
 export function RouteCardGrid({ route }: { route: PopularRoute }) {
+  const t = useT();
+
   return (
     <Link
       href={routeBookHref(route)}
@@ -57,11 +60,11 @@ export function RouteCardGrid({ route }: { route: PopularRoute }) {
             {route.duration}
           </span>
           <span className="inline-flex items-center gap-1.5 font-semibold text-navy">
-            Hatchback to Innova
+            {t("route.fleetRange")}
           </span>
         </div>
         <p className="card-cta mt-4 opacity-0 transition-opacity group-hover:opacity-100">
-          Book this route →
+          {t("route.bookThis")}
         </p>
       </div>
     </Link>
@@ -81,6 +84,7 @@ export function RouteCardBook({
   active?: boolean;
   onSelect: (route: PopularRoute) => void;
 }) {
+  const t = useT();
   const label = String(index + 1).padStart(2, "0");
   const totalLabel = String(total).padStart(2, "0");
 
@@ -130,16 +134,20 @@ export function RouteCardBook({
       <div className="flex flex-1 flex-col p-4 sm:p-5">
         <div className="grid grid-cols-2 gap-2">
           <div className="rounded-xl bg-surface px-3 py-2.5 ring-1 ring-black/[0.04]">
-            <p className="text-[10px] font-bold uppercase tracking-wide text-navy/40">Duration</p>
+            <p className="text-[10px] font-bold uppercase tracking-wide text-navy/40">
+              {t("route.duration")}
+            </p>
             <p className="mt-0.5 inline-flex items-center gap-1.5 text-sm font-bold text-navy">
               <Clock3 className="h-3.5 w-3.5 text-brand" />
               {route.duration}
             </p>
           </div>
           <div className="rounded-xl bg-brand/[0.06] px-3 py-2.5 ring-1 ring-brand/10">
-            <p className="text-[10px] font-bold uppercase tracking-wide text-navy/40">Fleet</p>
+            <p className="text-[10px] font-bold uppercase tracking-wide text-navy/40">
+              {t("route.fleet")}
+            </p>
             <p className="mt-0.5 text-sm font-extrabold text-brand">
-              Hatchback to Innova
+              {t("route.fleetRange")}
             </p>
           </div>
         </div>
@@ -151,14 +159,14 @@ export function RouteCardBook({
             className="btn-shine inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-4 py-3 text-sm font-semibold text-white shadow-md shadow-brand/25 transition-colors hover:bg-brand-dark"
           >
             <WhatsAppIcon className="h-4 w-4" />
-            Book now on <span className="text-white">WhatsApp</span>
+            {t("route.bookWhatsApp")}
           </a>
           <button
             type="button"
             onClick={() => onSelect(route)}
             className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl border border-black/10 bg-white px-4 py-2.5 text-xs font-semibold text-navy/70 transition-colors hover:border-brand/25 hover:text-brand"
           >
-            Select route
+            {t("route.select")}
             <ArrowRight className="h-3.5 w-3.5" />
           </button>
         </div>
@@ -176,6 +184,8 @@ export function RouteCardSidebar({
   active?: boolean;
   onSelect: (route: PopularRoute) => void;
 }) {
+  const t = useT();
+
   return (
     <button
       type="button"
@@ -190,7 +200,7 @@ export function RouteCardSidebar({
         <RouteImage src={route.imageUrl} alt={`${route.fromCity} to ${route.toCity}`} />
         {active ? (
           <span className="absolute inset-x-0 bottom-0 bg-brand py-0.5 text-center text-[9px] font-bold uppercase text-white">
-            Selected
+            {t("route.selected")}
           </span>
         ) : null}
       </div>
@@ -212,7 +222,7 @@ export function RouteCardSidebar({
             {route.duration}
           </span>
           <span className="inline-flex items-center gap-1 font-semibold text-navy">
-            Hatchback to Innova
+            {t("route.fleetRange")}
           </span>
         </div>
       </div>

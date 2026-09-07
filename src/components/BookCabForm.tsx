@@ -12,23 +12,28 @@ import {
   cabBookingNotes,
   cabBookingWhatsAppHref,
 } from "@/lib/whatsapp-booking";
+import { useT } from "@/lib/i18n";
+import type { MessageKey } from "@/lib/i18n/en";
 
-const TRIP_TABS = [
-  { id: "outstation", label: "Outstation" },
-  { id: "oneway", label: "One Way" },
-  { id: "local", label: "Local / City" },
-  { id: "airport", label: "Airport" },
+const TRIP_TAB_IDS = ["outstation", "oneway", "local", "airport"] as const;
+
+type TripTabId = (typeof TRIP_TAB_IDS)[number];
+
+const TRIP_TAB_KEYS: Record<TripTabId, MessageKey> = {
+  outstation: "bookForm.tab.outstation",
+  oneway: "bookForm.tab.oneWay",
+  local: "bookForm.tab.local",
+  airport: "bookForm.tab.airport",
+};
+
+const VEHICLE_KEYS = [
+  "bookForm.vehicle.choose",
+  "bookForm.vehicle.sedan",
+  "bookForm.vehicle.suv",
+  "bookForm.vehicle.innova",
+  "bookForm.vehicle.tempo",
+  "bookForm.vehicle.urbania",
 ] as const;
-
-type TripTabId = (typeof TRIP_TABS)[number]["id"];
-
-const VEHICLE_OPTIONS = [
-  "Choose your vehicles",
-  "Sedan",
-  "SUV",
-  "Innova",
-  "Tempo Traveller",
-];
 
 export default function BookCabForm({
   from: controlledFrom,
@@ -43,6 +48,7 @@ export default function BookCabForm({
   onToChange?: (value: string) => void;
   variant?: "default" | "compact";
 } = {}) {
+  const t = useT();
   const { routes: fromApi, loaded } = usePopularRoutes();
   const routes = useMemo(() => {
     if (fromApi.length > 0) return fromApi;
@@ -69,7 +75,9 @@ export default function BookCabForm({
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
-  const [vehicle, setVehicle] = useState(VEHICLE_OPTIONS[0]);
+  const [vehicleKey, setVehicleKey] = useState<(typeof VEHICLE_KEYS)[number]>(
+    "bookForm.vehicle.choose"
+  );
   const [passengers, setPassengers] = useState("");
   const [notes, setNotes] = useState("");
   const [error, setError] = useState("");
@@ -80,7 +88,7 @@ export default function BookCabForm({
     return allToCities;
   }, [from, fromCities, toByFrom, allToCities]);
 
-  const tripLabel = TRIP_TABS.find((tab) => tab.id === tripTab)?.label ?? "Outstation";
+  const tripLabel = t(TRIP_TAB_KEYS[tripTab]);
 
   function handleFromChange(value: string) {
     setFrom(value);
@@ -103,7 +111,8 @@ export default function BookCabForm({
       toCity: to.trim(),
       travelDate: date || undefined,
       pickupTime: time || undefined,
-      vehicle: vehicle !== VEHICLE_OPTIONS[0] ? vehicle : undefined,
+      vehicle:
+        vehicleKey !== "bookForm.vehicle.choose" ? t(vehicleKey) : undefined,
       passengers: passengerCount,
       notes: notes.trim() || undefined,
     };
@@ -111,16 +120,16 @@ export default function BookCabForm({
   }
 
   function validate() {
-    if (name.trim().length < 2) return "Enter your full name.";
+    if (name.trim().length < 2) return t("bookForm.error.name");
     if (!/^[6-9]\d{9}$/.test(phone.trim().replace(/\s+/g, ""))) {
-      return "Enter a valid 10-digit mobile number.";
+      return t("bookForm.error.phone");
     }
-    if (from.trim().length < 2) return "Enter pickup location.";
-    if (to.trim().length < 2) return "Enter drop location.";
-    if (!date) return "Pick a travel date.";
+    if (from.trim().length < 2) return t("bookForm.error.pickup");
+    if (to.trim().length < 2) return t("bookForm.error.drop");
+    if (!date) return t("bookForm.error.date");
     const passengerCount = Number(passengers);
     if (passengers && (!Number.isFinite(passengerCount) || passengerCount < 1 || passengerCount > 12)) {
-      return "Passengers must be between 1 and 12.";
+      return t("bookForm.error.passengers");
     }
     return "";
   }
@@ -190,16 +199,16 @@ export default function BookCabForm({
     >
       <div className="book-cab-card">
         <div className="book-cab-tabs" role="tablist" aria-label="Trip type">
-          {TRIP_TABS.map((tab) => (
+          {TRIP_TAB_IDS.map((id) => (
             <button
-              key={tab.id}
+              key={id}
               type="button"
               role="tab"
-              aria-selected={tripTab === tab.id}
-              onClick={() => setTripTab(tab.id)}
-              className={clsx("book-cab-tab", tripTab === tab.id && "book-cab-tab-active")}
+              aria-selected={tripTab === id}
+              onClick={() => setTripTab(id)}
+              className={clsx("book-cab-tab", tripTab === id && "book-cab-tab-active")}
             >
-              {tab.label}
+              {t(TRIP_TAB_KEYS[id])}
             </button>
           ))}
         </div>
@@ -207,29 +216,29 @@ export default function BookCabForm({
         <span className="book-cab-badge book-cab-badge-float">24×7</span>
 
         <div className="book-cab-grid">
-          <FormField label="Full name">
+          <FormField label={t("bookForm.name")}>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Your name"
+              placeholder={t("bookForm.namePlaceholder")}
               className="book-cab-input"
               autoComplete="name"
             />
           </FormField>
 
-          <FormField label="Mobile number">
+          <FormField label={t("bookForm.mobile")}>
             <input
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              placeholder="+91 00000 00000"
+              placeholder={t("bookForm.mobilePlaceholder")}
               className="book-cab-input"
               autoComplete="tel"
             />
           </FormField>
 
-          <FormField label="Pickup from">
+          <FormField label={t("bookForm.pickup")}>
             <input
               type="text"
               value={from}
@@ -248,7 +257,7 @@ export default function BookCabForm({
             )}
           </FormField>
 
-          <FormField label="Drop to">
+          <FormField label={t("bookForm.drop")}>
             <input
               type="text"
               value={to}
@@ -267,7 +276,7 @@ export default function BookCabForm({
             )}
           </FormField>
 
-          <FormField label="Travel date">
+          <FormField label={t("bookForm.date")}>
             <input
               type="date"
               value={date}
@@ -285,7 +294,7 @@ export default function BookCabForm({
             />
           </FormField>
 
-          <FormField label="Pickup time">
+          <FormField label={t("bookForm.time")}>
             <input
               type="time"
               value={time}
@@ -302,38 +311,40 @@ export default function BookCabForm({
             />
           </FormField>
 
-          <FormField label="Vehicle">
+          <FormField label={t("bookForm.vehicle")}>
             <select
-              value={vehicle}
-              onChange={(e) => setVehicle(e.target.value)}
+              value={vehicleKey}
+              onChange={(e) =>
+                setVehicleKey(e.target.value as (typeof VEHICLE_KEYS)[number])
+              }
               className="book-cab-input book-cab-select"
             >
-              {VEHICLE_OPTIONS.map((option) => (
-                <option key={option} value={option}>
-                  {option}
+              {VEHICLE_KEYS.map((key) => (
+                <option key={key} value={key}>
+                  {t(key)}
                 </option>
               ))}
             </select>
           </FormField>
 
-          <FormField label="Passengers">
+          <FormField label={t("bookForm.passengers")}>
             <input
               type="number"
               min={1}
               max={12}
               value={passengers}
               onChange={(e) => setPassengers(e.target.value)}
-              placeholder="e.g. 4"
+              placeholder={t("bookForm.passengersPlaceholder")}
               className="book-cab-input"
             />
           </FormField>
         </div>
 
-        <FormField label="Anything else?" className={compact ? "mt-3" : "mt-4"}>
+        <FormField label={t("bookForm.notes")} className={compact ? "mt-3" : "mt-4"}>
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            placeholder="Stops, luggage, return date..."
+            placeholder={t("bookForm.notesPlaceholder")}
             rows={compact ? 2 : 3}
             className="book-cab-input book-cab-textarea"
           />
@@ -349,16 +360,14 @@ export default function BookCabForm({
           <button type="submit" className="book-cab-btn-whatsapp">
             <WhatsAppIcon className="h-5 w-5" />
             {compact ? (
-              <span className="text-white">WhatsApp</span>
+              <span className="text-white">{t("bookForm.submitWhatsAppCompact")}</span>
             ) : (
-              <>
-                Send on <span className="text-white">WhatsApp</span>
-              </>
+              <span className="text-white">{t("bookForm.submitWhatsApp")}</span>
             )}
           </button>
           <button type="button" onClick={handleEmail} className="book-cab-btn-email">
             <Mail className="h-5 w-5" />
-            {compact ? "Email" : "Send by Email"}
+            {compact ? t("bookForm.submitEmailCompact") : t("bookForm.submitEmail")}
           </button>
         </div>
       </div>

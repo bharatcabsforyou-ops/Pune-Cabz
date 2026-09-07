@@ -19,38 +19,70 @@ import Reveal from "../motion/Reveal";
 import { StaggerGroup, StaggerItem } from "../motion/Stagger";
 import TouristPlacesGuide from "./TouristPlacesGuide";
 import { images } from "@/lib/images";
-import { touristPlaces } from "@/data/tourist-places";
+import { useT, type MessageKey } from "@/lib/i18n";
 
-const highlights = [
+const highlights: {
+  icon: typeof Mountain;
+  labelKey: MessageKey;
+  descKey: MessageKey;
+}[] = [
   {
     icon: Mountain,
-    label: "Hill stations",
-    desc: "Lonavala, Mahabaleshwar, Matheran, Lavasa",
+    labelKey: "tourism.highlight.hills",
+    descKey: "tourism.highlight.hillsDesc",
   },
   {
     icon: Palmtree,
-    label: "Coastal drives",
-    desc: "Alibag beaches & sea forts",
+    labelKey: "tourism.highlight.coast",
+    descKey: "tourism.highlight.coastDesc",
   },
   {
     icon: CalendarDays,
-    label: "Monsoon ghats",
-    desc: "Tamhini Ghat & Malshej Ghat",
+    labelKey: "tourism.highlight.monsoon",
+    descKey: "tourism.highlight.monsoonDesc",
   },
   {
     icon: CarFront,
-    label: "Pilgrimage trips",
-    desc: "Jejuri, Balaji & Prati Shirdi",
+    labelKey: "tourism.highlight.pilgrim",
+    descKey: "tourism.highlight.pilgrimDesc",
   },
 ];
 
-const stats = [
-  { value: "30+", label: "destinations" },
-  { value: "6+", label: "years" },
-  { value: "10", label: "vehicles" },
+const stats: { value: string; labelKey: MessageKey }[] = [
+  { value: "30+", labelKey: "tourism.stat.destinations" },
+  { value: "6+", labelKey: "tourism.stat.years" },
+  { value: "10", labelKey: "tourism.stat.vehicles" },
+];
+
+const steps: {
+  icon: typeof Sun;
+  step: string;
+  titleKey: MessageKey;
+  textKey: MessageKey;
+}[] = [
+  {
+    icon: Sun,
+    step: "01",
+    titleKey: "tourism.step1.title",
+    textKey: "tourism.step1.text",
+  },
+  {
+    icon: Users,
+    step: "02",
+    titleKey: "tourism.step2.title",
+    textKey: "tourism.step2.text",
+  },
+  {
+    icon: ShieldCheck,
+    step: "03",
+    titleKey: "tourism.step3.title",
+    textKey: "tourism.step3.text",
+  },
 ];
 
 export default function TourismPage() {
+  const t = useT();
+
   return (
     <>
       <section className="relative overflow-hidden border-b border-black/[0.04] bg-[#12090b]">
@@ -75,7 +107,7 @@ export default function TourismPage() {
               className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-brand-light"
             >
               <Compass className="h-3.5 w-3.5" />
-              Tourist places
+              {t("tourism.eyebrow")}
             </motion.p>
 
             <motion.h1
@@ -84,8 +116,8 @@ export default function TourismPage() {
               transition={{ delay: 0.06 }}
               className="mt-2.5 text-[1.85rem] font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]"
             >
-              See Maharashtra.{" "}
-              <span className="text-brand-light">We drive.</span>
+              {t("tourism.title")}{" "}
+              <span className="text-brand-light">{t("tourism.titleAccent")}</span>
             </motion.h1>
 
             <motion.p
@@ -94,8 +126,7 @@ export default function TourismPage() {
               transition={{ delay: 0.12 }}
               className="mt-3 max-w-xl text-sm leading-relaxed text-white/70 sm:text-[15px]"
             >
-              Lonavala to Alibag, Tamhini to Shirdi — door-to-door cabs with clear
-              distances, top stops, and flexible timing.
+              {t("tourism.desc")}
             </motion.p>
 
             <motion.div
@@ -106,11 +137,11 @@ export default function TourismPage() {
             >
               {stats.map((s) => (
                 <span
-                  key={s.label}
+                  key={s.labelKey}
                   className="inline-flex items-baseline gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-sm font-semibold text-white backdrop-blur-sm"
                 >
                   <span className="font-extrabold text-brand-light">{s.value}</span>
-                  <span className="text-white/55">{s.label}</span>
+                  <span className="text-white/55">{t(s.labelKey)}</span>
                 </span>
               ))}
             </motion.div>
@@ -122,14 +153,14 @@ export default function TourismPage() {
               className="mt-5 flex flex-wrap items-center justify-center gap-2.5"
             >
               <Link href="/book" className="btn-primary px-5 py-2.5 shadow-lg shadow-brand/30">
-                Book a ride Now
+                {t("common.bookRideNow")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <a
                 href="#destinations"
                 className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/18"
               >
-                View destinations
+                {t("tourism.viewDestinations")}
               </a>
             </motion.div>
           </div>
@@ -139,13 +170,13 @@ export default function TourismPage() {
       <section className="border-b border-black/[0.04] bg-white py-10 sm:py-12">
         <Container>
           <Reveal className="section-head">
-            <p className="section-eyebrow">Your kind of trip</p>
-            <h2 className="section-title">Hills, coast, monsoon & darshan</h2>
+            <p className="section-eyebrow">{t("tourism.kind.eyebrow")}</p>
+            <h2 className="section-title">{t("tourism.kind.title")}</h2>
           </Reveal>
 
           <StaggerGroup className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {highlights.map(({ icon: Icon, label, desc }, i) => (
-              <StaggerItem key={label}>
+            {highlights.map(({ icon: Icon, labelKey, descKey }, i) => (
+              <StaggerItem key={labelKey}>
                 <article className="group relative h-full overflow-hidden rounded-2xl border border-black/[0.06] bg-soft p-5 transition-all duration-300 hover:border-brand/20 hover:bg-white hover:shadow-[0_18px_40px_-28px_rgba(220,31,38,0.35)]">
                   <span className="absolute right-0 top-0 h-20 w-20 translate-x-6 -translate-y-6 rounded-full bg-brand/[0.06] transition-transform duration-500 group-hover:scale-125" />
                   <span className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-brand text-white shadow-md shadow-brand/25">
@@ -154,8 +185,8 @@ export default function TourismPage() {
                       {i + 1}
                     </span>
                   </span>
-                  <h3 className="relative mt-4 text-base font-bold text-navy">{label}</h3>
-                  <p className="relative mt-1.5 text-sm leading-relaxed text-navy/55">{desc}</p>
+                  <h3 className="relative mt-4 text-base font-bold text-navy">{t(labelKey)}</h3>
+                  <p className="relative mt-1.5 text-sm leading-relaxed text-navy/55">{t(descKey)}</p>
                 </article>
               </StaggerItem>
             ))}
@@ -166,28 +197,9 @@ export default function TourismPage() {
       <section className="border-b border-black/[0.04] bg-soft py-8 sm:py-10">
         <Container>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            {[
-              {
-                icon: Sun,
-                step: "01",
-                title: "Pick your date",
-                text: "Leave when it suits you — no fixed tour bus timing.",
-              },
-              {
-                icon: Users,
-                step: "02",
-                title: "Choose your cab",
-                text: "Sedan, SUV, Innova or cab — whichever suits your requirements and luggage.",
-              },
-              {
-                icon: ShieldCheck,
-                step: "03",
-                title: "Ride with trust",
-                text: "Verified drivers, live location, and 24×7 support.",
-              },
-            ].map(({ icon: Icon, step, title, text }) => (
+            {steps.map(({ icon: Icon, step, titleKey, textKey }) => (
               <div
-                key={title}
+                key={titleKey}
                 className="flex gap-4 rounded-2xl border border-black/[0.05] bg-white px-4 py-4 sm:px-5 sm:py-5"
               >
                 <div className="flex flex-col items-center gap-2">
@@ -197,8 +209,8 @@ export default function TourismPage() {
                   <span className="text-[10px] font-bold tracking-wider text-brand/70">{step}</span>
                 </div>
                 <div>
-                  <h3 className="font-bold text-navy">{title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-navy/55">{text}</p>
+                  <h3 className="font-bold text-navy">{t(titleKey)}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-navy/55">{t(textKey)}</p>
                 </div>
               </div>
             ))}
@@ -213,17 +225,16 @@ export default function TourismPage() {
           <Reveal>
             <div className="cta-panel px-6 py-10 text-center sm:px-10 sm:py-12">
               <h2 className="relative text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
-                Ready for your next getaway?
+                {t("tourism.ready")}
               </h2>
               <p className="relative mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-white/90">
-                Pick a destination, choose Sedan, SUV, Innova or cab, and we&apos;ll
-                handle the drive — hills, coast, or darshan.
+                {t("tourism.readyDesc")}
               </p>
               <Link
                 href="/book"
                 className="relative mt-7 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-brand shadow-lg transition-transform hover:scale-[1.02] hover:bg-white/95"
               >
-                Book a ride Now
+                {t("common.bookRideNow")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

@@ -5,118 +5,90 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Car, CreditCard, Shield, Clock } from "lucide-react";
 import Container from "../Container";
 import Reveal from "../motion/Reveal";
+import { useT, type MessageKey } from "@/lib/i18n";
+import { site } from "@/lib/site";
 
-const categories = [
-  { label: "Booking", icon: Car, color: "bg-brand/[0.07] text-brand" },
-  { label: "Payment", icon: CreditCard, color: "bg-emerald-50 text-emerald-600" },
-  { label: "Safety", icon: Shield, color: "bg-blue-50 text-blue-600" },
-  { label: "Support", icon: Clock, color: "bg-amber-50 text-amber-600" },
+type CategoryId = "booking" | "payment" | "safety" | "support";
+
+const categories: {
+  id: CategoryId;
+  labelKey: MessageKey;
+  icon: typeof Car;
+  color: string;
+}[] = [
+  { id: "booking", labelKey: "faq.cat.booking", icon: Car, color: "bg-brand/[0.07] text-brand" },
+  { id: "payment", labelKey: "faq.cat.payment", icon: CreditCard, color: "bg-emerald-50 text-emerald-600" },
+  { id: "safety", labelKey: "faq.cat.safety", icon: Shield, color: "bg-blue-50 text-blue-600" },
+  { id: "support", labelKey: "faq.cat.support", icon: Clock, color: "bg-amber-50 text-amber-600" },
 ];
 
-const faqs: { q: string; a: string; cat: string }[] = [
-  {
-    q: "Can I book a one-way cab?",
-    a: "Yes — one-way bookings are our most popular option. We offer competitive one-way fares on all Pune and Maharashtra routes. Note that for one-way hires the return leg cost is included in the fare, as the driver needs to bring the vehicle back.",
-    cat: "Booking",
-  },
-  {
-    q: "How do I book a cab?",
-    a: "Use the booking form on our website — pick your route, date, time, and cab type, then tap 'Book via WhatsApp'. You'll be connected to our team instantly on WhatsApp to confirm the details and lock in your ride.",
-    cat: "Booking",
-  },
-  {
-    q: "How will I get notified about my booking confirmation?",
-    a: "Once your booking is confirmed you'll receive a WhatsApp message with your driver's name, vehicle number, and estimated arrival time. You can also call or message us any time to check your booking status.",
-    cat: "Booking",
-  },
-  {
-    q: "Is it mandatory to register on your site to book a cab?",
-    a: "No registration is required. Simply fill in the booking form and connect with us on WhatsApp. We keep the process friction-free so you can book in under two minutes.",
-    cat: "Booking",
-  },
-  {
-    q: "What if the cab doesn't show up?",
-    a: "This is extremely rare, but if it happens call us immediately on our support number. We will either dispatch an alternate vehicle or arrange a full refund — whichever you prefer. Your journey will not be left stranded.",
-    cat: "Support",
-  },
-  {
-    q: "What if the cab shows up late?",
-    a: "Our drivers are tracked and reminded before every pickup. If your driver is running late you'll be notified proactively. For significant delays we offer a partial fare discount as a goodwill gesture.",
-    cat: "Support",
-  },
-  {
-    q: "Can I change or cancel my booking?",
-    a: "Yes. Contact us on WhatsApp or phone at least 2 hours before your scheduled pickup to modify or cancel at no charge. Cancellations within 2 hours of pickup may attract a small fee to cover the driver's time.",
-    cat: "Booking",
-  },
-  {
-    q: "Can I pay via Google Pay or Paytm?",
-    a: "Absolutely. We accept Google Pay, Paytm, PhonePe, UPI, and cash. Just let us know your preferred payment method when confirming your booking and we'll make it seamless.",
-    cat: "Payment",
-  },
-  {
-    q: "Can I book an outstation cab for someone else using my card?",
-    a: "Yes. You can book and pay for a ride on behalf of a family member, colleague, or friend. Simply provide the passenger's name and contact number during booking so the driver can coordinate with them directly.",
-    cat: "Payment",
-  },
-  {
-    q: "Is your website safe for online payments?",
-    a: "We do not store any card or payment details on our servers. All transactions go through RBI-compliant payment gateways with 256-bit SSL encryption. Your financial data is fully protected.",
-    cat: "Payment",
-  },
-  {
-    q: "Is the driver trustworthy?",
-    a: "Every driver on our platform is personally verified — we check government ID, driving licence, vehicle documents, and conduct a background check before onboarding. All drivers are experienced professionals with rated trip histories. Your safety is our top priority.",
-    cat: "Safety",
-  },
+const faqs: { qKey: MessageKey; aKey: MessageKey; cat: CategoryId }[] = [
+  { qKey: "faq.q1", aKey: "faq.a1", cat: "booking" },
+  { qKey: "faq.q2", aKey: "faq.a2", cat: "booking" },
+  { qKey: "faq.q3", aKey: "faq.a3", cat: "booking" },
+  { qKey: "faq.q4", aKey: "faq.a4", cat: "booking" },
+  { qKey: "faq.q5", aKey: "faq.a5", cat: "support" },
+  { qKey: "faq.q6", aKey: "faq.a6", cat: "support" },
+  { qKey: "faq.q7", aKey: "faq.a7", cat: "booking" },
+  { qKey: "faq.q8", aKey: "faq.a8", cat: "payment" },
+  { qKey: "faq.q9", aKey: "faq.a9", cat: "payment" },
+  { qKey: "faq.q10", aKey: "faq.a10", cat: "payment" },
+  { qKey: "faq.q11", aKey: "faq.a11", cat: "safety" },
 ];
 
 export default function FAQ() {
+  const t = useT();
   const [open, setOpen] = useState<number | null>(0);
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<CategoryId | null>(null);
 
-  const filtered = activeCategory ? faqs.filter((f) => f.cat === activeCategory) : faqs;
+  const filtered = activeCategory
+    ? faqs.filter((f) => f.cat === activeCategory)
+    : faqs;
 
   return (
     <section className="bg-white py-8 sm:py-9">
       <Container>
-        {/* Category filter pills */}
         <Reveal>
           <div className="flex flex-wrap justify-center gap-2 mb-8">
             <button
-              onClick={() => { setActiveCategory(null); setOpen(null); }}
+              onClick={() => {
+                setActiveCategory(null);
+                setOpen(null);
+              }}
               className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-700 transition-all duration-200 border ${
                 activeCategory === null
                   ? "bg-brand text-white border-brand shadow-sm"
                   : "bg-white text-navy/60 border-black/[0.07] hover:border-brand/30 hover:text-navy"
               }`}
             >
-              All Questions
+              {t("faq.all")}
             </button>
-            {categories.map(({ label, icon: Icon }) => (
+            {categories.map(({ id, labelKey, icon: Icon }) => (
               <button
-                key={label}
-                onClick={() => { setActiveCategory(activeCategory === label ? null : label); setOpen(null); }}
+                key={id}
+                onClick={() => {
+                  setActiveCategory(activeCategory === id ? null : id);
+                  setOpen(null);
+                }}
                 className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold transition-all duration-200 border ${
-                  activeCategory === label
+                  activeCategory === id
                     ? "bg-brand text-white border-brand shadow-sm"
                     : "bg-white text-navy/60 border-black/[0.07] hover:border-brand/30 hover:text-navy"
                 }`}
               >
                 <Icon className="h-3.5 w-3.5" />
-                {label}
+                {t(labelKey)}
               </button>
             ))}
           </div>
         </Reveal>
 
-        {/* FAQ list */}
         <div className="mx-auto max-w-2xl space-y-2.5">
           {filtered.map((item, i) => {
             const isOpen = open === i;
-            const cat = categories.find((c) => c.label === item.cat);
+            const cat = categories.find((c) => c.id === item.cat);
             return (
-              <Reveal key={item.q} delay={i * 0.04}>
+              <Reveal key={item.qKey} delay={i * 0.04}>
                 <div className="faq-item">
                   <button
                     type="button"
@@ -125,12 +97,14 @@ export default function FAQ() {
                   >
                     <div className="flex items-start gap-3 min-w-0">
                       {cat && (
-                        <span className={`mt-0.5 shrink-0 inline-flex items-center justify-center h-6 w-6 rounded-lg ${cat.color}`}>
+                        <span
+                          className={`mt-0.5 shrink-0 inline-flex items-center justify-center h-6 w-6 rounded-lg ${cat.color}`}
+                        >
                           <cat.icon className="h-3.5 w-3.5" />
                         </span>
                       )}
                       <span className="text-sm font-semibold text-navy sm:text-[15px] leading-snug">
-                        {item.q}
+                        {t(item.qKey)}
                       </span>
                     </div>
                     <motion.span
@@ -152,7 +126,9 @@ export default function FAQ() {
                         className="overflow-hidden"
                       >
                         <div className="px-5 pb-4 pl-14">
-                          <p className="text-sm leading-relaxed text-navy/60">{item.a}</p>
+                          <p className="text-sm leading-relaxed text-navy/60">
+                            {t(item.aKey)}
+                          </p>
                         </div>
                       </motion.div>
                     )}
@@ -163,18 +139,17 @@ export default function FAQ() {
           })}
         </div>
 
-        {/* Bottom CTA */}
         <Reveal>
           <div className="mt-10 mx-auto max-w-2xl rounded-2xl border border-black/[0.06] bg-gradient-to-br from-white to-soft-dark p-6 text-center shadow-[var(--card-shadow)]">
-            <p className="text-sm font-semibold text-navy">Still have a question?</p>
-            <p className="mt-1 text-sm text-navy/55">Our team is available 9 am – 9 pm IST on WhatsApp and phone.</p>
+            <p className="text-sm font-semibold text-navy">{t("faq.still.title")}</p>
+            <p className="mt-1 text-sm text-navy/55">{t("faq.still.desc")}</p>
             <a
-              href="https://wa.me/919876543210"
+              href={site.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary mt-4 inline-flex btn-shine"
             >
-              Chat on WhatsApp
+              {t("common.chatOnWhatsApp")}
             </a>
           </div>
         </Reveal>

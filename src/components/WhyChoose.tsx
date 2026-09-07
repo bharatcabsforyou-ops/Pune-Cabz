@@ -12,47 +12,50 @@ import Container from "./Container";
 import FeatureIcon from "./FeatureIcon";
 import RouteBannerImage from "./RouteBannerImage";
 import Reveal from "./motion/Reveal";
+import { useT, type MessageKey } from "@/lib/i18n";
 
-const reasons = [
+const reasons: { icon: typeof Clock3; titleKey: MessageKey; textKey: MessageKey }[] = [
   {
     icon: Clock3,
-    title: "On time",
-    text: "Punctual pickups you can plan around — city and outstation.",
+    titleKey: "whyChoose.onTime.title",
+    textKey: "whyChoose.onTime.text",
   },
   {
     icon: IndianRupee,
-    title: "Transparent fare",
-    text: "Clear per-km packages with no hidden surprise charges.",
+    titleKey: "whyChoose.fare.title",
+    textKey: "whyChoose.fare.text",
   },
   {
     icon: BadgeCheck,
-    title: "Experienced drivers",
-    text: "Professional, highly experienced drivers on every route.",
+    titleKey: "whyChoose.drivers.title",
+    textKey: "whyChoose.drivers.text",
   },
   {
     icon: CarFront,
-    title: "Neat & latest cars",
-    text: "Timely maintenance and mechanical checks as per standard operating procedures.",
+    titleKey: "whyChoose.cars.title",
+    textKey: "whyChoose.cars.text",
   },
   {
     icon: Sparkles,
-    title: "Easy booking & refunds",
-    text: "Simple booking with clear refund policies when plans change.",
+    titleKey: "whyChoose.booking.title",
+    textKey: "whyChoose.booking.text",
   },
   {
     icon: Headphones,
-    title: "24×7 assistance",
-    text: "Round-the-clock support on phone and WhatsApp whenever you need help.",
+    titleKey: "whyChoose.help.title",
+    textKey: "whyChoose.help.text",
   },
 ];
 
 export default function WhyChoose() {
+  const t = useT();
+
   return (
     <section className="bg-white page-section">
       <Container>
         <Reveal className="section-head">
-          <p className="section-eyebrow">Our Services</p>
-          <h2 className="section-title">Built for every Pune journey</h2>
+          <p className="section-eyebrow">{t("whyChoose.eyebrow")}</p>
+          <h2 className="section-title">{t("whyChoose.title")}</h2>
         </Reveal>
 
         <div className="mt-5 grid grid-cols-1 items-start gap-4 lg:grid-cols-2 lg:gap-5">
@@ -63,17 +66,17 @@ export default function WhyChoose() {
               rounded="none"
             />
             <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/95 px-2.5 py-1 text-[11px] font-bold text-navy shadow-sm ring-1 ring-black/[0.05]">
-              30+ cities
+              {t("whyChoose.badge")}
             </span>
           </Reveal>
 
           <div className="flex flex-col gap-2.5">
-            {reasons.map(({ icon: Icon, title, text }) => (
-              <div key={title} className="feature-row group">
+            {reasons.map(({ icon: Icon, titleKey, textKey }) => (
+              <div key={titleKey} className="feature-row group">
                 <FeatureIcon icon={Icon} size="md" className="shrink-0" />
                 <div className="min-w-0">
-                  <h3 className="text-sm font-bold text-navy">{title}</h3>
-                  <p className="mt-0.5 text-xs leading-relaxed text-navy/55">{text}</p>
+                  <h3 className="text-sm font-bold text-navy">{t(titleKey)}</h3>
+                  <p className="mt-0.5 text-xs leading-relaxed text-navy/55">{t(textKey)}</p>
                 </div>
               </div>
             ))}

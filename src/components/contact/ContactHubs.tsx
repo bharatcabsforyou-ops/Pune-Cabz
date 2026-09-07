@@ -5,6 +5,7 @@ import Container from "../Container";
 import FeatureIcon from "../FeatureIcon";
 import Reveal from "../motion/Reveal";
 import { StaggerGroup, StaggerItem } from "../motion/Stagger";
+import { useT } from "@/lib/i18n";
 
 const hubs = [
   { city: "Pune", tag: "HQ" },
@@ -18,15 +19,15 @@ const hubs = [
 ];
 
 export default function ContactHubs() {
+  const t = useT();
+
   return (
     <section className="bg-soft py-8 sm:py-9">
       <Container>
         <Reveal className="section-head">
-          <p className="section-eyebrow">Coverage</p>
-          <h2 className="section-title text-2xl sm:text-3xl">Cities we serve</h2>
-          <p className="section-desc mt-2">
-            Support is based in Pune. Rides run across these hubs.
-          </p>
+          <p className="section-eyebrow">{t("hubs.eyebrow")}</p>
+          <h2 className="section-title text-2xl sm:text-3xl">{t("hubs.title")}</h2>
+          <p className="section-desc mt-2">{t("hubs.desc")}</p>
         </Reveal>
 
         <StaggerGroup className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-4">

@@ -6,8 +6,11 @@ import Container from "./Container";
 import PhotoCard from "./PhotoCard";
 import Reveal from "./motion/Reveal";
 import { images } from "@/lib/images";
+import { useT } from "@/lib/i18n";
 
 export default function NeverMiss() {
+  const t = useT();
+
   return (
     <section className="bg-white page-section">
       <Container>
@@ -26,28 +29,27 @@ export default function NeverMiss() {
                 <Bell className="h-4.5 w-4.5 text-brand" />
               </div>
               <p className="text-[13px] font-medium leading-snug text-navy">
-                New cab available for your route!
-                <span className="ml-1 text-navy/40">now</span>
+                {t("neverMiss.alert")}
+                <span className="ml-1 text-navy/40">{t("neverMiss.now")}</span>
               </p>
             </motion.div>
           </Reveal>
 
           <Reveal direction="right">
             <h2 className="text-3xl font-extrabold leading-tight text-navy sm:text-4xl">
-              Never miss a ride!
+              {t("neverMiss.title")}
             </h2>
             <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-navy/60">
-              Set an alert for your route and get notified when cabs are ready to book. Stay
-              informed and reserve hatchback to Innova seats before they fill up.
+              {t("neverMiss.desc")}
             </p>
             <motion.a
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              href="#"
+              href="/book"
               className="btn-shine mt-7 inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-sm font-semibold text-white shadow-md shadow-brand/25 transition-colors hover:bg-brand-dark"
             >
               <Search className="h-4 w-4" />
-              Find a ride
+              {t("neverMiss.cta")}
             </motion.a>
           </Reveal>
         </div>

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { images } from "@/lib/images";
 
 const sizeClasses = {
-  nav: "h-14 w-auto max-w-[min(16rem,62vw)] sm:h-16 sm:max-w-[19rem]",
+  nav: "h-12 w-auto max-w-[min(11.5rem,48vw)] sm:h-[3.35rem] sm:max-w-[13.5rem] xl:h-14 xl:max-w-[15.5rem]",
   default: "h-12 w-auto max-w-[12rem] sm:h-14 sm:max-w-[14rem] lg:h-16 lg:max-w-[16rem]",
 } as const;
 
