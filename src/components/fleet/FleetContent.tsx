@@ -9,54 +9,63 @@ import Reveal from "@/components/motion/Reveal";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { useT, type MessageKey } from "@/lib/i18n";
 import { site } from "@/lib/site";
+import { useSiteImage } from "@/lib/content-overrides";
 
 const fleet: {
   name: string;
   seats: string;
   noteKey: MessageKey;
-  image: string;
+  imageId: string;
+  fallback: string;
 }[] = [
   {
     name: "Hatchback",
     seats: "4 + 1",
     noteKey: "fleet.note.hatchback",
-    image: "/image2.jpeg",
+    imageId: "fleet.hatchback",
+    fallback: "/image2.jpeg",
   },
   {
     name: "Sedan",
     seats: "4 + 1",
     noteKey: "fleet.note.sedan",
-    image: "/image1.jpeg",
+    imageId: "fleet.sedan",
+    fallback: "/image1.jpeg",
   },
   {
     name: "SUV",
     seats: "6 + 1",
     noteKey: "fleet.note.suv",
-    image: "/image8.png",
+    imageId: "fleet.suv",
+    fallback: "/image8.png",
   },
   {
     name: "Premium SUV",
     seats: "6–8 + 1",
     noteKey: "fleet.note.premiumSuv",
-    image: "/image3.png",
+    imageId: "fleet.premiumSuv",
+    fallback: "/image3.png",
   },
   {
     name: "Tempo Traveller",
     seats: "9–17",
     noteKey: "fleet.note.tempo",
-    image: "/image6.png",
+    imageId: "fleet.tempo",
+    fallback: "/image6.png",
   },
   {
     name: "Urbania",
     seats: "9–17",
     noteKey: "fleet.note.urbania",
-    image: "/image6.png",
+    imageId: "fleet.urbania",
+    fallback: "/image6.png",
   },
   {
     name: "Bus",
     seats: "17–60",
     noteKey: "fleet.note.bus",
-    image: "/image9.png",
+    imageId: "fleet.bus",
+    fallback: "/image9.png",
   },
 ];
 
@@ -65,8 +74,50 @@ function bookHref(name: string) {
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
 }
 
+function FleetCard({
+  name,
+  seats,
+  noteKey,
+  imageId,
+  fallback,
+}: (typeof fleet)[number]) {
+  const t = useT();
+  const image = useSiteImage(imageId, fallback);
+
+  return (
+    <article className="pro-card flex h-full flex-col overflow-hidden">
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-soft-dark">
+        <Image
+          src={image}
+          alt={name}
+          fill
+          className="object-cover"
+          sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
+        />
+      </div>
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <h2 className="text-lg font-bold text-navy">{name}</h2>
+        <div className="mt-3 flex flex-wrap gap-2 text-xs font-semibold">
+          <span className="rounded-full bg-brand/[0.07] px-2.5 py-1 text-brand">{seats}</span>
+        </div>
+        <p className="mt-3 flex-1 text-sm leading-relaxed text-navy/55">{t(noteKey)}</p>
+        <a
+          href={bookHref(name)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-primary btn-shine mt-5 inline-flex w-full items-center justify-center px-4 py-2.5 text-sm"
+        >
+          {t("fleet.bookNow")}
+          <ArrowRight className="h-4 w-4" />
+        </a>
+      </div>
+    </article>
+  );
+}
+
 export default function FleetContent() {
   const t = useT();
+  const heroImage = useSiteImage("fleet.hero", "/image8.png");
 
   return (
     <>
@@ -74,45 +125,15 @@ export default function FleetContent() {
         eyebrow={t("fleet.eyebrow")}
         title={t("fleet.title")}
         description={t("fleet.desc")}
-        image="/image8.png"
+        image={heroImage}
         imageAlt="Pune Cabz fleet of vehicles"
       />
       <section className="bg-white page-section">
         <Container>
           <StaggerGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {fleet.map(({ name, seats, noteKey, image }) => (
-              <StaggerItem key={name}>
-                <article className="pro-card flex h-full flex-col overflow-hidden">
-                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-soft-dark">
-                    <Image
-                      src={image}
-                      alt={name}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
-                    />
-                  </div>
-                  <div className="flex flex-1 flex-col p-5 sm:p-6">
-                    <h2 className="text-lg font-bold text-navy">{name}</h2>
-                    <div className="mt-3 flex flex-wrap gap-2 text-xs font-semibold">
-                      <span className="rounded-full bg-brand/[0.07] px-2.5 py-1 text-brand">
-                        {seats}
-                      </span>
-                    </div>
-                    <p className="mt-3 flex-1 text-sm leading-relaxed text-navy/55">
-                      {t(noteKey)}
-                    </p>
-                    <a
-                      href={bookHref(name)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primary btn-shine mt-5 inline-flex w-full items-center justify-center px-4 py-2.5 text-sm"
-                    >
-                      {t("fleet.bookNow")}
-                      <ArrowRight className="h-4 w-4" />
-                    </a>
-                  </div>
-                </article>
+            {fleet.map((item) => (
+              <StaggerItem key={item.name}>
+                <FleetCard {...item} />
               </StaggerItem>
             ))}
           </StaggerGroup>

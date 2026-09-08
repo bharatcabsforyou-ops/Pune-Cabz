@@ -5,7 +5,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 
 const BUCKET = "site-images";
 const MAX_BYTES = 5 * 1024 * 1024;
-const ALLOWED_FOLDERS = new Set(["tourism", "routes"]);
+const ALLOWED_FOLDERS = new Set(["tourism", "routes", "pages", "blog", "career"]);
 
 export async function POST(request: NextRequest) {
   if (!isAdminRequest(request)) {

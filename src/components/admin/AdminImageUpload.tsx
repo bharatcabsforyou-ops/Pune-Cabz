@@ -22,7 +22,7 @@ export default function AdminImageUpload({
 }: {
   value: string;
   onChange: (url: string) => void;
-  folder: "tourism" | "routes";
+  folder: "tourism" | "routes" | "pages" | "blog" | "career";
   label?: string;
   required?: boolean;
 }) {

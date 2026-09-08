@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
+import { getBlogSeedPosts } from "@/lib/blog-seed";
 
 type ChangeFreq = NonNullable<MetadataRoute.Sitemap[number]["changeFrequency"]>;
 
@@ -19,7 +20,6 @@ const publicRoutes: {
   { path: "/about/testimonials", changeFrequency: "weekly", priority: 0.65 },
   { path: "/about/faq", changeFrequency: "monthly", priority: 0.65 },
   { path: "/about/blog", changeFrequency: "weekly", priority: 0.7 },
-  { path: "/about/blog/pune-to-mumbai", changeFrequency: "monthly", priority: 0.65 },
   { path: "/about/career", changeFrequency: "monthly", priority: 0.5 },
   { path: "/about/terms", changeFrequency: "yearly", priority: 0.4 },
   { path: "/about/safety", changeFrequency: "monthly", priority: 0.6 },
@@ -30,10 +30,22 @@ const publicRoutes: {
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
-  return publicRoutes.map(({ path, changeFrequency, priority }) => ({
-    url: `${site.url}${path === "/" ? "" : path}`,
-    lastModified,
-    changeFrequency,
-    priority,
-  }));
+  const blogPosts = getBlogSeedPosts()
+    .filter((p) => p.published)
+    .map((p) => ({
+      url: `${site.url}/about/blog/${p.slug}`,
+      lastModified,
+      changeFrequency: "monthly" as ChangeFreq,
+      priority: 0.65,
+    }));
+
+  return [
+    ...publicRoutes.map(({ path, changeFrequency, priority }) => ({
+      url: `${site.url}${path === "/" ? "" : path}`,
+      lastModified,
+      changeFrequency,
+      priority,
+    })),
+    ...blogPosts,
+  ];
 }

@@ -23,6 +23,7 @@ import Reveal from "@/components/motion/Reveal";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { images } from "@/lib/images";
 import { useT, type MessageKey } from "@/lib/i18n";
+import { useSiteImage } from "@/lib/content-overrides";
 
 const glance: { featureKey: MessageKey; offerKey: MessageKey }[] = [
   { featureKey: "glance.rideOptions", offerKey: "glance.rideOptionsOffer" },
@@ -90,6 +91,8 @@ const chips: {
 export default function HowItWorksPage() {
   const t = useT();
   const [open, setOpen] = useState<number | null>(0);
+  const heroImage = useSiteImage("services.hero", images.film2);
+  const faqImage = useSiteImage("services.faq", images.travelHills);
 
   return (
     <>
@@ -140,7 +143,7 @@ export default function HowItWorksPage() {
             </div>
 
             <PhotoCard
-              src={images.film2}
+              src={heroImage}
               alt={t("services.hero.imageAlt")}
               variant="banner"
               priority
@@ -237,7 +240,7 @@ export default function HowItWorksPage() {
           <div className="grid grid-cols-1 items-start page-grid page-grid-2">
             <Reveal direction="left" className="lg:sticky lg:top-24">
               <PhotoCard
-                src={images.travelHills}
+                src={faqImage}
                 alt={t("services.faq.imageAlt")}
                 variant="banner"
               />

@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import AdminTourism from "@/components/admin/AdminTourism";
 import AdminPopularRoutes from "@/components/admin/AdminPopularRoutes";
+import AdminBlog from "@/components/admin/AdminBlog";
+import AdminCareer from "@/components/admin/AdminCareer";
 import AdminLogin from "@/components/admin/AdminLogin";
 import AdminShell, { type AdminSection } from "@/components/admin/AdminShell";
 import AdminHeader from "@/components/admin/AdminHeader";
@@ -10,11 +12,13 @@ import AdminReviews from "@/components/admin/AdminReviews";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 import AdminEnquiries from "@/components/admin/AdminEnquiries";
 import AdminBookings from "@/components/admin/AdminBookings";
+import AdminSiteSettings from "@/components/admin/AdminSiteSettings";
+import AdminPageCopy from "@/components/admin/AdminPageCopy";
+import { parseContentSection } from "@/lib/admin-content-pages";
 import type { Review, ReviewStatus } from "@/lib/reviews";
 import type { Enquiry, EnquiryStatus } from "@/lib/enquiries";
 import type { Booking, BookingStatus } from "@/lib/bookings";
 import type { TourismTrip } from "@/lib/tourism";
-import type { PopularRoute } from "@/lib/popular-routes";
 
 type ReviewTab = "pending" | "approved" | "rejected";
 type EnquiryTab = "new" | "read" | "closed";
@@ -35,6 +39,8 @@ export default function AdminPage() {
   const [busy, setBusy] = useState<string | null>(null);
   const [loadError, setLoadError] = useState("");
   const [setupNotice, setSetupNotice] = useState("");
+
+  const contentPageId = parseContentSection(section);
 
   async function checkSession() {
     const res = await fetch("/api/admin/session");
@@ -72,7 +78,7 @@ export default function AdminPage() {
       setupRequired?: boolean;
     };
     const tourismData = (await tourismRes.json()) as { trips?: TourismTrip[] };
-    const routesData = (await routesRes.json()) as { routes?: PopularRoute[] };
+    const routesData = (await routesRes.json()) as { routes?: { published?: boolean }[] };
 
     setReviews(reviewsData.reviews ?? []);
     setEnquiries(enquiriesData.enquiries ?? []);
@@ -224,24 +230,18 @@ export default function AdminPage() {
   return (
     <AdminShell section={section} onSectionChange={setSection} onLogout={logout} badges={badges}>
       {setupNotice ? (
-        <p className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-[13px] text-amber-900">
+        <p className="mb-3 border border-amber-200/90 bg-amber-50 px-3 py-2 text-[12px] leading-snug text-amber-900">
           {setupNotice}
         </p>
       ) : null}
 
       {section !== "dashboard" ? (
         <AdminHeader section={section} badge={headerBadge} />
-      ) : (
-        <header className="mb-6 rounded-2xl border border-black/[0.06] bg-white px-5 py-5 shadow-sm sm:px-6">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-navy/35">Overview</p>
-          <h1 className="mt-0.5 text-xl font-bold tracking-tight text-navy sm:text-2xl">Dashboard</h1>
-          <p className="mt-1.5 text-[13px] leading-relaxed text-navy/50">
-            Welcome back. Here is a quick summary of your site activity.
-          </p>
-        </header>
-      )}
+      ) : null}
 
-      {section === "dashboard" ? (
+      {contentPageId ? (
+        <AdminPageCopy pageId={contentPageId} active />
+      ) : section === "dashboard" ? (
         <AdminDashboard
           stats={{
             pendingReviews: reviewCounts.pending,
@@ -272,18 +272,7 @@ export default function AdminPage() {
           loadError={loadError}
           counts={enquiryCounts}
         />
-      ) : section === "tourism" ? (
-        <AdminTourism onChanged={loadAll} active={section === "tourism"} />
-      ) : section === "routes" ? (
-        <AdminPopularRoutes mode="list" onChanged={loadAll} active={section === "routes"} />
-      ) : section === "routes-add" ? (
-        <AdminPopularRoutes
-          mode="add"
-          onChanged={loadAll}
-          onGoBack={() => setSection("routes")}
-          active={section === "routes-add"}
-        />
-      ) : (
+      ) : section === "reviews" ? (
         <AdminReviews
           reviews={reviews}
           tab={reviewTab}
@@ -293,7 +282,17 @@ export default function AdminPage() {
           loadError={loadError}
           counts={reviewCounts}
         />
-      )}
+      ) : section === "tourism" ? (
+        <AdminTourism onCountChange={setTourismCount} active={section === "tourism"} />
+      ) : section === "routes" ? (
+        <AdminPopularRoutes onCountChange={setRoutesCount} active={section === "routes"} />
+      ) : section === "blog" ? (
+        <AdminBlog active={section === "blog"} />
+      ) : section === "career" ? (
+        <AdminCareer active={section === "career"} />
+      ) : section === "settings" ? (
+        <AdminSiteSettings active={section === "settings"} />
+      ) : null}
     </AdminShell>
   );
 }

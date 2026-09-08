@@ -7,16 +7,18 @@ import PhotoCard from "./PhotoCard";
 import Reveal from "./motion/Reveal";
 import { images } from "@/lib/images";
 import { useT } from "@/lib/i18n";
+import { useSiteImage } from "@/lib/content-overrides";
 
 export default function NeverMiss() {
   const t = useT();
+  const image = useSiteImage("home.neverMiss", images.film2);
 
   return (
     <section className="bg-white page-section">
       <Container>
         <div className="page-grid page-grid-2 items-center">
           <Reveal direction="left" className="relative">
-            <PhotoCard src={images.film2} alt="Pune to Mumbai with Pune Cabz" variant="banner" />
+            <PhotoCard src={image} alt="Pune to Mumbai with Pune Cabz" variant="banner" />
 
             <motion.div
               initial={{ opacity: 0, y: 16, scale: 0.9 }}

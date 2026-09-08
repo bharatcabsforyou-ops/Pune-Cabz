@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Check, Clock3, IndianRupee, MapPin, Pencil, Plus, Trash2 } from "lucide-react";
+import { Check, Pencil, Plus, Trash2 } from "lucide-react";
 import AdminImageUpload from "@/components/admin/AdminImageUpload";
 import AdminFormPanel, {
   AdminField,
@@ -23,9 +23,11 @@ const emptyForm: PopularRouteInput = {
 
 const tagSuggestions = ["Most booked", "Weekend", "Daily", "Hills", "Coastal", "Scenic", "Popular"];
 
-function RouteImage({ src, alt }: { src: string; alt: string }) {
+function RouteThumb({ src, alt }: { src: string; alt: string }) {
   if (src.startsWith("/")) {
-    return <Image src={src} alt={alt} fill className="object-cover" sizes="(max-width:768px) 100vw, 33vw" />;
+    return (
+      <Image src={src} alt={alt} fill className="object-cover" sizes="48px" />
+    );
   }
   // eslint-disable-next-line @next/next/no-img-element
   return <img src={src} alt={alt} className="h-full w-full object-cover" />;
@@ -123,7 +125,7 @@ function RouteFormFields({
             onChange={(e) => setForm((f) => ({ ...f, published: e.target.checked }))}
             className="h-4 w-4 rounded border-black/20 text-brand focus:ring-brand"
           />
-          <span className="text-sm font-medium text-navy">Show on Book your cars page</span>
+          <span className="text-sm font-medium text-navy">Published on book page</span>
         </label>
       </div>
       {formError ? <p className="text-sm text-brand">{formError}</p> : null}
@@ -131,7 +133,7 @@ function RouteFormFields({
   );
 }
 
-function RoutesGrid({
+function RoutesTable({
   routes,
   busy,
   onToggle,
@@ -146,99 +148,107 @@ function RoutesGrid({
 }) {
   if (routes.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-brand/20 bg-white px-5 py-10 text-center">
+      <div className="rounded-lg border border-dashed border-black/[0.12] bg-white px-5 py-12 text-center">
         <p className="text-sm font-semibold text-navy">No routes yet</p>
-        <p className="mt-2 text-sm text-navy/50">
-          Add routes here — they will show on the Book your cars page sidebar.
+        <p className="mx-auto mt-2 max-w-sm text-sm text-navy/50">
+          Click <strong>Add route</strong> to create your first popular route for the book page.
         </p>
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-      {routes.map((route) => (
-        <article
-          key={route.id}
-          className="overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-sm"
-        >
-          <div className="relative aspect-[16/10] bg-surface">
-            <RouteImage src={route.imageUrl ?? "/image2.jpeg"} alt={`${route.fromCity} to ${route.toCity}`} />
-            <span
-              className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase ${
-                route.published ? "bg-emerald-500 text-white" : "bg-navy/70 text-white"
-              }`}
-            >
-              {route.published ? "Live" : "Hidden"}
-            </span>
-          </div>
-          <div className="p-4">
-            <div className="flex flex-wrap items-center gap-2">
-              <h3 className="flex items-center gap-1.5 font-bold text-navy">
-                <MapPin className="h-4 w-4 text-brand" />
-                {route.fromCity} → {route.toCity}
-              </h3>
-              <span className="rounded-full bg-brand/10 px-2 py-0.5 text-[10px] font-bold uppercase text-brand">
-                {route.tag}
-              </span>
-            </div>
-            <p className="mt-2 flex flex-wrap items-center gap-3 text-[13px] text-navy/60">
-              <span className="inline-flex items-center gap-1">
-                <Clock3 className="h-3.5 w-3.5" />
-                {route.duration}
-              </span>
-              <span className="inline-flex items-center gap-1 font-semibold text-navy">
-                <IndianRupee className="h-3.5 w-3.5 text-brand" />
-                from {route.fromPrice}
-              </span>
-            </p>
-            <p className="mt-1 text-xs text-navy/40">Sort {route.sortOrder}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              <button
-                type="button"
-                disabled={busy === route.id}
-                onClick={() => onToggle(route)}
-                className="rounded-full bg-surface px-3 py-1.5 text-xs font-semibold text-navy disabled:opacity-60"
-              >
-                {route.published ? "Hide" : "Publish"}
-              </button>
-              <button
-                type="button"
-                onClick={() => onEdit(route)}
-                className="inline-flex items-center gap-1 rounded-full bg-navy px-3 py-1.5 text-xs font-semibold text-white"
-              >
-                <Pencil className="h-3 w-3" />
-                Edit
-              </button>
-              <button
-                type="button"
-                disabled={busy === route.id}
-                onClick={() => onRemove(route.id)}
-                className="inline-flex items-center gap-1 rounded-full bg-brand/10 px-3 py-1.5 text-xs font-semibold text-brand disabled:opacity-60"
-              >
-                <Trash2 className="h-3 w-3" />
-                Delete
-              </button>
-            </div>
-          </div>
-        </article>
-      ))}
+    <div className="overflow-x-auto rounded-lg border border-black/[0.08] bg-white">
+      <table className="w-full min-w-[720px] text-left text-[13px]">
+        <thead className="border-b border-black/[0.06] bg-[#fafbfc] text-[11px] font-semibold uppercase tracking-wider text-navy/40">
+          <tr>
+            <th className="px-4 py-2.5 font-semibold">Route</th>
+            <th className="px-4 py-2.5 font-semibold">Duration</th>
+            <th className="px-4 py-2.5 font-semibold">From price</th>
+            <th className="px-4 py-2.5 font-semibold">Tag</th>
+            <th className="px-4 py-2.5 font-semibold">Sort</th>
+            <th className="px-4 py-2.5 font-semibold">Status</th>
+            <th className="px-4 py-2.5 text-right font-semibold">Actions</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-black/[0.05]">
+          {routes.map((route) => (
+            <tr key={route.id} className="hover:bg-[#fafbfc]">
+              <td className="px-4 py-3">
+                <div className="flex items-center gap-3">
+                  <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded bg-surface">
+                    <RouteThumb
+                      src={route.imageUrl ?? "/image2.jpeg"}
+                      alt={`${route.fromCity} to ${route.toCity}`}
+                    />
+                  </div>
+                  <span className="font-medium text-navy">
+                    {route.fromCity} → {route.toCity}
+                  </span>
+                </div>
+              </td>
+              <td className="px-4 py-3 text-navy/65">{route.duration}</td>
+              <td className="px-4 py-3 tabular-nums font-semibold text-navy">
+                ₹{route.fromPrice}
+              </td>
+              <td className="px-4 py-3 text-navy/65">{route.tag}</td>
+              <td className="px-4 py-3 tabular-nums text-navy/50">{route.sortOrder}</td>
+              <td className="px-4 py-3">
+                <span
+                  className={`inline-block text-[11px] font-semibold uppercase tracking-wide ${
+                    route.published ? "text-emerald-700" : "text-navy/40"
+                  }`}
+                >
+                  {route.published ? "Live" : "Hidden"}
+                </span>
+              </td>
+              <td className="px-4 py-3">
+                <div className="flex flex-wrap items-center justify-end gap-1.5">
+                  <button
+                    type="button"
+                    disabled={busy === route.id}
+                    onClick={() => onToggle(route)}
+                    className="px-2 py-1 text-[12px] font-semibold text-navy/55 hover:text-navy disabled:opacity-60"
+                  >
+                    {route.published ? "Hide" : "Publish"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => onEdit(route)}
+                    className="inline-flex items-center gap-1 px-2 py-1 text-[12px] font-semibold text-brand hover:underline"
+                  >
+                    <Pencil className="h-3 w-3" />
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    disabled={busy === route.id}
+                    onClick={() => onRemove(route.id)}
+                    className="inline-flex items-center gap-1 px-2 py-1 text-[12px] font-semibold text-navy/40 hover:text-brand disabled:opacity-60"
+                    aria-label={`Delete ${route.fromCity} to ${route.toCity}`}
+                  >
+                    <Trash2 className="h-3 w-3" />
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
 
 export default function AdminPopularRoutes({
-  onChanged,
-  onGoBack,
+  onCountChange,
   active = true,
-  mode = "list",
 }: {
-  onChanged?: () => void;
-  onGoBack?: () => void;
+  /** Lightweight callback — only published count, not a full dashboard reload */
+  onCountChange?: (publishedCount: number) => void;
   active?: boolean;
-  mode?: "list" | "add";
 }) {
   const [routes, setRoutes] = useState<PopularRoute[]>([]);
+  const [loaded, setLoaded] = useState(false);
   const [loadError, setLoadError] = useState("");
   const [formError, setFormError] = useState("");
   const [busy, setBusy] = useState<string | null>(null);
@@ -247,35 +257,38 @@ export default function AdminPopularRoutes({
   const [form, setForm] = useState<PopularRouteInput>(emptyForm);
   const [successMsg, setSuccessMsg] = useState("");
 
+  function notifyCount(next: PopularRoute[]) {
+    onCountChange?.(next.filter((r) => r.published).length);
+  }
+
   async function loadRoutes() {
     const res = await fetch("/api/admin/popular-routes");
     const data = (await res.json()) as { routes?: PopularRoute[]; error?: string };
     if (!res.ok) {
       setLoadError(data.error || "Could not load routes.");
+      setLoaded(true);
       return;
     }
-    setRoutes(data.routes ?? []);
+    const next = data.routes ?? [];
+    setRoutes(next);
+    notifyCount(next);
     setLoadError("");
+    setLoaded(true);
   }
 
   useEffect(() => {
-    if (active) {
-      loadRoutes().catch(() => setLoadError("Could not load routes."));
-    }
-  }, [active]);
-
-  useEffect(() => {
-    if (active && mode === "add") {
-      setEditingId(null);
-      setForm({ ...emptyForm, sortOrder: routes.length + 1 });
-      setFormError("");
-      setOpen(true);
-    }
-  }, [active, mode, routes.length]);
+    if (!active) return;
+    if (loaded) return;
+    loadRoutes().catch(() => {
+      setLoadError("Could not load routes.");
+      setLoaded(true);
+    });
+  }, [active, loaded]);
 
   function closePanel() {
     setOpen(false);
-    if (mode === "add" && !editingId) onGoBack?.();
+    setEditingId(null);
+    setFormError("");
   }
 
   function startCreate() {
@@ -315,20 +328,26 @@ export default function AdminPopularRoutes({
     const data = (await res.json()) as { route?: PopularRoute; error?: string };
     setBusy(null);
 
-    if (!res.ok) {
+    if (!res.ok || !data.route) {
       setFormError(data.error || "Could not save route.");
       return;
     }
 
-    await loadRoutes();
-    onChanged?.();
+    const saved = data.route;
+    setRoutes((list) => {
+      const next = editingId
+        ? list.map((item) => (item.id === editingId ? saved : item))
+        : [saved, ...list].sort((a, b) => a.sortOrder - b.sortOrder);
+      notifyCount(next);
+      return next;
+    });
+
     const wasEdit = Boolean(editingId);
     setOpen(false);
     setEditingId(null);
     setForm({ ...emptyForm, sortOrder: routes.length + 2 });
-    setSuccessMsg(wasEdit ? "Route updated successfully." : "Route added — visible on Book your cars!");
-    window.setTimeout(() => setSuccessMsg(""), 5000);
-    if (mode === "add" && !wasEdit) onGoBack?.();
+    setSuccessMsg(wasEdit ? "Route updated." : "Route added — live on the book page when published.");
+    window.setTimeout(() => setSuccessMsg(""), 4000);
   }
 
   async function removeRoute(id: string) {
@@ -341,8 +360,11 @@ export default function AdminPopularRoutes({
     });
     setBusy(null);
     if (res.ok) {
-      setRoutes((list) => list.filter((item) => item.id !== id));
-      onChanged?.();
+      setRoutes((list) => {
+        const next = list.filter((item) => item.id !== id);
+        notifyCount(next);
+        return next;
+      });
     }
   }
 
@@ -363,42 +385,34 @@ export default function AdminPopularRoutes({
         published: !route.published,
       }),
     });
+    const data = (await res.json()) as { route?: PopularRoute };
     setBusy(null);
     if (res.ok) {
-      setRoutes((list) =>
-        list.map((item) => (item.id === route.id ? { ...item, published: !item.published } : item))
-      );
-      onChanged?.();
+      const updated = data.route ?? { ...route, published: !route.published };
+      setRoutes((list) => {
+        const next = list.map((item) => (item.id === route.id ? updated : item));
+        notifyCount(next);
+        return next;
+      });
     }
   }
 
   return (
     <div>
-      {mode === "list" ? (
-        <div className="rounded-2xl border border-black/5 bg-white px-5 py-4 shadow-sm">
-          <p className="text-sm text-navy/55">
-            All saved routes. Published routes show on <strong>Book your cars</strong> only — not on
-            the home page.
-          </p>
-        </div>
-      ) : (
-        <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-black/5 bg-white px-5 py-4 shadow-sm">
-          <p className="text-sm text-navy/55">
-            Fill route details in the panel on the right. Saved routes appear on the Book your cars
-            page only.
-          </p>
-          {!open ? (
-            <button
-              type="button"
-              onClick={startCreate}
-              className="inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2.5 text-sm font-semibold text-white"
-            >
-              <Plus className="h-4 w-4" />
-              Open add form
-            </button>
-          ) : null}
-        </div>
-      )}
+      <div className="flex flex-col gap-4 rounded-2xl border border-black/[0.06] bg-white px-5 py-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-sm leading-relaxed text-navy/55">
+          Manage popular routes in one place. Published routes appear on the{" "}
+          <strong className="font-semibold text-navy">book page</strong>.
+        </p>
+        <button
+          type="button"
+          onClick={startCreate}
+          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-brand/25 transition-transform hover:scale-[1.02]"
+        >
+          <Plus className="h-4 w-4" />
+          Add route
+        </button>
+      </div>
 
       {loadError ? (
         <p className="mt-4 rounded-xl border border-brand/20 bg-brand/5 px-4 py-3 text-sm text-brand">
@@ -414,11 +428,14 @@ export default function AdminPopularRoutes({
 
       <div className="mt-6 flex items-center justify-between gap-3">
         <p className="text-[13px] font-semibold text-navy">
-          Saved routes <span className="text-brand">({routes.length})</span>
+          Routes <span className="text-brand">({routes.length})</span>
         </p>
         <button
           type="button"
-          onClick={() => loadRoutes()}
+          onClick={() => {
+            setLoaded(false);
+            loadRoutes().finally(() => setLoaded(true));
+          }}
           className="text-[12px] font-semibold text-navy/45 hover:text-brand"
         >
           Refresh
@@ -426,19 +443,25 @@ export default function AdminPopularRoutes({
       </div>
 
       <div className="mt-3">
-        <RoutesGrid
-          routes={routes}
-          busy={busy}
-          onToggle={togglePublished}
-          onEdit={startEdit}
-          onRemove={removeRoute}
-        />
+        {!loaded && routes.length === 0 ? (
+          <div className="rounded-2xl border border-black/[0.06] bg-white px-5 py-10 text-center text-sm text-navy/45">
+            Loading routes…
+          </div>
+        ) : (
+          <RoutesTable
+            routes={routes}
+            busy={busy}
+            onToggle={togglePublished}
+            onEdit={startEdit}
+            onRemove={removeRoute}
+          />
+        )}
       </div>
 
       <AdminFormPanel
         open={open}
         onClose={closePanel}
-        subtitle="Book your cars"
+        subtitle="Popular routes"
         title={editingId ? "Edit route" : "Add route"}
         footer={
           <button
@@ -448,7 +471,7 @@ export default function AdminPopularRoutes({
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand py-3 text-sm font-semibold text-white shadow-sm shadow-brand/20 disabled:opacity-60"
           >
             <Check className="h-4 w-4" />
-            {busy === "save" ? "Saving..." : editingId ? "Save changes" : "Save route"}
+            {busy === "save" ? "Saving…" : editingId ? "Save changes" : "Save route"}
           </button>
         }
       >

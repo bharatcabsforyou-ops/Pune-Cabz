@@ -8,13 +8,15 @@ import Reveal from "./motion/Reveal";
 import { StaggerGroup, StaggerItem } from "./motion/Stagger";
 import { images } from "@/lib/images";
 import { useT, type MessageKey } from "@/lib/i18n";
+import { useSiteImage } from "@/lib/content-overrides";
 
 const cards: {
   titleKey: MessageKey;
   textKey: MessageKey;
   ctaKey: MessageKey;
   href: string;
-  image: string;
+  imageId: string;
+  fallback: string;
   imageAlt: string;
 }[] = [
   {
@@ -22,7 +24,8 @@ const cards: {
     textKey: "explore.book.text",
     ctaKey: "explore.book.cta",
     href: "/book",
-    image: images.travelCab,
+    imageId: "home.exploreBook",
+    fallback: images.travelCab,
     imageAlt: "Book an intercity cab with Pune Cabz",
   },
   {
@@ -30,7 +33,8 @@ const cards: {
     textKey: "explore.tourism.text",
     ctaKey: "explore.tourism.cta",
     href: "/tourism",
-    image: images.travelHills,
+    imageId: "home.exploreTourism",
+    fallback: images.travelHills,
     imageAlt: "Scenic hill station trip from Pune",
   },
   {
@@ -38,10 +42,38 @@ const cards: {
     textKey: "explore.safe.text",
     ctaKey: "explore.safe.cta",
     href: "/safety",
-    image: images.travelOpenRoad,
+    imageId: "home.exploreSafe",
+    fallback: images.travelOpenRoad,
     imageAlt: "Safe highway travel with verified drivers",
   },
 ];
+
+function ExploreCard({
+  titleKey,
+  textKey,
+  ctaKey,
+  href,
+  imageId,
+  fallback,
+  imageAlt,
+}: (typeof cards)[number]) {
+  const t = useT();
+  const image = useSiteImage(imageId, fallback);
+
+  return (
+    <Link href={href} className="pro-card-interactive group">
+      <RouteBannerImage src={image} alt={imageAlt} rounded="none" />
+      <div className="card-body p-4">
+        <h3 className="text-[15px] font-bold text-navy">{t(titleKey)}</h3>
+        <p className="mt-1 text-xs leading-relaxed text-navy/55">{t(textKey)}</p>
+        <span className="card-cta mt-3">
+          {t(ctaKey)}
+          <ArrowRight className="h-3.5 w-3.5" />
+        </span>
+      </div>
+    </Link>
+  );
+}
 
 export default function HomeExplore() {
   const t = useT();
@@ -56,19 +88,9 @@ export default function HomeExplore() {
         </Reveal>
 
         <StaggerGroup className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
-          {cards.map(({ titleKey, textKey, ctaKey, href, image, imageAlt }) => (
-            <StaggerItem key={titleKey}>
-              <Link href={href} className="pro-card-interactive group">
-                <RouteBannerImage src={image} alt={imageAlt} rounded="none" />
-                <div className="card-body p-4">
-                  <h3 className="text-[15px] font-bold text-navy">{t(titleKey)}</h3>
-                  <p className="mt-1 text-xs leading-relaxed text-navy/55">{t(textKey)}</p>
-                  <span className="card-cta mt-3">
-                    {t(ctaKey)}
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </span>
-                </div>
-              </Link>
+          {cards.map((card) => (
+            <StaggerItem key={card.titleKey}>
+              <ExploreCard {...card} />
             </StaggerItem>
           ))}
         </StaggerGroup>

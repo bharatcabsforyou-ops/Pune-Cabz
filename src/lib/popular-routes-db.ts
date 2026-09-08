@@ -37,6 +37,17 @@ function normalizeCity(city: string) {
 }
 
 function resolveRouteImage(row: RowWithImage) {
+  const stored = row.image_url?.trim() ?? "";
+
+  // Always prefer a real admin upload / absolute URL / non-fleet local asset
+  if (stored) {
+    const isHttp = /^https?:\/\//i.test(stored);
+    const isLocalAsset = stored.startsWith("/");
+    if (isHttp) return stored;
+    if (isLocalAsset && !isFleetCarImage(stored)) return stored;
+    if (isLocalAsset && isFleetCarImage(stored)) return stored;
+  }
+
   const from = normalizeCity(row.from_city);
   const to = normalizeCity(row.to_city);
   const key = `${from}|${to}`;
@@ -47,14 +58,11 @@ function resolveRouteImage(row: RowWithImage) {
     return "/image9.png";
   }
 
-  // Prefer local fleet car photos for popular routes
-  if (row.image_url && isFleetCarImage(row.image_url)) return row.image_url;
-
   if (row.sort_order >= 1 && row.sort_order <= 11) {
     return fleetBySort[row.sort_order];
   }
 
-  return "/image2.jpeg";
+  return stored || "/image2.jpeg";
 }
 
 export const ROUTE_SELECT_WITH_IMAGE =

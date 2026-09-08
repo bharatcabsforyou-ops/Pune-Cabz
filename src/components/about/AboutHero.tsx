@@ -7,10 +7,11 @@ import { ArrowRight } from "lucide-react";
 import Container from "../Container";
 import { images } from "@/lib/images";
 import { useT } from "@/lib/i18n";
+import { useSiteImage } from "@/lib/content-overrides";
 
 export default function AboutHero() {
   const t = useT();
-
+  const heroImage = useSiteImage("about.hero", images.film1);
   return (
     <section className="page-hero">
       <Container className="relative">
@@ -70,7 +71,7 @@ export default function AboutHero() {
           >
             <div className="pro-card-static overflow-hidden p-0">
               <Image
-                src={images.film1}
+                src={heroImage}
                 alt="Pune Cabz in Pune city"
                 width={1536}
                 height={1024}

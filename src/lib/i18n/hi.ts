@@ -231,7 +231,7 @@ export const hi: Record<MessageKey, string> = {
   "explore.safe.text": "आईडी जाँच, लाइव ट्रिप शेयरिंग और 24/7 सहायता।",
   "explore.safe.cta": "सुरक्षा देखें",
 
-  "popular.eyebrow": "रूट सूची",
+  "popular.eyebrow": "लोकप्रिय रूट",
   "popular.title": "पुणे से लोकप्रिय रूट",
   "popular.desc": "अभी राइड बुक करें — वही रूट होम और बुक पेज पर।",
 

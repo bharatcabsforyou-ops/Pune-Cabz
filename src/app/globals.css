@@ -52,6 +52,16 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Same Devanagari face for Hindi & Marathi (beats body.font-sans) */
+  html:lang(hi),
+  html:lang(mr),
+  html:lang(hi) body,
+  html:lang(mr) body,
+  html:lang(hi) .font-sans,
+  html:lang(mr) .font-sans {
+    font-family: var(--font-devanagari), var(--font-jakarta), system-ui, sans-serif;
+  }
+
   body {
     line-height: 1.6;
     letter-spacing: -0.011em;
@@ -66,6 +76,16 @@
   h6 {
     letter-spacing: -0.025em;
     line-height: 1.15;
+  }
+
+  html:lang(hi) h1,
+  html:lang(hi) h2,
+  html:lang(hi) h3,
+  html:lang(mr) h1,
+  html:lang(mr) h2,
+  html:lang(mr) h3 {
+    letter-spacing: 0;
+    line-height: 1.28;
   }
 
   p {

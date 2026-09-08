@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Clock3, MapPinned, Navigation } from "lucide-react";
@@ -8,7 +8,86 @@ import Container from "@/components/Container";
 import Reveal from "@/components/motion/Reveal";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { touristPlaces, type TouristPlace } from "@/data/tourist-places";
+import { tripToTouristPlaceFields } from "@/lib/tourism-seed";
+import type { TourismTrip } from "@/lib/tourism";
 import { useT } from "@/lib/i18n";
+
+const PLACE_CATEGORIES = new Set([
+  "Hill station",
+  "Coastal",
+  "Pilgrimage",
+  "Monsoon",
+  "Heritage",
+]);
+
+function normalizePlace(raw: ReturnType<typeof tripToTouristPlaceFields>): TouristPlace | null {
+  if (!PLACE_CATEGORIES.has(raw.category)) return null;
+  return {
+    id: raw.id,
+    name: raw.name,
+    tagline: raw.tagline,
+    description: raw.description,
+    whyCab: raw.whyCab,
+    fromPune: raw.fromPune || "—",
+    fromMumbai: raw.fromMumbai || "—",
+    stops: raw.stops.length ? raw.stops : ["—"],
+    category: raw.category as TouristPlace["category"],
+    image: raw.image,
+  };
+}
+
+function tripsToPlaces(trips: TourismTrip[]): TouristPlace[] {
+  const byId = new Map<string, TouristPlace>();
+
+  for (const base of touristPlaces) {
+    byId.set(base.id, base);
+  }
+
+  for (const trip of trips) {
+    if (!trip.published) continue;
+    const mapped = normalizePlace(tripToTouristPlaceFields(trip));
+    if (!mapped) continue;
+    // Prefer trips that carry full destination copy (description / stops)
+    const existing = byId.get(mapped.id);
+    if (!existing || (mapped.description && mapped.description.length > 20)) {
+      byId.set(mapped.id, {
+        ...existing,
+        ...mapped,
+        description: mapped.description || existing?.description || "",
+        fromPune: mapped.fromPune !== "—" ? mapped.fromPune : existing?.fromPune || mapped.fromPune,
+        fromMumbai:
+          mapped.fromMumbai !== "—" ? mapped.fromMumbai : existing?.fromMumbai || mapped.fromMumbai,
+        stops: mapped.stops[0] !== "—" ? mapped.stops : existing?.stops || mapped.stops,
+        whyCab: mapped.whyCab || existing?.whyCab,
+      });
+    } else if (existing) {
+      byId.set(mapped.id, {
+        ...existing,
+        name: mapped.name || existing.name,
+        tagline: mapped.tagline || existing.tagline,
+        image: mapped.image || existing.image,
+        category: mapped.category || existing.category,
+      });
+    } else {
+      byId.set(mapped.id, mapped);
+    }
+  }
+
+  // Keep original order for known places, then append any new CMS places
+  const ordered: TouristPlace[] = [];
+  const seen = new Set<string>();
+  for (const place of touristPlaces) {
+    const next = byId.get(place.id);
+    if (next) {
+      ordered.push(next);
+      seen.add(place.id);
+    }
+  }
+  for (const [id, place] of byId) {
+    if (!seen.has(id)) ordered.push(place);
+  }
+  return ordered;
+}
 
 function PlaceCard({ place }: { place: TouristPlace }) {
   const t = useT();
@@ -76,17 +155,36 @@ function PlaceCard({ place }: { place: TouristPlace }) {
 export default function TouristPlacesGuide() {
   const t = useT();
   const allLabel = t("tourism.guide.all");
+  const [places, setPlaces] = useState<TouristPlace[]>(touristPlaces);
+
+  useEffect(() => {
+    let ignore = false;
+    fetch("/api/tourism")
+      .then(async (res) => {
+        const data = (await res.json()) as { trips?: TourismTrip[] };
+        if (ignore) return;
+        if (data.trips?.length) {
+          setPlaces(tripsToPlaces(data.trips));
+        }
+      })
+      .catch(() => {
+        if (!ignore) setPlaces(touristPlaces);
+      });
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   const categories = useMemo(() => {
-    return ["All", ...new Set(touristPlaces.map((p) => p.category))];
-  }, []);
+    return ["All", ...new Set(places.map((p) => p.category))];
+  }, [places]);
 
   const [filter, setFilter] = useState("All");
 
   const filtered = useMemo(() => {
-    if (filter === "All") return touristPlaces;
-    return touristPlaces.filter((p) => p.category === filter);
-  }, [filter]);
+    if (filter === "All") return places;
+    return places.filter((p) => p.category === filter);
+  }, [filter, places]);
 
   return (
     <section id="destinations" className="scroll-mt-24 bg-white page-section">

@@ -11,6 +11,7 @@ export default function AdminFormPanel({
   subtitle,
   children,
   footer,
+  wide = false,
 }: {
   open: boolean;
   onClose: () => void;
@@ -18,6 +19,7 @@ export default function AdminFormPanel({
   subtitle?: string;
   children: ReactNode;
   footer?: ReactNode;
+  wide?: boolean;
 }) {
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -56,7 +58,9 @@ export default function AdminFormPanel({
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 32, stiffness: 320, mass: 0.85 }}
-            className="relative flex h-full w-[min(100%,30rem)] flex-col border-l border-black/[0.08] bg-white shadow-[-12px_0_40px_rgba(15,17,23,0.12)] sm:w-[34rem]"
+            className={`relative flex h-full flex-col border-l border-black/[0.08] bg-white shadow-[-12px_0_40px_rgba(15,17,23,0.12)] ${
+              wide ? "w-[min(100%,40rem)] sm:w-[42rem]" : "w-[min(100%,30rem)] sm:w-[34rem]"
+            }`}
           >
             <div className="relative shrink-0 overflow-hidden border-b border-black/[0.06] bg-gradient-to-br from-[#fafbfc] via-white to-brand/[0.03] px-5 py-5 sm:px-6">
               <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-brand/[0.06] blur-2xl" />

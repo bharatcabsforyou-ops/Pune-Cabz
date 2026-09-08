@@ -3,19 +3,20 @@
 import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
 import WhatsAppIcon from "./WhatsAppIcon";
+import { useSite } from "@/lib/site-context";
 import { useT } from "@/lib/i18n";
-import { site } from "@/lib/site";
 
 const spring = { delay: 0.8, type: "spring" as const, stiffness: 320, damping: 22 };
 
 export default function ContactFloats() {
+  const site = useSite();
   const t = useT();
 
   return (
     <div className="contact-float-stack" aria-label={t("floats.quickContact")}>
       <motion.a
         href={site.phoneHref}
-        aria-label={`Call ${site.phone}`}
+        aria-label={`${t("floats.callUs")} ${site.phone}`}
         initial={{ opacity: 0, scale: 0.6, y: 24 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ ...spring, delay: 0.65 }}

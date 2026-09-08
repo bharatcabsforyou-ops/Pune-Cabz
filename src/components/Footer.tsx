@@ -6,19 +6,27 @@ import Container from "./Container";
 import Logo from "./Logo";
 import SocialIcon, { type SocialName } from "./SocialIcon";
 import { images } from "@/lib/images";
-import { site } from "@/lib/site";
 import { aboutNavLinks } from "@/lib/site-nav";
 import { useT, type MessageKey } from "@/lib/i18n";
+import { useSite } from "@/lib/site-context";
+import { useSiteImage } from "@/lib/content-overrides";
 
-const socials: { name: SocialName; href: string; labelKey: MessageKey }[] = [
-  { name: "whatsapp", href: site.whatsappHref, labelKey: "footer.social.whatsapp" },
-  { name: "instagram", href: site.instagram, labelKey: "footer.social.instagram" },
-  { name: "facebook", href: "#", labelKey: "footer.social.facebook" },
-  { name: "youtube", href: "#", labelKey: "footer.social.youtube" },
+const socialDefs: { name: SocialName; labelKey: MessageKey; href: (s: ReturnType<typeof useSite>) => string }[] = [
+  { name: "whatsapp", labelKey: "footer.social.whatsapp", href: (s) => s.whatsappHref },
+  { name: "instagram", labelKey: "footer.social.instagram", href: (s) => s.instagram },
+  { name: "facebook", labelKey: "footer.social.facebook", href: () => "#" },
+  { name: "youtube", labelKey: "footer.social.youtube", href: () => "#" },
 ];
 
 export default function Footer() {
   const t = useT();
+  const site = useSite();
+  const footerBg = useSiteImage("site.footerBg", images.heroBg);
+  const socials = socialDefs.map((item) => ({
+    name: item.name,
+    labelKey: item.labelKey,
+    href: item.href(site),
+  }));
 
   const columns: {
     titleKey: MessageKey;
@@ -60,7 +68,7 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-navy">
       <Image
-        src={images.heroBg}
+        src={footerBg}
         alt=""
         fill
         sizes="100vw"

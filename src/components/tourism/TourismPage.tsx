@@ -20,6 +20,7 @@ import { StaggerGroup, StaggerItem } from "../motion/Stagger";
 import TouristPlacesGuide from "./TouristPlacesGuide";
 import { images } from "@/lib/images";
 import { useT, type MessageKey } from "@/lib/i18n";
+import { useSiteImage } from "@/lib/content-overrides";
 
 const highlights: {
   icon: typeof Mountain;
@@ -82,13 +83,14 @@ const steps: {
 
 export default function TourismPage() {
   const t = useT();
+  const heroImage = useSiteImage("tourism.hero", images.travelHills);
 
   return (
     <>
       <section className="relative overflow-hidden border-b border-black/[0.04] bg-[#12090b]">
         <div className="absolute inset-0">
           <Image
-            src={images.travelHills}
+            src={heroImage}
             alt=""
             fill
             priority

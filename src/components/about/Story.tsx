@@ -5,13 +5,13 @@ import PhotoCard from "../PhotoCard";
 import Reveal from "../motion/Reveal";
 import { unsplash } from "@/lib/images";
 import { useT } from "@/lib/i18n";
+import { useSiteImage } from "@/lib/content-overrides";
 
-/** Comfortable sedan on an open highway — fits Pune Cabz about story */
-const aboutStoryImage = unsplash("1485291571150-772bcfc10da5");
+const aboutStoryFallback = unsplash("1485291571150-772bcfc10da5");
 
 export default function Story() {
   const t = useT();
-
+  const storyImage = useSiteImage("about.story", aboutStoryFallback);
   return (
     <section className="bg-white page-section">
       <Container>
@@ -29,7 +29,7 @@ export default function Story() {
 
           <Reveal direction="right">
             <PhotoCard
-              src={aboutStoryImage}
+              src={storyImage}
               alt="Comfortable cab ride with Pune Cabz"
             />
           </Reveal>

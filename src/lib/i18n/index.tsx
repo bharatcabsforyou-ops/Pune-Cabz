@@ -18,6 +18,7 @@ import {
 import { en, type MessageKey } from "./en";
 import { hi } from "./hi";
 import { mr } from "./mr";
+import { useContentOverrides } from "@/lib/content-overrides";
 
 const dictionaries: Record<Locale, Record<MessageKey, string>> = {
   en,
@@ -43,6 +44,7 @@ function formatMessage(template: string, vars?: Record<string, string | number>)
 export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(DEFAULT_LOCALE);
   const [ready, setReady] = useState(false);
+  const overrides = useContentOverrides();
 
   useEffect(() => {
     try {
@@ -73,11 +75,15 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
 
   const t = useCallback(
     (key: MessageKey, vars?: Record<string, string | number>) => {
+      const override = overrides[locale]?.[key];
+      if (typeof override === "string" && override.trim()) {
+        return formatMessage(override, vars);
+      }
       const dict = dictionaries[locale] ?? en;
       const message = dict[key] ?? en[key] ?? key;
       return formatMessage(message, vars);
     },
-    [locale]
+    [locale, overrides]
   );
 
   const value = useMemo(

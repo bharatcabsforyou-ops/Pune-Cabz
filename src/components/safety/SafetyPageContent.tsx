@@ -23,6 +23,7 @@ import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { images } from "@/lib/images";
 import { useT, type MessageKey } from "@/lib/i18n";
 import { site } from "@/lib/site";
+import { useSiteImage } from "@/lib/content-overrides";
 
 const features: {
   icon: typeof IdCard;
@@ -61,6 +62,8 @@ const stats: { labelKey: MessageKey; textKey: MessageKey }[] = [
 
 export default function SafetyPageContent() {
   const t = useT();
+  const heroImage = useSiteImage("safety.hero", images.travelDriveView);
+  const friendsImage = useSiteImage("safety.friends", images.friendsTable);
 
   return (
     <>
@@ -117,7 +120,7 @@ export default function SafetyPageContent() {
             </div>
 
             <PhotoCard
-              src={images.travelDriveView}
+              src={heroImage}
               alt="Safe travel with verified Pune Cabz drivers"
               variant="banner"
               badge="verified"
@@ -242,7 +245,7 @@ export default function SafetyPageContent() {
               </div>
             </Reveal>
             <Reveal direction="right">
-              <PhotoCard src={images.friendsTable} alt="Travelling together with trust" />
+              <PhotoCard src={friendsImage} alt="Travelling together with trust" />
             </Reveal>
           </div>
         </Container>

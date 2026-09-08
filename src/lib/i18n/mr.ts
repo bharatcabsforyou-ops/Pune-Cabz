@@ -231,7 +231,7 @@ export const mr: Record<MessageKey, string> = {
   "explore.safe.text": "आयडी तपासणी, लाइव्ह ट्रिप शेअरिंग आणि २४/७ सहाय्य.",
   "explore.safe.cta": "सुरक्षा पहा",
 
-  "popular.eyebrow": "रुट यादी",
+  "popular.eyebrow": "लोकप्रिय रुट",
   "popular.title": "पुण्याहून लोकप्रिय रुट",
   "popular.desc": "आता राइड बुक करा — तेच रुट होम आणि बुक पेजवर.",
 

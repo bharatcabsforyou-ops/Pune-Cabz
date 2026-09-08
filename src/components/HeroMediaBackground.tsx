@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 import { images } from "@/lib/images";
 import { site } from "@/lib/site";
+import { useSiteImage } from "@/lib/content-overrides";
 
 export default function HeroMediaBackground() {
   const reduceMotion = useReducedMotion();
   const [videoOk, setVideoOk] = useState(true);
   const [videoSrc, setVideoSrc] = useState(site.heroVideoUrl);
+  const heroBg = useSiteImage("home.heroBg", images.heroBg);
 
   useEffect(() => {
     if (reduceMotion) return;
@@ -23,7 +25,7 @@ export default function HeroMediaBackground() {
     <>
       <div className="absolute inset-0">
         <Image
-          src={images.heroBg}
+          src={heroBg}
           alt=""
           fill
           priority
@@ -38,7 +40,7 @@ export default function HeroMediaBackground() {
             muted
             loop
             playsInline
-            poster={images.heroBg}
+            poster={heroBg}
             onError={() => {
               if (videoSrc !== images.heroVideo) {
                 setVideoSrc(images.heroVideo);

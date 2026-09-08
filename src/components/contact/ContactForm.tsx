@@ -18,6 +18,7 @@ import Reveal from "../motion/Reveal";
 import { images } from "@/lib/images";
 import { site } from "@/lib/site";
 import { useT } from "@/lib/i18n";
+import { useSiteImage } from "@/lib/content-overrides";
 
 const subjects = [
   { value: "", label: "Select topic" },
@@ -30,6 +31,7 @@ const subjects = [
 
 export default function ContactForm() {
   const t = useT();
+  const formImage = useSiteImage("contact.form", images.travelDriveView);
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -80,7 +82,7 @@ export default function ContactForm() {
           <Reveal direction="left" className="order-2 min-h-0 lg:order-1 lg:relative lg:w-[38%] lg:shrink-0">
             <div className="relative h-40 overflow-hidden rounded-xl bg-[#1a1214] sm:h-44 lg:absolute lg:inset-0 lg:h-auto">
               <Image
-                src={images.travelDriveView}
+                src={formImage}
                 alt="Pune Cabz support on your route"
                 fill
                 sizes="(min-width: 1024px) 360px, 100vw"

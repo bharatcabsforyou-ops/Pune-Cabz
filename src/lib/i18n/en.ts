@@ -236,7 +236,7 @@ export const en = {
   "explore.safe.text": "ID checks, live trip sharing, and 24/7 support.",
   "explore.safe.cta": "See safety",
 
-  "popular.eyebrow": "Route list",
+  "popular.eyebrow": "Popular routes",
   "popular.title": "Popular routes from Pune",
   "popular.desc": "Book a ride Now — same routes on the home page and on the book page.",
 

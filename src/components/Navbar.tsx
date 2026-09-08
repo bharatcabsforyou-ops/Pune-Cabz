@@ -69,10 +69,8 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: [0.21, 0.47, 0.32, 0.98] }}
       className={clsx(
-        "sticky top-0 z-50 overflow-visible border-b bg-white/95 backdrop-blur-xl transition-[border-color,box-shadow,background-color] duration-300",
-        scrolled
-          ? "border-black/[0.05] shadow-[0_4px_20px_-12px_rgba(26,10,12,0.12)]"
-          : "border-transparent"
+        "sticky top-0 z-50 overflow-visible border-b border-black/[0.06] bg-white transition-[box-shadow] duration-300",
+        scrolled && "shadow-[0_4px_20px_-12px_rgba(26,10,12,0.12)]"
       )}
     >
       <Container className="grid h-[4.25rem] min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 sm:h-[4.75rem] sm:gap-2.5 xl:gap-3">
@@ -199,7 +197,7 @@ export default function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.26, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="overflow-hidden border-t border-black/[0.06] bg-white/95 backdrop-blur-xl xl:hidden"
+            className="overflow-hidden border-t border-black/[0.06] bg-white xl:hidden"
           >
             <nav className="flex flex-col gap-0.5 px-4 py-3 sm:px-6">
               <div className="mb-2 flex items-center justify-between rounded-xl border border-black/[0.06] bg-soft px-3 py-2.5">

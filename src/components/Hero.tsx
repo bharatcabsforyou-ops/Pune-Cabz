@@ -1,13 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
+import clsx from "clsx";
 import Container from "./Container";
 import HeroMediaBackground from "./HeroMediaBackground";
 import BookCabForm from "./BookCabForm";
-import { useT } from "@/lib/i18n";
+import { useLocale, useT } from "@/lib/i18n";
 
 export default function Hero() {
   const t = useT();
+  const { locale } = useLocale();
+  const isDevanagari = locale === "hi" || locale === "mr";
 
   const stats = [
     { value: "30+", label: t("hero.stat.cities") },
@@ -32,12 +35,20 @@ export default function Hero() {
               {t("hero.badge")}
             </motion.p>
 
-            <h1 className="mt-3 text-[2.25rem] font-extrabold leading-[1.08] tracking-tight sm:mt-3.5 sm:text-5xl lg:text-[3.5rem]">
+            <h1
+              lang={locale}
+              className={clsx(
+                "mt-3 flex flex-col items-start text-left font-extrabold sm:mt-3.5",
+                isDevanagari
+                  ? "gap-1.5 text-[2.05rem] leading-[1.3] tracking-normal sm:gap-2 sm:text-[2.75rem] sm:leading-[1.28] lg:text-[3.25rem] lg:leading-[1.26] [font-family:var(--font-devanagari),var(--font-jakarta),sans-serif]"
+                  : "gap-1 text-[2.25rem] leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.5rem]"
+              )}
+            >
               <motion.span
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.08, ease: [0.21, 0.47, 0.32, 0.98] }}
-                className="block text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.25)]"
+                className="block w-full pl-0 text-left text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.25)]"
               >
                 {t("hero.title1")}
               </motion.span>
@@ -45,7 +56,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.18, ease: [0.21, 0.47, 0.32, 0.98] }}
-                className="mt-1 block text-brand drop-shadow-[0_2px_12px_rgba(0,0,0,0.25)]"
+                className="block w-full pl-0 text-left text-brand drop-shadow-[0_2px_12px_rgba(0,0,0,0.25)]"
               >
                 {t("hero.title2")}
               </motion.span>
@@ -55,7 +66,10 @@ export default function Hero() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.26 }}
-              className="mt-3 text-[15px] font-semibold text-white/90 sm:text-base drop-shadow-[0_1px_8px_rgba(0,0,0,0.2)]"
+              className={clsx(
+                "mt-3 font-semibold text-white/90 drop-shadow-[0_1px_8px_rgba(0,0,0,0.2)]",
+                isDevanagari ? "text-[15px] leading-snug sm:text-base" : "text-[15px] sm:text-base"
+              )}
             >
               {t("hero.subtitle")}
             </motion.p>
@@ -64,7 +78,12 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.32 }}
-              className="mt-2.5 max-w-lg text-[15px] leading-relaxed text-white/92 sm:mt-3 sm:text-base lg:text-[17px] drop-shadow-[0_1px_8px_rgba(0,0,0,0.25)]"
+              className={clsx(
+                "mt-2.5 max-w-lg text-white/92 sm:mt-3 drop-shadow-[0_1px_8px_rgba(0,0,0,0.25)]",
+                isDevanagari
+                  ? "text-[15px] leading-relaxed sm:text-base lg:text-[16px]"
+                  : "text-[15px] leading-relaxed sm:text-base lg:text-[17px]"
+              )}
             >
               {t("hero.body")}
             </motion.p>

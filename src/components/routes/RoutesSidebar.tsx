@@ -18,7 +18,7 @@ export function RoutesMobileStrip({ routes, loaded, selectedId, onSelect }: Rout
 
   return (
     <div className="lg:hidden">
-      <p className="text-[11px] font-bold uppercase tracking-widest text-brand">Route list</p>
+      <p className="text-[11px] font-bold uppercase tracking-widest text-brand">Popular routes</p>
       <p className="mt-1 text-sm font-semibold text-navy">Pick a route</p>
       <div className="mt-3 flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {routes.map((route) => {
@@ -62,7 +62,7 @@ export default function RoutesSidebar({ routes, loaded, selectedId, onSelect }: 
     return (
       <aside className="hidden rounded-2xl border border-dashed border-brand/20 bg-white p-5 text-center lg:block">
         <p className="text-sm font-semibold text-navy">No routes yet</p>
-        <p className="mt-2 text-[13px] text-navy/50">Add routes in admin Route list — they appear here.</p>
+        <p className="mt-2 text-[13px] text-navy/50">Add routes in admin Popular routes — they appear here.</p>
       </aside>
     );
   }
@@ -70,10 +70,10 @@ export default function RoutesSidebar({ routes, loaded, selectedId, onSelect }: 
   return (
     <aside className="hidden rounded-2xl border border-black/[0.06] bg-white shadow-sm lg:block lg:sticky lg:top-24">
       <div className="border-b border-black/[0.05] bg-gradient-to-br from-[#fafbfc] to-white px-5 py-4">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-brand">Route list</p>
+        <p className="text-[11px] font-bold uppercase tracking-widest text-brand">Popular routes</p>
         <h2 className="mt-1 text-lg font-bold text-navy">Popular from Pune</h2>
         <p className="mt-1 text-[13px] leading-relaxed text-navy/50">
-          Same routes as admin Route list. Tap to fill the booking form.
+          Tap a route to fill the booking form.
         </p>
       </div>
 

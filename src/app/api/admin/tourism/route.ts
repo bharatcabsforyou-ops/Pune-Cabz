@@ -2,49 +2,75 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { isAdminRequest } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { getTourismSeedTrips } from "@/lib/tourism-seed";
 import {
+  isMissingPlaceColumns,
+  mapTourismRow,
+  tourismDbPayload,
+  TOURISM_SELECT_BASE,
+  TOURISM_SELECT_FULL,
+  type TourismRow,
+} from "@/lib/tourism-db";
+import {
+  isPersistedTourismId,
+  mergeTourismTrips,
   sortTourismTrips,
   validateTourismInput,
-  type TourismTrip,
   type TourismTripInput,
 } from "@/lib/tourism";
 
-type Row = {
-  id: string;
-  title: string;
-  caption: string;
-  trip_type: string;
-  from_city: string;
-  image_url: string;
-  sort_order: number;
-  published: boolean;
-  created_at: string;
-};
+async function fetchAdminTrips(supabase: ReturnType<typeof createAdminClient>) {
+  const full = await supabase
+    .from("tourism_trips")
+    .select(TOURISM_SELECT_FULL)
+    .order("sort_order", { ascending: true })
+    .order("created_at", { ascending: false });
 
-function mapRow(row: Row): TourismTrip {
-  return {
-    id: row.id,
-    title: row.title,
-    caption: row.caption,
-    tripType: row.trip_type,
-    fromCity: row.from_city,
-    imageUrl: row.image_url,
-    sortOrder: row.sort_order,
-    published: row.published,
-    createdAt: row.created_at,
-  };
+  if (full.error && isMissingPlaceColumns(full.error.message)) {
+    return supabase
+      .from("tourism_trips")
+      .select(TOURISM_SELECT_BASE)
+      .order("sort_order", { ascending: true })
+      .order("created_at", { ascending: false });
+  }
+
+  return full;
 }
 
-function dbPayload(input: TourismTripInput) {
-  return {
-    title: input.title,
-    caption: input.caption,
-    trip_type: input.tripType,
-    from_city: input.fromCity,
-    image_url: input.imageUrl,
-    sort_order: input.sortOrder,
-    published: input.published,
-  };
+async function writeTrip(
+  supabase: ReturnType<typeof createAdminClient>,
+  mode: "insert" | "update",
+  input: TourismTripInput,
+  id?: string
+) {
+  let includePlace = true;
+  let payload = tourismDbPayload(input, true);
+
+  let result =
+    mode === "insert"
+      ? await supabase.from("tourism_trips").insert(payload).select(TOURISM_SELECT_FULL).single()
+      : await supabase
+          .from("tourism_trips")
+          .update(payload)
+          .eq("id", id!)
+          .select(TOURISM_SELECT_FULL)
+          .single();
+
+  if (result.error && isMissingPlaceColumns(result.error.message)) {
+    includePlace = false;
+    payload = tourismDbPayload(input, false);
+    result =
+      mode === "insert"
+        ? await supabase.from("tourism_trips").insert(payload).select(TOURISM_SELECT_BASE).single()
+        : await supabase
+            .from("tourism_trips")
+            .update(payload)
+            .eq("id", id!)
+            .select(TOURISM_SELECT_BASE)
+            .single();
+  }
+
+  return { result, includePlace };
 }
 
 export async function GET(request: NextRequest) {
@@ -54,26 +80,27 @@ export async function GET(request: NextRequest) {
 
   try {
     const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from("tourism_trips")
-      .select(
-        "id, title, caption, trip_type, from_city, image_url, sort_order, published, created_at"
-      )
-      .order("sort_order", { ascending: true })
-      .order("created_at", { ascending: false });
+    const { data, error } = await fetchAdminTrips(supabase);
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      return NextResponse.json({
+        trips: getTourismSeedTrips(),
+        error: error.message,
+        setupRequired: true,
+      });
     }
 
     return NextResponse.json({
-      trips: sortTourismTrips((data as Row[] | null)?.map(mapRow) ?? []),
+      trips: mergeTourismTrips(
+        sortTourismTrips((data as TourismRow[] | null)?.map(mapTourismRow) ?? []),
+        getTourismSeedTrips()
+      ),
     });
   } catch {
-    return NextResponse.json(
-      { error: "Supabase service role key is missing." },
-      { status: 503 }
-    );
+    return NextResponse.json({
+      trips: getTourismSeedTrips(),
+      error: "Supabase service role key is missing — showing built-in destinations.",
+    });
   }
 }
 
@@ -96,19 +123,13 @@ export async function POST(request: NextRequest) {
 
   try {
     const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from("tourism_trips")
-      .insert(dbPayload(validated.data))
-      .select(
-        "id, title, caption, trip_type, from_city, image_url, sort_order, published, created_at"
-      )
-      .single();
+    const { result } = await writeTrip(supabase, "insert", validated.data);
 
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+    if (result.error) {
+      return NextResponse.json({ error: result.error.message }, { status: 500 });
     }
 
-    return NextResponse.json({ trip: mapRow(data as Row) });
+    return NextResponse.json({ trip: mapTourismRow(result.data as TourismRow) });
   } catch {
     return NextResponse.json(
       { error: "Supabase service role key is missing." },
@@ -143,20 +164,21 @@ export async function PATCH(request: NextRequest) {
 
   try {
     const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from("tourism_trips")
-      .update(dbPayload(validated.data))
-      .eq("id", id)
-      .select(
-        "id, title, caption, trip_type, from_city, image_url, sort_order, published, created_at"
-      )
-      .single();
 
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+    if (!isPersistedTourismId(id)) {
+      const { result } = await writeTrip(supabase, "insert", validated.data);
+      if (result.error) {
+        return NextResponse.json({ error: result.error.message }, { status: 500 });
+      }
+      return NextResponse.json({ trip: mapTourismRow(result.data as TourismRow) });
     }
 
-    return NextResponse.json({ trip: mapRow(data as Row) });
+    const { result } = await writeTrip(supabase, "update", validated.data, id);
+    if (result.error) {
+      return NextResponse.json({ error: result.error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ trip: mapTourismRow(result.data as TourismRow) });
   } catch {
     return NextResponse.json(
       { error: "Supabase service role key is missing." },
@@ -180,6 +202,16 @@ export async function DELETE(request: NextRequest) {
 
   if (!id) {
     return NextResponse.json({ error: "Trip id is required." }, { status: 400 });
+  }
+
+  if (!isPersistedTourismId(id)) {
+    return NextResponse.json(
+      {
+        error:
+          "Built-in destinations can’t be deleted. Edit & save to store a copy, then manage that row.",
+      },
+      { status: 400 }
+    );
   }
 
   try {

@@ -1,6 +1,9 @@
+"use client";
+
 import clsx from "clsx";
 import Image from "next/image";
 import { images } from "@/lib/images";
+import { useSiteImage } from "@/lib/content-overrides";
 
 const sizeClasses = {
   nav: "h-12 w-auto max-w-[min(11.5rem,48vw)] sm:h-[3.35rem] sm:max-w-[13.5rem] xl:h-14 xl:max-w-[15.5rem]",
@@ -16,6 +19,8 @@ export default function Logo({
   dark?: boolean;
   size?: keyof typeof sizeClasses;
 }) {
+  const logoSrc = useSiteImage("site.logo", images.logoNav);
+
   return (
     <span
       className={clsx(
@@ -25,7 +30,7 @@ export default function Logo({
       )}
     >
       <Image
-        src={images.logoNav}
+        src={logoSrc}
         alt="Pune Cabz — Travellers Choice"
         width={2078}
         height={721}
