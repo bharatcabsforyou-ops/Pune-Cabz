@@ -1,15 +1,15 @@
 import { createHmac, timingSafeEqual } from "crypto";
 import type { NextRequest } from "next/server";
-import { verifyPassword } from "@/lib/admin-password";
 import { createAdminClient, isSupabaseConfigured } from "@/lib/supabase/admin";
+import { normalizeAdminEmail } from "@/lib/admin-otp";
 
 const COOKIE_TOKEN = "pc_admin";
 const COOKIE_EMAIL = "pc_admin_email";
 
 function sessionSecret() {
   return (
-    process.env.SUPABASE_SERVICE_ROLE_KEY ||
     process.env.ADMIN_SESSION_SECRET ||
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
     process.env.ADMIN_PASSWORD ||
     ""
   );
@@ -20,10 +20,6 @@ function safeEqual(a: string, b: string) {
   const right = Buffer.from(b);
   if (left.length !== right.length) return false;
   return timingSafeEqual(left, right);
-}
-
-function normalizeEmail(email: string) {
-  return email.trim().toLowerCase();
 }
 
 export function adminCookieOptions() {
@@ -46,7 +42,7 @@ export function adminEmailCookieName() {
 
 export function makeAdminToken(email: string) {
   const secret = sessionSecret();
-  const normalized = normalizeEmail(email);
+  const normalized = normalizeAdminEmail(email);
   if (!secret || !normalized) return null;
   return createHmac("sha256", secret).update(`pune-cabz-admin:${normalized}`).digest("hex");
 }
@@ -55,47 +51,35 @@ export function adminConfigured() {
   return isSupabaseConfigured() && Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY);
 }
 
-function envCredentialsMatch(email: string, password: string) {
-  const expectedEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
-  const expectedPassword = process.env.ADMIN_PASSWORD ?? "";
-  if (!expectedEmail || !expectedPassword) return false;
-  return (
-    safeEqual(normalizeEmail(email), expectedEmail) &&
-    safeEqual(password.trim(), expectedPassword)
-  );
-}
+/** Email must be in admin_users or match ADMIN_EMAIL env allowlist. */
+export async function isAllowedAdminEmail(email: string) {
+  const normalized = normalizeAdminEmail(email);
+  if (!normalized || !normalized.includes("@")) return false;
 
-export async function verifyAdminLogin(email: string, password: string) {
-  const normalized = normalizeEmail(email);
-  const cleanPassword = password.trim();
-  if (!normalized || !cleanPassword) return null;
+  const envEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+  if (envEmail && safeEqual(normalized, envEmail)) {
+    return true;
+  }
 
   if (isSupabaseConfigured() && process.env.SUPABASE_SERVICE_ROLE_KEY) {
     try {
       const supabase = createAdminClient();
       const { data, error } = await supabase
         .from("admin_users")
-        .select("email, password_hash")
+        .select("email")
         .eq("email", normalized)
         .maybeSingle();
 
       if (error) {
-        console.error("[admin login] Supabase error:", error.message);
+        console.error("[admin otp] allowlist error:", error.message);
       }
-
-      if (data && verifyPassword(cleanPassword, data.password_hash)) {
-        return normalized;
-      }
+      if (data?.email) return true;
     } catch (err) {
-      console.error("[admin login] Supabase client error:", err);
+      console.error("[admin otp] allowlist client error:", err);
     }
   }
 
-  if (envCredentialsMatch(normalized, cleanPassword)) {
-    return normalized;
-  }
-
-  return null;
+  return false;
 }
 
 export function isAdminRequest(request: NextRequest) {

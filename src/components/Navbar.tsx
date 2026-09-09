@@ -18,9 +18,11 @@ import {
 } from "@/lib/site-nav";
 import { site } from "@/lib/site";
 import { useT } from "@/lib/i18n";
+import { useAdminChrome } from "@/lib/admin-chrome";
 
 export default function Navbar() {
   const t = useT();
+  const { hideSiteChrome } = useAdminChrome();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
@@ -59,7 +61,7 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", onPointerDown);
   }, []);
 
-  if (pathname.startsWith("/admin")) {
+  if (pathname.startsWith("/admin") && hideSiteChrome) {
     return null;
   }
 

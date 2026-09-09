@@ -5,20 +5,22 @@ import type { ReactNode } from "react";
 import Footer from "@/components/Footer";
 import ReviewsSection from "@/components/ReviewsSection";
 import ContactFloats from "@/components/ContactFloats";
+import { useAdminChrome } from "@/lib/admin-chrome";
 
 export default function SiteChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const isAdmin = pathname.startsWith("/admin");
-  const hideReviews = pathname.startsWith("/about/testimonials");
+  const { hideSiteChrome } = useAdminChrome();
+  const isAdminDashboard = pathname.startsWith("/admin") && hideSiteChrome;
+  const hideReviews = pathname.startsWith("/about/testimonials") || pathname.startsWith("/admin");
 
   return (
     <>
       {children}
-      {!isAdmin ? (
+      {!isAdminDashboard ? (
         <>
           {!hideReviews ? <ReviewsSection /> : null}
           <Footer />
-          <ContactFloats />
+          {!pathname.startsWith("/admin") ? <ContactFloats /> : null}
         </>
       ) : null}
     </>

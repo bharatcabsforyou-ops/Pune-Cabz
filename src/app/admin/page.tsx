@@ -19,6 +19,7 @@ import type { Review, ReviewStatus } from "@/lib/reviews";
 import type { Enquiry, EnquiryStatus } from "@/lib/enquiries";
 import type { Booking, BookingStatus } from "@/lib/bookings";
 import type { TourismTrip } from "@/lib/tourism";
+import { useSyncAdminChrome } from "@/lib/admin-chrome";
 
 type ReviewTab = "pending" | "approved" | "rejected";
 type EnquiryTab = "new" | "read" | "closed";
@@ -26,6 +27,7 @@ type BookingTab = "new" | "confirmed" | "cancelled" | "completed";
 
 export default function AdminPage() {
   const [authed, setAuthed] = useState<boolean | null>(null);
+  useSyncAdminChrome(authed);
   const [loginError, setLoginError] = useState("");
   const [section, setSection] = useState<AdminSection>("dashboard");
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -107,16 +109,40 @@ export default function AdminPage() {
       .catch(() => setAuthed(false));
   }, []);
 
-  async function login(emailInput: string, passwordInput: string) {
+  async function requestOtp(emailInput: string) {
     setLoginError("");
-    const res = await fetch("/api/admin/login", {
+    const res = await fetch("/api/admin/login/request-otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: emailInput, password: passwordInput }),
+      body: JSON.stringify({ email: emailInput }),
+    });
+    const data = (await res.json()) as {
+      ok?: boolean;
+      error?: string;
+      message?: string;
+      debugOtp?: string;
+    };
+    if (!res.ok) {
+      setLoginError(data.error || "Could not send login code.");
+      return { ok: false as const };
+    }
+    return {
+      ok: true as const,
+      message: data.message,
+      debugOtp: data.debugOtp,
+    };
+  }
+
+  async function verifyOtp(emailInput: string, otp: string) {
+    setLoginError("");
+    const res = await fetch("/api/admin/login/verify-otp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: emailInput, otp }),
     });
     const data = (await res.json()) as { error?: string };
     if (!res.ok) {
-      setLoginError(data.error || "Login failed.");
+      setLoginError(data.error || "Invalid code.");
       return;
     }
     await loadAll();
@@ -224,7 +250,9 @@ export default function AdminPage() {
   }
 
   if (!authed) {
-    return <AdminLogin onLogin={login} error={loginError} />;
+    return (
+      <AdminLogin onRequestOtp={requestOtp} onVerifyOtp={verifyOtp} error={loginError} />
+    );
   }
 
   return (

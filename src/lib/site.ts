@@ -1,7 +1,7 @@
 export const site = {
   name: "Pune Cabz",
   /** Canonical site origin — set NEXT_PUBLIC_SITE_URL in production */
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://punecabz.in").replace(/\/$/, ""),
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://punecabz.com").replace(/\/$/, ""),
   phone: "+91 95959 33899",
   phoneHref: "tel:+919595933899",
   email: "punecabz@gmail.com",

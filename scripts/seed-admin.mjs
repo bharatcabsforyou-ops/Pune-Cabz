@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Creates/updates the default admin in Supabase.
- * Run after supabase/admin_users.sql (table must exist).
+ * Creates/updates the default admin email allowlist in Supabase.
+ * Run after supabase/admin_users.sql (and optionally supabase/admin_otps.sql).
  *
  * Usage: node scripts/seed-admin.mjs
  */
@@ -9,13 +9,11 @@
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync, existsSync } from "fs";
 import { resolve } from "path";
-import { scryptSync, randomBytes } from "crypto";
 
 const ROOT = resolve(import.meta.dirname, "..");
 const ENV_PATH = resolve(ROOT, ".env.local");
 
 const ADMIN_EMAIL = "yesr01164@gmail.com";
-const ADMIN_PASSWORD = "Gafru@786";
 
 function loadEnv() {
   if (!existsSync(ENV_PATH)) {
@@ -32,12 +30,6 @@ function loadEnv() {
   return env;
 }
 
-function hashPassword(password) {
-  const salt = randomBytes(16).toString("hex");
-  const hash = scryptSync(password, salt, 64).toString("hex");
-  return `${salt}:${hash}`;
-}
-
 async function main() {
   const env = loadEnv();
   const url = env.NEXT_PUBLIC_SUPABASE_URL;
@@ -51,21 +43,38 @@ async function main() {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 
-  const passwordHash = hashPassword(ADMIN_PASSWORD);
   const { data, error } = await supabase
     .from("admin_users")
-    .upsert({ email: ADMIN_EMAIL.toLowerCase(), password_hash: passwordHash }, { onConflict: "email" })
+    .upsert({ email: ADMIN_EMAIL.toLowerCase(), password_hash: null }, { onConflict: "email" })
     .select("email")
     .single();
 
   if (error) {
-    console.error("Failed:", error.message);
-    console.error("\nRun supabase/admin_users.sql in the Supabase SQL editor first.");
-    process.exit(1);
+    // Older schema may still require password_hash — insert with placeholder hash
+    const { data: retry, error: retryError } = await supabase
+      .from("admin_users")
+      .upsert(
+        {
+          email: ADMIN_EMAIL.toLowerCase(),
+          password_hash: "otp-only",
+        },
+        { onConflict: "email" }
+      )
+      .select("email")
+      .single();
+
+    if (retryError) {
+      console.error("Failed:", error.message, "/", retryError.message);
+      console.error("\nRun supabase/admin_users.sql then supabase/admin_otps.sql first.");
+      process.exit(1);
+    }
+    console.log("Admin ready:", retry.email);
+  } else {
+    console.log("Admin ready:", data.email);
   }
 
-  console.log("Admin ready:", data.email);
-  console.log("Login at /admin with your email and password.");
+  console.log("Login at /admin with email + OTP (no password).");
+  console.log("Set RESEND_API_KEY to receive codes by email.");
 }
 
 main();

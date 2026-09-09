@@ -3,7 +3,7 @@
 create table if not exists public.admin_users (
   id uuid primary key default gen_random_uuid(),
   email text not null unique,
-  password_hash text not null,
+  password_hash text,
   created_at timestamptz not null default now()
 );
 
@@ -14,4 +14,5 @@ alter table public.admin_users enable row level security;
 -- No public policies: only the service role (admin API) can read/write admin_users.
 
 -- Default admin email: yesr01164@gmail.com
--- After running this file, run: npm run seed:admin
+-- After running this file + supabase/admin_otps.sql, run: npm run seed:admin
+-- Login is email + OTP (no password).
