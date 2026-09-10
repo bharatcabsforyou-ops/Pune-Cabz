@@ -4,6 +4,7 @@ import { useMemo, useState, type FormEvent, type ReactNode } from "react";
 import clsx from "clsx";
 import { Mail } from "lucide-react";
 import WhatsAppIcon from "./WhatsAppIcon";
+import CityCombobox from "./CityCombobox";
 import { usePopularRoutes } from "@/hooks/usePopularRoutes";
 import defaultRoutes from "@/data/default-routes.json";
 import { routeCityOptions, mergeRoutesWithDefaults, type PopularRoute } from "@/lib/popular-routes";
@@ -237,41 +238,23 @@ export default function BookCabForm({
           </FormField>
 
           <FormField label={t("bookForm.pickup")}>
-            <input
-              type="text"
+            <CityCombobox
               value={from}
-              onChange={(e) => handleFromChange(e.target.value)}
+              onChange={handleFromChange}
+              options={fromCities}
               placeholder={`e.g. ${defaultFrom}`}
-              list="book-from-cities"
               disabled={!loaded && fromApi.length === 0}
-              className="book-cab-input"
             />
-            {fromCities.length > 0 && (
-              <datalist id="book-from-cities">
-                {fromCities.map((city) => (
-                  <option key={city} value={city} />
-                ))}
-              </datalist>
-            )}
           </FormField>
 
           <FormField label={t("bookForm.drop")}>
-            <input
-              type="text"
+            <CityCombobox
               value={to}
-              onChange={(e) => setTo(e.target.value)}
+              onChange={setTo}
+              options={filteredToOptions}
               placeholder={`e.g. ${defaultTo}`}
-              list="book-to-cities"
               disabled={!loaded && fromApi.length === 0}
-              className="book-cab-input"
             />
-            {filteredToOptions.length > 0 && (
-              <datalist id="book-to-cities">
-                {filteredToOptions.map((city) => (
-                  <option key={city} value={city} />
-                ))}
-              </datalist>
-            )}
           </FormField>
 
           <FormField label={t("bookForm.date")}>
@@ -383,9 +366,9 @@ function FormField({
   className?: string;
 }) {
   return (
-    <label className={clsx("book-cab-field", className)}>
+    <div className={clsx("book-cab-field", className)}>
       <span className="book-cab-label">{label}</span>
       {children}
-    </label>
+    </div>
   );
 }

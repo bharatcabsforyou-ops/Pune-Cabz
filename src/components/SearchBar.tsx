@@ -13,6 +13,7 @@ import {
   Plus,
 } from "lucide-react";
 import WhatsAppIcon from "./WhatsAppIcon";
+import CityCombobox from "./CityCombobox";
 import { usePopularRoutes } from "@/hooks/usePopularRoutes";
 import defaultRoutes from "@/data/default-routes.json";
 import { routeCityOptions, mergeRoutesWithDefaults, type PopularRoute } from "@/lib/popular-routes";
@@ -120,9 +121,10 @@ export default function SearchBar({
           listId="search-from-cities"
           isHero={isHero}
           disabled={!loaded && fromApi.length === 0}
+          elevate
         />
 
-        <div className="flex items-center justify-center lg:w-0 lg:shrink-0">
+        <div className="relative z-[5] flex items-center justify-center lg:w-0 lg:shrink-0">
           <motion.button
             type="button"
             onClick={swap}
@@ -146,6 +148,7 @@ export default function SearchBar({
           listId="search-to-cities"
           isHero={isHero}
           disabled={!loaded && fromApi.length === 0}
+          elevate
         />
         <Divider />
         <Field
@@ -196,7 +199,7 @@ export default function SearchBar({
           </div>
         </div>
 
-        <div className="flex items-stretch border-t border-black/8 lg:border-t-0 lg:border-l lg:border-black/10">
+        <div className="flex items-stretch overflow-hidden rounded-b-[1.25rem] border-t border-black/8 lg:rounded-b-none lg:rounded-r-[1.25rem] lg:border-t-0 lg:border-l lg:border-black/10">
           <button
             type="submit"
             className={clsx(
@@ -226,6 +229,7 @@ function Field({
   listId,
   isHero = false,
   disabled = false,
+  elevate = false,
 }: {
   icon: React.ReactNode;
   label: string;
@@ -237,33 +241,38 @@ function Field({
   listId?: string;
   isHero?: boolean;
   disabled?: boolean;
+  elevate?: boolean;
 }) {
   return (
     <div
       className={clsx(
         "flex min-w-0 items-center gap-3 px-4 py-3.5 transition-colors focus-within:bg-brand/[0.02] sm:px-5 sm:py-4",
         isHero ? "flex-1 lg:min-w-[140px]" : "flex-1",
-        type === "date" && isHero && "lg:min-w-[170px] lg:max-w-[200px]"
+        type === "date" && isHero && "lg:min-w-[170px] lg:max-w-[200px]",
+        elevate && "relative z-30 focus-within:z-40"
       )}
     >
       {icon}
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="relative flex min-w-0 flex-1 flex-col">
         <span className="text-xs font-medium text-navy/50">{label}</span>
-        <input
-          type={type}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
-          list={listId}
-          disabled={disabled}
-          className="w-full min-w-0 bg-transparent text-[16px] font-semibold text-navy placeholder:text-navy/30 outline-none ring-0 focus:outline-none focus:ring-0 focus-visible:outline-none disabled:opacity-50"
-        />
-        {listId && options.length > 0 && (
-          <datalist id={listId}>
-            {options.map((option) => (
-              <option key={option} value={option} />
-            ))}
-          </datalist>
+        {type === "text" && listId ? (
+          <CityCombobox
+            variant="inline"
+            value={value}
+            onChange={onChange}
+            options={options}
+            placeholder={placeholder}
+            disabled={disabled}
+          />
+        ) : (
+          <input
+            type={type}
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder={placeholder}
+            disabled={disabled}
+            className="w-full min-w-0 bg-transparent text-[16px] font-semibold text-navy placeholder:text-navy/30 outline-none ring-0 focus:outline-none focus:ring-0 focus-visible:outline-none disabled:opacity-50"
+          />
         )}
       </div>
     </div>

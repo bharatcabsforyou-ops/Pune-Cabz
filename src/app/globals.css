@@ -267,7 +267,7 @@
 }
 
 .search-panel {
-  overflow: hidden;
+  overflow: visible;
   border-radius: 1.25rem;
   background: #ffffff;
   box-shadow:
@@ -286,7 +286,7 @@
 
 .book-cab-card {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 1.35rem;
   border: 1px solid rgba(255, 255, 255, 0.85);
   background: #ffffff;
@@ -389,6 +389,12 @@
   min-width: 0;
   flex-direction: column;
   gap: 0.35rem;
+  position: relative;
+  z-index: 1;
+}
+
+.book-cab-field:focus-within {
+  z-index: 40;
 }
 
 .book-cab-label {
@@ -448,6 +454,134 @@
   background-repeat: no-repeat;
   background-position: right 0.85rem center;
   padding-right: 2.25rem;
+}
+
+/* City pickup / drop combobox */
+.city-combobox {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.city-combobox-control {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.city-combobox-input {
+  padding-right: 2.35rem;
+}
+
+.city-combobox-input-inline {
+  width: 100%;
+  min-width: 0;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-navy);
+  outline: none;
+  padding-right: 1.5rem;
+}
+
+.city-combobox-input-inline::placeholder {
+  color: color-mix(in srgb, var(--color-navy) 30%, transparent);
+  font-weight: 500;
+}
+
+.city-combobox-chevron {
+  position: absolute;
+  right: 0.55rem;
+  display: inline-flex;
+  height: 1.75rem;
+  width: 1.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--color-navy) 45%, transparent);
+  transition:
+    transform 0.18s ease,
+    color 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.city-combobox--inline .city-combobox-chevron {
+  right: 0;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.city-combobox-chevron:hover {
+  color: var(--color-brand);
+  background: color-mix(in srgb, var(--color-brand) 8%, transparent);
+}
+
+.city-combobox-chevron-open {
+  transform: rotate(180deg);
+  color: var(--color-brand);
+}
+
+.city-combobox-menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 0.35rem);
+  z-index: 60;
+  max-height: 15.5rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: 0.95rem;
+  border: 1px solid rgba(26, 10, 12, 0.08);
+  background: #ffffff;
+  padding: 0.35rem;
+  box-shadow:
+    0 12px 28px rgba(26, 10, 12, 0.12),
+    0 2px 8px rgba(26, 10, 12, 0.06);
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--color-brand) 35%, transparent) transparent;
+}
+
+.city-combobox--inline .city-combobox-menu {
+  left: -0.35rem;
+  right: -0.35rem;
+  min-width: 12rem;
+}
+
+.city-combobox-empty {
+  padding: 0.85rem 0.95rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--color-navy) 55%, transparent);
+}
+
+.city-combobox-option {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.55rem;
+  border-radius: 0.7rem;
+  padding: 0.62rem 0.75rem;
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--color-navy) 82%, transparent);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.city-combobox-option:hover,
+.city-combobox-option-active {
+  background: color-mix(in srgb, var(--color-brand) 9%, transparent);
+  color: var(--color-brand);
+}
+
+.city-combobox-option-icon {
+  height: 0.95rem;
+  width: 0.95rem;
+  flex-shrink: 0;
+  opacity: 0.7;
 }
 
 .book-cab-textarea {
