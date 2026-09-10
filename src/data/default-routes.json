@@ -1,21 +1,21 @@
 [
   {
     "fromCity": "Pune",
-    "toCity": "Pune City",
-    "duration": "45m",
-    "fromPrice": "199",
-    "tag": "Popular",
-    "imageUrl": "/image1.jpeg",
-    "sortOrder": 1,
-    "published": true
-  },
-  {
-    "fromCity": "Pune",
     "toCity": "Mumbai",
     "duration": "3h 30m",
     "fromPrice": "499",
     "tag": "Most booked",
     "imageUrl": "/image2.jpeg",
+    "sortOrder": 1,
+    "published": true
+  },
+  {
+    "fromCity": "Mumbai",
+    "toCity": "Pune",
+    "duration": "3h 30m",
+    "fromPrice": "499",
+    "tag": "Daily",
+    "imageUrl": "/image1.jpeg",
     "sortOrder": 2,
     "published": true
   },
@@ -30,23 +30,13 @@
     "published": true
   },
   {
-    "fromCity": "Pune",
-    "toCity": "Konkan",
-    "duration": "5h",
-    "fromPrice": "599",
-    "tag": "Coastal",
-    "imageUrl": "/image7.png",
+    "fromCity": "Nashik",
+    "toCity": "Pune",
+    "duration": "4h 15m",
+    "fromPrice": "449",
+    "tag": "Weekend",
+    "imageUrl": "/image3.png",
     "sortOrder": 4,
-    "published": true
-  },
-  {
-    "fromCity": "Pune",
-    "toCity": "Mahabaleshwar",
-    "duration": "2h 45m",
-    "fromPrice": "399",
-    "tag": "Scenic",
-    "imageUrl": "/iamge5.png",
-    "sortOrder": 5,
     "published": true
   },
   {
@@ -56,7 +46,37 @@
     "fromPrice": "299",
     "tag": "Hills",
     "imageUrl": "/image6.png",
+    "sortOrder": 5,
+    "published": true
+  },
+  {
+    "fromCity": "Lonavala",
+    "toCity": "Pune",
+    "duration": "1h 15m",
+    "fromPrice": "299",
+    "tag": "Hills",
+    "imageUrl": "/image6.png",
     "sortOrder": 6,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Mahabaleshwar",
+    "duration": "2h 45m",
+    "fromPrice": "399",
+    "tag": "Scenic",
+    "imageUrl": "/iamge5.png",
+    "sortOrder": 7,
+    "published": true
+  },
+  {
+    "fromCity": "Mahabaleshwar",
+    "toCity": "Pune",
+    "duration": "2h 45m",
+    "fromPrice": "399",
+    "tag": "Scenic",
+    "imageUrl": "/iamge5.png",
+    "sortOrder": 8,
     "published": true
   },
   {
@@ -66,7 +86,17 @@
     "fromPrice": "699",
     "tag": "Pilgrimage",
     "imageUrl": "/image7.png",
-    "sortOrder": 7,
+    "sortOrder": 9,
+    "published": true
+  },
+  {
+    "fromCity": "Shirdi",
+    "toCity": "Pune",
+    "duration": "5h 30m",
+    "fromPrice": "699",
+    "tag": "Pilgrimage",
+    "imageUrl": "/image7.png",
+    "sortOrder": 10,
     "published": true
   },
   {
@@ -76,27 +106,17 @@
     "fromPrice": "549",
     "tag": "Daily",
     "imageUrl": "/image8.png",
-    "sortOrder": 8,
+    "sortOrder": 11,
     "published": true
   },
   {
-    "fromCity": "Pune",
-    "toCity": "Chatrapati Sambhajinagar",
-    "duration": "5h",
-    "fromPrice": "649",
-    "tag": "Heritage",
-    "imageUrl": "/image9.png",
-    "sortOrder": 9,
-    "published": true
-  },
-  {
-    "fromCity": "Pune",
-    "toCity": "Goa",
-    "duration": "9h",
-    "fromPrice": "1299",
-    "tag": "Coastal",
-    "imageUrl": "/image10.png",
-    "sortOrder": 10,
+    "fromCity": "Kolhapur",
+    "toCity": "Pune",
+    "duration": "4h",
+    "fromPrice": "549",
+    "tag": "Daily",
+    "imageUrl": "/image8.png",
+    "sortOrder": 12,
     "published": true
   },
   {
@@ -106,7 +126,587 @@
     "fromPrice": "349",
     "tag": "Scenic",
     "imageUrl": "/image11.png",
-    "sortOrder": 11,
+    "sortOrder": 13,
+    "published": true
+  },
+  {
+    "fromCity": "Satara",
+    "toCity": "Pune",
+    "duration": "2h",
+    "fromPrice": "349",
+    "tag": "Scenic",
+    "imageUrl": "/image11.png",
+    "sortOrder": 14,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Chatrapati Sambhajinagar",
+    "duration": "5h",
+    "fromPrice": "649",
+    "tag": "Heritage",
+    "imageUrl": "/image9.png",
+    "sortOrder": 15,
+    "published": true
+  },
+  {
+    "fromCity": "Chatrapati Sambhajinagar",
+    "toCity": "Pune",
+    "duration": "5h",
+    "fromPrice": "649",
+    "tag": "Heritage",
+    "imageUrl": "/image9.png",
+    "sortOrder": 16,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Goa",
+    "duration": "9h",
+    "fromPrice": "1299",
+    "tag": "Coastal",
+    "imageUrl": "/image10.png",
+    "sortOrder": 17,
+    "published": true
+  },
+  {
+    "fromCity": "Goa",
+    "toCity": "Pune",
+    "duration": "9h",
+    "fromPrice": "1299",
+    "tag": "Coastal",
+    "imageUrl": "/image10.png",
+    "sortOrder": 18,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Konkan",
+    "duration": "5h",
+    "fromPrice": "599",
+    "tag": "Coastal",
+    "imageUrl": "/image7.png",
+    "sortOrder": 19,
+    "published": true
+  },
+  {
+    "fromCity": "Konkan",
+    "toCity": "Pune",
+    "duration": "5h",
+    "fromPrice": "599",
+    "tag": "Coastal",
+    "imageUrl": "/image7.png",
+    "sortOrder": 20,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Pune City",
+    "duration": "45m",
+    "fromPrice": "199",
+    "tag": "Popular",
+    "imageUrl": "/image1.jpeg",
+    "sortOrder": 21,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Ahmednagar",
+    "duration": "2h 30m",
+    "fromPrice": "399",
+    "tag": "Daily",
+    "imageUrl": "/image4.jpeg",
+    "sortOrder": 22,
+    "published": true
+  },
+  {
+    "fromCity": "Ahmednagar",
+    "toCity": "Pune",
+    "duration": "2h 30m",
+    "fromPrice": "399",
+    "tag": "Daily",
+    "imageUrl": "/image4.jpeg",
+    "sortOrder": 23,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Solapur",
+    "duration": "4h 30m",
+    "fromPrice": "599",
+    "tag": "Daily",
+    "imageUrl": "/image8.png",
+    "sortOrder": 24,
+    "published": true
+  },
+  {
+    "fromCity": "Solapur",
+    "toCity": "Pune",
+    "duration": "4h 30m",
+    "fromPrice": "599",
+    "tag": "Daily",
+    "imageUrl": "/image8.png",
+    "sortOrder": 25,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Sangli",
+    "duration": "4h",
+    "fromPrice": "549",
+    "tag": "Daily",
+    "imageUrl": "/image11.png",
+    "sortOrder": 26,
+    "published": true
+  },
+  {
+    "fromCity": "Sangli",
+    "toCity": "Pune",
+    "duration": "4h",
+    "fromPrice": "549",
+    "tag": "Daily",
+    "imageUrl": "/image11.png",
+    "sortOrder": 27,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Alibaug",
+    "duration": "3h 30m",
+    "fromPrice": "699",
+    "tag": "Coastal",
+    "imageUrl": "/image10.png",
+    "sortOrder": 28,
+    "published": true
+  },
+  {
+    "fromCity": "Alibaug",
+    "toCity": "Pune",
+    "duration": "3h 30m",
+    "fromPrice": "699",
+    "tag": "Coastal",
+    "imageUrl": "/image10.png",
+    "sortOrder": 29,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Panchgani",
+    "duration": "2h",
+    "fromPrice": "349",
+    "tag": "Hills",
+    "imageUrl": "/iamge5.png",
+    "sortOrder": 30,
+    "published": true
+  },
+  {
+    "fromCity": "Panchgani",
+    "toCity": "Pune",
+    "duration": "2h",
+    "fromPrice": "349",
+    "tag": "Hills",
+    "imageUrl": "/iamge5.png",
+    "sortOrder": 31,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Khandala",
+    "duration": "1h 20m",
+    "fromPrice": "299",
+    "tag": "Hills",
+    "imageUrl": "/image6.png",
+    "sortOrder": 32,
+    "published": true
+  },
+  {
+    "fromCity": "Khandala",
+    "toCity": "Pune",
+    "duration": "1h 20m",
+    "fromPrice": "299",
+    "tag": "Hills",
+    "imageUrl": "/image6.png",
+    "sortOrder": 33,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Matheran",
+    "duration": "2h 30m",
+    "fromPrice": "449",
+    "tag": "Hills",
+    "imageUrl": "/image6.png",
+    "sortOrder": 34,
+    "published": true
+  },
+  {
+    "fromCity": "Matheran",
+    "toCity": "Pune",
+    "duration": "2h 30m",
+    "fromPrice": "449",
+    "tag": "Hills",
+    "imageUrl": "/image6.png",
+    "sortOrder": 35,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Lavasa",
+    "duration": "1h 30m",
+    "fromPrice": "349",
+    "tag": "Scenic",
+    "imageUrl": "/image4.jpeg",
+    "sortOrder": 36,
+    "published": true
+  },
+  {
+    "fromCity": "Lavasa",
+    "toCity": "Pune",
+    "duration": "1h 30m",
+    "fromPrice": "349",
+    "tag": "Scenic",
+    "imageUrl": "/image4.jpeg",
+    "sortOrder": 37,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Jejuri",
+    "duration": "1h",
+    "fromPrice": "249",
+    "tag": "Pilgrimage",
+    "imageUrl": "/image7.png",
+    "sortOrder": 38,
+    "published": true
+  },
+  {
+    "fromCity": "Jejuri",
+    "toCity": "Pune",
+    "duration": "1h",
+    "fromPrice": "249",
+    "tag": "Pilgrimage",
+    "imageUrl": "/image7.png",
+    "sortOrder": 39,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Pandharpur",
+    "duration": "4h",
+    "fromPrice": "599",
+    "tag": "Pilgrimage",
+    "imageUrl": "/image7.png",
+    "sortOrder": 40,
+    "published": true
+  },
+  {
+    "fromCity": "Pandharpur",
+    "toCity": "Pune",
+    "duration": "4h",
+    "fromPrice": "599",
+    "tag": "Pilgrimage",
+    "imageUrl": "/image7.png",
+    "sortOrder": 41,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Karad",
+    "duration": "2h 45m",
+    "fromPrice": "449",
+    "tag": "Daily",
+    "imageUrl": "/image11.png",
+    "sortOrder": 42,
+    "published": true
+  },
+  {
+    "fromCity": "Karad",
+    "toCity": "Pune",
+    "duration": "2h 45m",
+    "fromPrice": "449",
+    "tag": "Daily",
+    "imageUrl": "/image11.png",
+    "sortOrder": 43,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Miraj",
+    "duration": "4h",
+    "fromPrice": "549",
+    "tag": "Daily",
+    "imageUrl": "/image11.png",
+    "sortOrder": 44,
+    "published": true
+  },
+  {
+    "fromCity": "Miraj",
+    "toCity": "Pune",
+    "duration": "4h",
+    "fromPrice": "549",
+    "tag": "Daily",
+    "imageUrl": "/image11.png",
+    "sortOrder": 45,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Baramati",
+    "duration": "1h 45m",
+    "fromPrice": "349",
+    "tag": "Daily",
+    "imageUrl": "/image4.jpeg",
+    "sortOrder": 46,
+    "published": true
+  },
+  {
+    "fromCity": "Baramati",
+    "toCity": "Pune",
+    "duration": "1h 45m",
+    "fromPrice": "349",
+    "tag": "Daily",
+    "imageUrl": "/image4.jpeg",
+    "sortOrder": 47,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Chiplun",
+    "duration": "4h 30m",
+    "fromPrice": "699",
+    "tag": "Coastal",
+    "imageUrl": "/image10.png",
+    "sortOrder": 48,
+    "published": true
+  },
+  {
+    "fromCity": "Chiplun",
+    "toCity": "Pune",
+    "duration": "4h 30m",
+    "fromPrice": "699",
+    "tag": "Coastal",
+    "imageUrl": "/image10.png",
+    "sortOrder": 49,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Ratnagiri",
+    "duration": "5h 30m",
+    "fromPrice": "799",
+    "tag": "Coastal",
+    "imageUrl": "/image10.png",
+    "sortOrder": 50,
+    "published": true
+  },
+  {
+    "fromCity": "Ratnagiri",
+    "toCity": "Pune",
+    "duration": "5h 30m",
+    "fromPrice": "799",
+    "tag": "Coastal",
+    "imageUrl": "/image10.png",
+    "sortOrder": 51,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Ganpatipule",
+    "duration": "6h",
+    "fromPrice": "899",
+    "tag": "Coastal",
+    "imageUrl": "/image10.png",
+    "sortOrder": 52,
+    "published": true
+  },
+  {
+    "fromCity": "Ganpatipule",
+    "toCity": "Pune",
+    "duration": "6h",
+    "fromPrice": "899",
+    "tag": "Coastal",
+    "imageUrl": "/image10.png",
+    "sortOrder": 53,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Latur",
+    "duration": "5h 30m",
+    "fromPrice": "749",
+    "tag": "Daily",
+    "imageUrl": "/image9.png",
+    "sortOrder": 54,
+    "published": true
+  },
+  {
+    "fromCity": "Latur",
+    "toCity": "Pune",
+    "duration": "5h 30m",
+    "fromPrice": "749",
+    "tag": "Daily",
+    "imageUrl": "/image9.png",
+    "sortOrder": 55,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Nagpur",
+    "duration": "12h",
+    "fromPrice": "2499",
+    "tag": "Long distance",
+    "imageUrl": "/image9.png",
+    "sortOrder": 56,
+    "published": true
+  },
+  {
+    "fromCity": "Nagpur",
+    "toCity": "Pune",
+    "duration": "12h",
+    "fromPrice": "2499",
+    "tag": "Long distance",
+    "imageUrl": "/image9.png",
+    "sortOrder": 57,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Belagavi",
+    "duration": "6h",
+    "fromPrice": "999",
+    "tag": "Daily",
+    "imageUrl": "/image8.png",
+    "sortOrder": 58,
+    "published": true
+  },
+  {
+    "fromCity": "Belagavi",
+    "toCity": "Pune",
+    "duration": "6h",
+    "fromPrice": "999",
+    "tag": "Daily",
+    "imageUrl": "/image8.png",
+    "sortOrder": 59,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Hyderabad",
+    "duration": "10h",
+    "fromPrice": "1999",
+    "tag": "Long distance",
+    "imageUrl": "/image3.png",
+    "sortOrder": 60,
+    "published": true
+  },
+  {
+    "fromCity": "Hyderabad",
+    "toCity": "Pune",
+    "duration": "10h",
+    "fromPrice": "1999",
+    "tag": "Long distance",
+    "imageUrl": "/image3.png",
+    "sortOrder": 61,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Bengaluru",
+    "duration": "12h",
+    "fromPrice": "2499",
+    "tag": "Long distance",
+    "imageUrl": "/image3.png",
+    "sortOrder": 62,
+    "published": true
+  },
+  {
+    "fromCity": "Bengaluru",
+    "toCity": "Pune",
+    "duration": "12h",
+    "fromPrice": "2499",
+    "tag": "Long distance",
+    "imageUrl": "/image3.png",
+    "sortOrder": 63,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Surat",
+    "duration": "8h",
+    "fromPrice": "1499",
+    "tag": "Long distance",
+    "imageUrl": "/image2.jpeg",
+    "sortOrder": 64,
+    "published": true
+  },
+  {
+    "fromCity": "Surat",
+    "toCity": "Pune",
+    "duration": "8h",
+    "fromPrice": "1499",
+    "tag": "Long distance",
+    "imageUrl": "/image2.jpeg",
+    "sortOrder": 65,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Indore",
+    "duration": "10h",
+    "fromPrice": "1899",
+    "tag": "Long distance",
+    "imageUrl": "/image2.jpeg",
+    "sortOrder": 66,
+    "published": true
+  },
+  {
+    "fromCity": "Indore",
+    "toCity": "Pune",
+    "duration": "10h",
+    "fromPrice": "1899",
+    "tag": "Long distance",
+    "imageUrl": "/image2.jpeg",
+    "sortOrder": 67,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Pune Airport",
+    "duration": "45m",
+    "fromPrice": "299",
+    "tag": "Airport",
+    "imageUrl": "/image1.jpeg",
+    "sortOrder": 68,
+    "published": true
+  },
+  {
+    "fromCity": "Pune Airport",
+    "toCity": "Pune",
+    "duration": "45m",
+    "fromPrice": "299",
+    "tag": "Airport",
+    "imageUrl": "/image1.jpeg",
+    "sortOrder": 69,
+    "published": true
+  },
+  {
+    "fromCity": "Pune",
+    "toCity": "Mumbai Airport",
+    "duration": "3h 45m",
+    "fromPrice": "799",
+    "tag": "Airport",
+    "imageUrl": "/image2.jpeg",
+    "sortOrder": 70,
+    "published": true
+  },
+  {
+    "fromCity": "Mumbai Airport",
+    "toCity": "Pune",
+    "duration": "3h 45m",
+    "fromPrice": "799",
+    "tag": "Airport",
+    "imageUrl": "/image2.jpeg",
+    "sortOrder": 71,
     "published": true
   }
 ]

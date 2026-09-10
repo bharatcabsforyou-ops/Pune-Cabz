@@ -22,6 +22,7 @@ import { films } from "@/lib/images";
 import { logRouteInquiry, routeWhatsAppHref } from "@/lib/open-route-whatsapp";
 import WhatsAppIcon from "./WhatsAppIcon";
 import type { PopularRoute } from "@/lib/popular-routes";
+import { mergeRoutesWithDefaults } from "@/lib/popular-routes";
 import { isBrandedRouteBanner } from "@/lib/images";
 import { useT } from "@/lib/i18n";
 import clsx from "clsx";
@@ -64,13 +65,10 @@ export default function HomeRoutesCarousel({
   const t = useT();
   const reduceMotion = useReducedMotion();
   const { routes: fromApi, loaded } = usePopularRoutes();
-  const routes = useMemo(() => {
-    if (fromApi.length > 0) return fromApi;
-    return (defaultRoutes as Omit<PopularRoute, "id">[]).map((route, i) => ({
-      ...route,
-      id: `default-${i}`,
-    }));
-  }, [fromApi]);
+  const routes = useMemo(
+    () => mergeRoutesWithDefaults(fromApi, defaultRoutes as Omit<PopularRoute, "id">[]),
+    [fromApi]
+  );
 
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);

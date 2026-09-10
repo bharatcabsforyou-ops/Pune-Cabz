@@ -163,6 +163,7 @@ export const en = {
   "bookForm.time": "Pickup time",
   "bookForm.vehicle": "Vehicle",
   "bookForm.vehicle.choose": "Choose your vehicles",
+  "bookForm.vehicle.hatchback": "Hatchback",
   "bookForm.vehicle.sedan": "Sedan",
   "bookForm.vehicle.suv": "SUV",
   "bookForm.vehicle.innova": "Innova",

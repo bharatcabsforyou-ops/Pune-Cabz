@@ -6,7 +6,7 @@ import { Mail } from "lucide-react";
 import WhatsAppIcon from "./WhatsAppIcon";
 import { usePopularRoutes } from "@/hooks/usePopularRoutes";
 import defaultRoutes from "@/data/default-routes.json";
-import { routeCityOptions, type PopularRoute } from "@/lib/popular-routes";
+import { routeCityOptions, mergeRoutesWithDefaults, type PopularRoute } from "@/lib/popular-routes";
 import {
   cabBookingMailtoHref,
   cabBookingNotes,
@@ -28,6 +28,7 @@ const TRIP_TAB_KEYS: Record<TripTabId, MessageKey> = {
 
 const VEHICLE_KEYS = [
   "bookForm.vehicle.choose",
+  "bookForm.vehicle.hatchback",
   "bookForm.vehicle.sedan",
   "bookForm.vehicle.suv",
   "bookForm.vehicle.innova",
@@ -50,13 +51,10 @@ export default function BookCabForm({
 } = {}) {
   const t = useT();
   const { routes: fromApi, loaded } = usePopularRoutes();
-  const routes = useMemo(() => {
-    if (fromApi.length > 0) return fromApi;
-    return (defaultRoutes as Omit<PopularRoute, "id">[]).map((route, i) => ({
-      ...route,
-      id: `default-${i}`,
-    }));
-  }, [fromApi]);
+  const routes = useMemo(
+    () => mergeRoutesWithDefaults(fromApi, defaultRoutes as Omit<PopularRoute, "id">[]),
+    [fromApi]
+  );
 
   const { fromCities, toByFrom, allToCities } = useMemo(
     () => routeCityOptions(routes),

@@ -7,6 +7,7 @@ import { usePopularRoutes } from "@/hooks/usePopularRoutes";
 import defaultRoutes from "@/data/default-routes.json";
 import { touristPlaces } from "@/data/tourist-places";
 import type { PopularRoute } from "@/lib/popular-routes";
+import { mergeRoutesWithDefaults } from "@/lib/popular-routes";
 import { useT } from "@/lib/i18n";
 
 type LocationChip = {
@@ -39,13 +40,10 @@ function buildLocations(routes: PopularRoute[]): LocationChip[] {
 export default function HomePromiseMarquee() {
   const t = useT();
   const { routes: fromApi } = usePopularRoutes();
-  const routes =
-    fromApi.length > 0
-      ? fromApi
-      : (defaultRoutes as Omit<PopularRoute, "id">[]).map((route, i) => ({
-          ...route,
-          id: `default-${i}`,
-        }));
+  const routes = mergeRoutesWithDefaults(
+    fromApi,
+    defaultRoutes as Omit<PopularRoute, "id">[]
+  );
 
   const locations = buildLocations(routes);
   if (locations.length === 0) return null;

@@ -33,6 +33,33 @@ export function publicRoutesFromDb(fromDb: PopularRoute[]) {
   return sortPopularRoutes(fromDb.filter((route) => route.published));
 }
 
+function routePairKey(route: { fromCity: string; toCity: string }) {
+  return `${route.fromCity}|${route.toCity}`.toLowerCase().trim();
+}
+
+/** JSON defaults fill gaps; admin/DB rows win on the same from→to pair. */
+export function mergeRoutesWithDefaults(
+  fromApi: PopularRoute[],
+  defaults: Omit<PopularRoute, "id" | "createdAt">[]
+) {
+  const map = new Map<string, PopularRoute>();
+
+  defaults.forEach((route, index) => {
+    if (!route.published) return;
+    map.set(routePairKey(route), {
+      ...route,
+      id: `default-${index}`,
+    });
+  });
+
+  for (const route of fromApi) {
+    if (!route.published) continue;
+    map.set(routePairKey(route), route);
+  }
+
+  return sortPopularRoutes([...map.values()]);
+}
+
 export function routeCityOptions(routes: PopularRoute[]) {
   const fromCities = [...new Set(routes.map((route) => route.fromCity))].sort((a, b) =>
     a.localeCompare(b)

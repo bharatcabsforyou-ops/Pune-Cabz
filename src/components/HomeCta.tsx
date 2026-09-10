@@ -32,7 +32,7 @@ export default function HomeCta() {
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="/our-services"
+                href="/#how-it-works"
                 className="inline-flex items-center gap-2 rounded-full bg-white/15 px-7 py-3.5 text-sm font-semibold text-white ring-1 ring-white/35 backdrop-blur-sm transition-colors hover:bg-white/25"
               >
                 {t("homeCta.howItWorks")}

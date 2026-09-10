@@ -6,6 +6,7 @@ import RouteBannerImage from "./RouteBannerImage";
 import { usePopularRoutes } from "@/hooks/usePopularRoutes";
 import defaultRoutes from "@/data/default-routes.json";
 import type { PopularRoute } from "@/lib/popular-routes";
+import { mergeRoutesWithDefaults } from "@/lib/popular-routes";
 
 function SmallRouteCard({ route }: { route: PopularRoute }) {
   const href = `/book?from=${encodeURIComponent(route.fromCity)}&to=${encodeURIComponent(route.toCity)}`;
@@ -37,13 +38,10 @@ function SmallRouteCard({ route }: { route: PopularRoute }) {
 
 export default function HomePopularRoutesStrip() {
   const { routes: fromApi, loaded } = usePopularRoutes();
-  const routes =
-    fromApi.length > 0
-      ? fromApi
-      : (defaultRoutes as Omit<PopularRoute, "id">[]).map((route, i) => ({
-          ...route,
-          id: `default-${i}`,
-        }));
+  const routes = mergeRoutesWithDefaults(
+    fromApi,
+    defaultRoutes as Omit<PopularRoute, "id">[]
+  );
 
   if (!loaded && fromApi.length === 0) {
     return (

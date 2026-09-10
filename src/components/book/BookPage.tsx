@@ -16,6 +16,7 @@ import BookRoutesGallery from "@/components/book/BookRoutesGallery";
 import { usePopularRoutes } from "@/hooks/usePopularRoutes";
 import defaultRoutes from "@/data/default-routes.json";
 import type { PopularRoute } from "@/lib/popular-routes";
+import { mergeRoutesWithDefaults } from "@/lib/popular-routes";
 import { useT, type MessageKey } from "@/lib/i18n";
 
 const points: { icon: typeof CarFront; labelKey: MessageKey }[] = [
@@ -32,13 +33,10 @@ export default function BookPage() {
   const queryTo = searchParams.get("to") ?? "";
   const { routes: fromApi, loaded } = usePopularRoutes();
 
-  const routes = useMemo(() => {
-    if (fromApi.length > 0) return fromApi;
-    return (defaultRoutes as Omit<PopularRoute, "id">[]).map((route, i) => ({
-      ...route,
-      id: `default-${i}`,
-    }));
-  }, [fromApi]);
+  const routes = useMemo(
+    () => mergeRoutesWithDefaults(fromApi, defaultRoutes as Omit<PopularRoute, "id">[]),
+    [fromApi]
+  );
 
   const [from, setFrom] = useState(queryFrom);
   const [to, setTo] = useState(queryTo);

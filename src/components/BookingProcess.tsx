@@ -51,7 +51,10 @@ export default function BookingProcess() {
   ];
 
   return (
-    <section className="relative overflow-hidden border-t border-black/[0.04] bg-white page-section">
+    <section
+      id="how-it-works"
+      className="relative scroll-mt-24 overflow-hidden border-t border-black/[0.04] bg-white page-section"
+    >
       <Container>
         <Reveal className="section-head">
           <p className="section-eyebrow">{t("bookingProcess.eyebrow")}</p>

@@ -158,6 +158,7 @@ export const mr: Record<MessageKey, string> = {
   "bookForm.time": "पिकअप वेळ",
   "bookForm.vehicle": "वाहन",
   "bookForm.vehicle.choose": "तुमचे वाहन निवडा",
+  "bookForm.vehicle.hatchback": "हॅचबॅक",
   "bookForm.vehicle.sedan": "सेडान",
   "bookForm.vehicle.suv": "SUV",
   "bookForm.vehicle.innova": "इनोव्हा",

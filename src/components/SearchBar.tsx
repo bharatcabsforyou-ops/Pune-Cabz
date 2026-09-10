@@ -15,7 +15,7 @@ import {
 import WhatsAppIcon from "./WhatsAppIcon";
 import { usePopularRoutes } from "@/hooks/usePopularRoutes";
 import defaultRoutes from "@/data/default-routes.json";
-import { routeCityOptions, type PopularRoute } from "@/lib/popular-routes";
+import { routeCityOptions, mergeRoutesWithDefaults, type PopularRoute } from "@/lib/popular-routes";
 import { routeSearchWhatsAppHref } from "@/lib/whatsapp-booking";
 import { useT } from "@/lib/i18n";
 
@@ -34,13 +34,10 @@ export default function SearchBar({
 } = {}) {
   const t = useT();
   const { routes: fromApi, loaded } = usePopularRoutes();
-  const routes = useMemo(() => {
-    if (fromApi.length > 0) return fromApi;
-    return (defaultRoutes as Omit<PopularRoute, "id">[]).map((route, i) => ({
-      ...route,
-      id: `default-${i}`,
-    }));
-  }, [fromApi]);
+  const routes = useMemo(
+    () => mergeRoutesWithDefaults(fromApi, defaultRoutes as Omit<PopularRoute, "id">[]),
+    [fromApi]
+  );
 
   const { fromCities, toByFrom, allToCities } = useMemo(
     () => routeCityOptions(routes),
