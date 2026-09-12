@@ -80,6 +80,7 @@ export default function BookCabForm({
   const [passengers, setPassengers] = useState("");
   const [notes, setNotes] = useState("");
   const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
 
   const filteredToOptions = useMemo(() => {
     const exactFrom = fromCities.find((c) => c.toLowerCase() === from.trim().toLowerCase());
@@ -133,8 +134,9 @@ export default function BookCabForm({
     return "";
   }
 
-  function persistBooking(payload: ReturnType<typeof buildPayload>) {
-    fetch("/api/bookings", {
+  async function persistBooking(payload: ReturnType<typeof buildPayload>) {
+    const notes = cabBookingNotes(payload).slice(0, 500);
+    const res = await fetch("/api/bookings", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -144,10 +146,17 @@ export default function BookCabForm({
         toCity: payload.toCity,
         travelDate: payload.travelDate,
         passengers: payload.passengers,
-        notes: cabBookingNotes(payload),
+        notes,
       }),
-    }).catch(() => {});
+      keepalive: true,
+    });
 
+    if (!res.ok) {
+      const data = (await res.json().catch(() => null)) as { error?: string } | null;
+      throw new Error(data?.error || "Could not save booking.");
+    }
+
+    // Best-effort enquiry log — must not block WhatsApp
     fetch("/api/route-inquiries", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -157,10 +166,11 @@ export default function BookCabForm({
         travelDate: payload.travelDate,
         passengers: payload.passengers,
       }),
+      keepalive: true,
     }).catch(() => {});
   }
 
-  function handleWhatsApp(e: FormEvent) {
+  async function handleWhatsApp(e: FormEvent) {
     e.preventDefault();
     const message = validate();
     if (message) {
@@ -169,11 +179,17 @@ export default function BookCabForm({
     }
     setError("");
     const payload = buildPayload();
-    persistBooking(payload);
-    window.location.href = cabBookingWhatsAppHref(payload);
+    setSaving(true);
+    try {
+      await persistBooking(payload);
+      window.location.href = cabBookingWhatsAppHref(payload);
+    } catch (err) {
+      setSaving(false);
+      setError(err instanceof Error ? err.message : "Could not save booking. Please try again.");
+    }
   }
 
-  function handleEmail(e: FormEvent) {
+  async function handleEmail(e: FormEvent) {
     e.preventDefault();
     const message = validate();
     if (message) {
@@ -182,8 +198,14 @@ export default function BookCabForm({
     }
     setError("");
     const payload = buildPayload();
-    persistBooking(payload);
-    window.location.href = cabBookingMailtoHref(payload);
+    setSaving(true);
+    try {
+      await persistBooking(payload);
+      window.location.href = cabBookingMailtoHref(payload);
+    } catch (err) {
+      setSaving(false);
+      setError(err instanceof Error ? err.message : "Could not save booking. Please try again.");
+    }
   }
 
   const defaultFrom = fromCities[0] ?? "Pune";
@@ -338,15 +360,24 @@ export default function BookCabForm({
         ) : null}
 
         <div className="book-cab-actions">
-          <button type="submit" className="book-cab-btn-whatsapp">
+          <button type="submit" className="book-cab-btn-whatsapp" disabled={saving}>
             <WhatsAppIcon className="h-5 w-5" />
             {compact ? (
-              <span className="text-white">{t("bookForm.submitWhatsAppCompact")}</span>
+              <span className="text-white">
+                {saving ? "Saving…" : t("bookForm.submitWhatsAppCompact")}
+              </span>
             ) : (
-              <span className="text-white">{t("bookForm.submitWhatsApp")}</span>
+              <span className="text-white">
+                {saving ? "Saving booking…" : t("bookForm.submitWhatsApp")}
+              </span>
             )}
           </button>
-          <button type="button" onClick={handleEmail} className="book-cab-btn-email">
+          <button
+            type="button"
+            onClick={handleEmail}
+            className="book-cab-btn-email"
+            disabled={saving}
+          >
             <Mail className="h-5 w-5" />
             {compact ? t("bookForm.submitEmailCompact") : t("bookForm.submitEmail")}
           </button>

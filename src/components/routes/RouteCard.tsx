@@ -155,7 +155,11 @@ export function RouteCardBook({
         <div className="mt-auto flex flex-col gap-2 pt-4">
           <a
             href={routeWhatsAppHref(route)}
-            onClick={() => logRouteInquiry(route)}
+            onClick={async (e) => {
+              e.preventDefault();
+              await logRouteInquiry(route);
+              window.location.href = routeWhatsAppHref(route);
+            }}
             className="btn-shine inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-4 py-3 text-sm font-semibold text-white shadow-md shadow-brand/25 transition-colors hover:bg-brand-dark"
           >
             <WhatsAppIcon className="h-4 w-4" />

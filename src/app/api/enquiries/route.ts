@@ -1,8 +1,15 @@
 import { NextResponse } from "next/server";
-import { isSupabaseConfigured } from "@/lib/supabase/admin";
+import { createAdminClient, isSupabaseConfigured } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { validateEnquiryInput } from "@/lib/enquiries";
 import { sendEnquiryEmail } from "@/lib/send-enquiry-email";
+
+async function getWriteClient() {
+  if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return createAdminClient();
+  }
+  return createClient();
+}
 
 export async function POST(request: Request) {
   if (!isSupabaseConfigured()) {
@@ -22,7 +29,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const supabase = await createClient();
+    const supabase = await getWriteClient();
     const { error } = await supabase.from("enquiries").insert({
       name: validated.data.name,
       email: validated.data.email,
@@ -32,17 +39,18 @@ export async function POST(request: Request) {
     });
 
     if (error) {
+      console.error("[enquiries] insert failed:", error.message);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    // Best-effort email to site inbox (does not block save success)
     const mail = await sendEnquiryEmail(validated.data);
     if (!mail.ok) {
       console.error("[enquiries] email notify failed:", mail.error);
     }
 
     return NextResponse.json({ ok: true, emailed: mail.ok });
-  } catch {
+  } catch (err) {
+    console.error("[enquiries] save error:", err);
     return NextResponse.json({ error: "Could not save enquiry." }, { status: 500 });
   }
 }

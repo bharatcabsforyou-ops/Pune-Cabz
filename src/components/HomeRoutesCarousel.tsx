@@ -330,7 +330,11 @@ function HeroRoutesPanel({
 
                   <a
                     href={routeWhatsAppHref(active)}
-                    onClick={() => logRouteInquiry(active)}
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      await logRouteInquiry(active);
+                      window.location.href = routeWhatsAppHref(active);
+                    }}
                     className="btn-shine mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-brand/30 transition-all hover:bg-brand-dark sm:mt-auto sm:w-auto sm:rounded-full sm:px-6"
                   >
                     <WhatsAppIcon className="h-4 w-4" />
@@ -384,7 +388,11 @@ function RouteDetails({
         </div>
         <a
           href={routeWhatsAppHref(active)}
-          onClick={() => logRouteInquiry(active)}
+          onClick={async (e) => {
+            e.preventDefault();
+            await logRouteInquiry(active);
+            window.location.href = routeWhatsAppHref(active);
+          }}
           className="btn-shine mt-6 inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-sm font-semibold text-white shadow-md shadow-brand/25 transition-colors hover:bg-brand-dark"
         >
           <WhatsAppIcon className="h-4 w-4" />

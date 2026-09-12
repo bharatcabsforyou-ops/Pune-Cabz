@@ -1,9 +1,16 @@
 import { NextResponse } from "next/server";
-import { isSupabaseConfigured } from "@/lib/supabase/admin";
+import { createAdminClient, isSupabaseConfigured } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { site } from "@/lib/site";
 import { routeSearchAdminMessage } from "@/lib/whatsapp-booking";
 import { validateRouteInquiryInput } from "@/lib/route-inquiries";
+
+async function getWriteClient() {
+  if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return createAdminClient();
+  }
+  return createClient();
+}
 
 export async function POST(request: Request) {
   if (!isSupabaseConfigured()) {
@@ -25,7 +32,7 @@ export async function POST(request: Request) {
   const { fromCity, toCity, travelDate, passengers } = validated.data;
 
   try {
-    const supabase = await createClient();
+    const supabase = await getWriteClient();
     const { error } = await supabase.from("enquiries").insert({
       name: "Route Search",
       email: site.email,
@@ -35,11 +42,13 @@ export async function POST(request: Request) {
     });
 
     if (error) {
+      console.error("[route-inquiries] insert failed:", error.message);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
     return NextResponse.json({ ok: true, logged: true });
-  } catch {
+  } catch (err) {
+    console.error("[route-inquiries] save error:", err);
     return NextResponse.json({ error: "Could not log route search." }, { status: 500 });
   }
 }

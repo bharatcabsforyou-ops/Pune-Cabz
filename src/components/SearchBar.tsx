@@ -80,7 +80,7 @@ export default function SearchBar({
     setSwapped((s) => !s);
   }
 
-  function handleSearch(e: React.FormEvent) {
+  async function handleSearch(e: React.FormEvent) {
     e.preventDefault();
     if (!from.trim() || !to.trim()) return;
 
@@ -91,11 +91,16 @@ export default function SearchBar({
       passengers,
     };
 
-    fetch("/api/route-inquiries", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    }).catch(() => {});
+    try {
+      await fetch("/api/route-inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      });
+    } catch {
+      /* still open WhatsApp */
+    }
 
     window.location.href = routeSearchWhatsAppHref(payload);
   }

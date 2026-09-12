@@ -1,7 +1,14 @@
 import { NextResponse } from "next/server";
-import { isSupabaseConfigured } from "@/lib/supabase/admin";
+import { createAdminClient, isSupabaseConfigured } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { validateBookingInput } from "@/lib/bookings";
+
+async function getWriteClient() {
+  if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return createAdminClient();
+  }
+  return createClient();
+}
 
 export async function POST(request: Request) {
   if (!isSupabaseConfigured()) {
@@ -21,7 +28,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const supabase = await createClient();
+    const supabase = await getWriteClient();
     const { error } = await supabase.from("bookings").insert({
       name: validated.data.name,
       phone: validated.data.phone,
@@ -35,11 +42,13 @@ export async function POST(request: Request) {
     });
 
     if (error) {
+      console.error("[bookings] insert failed:", error.message);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
     return NextResponse.json({ ok: true });
-  } catch {
+  } catch (err) {
+    console.error("[bookings] save error:", err);
     return NextResponse.json({ error: "Could not save booking." }, { status: 500 });
   }
 }
