@@ -211,7 +211,7 @@
   },
   {
     "fromCity": "Pune",
-    "toCity": "Ahmednagar",
+    "toCity": "Ahilyanagar",
     "duration": "2h 30m",
     "fromPrice": "399",
     "tag": "Daily",
@@ -220,7 +220,7 @@
     "published": true
   },
   {
-    "fromCity": "Ahmednagar",
+    "fromCity": "Ahilyanagar",
     "toCity": "Pune",
     "duration": "2h 30m",
     "fromPrice": "399",

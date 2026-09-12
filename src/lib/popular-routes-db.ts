@@ -11,7 +11,18 @@ const defaultImageByRoute = Object.fromEntries(
 /** Old city name → current label */
 const cityAliases: Record<string, string> = {
   aurangabad: "chatrapati sambhajinagar",
+  ahmednagar: "ahilyanagar",
 };
+
+const displayCity: Record<string, string> = {
+  "chatrapati sambhajinagar": "Chatrapati Sambhajinagar",
+  ahilyanagar: "Ahilyanagar",
+};
+
+function labelCity(city: string) {
+  const normalized = normalizeCity(city);
+  return displayCity[normalized] ?? city;
+}
 
 const fleetBySort: Record<number, string> = {
   1: "/image1.jpeg",
@@ -90,15 +101,10 @@ export function isMissingImageColumn(message: string) {
 }
 
 export function mapPopularRouteRow(row: RowWithImage): PopularRoute {
-  const toCity =
-    normalizeCity(row.to_city) === "chatrapati sambhajinagar"
-      ? "Chatrapati Sambhajinagar"
-      : row.to_city;
-
   return {
     id: row.id,
-    fromCity: row.from_city,
-    toCity,
+    fromCity: labelCity(row.from_city),
+    toCity: labelCity(row.to_city),
     duration: row.duration,
     fromPrice: row.from_price,
     tag: row.tag,

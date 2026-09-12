@@ -233,7 +233,7 @@
   {
     "id": "seed-pr-22",
     "fromCity": "Pune",
-    "toCity": "Ahmednagar",
+    "toCity": "Ahilyanagar",
     "duration": "2h 30m",
     "fromPrice": "399",
     "tag": "Daily",
@@ -243,7 +243,7 @@
   },
   {
     "id": "seed-pr-23",
-    "fromCity": "Ahmednagar",
+    "fromCity": "Ahilyanagar",
     "toCity": "Pune",
     "duration": "2h 30m",
     "fromPrice": "399",
