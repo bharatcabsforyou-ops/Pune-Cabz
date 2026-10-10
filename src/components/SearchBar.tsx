@@ -194,8 +194,8 @@ export default function SearchBar({
               <button
                 type="button"
                 aria-label="Increase passengers"
-                disabled={passengers >= 12}
-                onClick={() => setPassengers((n) => Math.min(12, n + 1))}
+                disabled={passengers >= 150}
+                onClick={() => setPassengers((n) => Math.min(150, n + 1))}
                 className="flex h-8 w-8 items-center justify-center rounded-full border border-black/10 text-navy transition-colors hover:border-brand/40 hover:bg-brand/5 hover:text-brand disabled:cursor-not-allowed disabled:opacity-35"
               >
                 <Plus className="h-4 w-4" strokeWidth={2.4} />

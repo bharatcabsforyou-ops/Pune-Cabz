@@ -177,7 +177,7 @@ export const mr: Record<MessageKey, string> = {
   "bookForm.error.pickup": "पिकअप स्थळ लिहा.",
   "bookForm.error.drop": "ड्रॉप स्थळ लिहा.",
   "bookForm.error.date": "प्रवासाची तारीख निवडा.",
-  "bookForm.error.passengers": "प्रवासी 1 ते 12 दरम्यान असावेत.",
+  "bookForm.error.passengers": "प्रवासी 1 ते 150 दरम्यान असावेत.",
 
   "common.bookRideNow": "आता राइड बुक करा",
   "common.whatsapp": "WhatsApp",

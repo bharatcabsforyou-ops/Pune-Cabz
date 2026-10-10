@@ -30,7 +30,7 @@ create table if not exists public.bookings (
   from_city text not null,
   to_city text not null,
   travel_date date not null,
-  passengers integer not null default 1 check (passengers >= 1 and passengers <= 12),
+  passengers integer not null default 1 check (passengers >= 1 and passengers <= 150),
   notes text,
   status text not null default 'new' check (status in ('new', 'confirmed', 'cancelled', 'completed')),
   created_at timestamptz not null default now()
@@ -47,3 +47,26 @@ create policy bookings_public_insert
   for insert
   to anon, authenticated
   with check (true);
+
+-- Existing databases keep the old 12-passenger check until this runs.
+do $$
+declare
+  cname text;
+begin
+  for cname in
+    select con.conname
+    from pg_constraint con
+    join pg_class rel on rel.oid = con.conrelid
+    join pg_namespace nsp on nsp.oid = rel.relnamespace
+    where nsp.nspname = 'public'
+      and rel.relname = 'bookings'
+      and con.contype = 'c'
+      and pg_get_constraintdef(con.oid) ilike '%passengers%'
+  loop
+    execute format('alter table public.bookings drop constraint %I', cname);
+  end loop;
+end $$;
+
+alter table public.bookings
+  add constraint bookings_passengers_check
+  check (passengers >= 1 and passengers <= 150);

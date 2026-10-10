@@ -20,8 +20,8 @@ export function validateRouteInquiryInput(input: Partial<RouteInquiryInput>) {
   if (travelDate && !/^\d{4}-\d{2}-\d{2}$/.test(travelDate)) {
     return { error: "Invalid travel date." };
   }
-  if (!Number.isFinite(passengers) || passengers < 1 || passengers > 12) {
-    return { error: "Passengers must be between 1 and 12." };
+  if (!Number.isFinite(passengers) || passengers < 1 || passengers > 150) {
+    return { error: "Passengers must be between 1 and 150." };
   }
 
   return {

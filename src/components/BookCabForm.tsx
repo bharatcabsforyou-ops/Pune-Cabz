@@ -128,7 +128,7 @@ export default function BookCabForm({
     if (to.trim().length < 2) return t("bookForm.error.drop");
     if (!date) return t("bookForm.error.date");
     const passengerCount = Number(passengers);
-    if (passengers && (!Number.isFinite(passengerCount) || passengerCount < 1 || passengerCount > 12)) {
+    if (passengers && (!Number.isFinite(passengerCount) || passengerCount < 1 || passengerCount > 150)) {
       return t("bookForm.error.passengers");
     }
     return "";
@@ -334,7 +334,7 @@ export default function BookCabForm({
             <input
               type="number"
               min={1}
-              max={12}
+              max={150}
               value={passengers}
               onChange={(e) => setPassengers(e.target.value)}
               placeholder={t("bookForm.passengersPlaceholder")}

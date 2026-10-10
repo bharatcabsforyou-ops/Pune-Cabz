@@ -182,7 +182,7 @@ export const en = {
   "bookForm.error.pickup": "Enter pickup location.",
   "bookForm.error.drop": "Enter drop location.",
   "bookForm.error.date": "Pick a travel date.",
-  "bookForm.error.passengers": "Passengers must be between 1 and 12.",
+  "bookForm.error.passengers": "Passengers must be between 1 and 150.",
 
   "common.bookRideNow": "Book a ride Now",
   "common.whatsapp": "WhatsApp",
