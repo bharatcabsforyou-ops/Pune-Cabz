@@ -450,18 +450,15 @@ export const mr: Record<MessageKey, string> = {
 
   "reviews.modal.eyebrow": "रिव्ह्यू जोडा",
   "reviews.modal.title": "तुमची राइड कशी होती?",
-  "reviews.modal.thanks":
-    "धन्यवाद. तुमचा रिव्ह्यू आमच्या टीमकडे आहे. अॅडमिन मंजूर केल्यानंतर तो साइटवर दिसेल.",
+  "reviews.modal.thanks": "धन्यवाद. तुमचा रिव्ह्यू पाठवला आहे.",
   "reviews.modal.name": "नाव",
   "reviews.modal.city": "शहर",
   "reviews.modal.route": "रुट",
   "reviews.modal.rating": "रेटिंग",
   "reviews.modal.yourReview": "तुमचा रिव्ह्यू",
   "reviews.modal.placeholder": "इतरांना सांगा राइड कशी झाली.",
-  "reviews.modal.submit": "मंजुरीसाठी पाठवा",
+  "reviews.modal.submit": "रिव्ह्यू पाठवा",
   "reviews.modal.sending": "पाठवत आहोत...",
-  "reviews.modal.note":
-    "रिव्ह्यू आधी अॅडमिन पॅनेलमध्ये जातात. मंजुरीनंतर येथे दिसतात.",
   "reviews.modal.close": "बंद करा",
 
   "packages.eyebrow": "पॅकेजेस",

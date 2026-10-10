@@ -451,18 +451,15 @@ export const en = {
 
   "reviews.modal.eyebrow": "Add review",
   "reviews.modal.title": "How was your ride?",
-  "reviews.modal.thanks":
-    "Thanks. Your review is with our team. It will show on the site after an admin approves it.",
+  "reviews.modal.thanks": "Thanks for your review.",
   "reviews.modal.name": "Name",
   "reviews.modal.city": "City",
   "reviews.modal.route": "Route",
   "reviews.modal.rating": "Rating",
   "reviews.modal.yourReview": "Your review",
   "reviews.modal.placeholder": "Tell others how the ride went.",
-  "reviews.modal.submit": "Submit for approval",
+  "reviews.modal.submit": "Submit review",
   "reviews.modal.sending": "Sending...",
-  "reviews.modal.note":
-    "Reviews go to the admin panel first. They appear here after approval.",
   "reviews.modal.close": "Close",
 
   "packages.eyebrow": "Packages",

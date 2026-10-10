@@ -255,9 +255,6 @@ export default function ReviewsSection() {
                   >
                     {sending ? t("reviews.modal.sending") : t("reviews.modal.submit")}
                   </button>
-                  <p className="text-center text-[12px] text-navy/45">
-                    {t("reviews.modal.note")}
-                  </p>
                 </form>
               )}
             </motion.div>
